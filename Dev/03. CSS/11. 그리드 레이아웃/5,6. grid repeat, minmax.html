@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Grid Layout</title>
+    <style>
+        .container {
+            width: 600px;
+            border: 1px solid #ccc;
+            display: grid; /* 그리드 컨테이너로 설정 */
+            /* repeat(반복횟수, 크기패턴) */
+            grid-template-columns: repeat(3,1fr);
+            /* minmax(최솟값, 최대값) */
+            grid-auto-rows: minmax(100px, auto); /* 최소 100px, 최대는 컨텐츠 양에
+                                                            따라서 자동 조절 */
+        }
+        .items {
+            padding: 10px;
+            font-size: 16px;
+        }
+        .items:nth-child(odd) {
+            background-color: #ffc400;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="items">LLM 기반 에이전트는 계획 및 메모리와 같은 핵심 모듈과 결합된 LLM을 통해 복잡한 작업을 수행할 수 있는 LLM 애플리케이션을 의미합니다.</div>
+        <div class="items">LLM 기반 에이전트는 계획 및 메모리와 같은 핵심 모듈과 결합된 LLM을 통해 복잡한 작업을 수행할 수 있는</div>
+        <div class="items">LLM 기반 에이전트는 계획 및 메모리와 같은 핵심 모듈과 결합된 LLM을 통해 복잡한 작업을 </div>
+        <div class="items">LLM 기반 에이전트는 계획 및 메모리와 같은 핵심 모듈과 결합된 LLM을 통해 복잡한</div>
+        <div class="items">LLM 기반 에이전트는 계획 및 메모리와</div>
+        <div class="items">LM 기반 에이전트는 계획 및 메모리와 같은 핵심 모듈</div>
+    </div>
+</body>
+</html>

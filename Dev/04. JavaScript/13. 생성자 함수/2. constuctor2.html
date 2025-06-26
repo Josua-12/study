@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Person(name, age, job) {
+            this.name = name;
+            this.age = age;
+            this.job = job;
+            this.sayHi = function() {
+                console.log('안녕하세요!' + this.name + '입니다.')
+            }
+        }
+        
+        const person1 = new Person('이방원', 40, 'King');
+        const person2 = new Person('류성룡', 45, '영의정');
+        console.log(person1.name)
+        console.log(person2.age) 
+        person1.sayHi()
+        person2.sayHi()
+    </script>
+</body>
+</html>

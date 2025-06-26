@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>플렉스 박스 레이아웃 - 방향 설정</title>
+    <style>
+        /* 모든 컨테이너가 공통으로 사용할 스타일 */
+        .container {
+            width: 700px;
+            display: flex; /* 플렉스 컨테이너로 지정하여 플렉스
+                              박스 레이아웃 활성화 */
+            background-color: #eee;
+            border: 1px solid #222;
+            margin-bottom: 30px;
+        }
+        /* 플렉스 아이템(박스) 기본 스타일
+           컨테이너 안에 들어갈 박스들의 공통 스타일 */
+        .box {
+            padding: 5px 45px;
+            margin: 5px;
+            width: 80px;
+        }
+        /* 홀수 번째 박스 스타일 (1, 3, 5번 ...) 
+           :nth-child(odd) 선택자로 홀수번째 자식 요소 선택*/
+        .box:nth-child(odd) {
+            background-color: rgb(255, 187, 0);
+        }
+        /* 짝수 번째 박스 스타일 (2, 4, 6번 ...) 
+           :nth-child(even) 선택자로 짝수번째 자식 요소 선택*/
+        .box:nth-child(even) {
+            background-color: rgb(35, 220, 35);
+        }
+        /* 박스 안의 텍스트 스타일 - 숫자가 박스 중앙에 굵게 표시 */
+        p {
+            text-align: center;
+            font-weight: bold;
+        }
+        /* 1) 플렉스 방향 설정
+              - flex-direction 속성 : 주축(main axis) 방향
+              - 기본값 (왼쪽에서 오른쪽으로) */
+        #opt1 {
+            flex-direction: row;
+        }
+        /* 2) 플렉스 방향 설정
+              - flex-direction 속성 : 주축(main axis) 방향
+              - 역순 (오른쪽에서 왼쪽으로) */
+        #opt2 {
+            flex-direction: row-reverse;
+        }
+        /* 3) 플렉스 방향 설정
+              - flex-direction 속성 : 교차축(cross axis) 방향
+              - 세로 (위쪽에서 아래쪽으로) */
+        #opt3 {
+            flex-direction: column;
+        }
+        /* 4) 플렉스 방향 설정
+              - flex-direction 속성 : 교차축(cross axis) 방향
+              - 세로 역방향 (아래쪽에서 위쪽으로) */
+        #opt4 {
+            flex-direction: column-reverse;
+        }
+    </style>
+</head>
+<body>
+    <!-- 첫번째 컨테이너 : 기본 방향 -->
+    <div class="container" id="opt1">
+        <div class="box"><p>1</p></div>
+        <div class="box"><p>2</p></div>
+        <div class="box"><p>3</p></div>
+    </div>
+    <!-- 두번째 컨테이너 : 역방향 -->
+    <div class="container" id="opt2">
+        <div class="box"><p>1</p></div>
+        <div class="box"><p>2</p></div>
+        <div class="box"><p>3</p></div>
+    </div>
+    <!-- 세번째 컨테이너 : 세로방향 -->
+    <div class="container" id="opt3">
+        <div class="box"><p>1</p></div>
+        <div class="box"><p>2</p></div>
+        <div class="box"><p>3</p></div>
+    </div>
+    <!-- 네번째 컨테이너 : 세로 역방향 -->
+    <div class="container" id="opt4">
+        <div class="box"><p>1</p></div>
+        <div class="box"><p>2</p></div>
+        <div class="box"><p>3</p></div>
+    </div>
+</body>
+</html>
+
+<!-- 1) display : flex로 플렉스 컨테이너 생성
+     2) flex-direction으로 주축 방향 제어
+     3) row vs column : 가로, 세로 배치
+     4) reverse 옵션 : 시작점과 끝점을 뒤바꿈
+     5) 주축이 바뀌면 교차축도 자동으로 바뀜
+         - row일 때는 세로가 교차축,
+         - column일 때는 가로가 교차축 -->

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>플렉스 박스 레이아웃</title>
+    <style>
+        .container {
+            width: 200px;
+            height: 500px;
+            display: flex; /* 플렉스 컨테이너 지정 */
+            flex-direction: column; /* 주축을 세로로 변경 */
+            justify-content: flex-start; /* 주축(세로) 정렬*/
+            background-color: #eee;
+            border: 1px solid #222;
+            margin-bottom: 30px;
+        }
+        .box {
+            padding: 5px 45px;
+            margin: 5px;
+        }
+        .box:nth-child(odd) {
+            background-color: rgb(255, 187, 0);
+        }
+        .box:nth-child(even) {
+            background-color: rgb(35, 200, 35);
+        }
+        p {
+            text-align: center;
+            font-weight: bold;
+        }
+        #box1 {
+            margin-bottom: auto; /* 1번박스 오른쪽 공간을 최대한 늘림 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box" id="box1"><p>1</p></div>
+        <div class="box" id="box2"><p>2</p></div>
+        <div class="box" id="box3"><p>3</p></div>
+
+    </div>
+</body>
+</html>
+<!-- 1) flex-direction에 다른 주축 변화
+        - row(기본값) : 주축 = 가로, 교차축 = 세로
+        - column : 주축 = 세로, 교차축 = 가로
+     2) 방향별 margin : auto 정리
+        - 가로 방향(flex-direction:row)
+            - margin-left : auto => 요소를 오른쪽으로 밀어냄
+            - margin-right : auto => 요소를 왼쪽으로 밀어냄
+        - 세로 방향(flex-direction:column)
+            - margin-top : auto => 요소를 아래쪽으로 밀어냄
+            - margin-bottom : auto => 요소를 위쪽으로 밀어냄 -->

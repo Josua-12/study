@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let colors = ["green", "blue", "purple"];
+        console.log(colors.at(1));
+        console.log(colors.at(-1));
+        console.log(colors.at(3));
+        console.log('');
+
+        console.log(colors.includes("blue"));
+        console.log(colors.includes("yellow"));
+        console.log(colors.includes("purple", 2));
+        console.log(colors.includes("purple", 1));
+        console.log(colors.includes("green", 1));
+        console.log(colors.includes("yellow", 0));
+        console.log('');
+
+        console.log(colors.indexOf("purple")); // 배열에 있을 때는 위치가 나오고
+        console.log(colors.indexOf("yellow")); // 배열에 없으면 -1
+    </script>
+</body>
+</html>

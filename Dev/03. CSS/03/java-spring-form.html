@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바, 스프링 개발자 지원서</title>
+    <link rel="stylesheet" href="css/style-css.css">
+</head>
+<body>
+    <div id="container">
+        <h1>자바, 스프링 개발자 지원서</h1>
+        <p>JAVA, Spring, LLM에 대한 기술적 이해와 경험이 있는 분을 모십니다.</p>        
+        <hr>
+        <form>
+            <h4>개인정보</h4>
+            <ul>
+                <li>
+                    <label for="uname">이름</label>
+                    <input type="text" id="uname" autofocus required
+                        placeholder="공백없이 입력하세요">
+                </li>
+                <li>
+                    <label for="utel">연락처</label>
+                    <input type="tel" id="utel" required 
+                        placeholder="예)010-1234-1234">
+                </li>
+            </ul>
+            <h4>지원 분야</h4>
+            <ul>
+                <li>
+                    <label>
+                        <input type="radio" name="field" value="java"
+                            required>자바 개발자
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="radio" name="field" value="Spring"
+                            required>스프링, 스프링부트 개발자
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="radio" name="field" value="ai"
+                            required>AI Agent 개발자
+                    </label>
+                </li>
+            </ul>
+            <h4>지원동기</h4>
+                <label>
+                    <textarea id="motive" cols="60" rows="5" required
+                    placeholder="본사 지원 동기를 간략하게 써 주세요."></textarea>
+                </label>
+                <div>
+        <input type="submit" value="접수하기">
+        <input type="reset" value="다시 쓰기">
+    </div>
+        </form>
+
+    </div>
+
+    
+</body>
+</html>

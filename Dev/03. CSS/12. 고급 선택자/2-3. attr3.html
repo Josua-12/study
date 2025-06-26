@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul {
+            list-style: none;
+        }
+        li {
+            width: 100px;
+            display: inline-block;
+        }
+        li a {
+            padding: 5px 20px;
+            font-size: 14px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .flat {
+            background: #eee;
+            border: 1px solid #222;
+        }
+        /* class 속성 값에 button이 포함된 요소에 스타일 지정 */
+        a[class~="button"] {
+            box-shadow: rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+            border: 1px solid #222;
+        }
+        
+    </style>
+</head>
+<body>
+    <ul>
+        <li><a>메인 메뉴 :</a></li>
+        <li><a href="#" class="flat">메뉴 1</a></li>
+        <li><a href="#" class="flat">메뉴 2</a></li>
+        <li><a href="#" class="button">메뉴 3</a></li>
+        <li><a href="#" class="flat button">메뉴 4</a></li>
+    </ul>
+</body>
+</html>

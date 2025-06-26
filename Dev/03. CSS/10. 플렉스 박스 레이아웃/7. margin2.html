@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>플렉스 박스 레이아웃</title>
+    <style>
+        .container {
+            width: 700px;
+            display: flex; /* 플렉스 컨테이너 지정 */
+            justify-content: flex-end; /* 주축 정렬 : 끝점에 맞춰서 정렬 */
+            background-color: #eee;
+            border: 1px solid #222;
+            margin-bottom: 30px;
+        }
+        .box {
+            padding: 5px 45px;
+            margin: 5px;
+            width: 80px;
+        }
+        .box:nth-child(odd) {
+            background-color: rgb(255, 187, 0);
+        }
+        .box:nth-child(even) {
+            background-color: rgb(35, 200, 35);
+        }
+        p {
+            text-align: center;
+            font-weight: bold;
+        }
+        #box3 {
+            margin-left: auto; /* 3번박스 왼쪽 공간을 최대한 늘림 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box" id="box1"><p>1</p></div>
+        <div class="box" id="box2"><p>2</p></div>
+        <div class="box" id="box3"><p>3</p></div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var sum = 0;        // 전역 변수 선언
+        function addNumber() {
+            var result;     // 지역 변수 선언
+            sum = 10 + 20;
+            result = 10 * 20;
+        }
+        addNumber()         // 함수 호출
+        console.log(sum)
+        // result는 함수 내부에서 선언된 지역 변수이므로 함수 밖에서는 접근 불가함. (쌤이 쓰신거)
+        // console.log(result)   지역 변수를 바깥쪽에서 쓰니까 undefined라고 뜨면서 오류 발생
+    </script>
+</body>
+</html>

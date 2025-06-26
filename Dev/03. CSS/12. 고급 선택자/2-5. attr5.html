@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul {
+            list-style: none;
+        }
+        li {
+            width: 100px;
+            display: inline-block;
+        }
+        li a {
+            padding: 5px 20px;
+            font-size: 14px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        /* href 속성이 있는 a 요소의 스타일 지정하기 */
+        a[href] {
+            background: yellow;
+            border: 1px solid #ccc;
+            font-weight: normal;
+        }
+        /* 속성값이 "eng"로 시작하는 요소를 찾는 선택자 */
+        a[title ^= "eng"]{
+            background: url(images/bg.jpg) no-repeat left center;
+        }
+        /* 속성값이 "kor"로 시작하는 요소를 찾는 선택자 */
+        a[title ^= "kor"]{
+            background: url(images/s.jpg) no-repeat left center;
+        }
+        /* 속성값이 "chi"로 시작하는 요소를 찾는 선택자 */
+        a[title ^= "chi"]{
+            background: url(images/dot.png) no-repeat left center;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li><a>외국어 서비스 :</a></li>
+        <li><a href="#" title="english">영어</a></li>
+        <li><a href="#" title="korean">한국어</a></li>
+        <li><a href="#" title="chinese">중국어</a></li>
+    </ul>
+</body>
+</html>

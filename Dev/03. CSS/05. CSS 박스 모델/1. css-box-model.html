@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS 박스모델</title>
+</head>
+<style>
+    /* 전체 초기화 */
+    * { 
+        margin: 0;  /* 모든 요소의 외부 여백 제거 */
+        padding: 0;     /* 모든 요소의 내부 여백 제거 */
+        box-sizing: border-box;  /* 박스 크기 계산에 padding, border 포함 */
+    }
+
+    /* 전체 페이지 기본 스타일링 */
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-seri
+        
+        
+        
+        f;
+        line-height: 1.6; /* 줄 간격을 1.6배로 설정 (가독성 향상) */
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 20px;
+        min-height: 100vh; /* 최소 높이를 화면 전체 높이로 설정 */
+    }
+
+    /* 메인 컨테이너 - 전체 내용을 감싸는 박스 */
+    .container {
+        max-width: 1200px; /* 최대 너비 제한 */
+        margin: 0 auto; /* 좌우 자동 마진으로 중앙 정렬 */
+        background: white; /* 흰색 배경 */
+        border-radius: 15px; /* 모서리를 15px만큼 둥글게 함 */
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        overflow: hidden; /* 자식 요소가 컨테이너를 넘지 않도록 */
+    }
+
+    /* 페이지 상단 헤더 영역 */
+    .header {
+        background: linear-gradient(135deg, yellow, #45a049);
+        color: white; /* 텍스트 색상을 회색으로 */
+        padding: 30px; /* 상하좌우 내부 여백 30px */
+        text-align: center;
+    }
+
+    /* 헤더 내부의 제목 스타일 */
+    .header h1{
+        font-size: 2.5em;   /* 글자 크기를 시스템 기본 크기의 2.5배 */
+        margin-bottom: 10px; /* 아래쪽에 외부 여백 10px */
+    }
+
+    .lab-content {
+        padding: 30px; /* 상하좌우 내부 여백 30px */
+        }
+
+        /* 기본 박스 모델 */
+    .basic-box {
+        width: 200px; /* 콘텐츠 영역 너비 200px */
+        height: 100px;  /* 콘텐츠 영역 너비 100px */
+        background-color: #ffeb3b; 
+        border: 5px solid #ff9800; /* 5px 두께의 주황색 테두리 */
+        padding: 20px; /* 상하좌우 내부 여백 20px */
+        margin: 20px; /* 상하좌우 외부 여백 20px */
+        text-align: center;
+        font-weight: bold;
+        display: inline-block; /* 인라인 요소처럼 나란히  */
+    }
+</style>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>😂css 박스모델</h1>
+            <p>기본 박스모델 구성요소</p>
+        </div>
+        <div class="lab-content">
+            <div class="lab-section">
+                <p><strong>아래 박스를 F12로 검사해보세요!</strong></p>
+                <div class="basic-box">
+                    Content 영역<br>
+                    (200px X 100px)
+                </div>
+                <div class="highlight">
+                    <strong>🔎확인해보세요</strong><br>
+                    - 실제 박스 크기 = 200px +40px(padding) + 10px(border) = 250px<br>
+                    - 개발자도구(검사)에서 각 영역이 다른 색으로 표시됨
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>

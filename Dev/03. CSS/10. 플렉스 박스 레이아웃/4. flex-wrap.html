@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>플렉스 박스 레이아웃</title>
+    <style>
+        /* 모든 컨테이너가 공통으로 사용할 스타일 */
+        .container {
+            display: flex; /* 플렉스 컨테이너로 지정하여 플렉스
+                              박스 레이아웃 활성화 */
+            background-color: #eee;
+            border: 1px solid #222;
+            margin-bottom: 30px;
+        }
+        /* 플렉스 아이템(박스) 기본 스타일
+           컨테이너 안에 들어갈 박스들의 공통 스타일 */
+        .box {
+            padding: 5px 45px;
+            margin: 5px;
+            width: 80px;
+        }
+        /* 홀수 번째 박스 스타일 (1, 3, 5번 ...) 
+           :nth-child(odd) 선택자로 홀수번째 자식 요소 선택*/
+        .box:nth-child(odd) {
+            background-color: rgb(255, 187, 0);
+        }
+        /* 짝수 번째 박스 스타일 (2, 4, 6번 ...) 
+           :nth-child(even) 선택자로 짝수번째 자식 요소 선택*/
+        .box:nth-child(even) {
+            background-color: rgb(35, 220, 35);
+        }
+        /* 박스 안의 텍스트 스타일 - 숫자가 박스 중앙에 굵게 표시 */
+        p {
+            text-align: center;
+            font-weight: bold;
+        }
+        /* 옵션 1 : 줄바꿈 없음(기본값) */
+        #opt1 {
+            flex-wrap: nowrap; /* 모든 아이템을 한 줄에 강제 배치 
+                                  컨테이너 너비를 넘어가면 아이템들이 축소됨 */
+        }
+        /* 옵션 2 : 줄바꿈 허용 */
+        #opt2 {
+            flex-wrap: wrap; /* 공간이 부족하면 다음 줄로 이동
+                                컨테이너 너비를 넘어가면 아이템의 원래 크기 유지, 
+                                자연스러운 줄바꿈 */
+        }
+        /* 옵션 3 : 역순 줄바꿈 */
+        #opt3 {
+            flex-wrap: wrap-reverse; /* 줄바꿈은 하되, 줄의 순서를 뒤바꿈
+                                첫번째 줄이 아래쪽에, 두번째 줄이 위쪽에 배치 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="opt1">
+        <div class="box"><p>1</p></div>
+        <div class="box"><p>2</p></div>
+        <div class="box"><p>3</p></div>
+        <div class="box"><p>4</p></div>
+        <div class="box"><p>5</p></div>
+        <div class="box"><p>6</p></div>
+    </div>
+        <div class="container" id="opt2">
+        <div class="box"><p>1</p></div>
+        <div class="box"><p>2</p></div>
+        <div class="box"><p>3</p></div>
+        <div class="box"><p>4</p></div>
+        <div class="box"><p>5</p></div>
+        <div class="box"><p>6</p></div>
+    </div>
+    <div class="container" id="opt3">
+        <div class="box"><p>1</p></div>
+        <div class="box"><p>2</p></div>
+        <div class="box"><p>3</p></div>
+        <div class="box"><p>4</p></div>
+        <div class="box"><p>5</p></div>
+        <div class="box"><p>6</p></div>
+    </div>
+</body>
+</html>

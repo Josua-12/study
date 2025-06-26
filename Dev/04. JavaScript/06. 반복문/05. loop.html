@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        for(let i = 1; i < 6; i++) {
+            console.log(i);
+        }
+        console.log('');
+
+        for(let i = 5; i > 0; i--) {
+            console.log(i);
+        }
+        console.log('');
+
+        let i = 1;
+        while(i <= 10) {
+            console.log(i);
+            i++
+        }
+        console.log('');
+
+        let arr = [1, 2, 3, 4, 5];
+        for(let i = 0; i < arr.length; i++) {
+            console.log(arr[i]);
+        }
+        console.log('');
+
+        let person = {
+            name: '이순신',
+            age: 25,
+            height: 180,
+        }
+        console.log(person);  // 객체의 모든 속성 출력(키-값 쌍으로 구성됨)
+        console.log(person.name);  // 객체의 속성에 접근할 때 점 표기법
+        console.log(person['age']); // 객체의 속성에 접근할 때 대괄호 표기법
+        console.log('');
+
+        console.log(Object.keys(person));
+        console.log('');
+
+        let newArray = Object.keys(person);
+        for(let i = 0; i < newArray.length; i++){
+            let nowKey = newArray[i];
+            console.log(`key : ${nowKey}, value : ${person[nowKey]}`);
+            // person 객체를 [key, value] 형태의 배열로 변환
+        }
+        console.log('');
+
+        let newArray2 = Object.values(person);
+        for(let i = 0; i < newArray2.length; i++) {
+            console.log(`value : ${newArray2[i]}`);
+        }  // for문으로 person 객체 프로퍼티의 값들 출력함
+        console.log('');
+
+        let newArray3 = Object.entries(person);
+        for(let i = 0; i < newArray3.length; i++) {
+            console.log(`newArray3[${i}][0] => ${newArray3[i][0]}`);
+            console.log(`newArray3[${i}][1] => ${newArray3[i][1]}`);
+        }
+        console.log('');
+
+        let newArray4 = Object.entries(person);
+        for(let i = 0; i < newArray3.length; i++) {
+        console.log(`key : ${newArray3[i][0]} // value : ${newArray3[i][1]}`);
+        }
+        console.log('');
+
+        let arr2 = [1, 2, 3, 4, 5];
+        for(let i of arr2) {
+            console.log(i);
+        }
+        console.log('');
+
+        let person2 = {
+            name: '이순신',
+            age: 25,
+            height: 180,
+        }
+        for(let key in person2) {
+            console.log(`${key} : ${person2[key]}`);
+        }
+    </script>
+</body>
+</html>

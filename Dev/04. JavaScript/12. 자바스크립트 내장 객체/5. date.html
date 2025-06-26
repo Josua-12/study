@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>교육 캠프 경과 일수</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 1px solid #222;
+            background-color: #3bf;
+            text-align: center;
+        }
+        h1 {
+            margin-top: 2em;
+        }
+        .accent {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>교육 캠프 경과 일수</h1>
+        <p><span class="accent" id="result"></span>일이 연속으로 <br> 지났습니다.</p>
+        <p>화이팅입니다!<br>힘내세요!!</p>
+    </div>
+    <script>
+        let now = new Date(); // 특정한 파라미터를 주지 않으면 오늘 날짜로 객체 지정
+        let firstDay = new Date("2025-05-27"); // 시작 날짜를 객체로 지정
+
+        // 1970년 1월 1일 0시 0분 0초부터 지금까지의 밀리 초 경과 시간 (정수)
+        let toNow = now.getTime(); // 오늘까지 지난 시간 (밀리초)(1970.01.01~)
+        let tofirst = firstDay.getTime(); // 2025년 05월 27일까지 지난 시간(1970.01.01~2025.05.27)
+        let passTime = toNow - tofirst; // 5월 27일부터 오늘까지 지난 시간 (밀리초)
+
+        // 밀리 초를 일 수로 계산하고 반올림 , round : 소수 첫째자리에서 반올림해서 정수
+        passTime= Math.round(passTime/(1000*60*60*24)) //1초 * 60(1분에) * 60(1시간에) *24(하루에)
+        document.querySelector("#result").innerText = passTime;
+
+    </script>
+</body>
+</html>

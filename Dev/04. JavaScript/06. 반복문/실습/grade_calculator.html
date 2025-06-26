@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>성적 계산기</title>
+    <style>
+        * {margin: 0; padding: 0;}
+        body {font-family: Arial, Helvetica, sans-serif; padding: 20px; background-color: #f5f5f5;}
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333; margin-bottom: 20px; text-align: center;
+        }
+        .grade-A {color: #4caf50; font-weight: bold;}
+        .grade-B {color: #2196f3; font-weight: bold;}
+        .grade-C {color: #ff9800; font-weight: bold;}
+        .grade-D {color: #f44336; font-weight: bold;}
+        .grade-F {color: #9c27b0; font-weight: bold;}
+        .result {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        //학생 점수 배열
+        let scores = [95, 87, 76, 65, 54, 43, 88, 92, 71, 83, 69, 78, 85, 90, 72];
+        //학생 이름 배열
+        let studentNames = ['김철수', "이영희", '박민수', '최지영', '정태현', '한소영', '임동훈', 
+                            '서미진', '오준석', '신혜진', '윤성호', '장미라', '조준호', '배수진','황정민'];
+        //성적 통계 변수를 멤버로 하는 객체
+        let gradeCount = { A:0, B:0, C:0, D:0, F:0};
+        let totalScore = 0;
+
+        //점수를 학점으로 변환하는 함수
+        function getGrade(score) {
+            if(score >= 90) return 'A';
+            else if(score >= 80) return 'B';
+            else if(score >= 70) return 'C';
+            else if(score >= 60) return 'D';
+            else return 'F';
+        }
+
+        document.write('<div class="container">');
+        document.write('<h1>학생 성적 관리 시스템</h1>');
+
+        for(let i = 0; i < scores.length; i++) {
+            let currentScore = scores[i]; //현재 학생의 점수를 변수에 저장
+            let currentName = studentNames[i]; //현재 학생의 이름
+            let grade = getGrade(currentScore); //점수를 성적으로 변환
+            let cssClass = 'grade-' + grade; //CSS에서 사용할 클래스명 생성(grade-A, grade-B)
+
+            // 성적별 카운트 증가
+            gradeCount[grade]++;    //현재 성적 등급의 학생 수 증가 (gradeCount.A++, gradeCount.B++)
+            // 총점 누적
+            totalScore += currentScore;
+
+            //출력 -- 예) 김철수 : 95점(A등급)
+            document.write('<div class="result">')
+            document.write("<span class= '"+cssClass+"' >" +currentName+ " : " + currentScore +"점 (" + grade + "등급)</span>");
+            document.write('</div>')
+            }
+
+            document.write("<hr style ='margin: 20px 0;'>");
+            document.write("<h2>📈성적 통계</h2>");
+            
+            //평균
+            let average = Math.round(totalScore / scores.length * 100) / 100
+            document.write("<div class='result'>");
+            document.write("<strong>전체 학생 수 :</strong> " + scores.length + "명<br>");
+            document.write("<strong>평균 점수 :</strong> " + average + "점<br>");
+            document.write("<strong>총점 :</strong> " + totalScore + "점<br>");
+            document.write("<div>");
+
+
+
+            document.write('</div>');
+    </script>
+</body>
+</html>
+

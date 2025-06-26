@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            - 인자가 모두 전달하면 전달값이 사용됨
+            - 일부만 전달하면 기본값이 사용됨
+        */
+        function multiple(a, b = 5, c = 10) {
+            return a* b + c;
+        }
+
+        let result1 = multiple(5, 10, 20);
+        document.write(`multiple(5, 10, 20) = ${result1}<br>`)
+
+        let result2 = multiple(10, 20);
+        document.write(`multiple(5, 10) = ${result2}<br>`)
+
+        let result3 = multiple(30);
+        document.write(`multiple(5, 10, 20) = ${result3}<br>`)
+        
+    </script>
+</body>
+</html>

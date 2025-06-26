@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>변수와 연산자, 조건문, 이벤트, DOM</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        /* 메인 컨테이너 */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: #2d3436;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #2d3436;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #74b9ff;
+        }
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: #a29bfd;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #0984e3;
+        }
+        .result-box {
+            background: #d1f2eb;
+            border: 2px solid #00b894;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .result-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #00b894;
+            margin: 10px 0;
+        }
+        /* 숨김 클래스 */
+        .hidden {
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>변수와 기본 계산</h1>
+
+        <div class="input-group">
+            <label for="firstNumber">첫 번째 숫자:</label>
+            <input type="number" id="firstNumber" placeholder="10" />
+        </div>
+
+        <div class="input-group">
+            <label for="secondNumber">두 번째 숫자:</label>
+            <input type="number" id="secondNumber" placeholder="5" />
+        </div>       
+        
+        <!-- 계산 버튼들 -->
+         <button class="btn" onclick="calculate('add')">➕더하기</button>
+         <button class="btn" onclick="calculate('substract')">➖빼기</button>
+         <button class="btn" onclick="calculate('multiply')">✖️곱하기</button>
+         <button class="btn" onclick="calculate('divide')">➗나누기</button>
+
+        <!-- 결과 표시 영역 -->
+         <div id="resultBox" class="result-box hidden">
+            <h3>🧮계산 결과</h3>
+            <div id="calculation"></div>
+            <div id="result" class="result-value"></div>
+         </div> 
+    </div>
+
+    <script>
+        function calculate(operation) {
+            // HTML에서 사용자가 입력한 값 가져오기 
+            let first = document.getElementById("firstNumber").value; //첫번째 입력칸의 값
+            let second = document.getElementById("secondNumber").value; //두번째 입력칸의 값
+
+            // 문자열을 숫자로 변환하기 (입력칸의 값은 항상 문자열임)
+            let num1 = Number(first);   // "10" => 10으로 변환 
+            let num2 = Number(second);   // "5" => 5으로 변환 
+
+            // 사용자가 숫자를 입력했는지 확인
+            if(first === "" || second === "") { //입력칸이 비어있으면 
+                alert("숫자를 입력해주세요!");   //경고창 띄우기 
+                return;                        //함수 중단하고 끝내기   
+            }
+
+            // 계산하기 
+            let result;     //  계산 결과를 저장할 변수 선언 
+
+            if(operation === 'add') {   // 더하기 버튼을 눌렀다면
+                result = num1 + num2;   // 두 숫자를 더하기 
+            } else if(operation === 'substract') {  // 빼기 버튼을 눌렀다면
+                result = num1 - num2;   // 첫 번째에서 두 번째 빼기 
+            } else if(operation === 'multiply') {  // 곱하기 버튼을 눌렀다면
+                result = num1 * num2;   // 두 숫자를 곱하기 
+            } else if(operation === 'divide') {  // 나누기 버튼을 눌렀다면
+                if(num2 === 0) {    // 두번째 숫자가 0이면
+                    alert("0으로 나눌 수 없어요!");
+                    return;         // 함수 중단하고 끝내기 
+                }
+                result = num1 / num2;       // 첫번째를 두번째로 나누기 
+            }
+
+            // 계산 결과를 화면에 출력하기 
+            // textContent는 HTML 요소의 글자 내용을 바꾸는 명령어  
+            document.getElementById("calculation").textContent 
+                                        = first + " 와(과)" + second;
+            // textContent를 사용해서 결과값을 화면에 표시                                         
+            document.getElementById("result").textContent = result;
+            // classList = "CSS 클래스들의 목록" 
+            // class="result-box hidden"
+            // classList.remove("hidden") <-- 클래스목록에서 "hidden"클래스만 제거하는 명령어
+            document.getElementById("resultBox").classList.remove("hidden");                                      
+
+            console.log("계산 완료");
+            console.log("결과 : " + result);
+        }
+
+        // 페이지가 처음 로드될때 자동으로 실행되는 함수 
+        window.onload = function() {
+            console.log("계산기 시작!");
+        } 
+
+    </script>
+</body>
+</html>

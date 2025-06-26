@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>요일별 할인율 계산기</title>
+    <style>
+        body {
+            background-color: #0c3268;
+            color: rgb(243, 243, 243);
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 900px;  /* 최대 너비 */
+            margin: 0 auto;  /* 가운데 정렬 */
+        }
+        h1 {
+            text-align: center;
+            color: yellow;
+            text-shadow: 2px 2px 2px #000;
+            margin-bottom: 30px;
+        }
+        .exercise {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border-left: 5px solid yellow;
+        }
+         .discount-info {
+            background-color: rgba(255, 255, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            border: 0.1px solid rgba(255, 255, 0, 0.3);
+        }
+        button {
+            background-color: yellow;
+            color: #0c3268;
+            border: none;
+            padding: 12px 25px;
+            margin: 10px 5px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #ffeb3b;
+        }
+        .result {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            margin-top: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💰요일별 할인율 계산기</h1>
+
+        <div class="exercise">
+            <h3>요일에 따른 할인율을 확인하세요</h3>
+            <p>요일을 입력하거나 Enter키를 눌러 오늘의 할인율을 확인할 수 있습니다.</p>
+
+            <!-- 계절별 정보 카드 -->
+            <div class="discount-info">
+                <h3>📅요일별 할인율 안내</h3>
+                <ul class="discount-days">
+                    <li>월요일, 화요일: 10% 할인</li>
+                    <li>수요일, 목요일: 15% 할인</li>
+                    <li>금요일: 20% 할인 (불금 특가! 🎉)</li>
+                    <li>토요일, 일요일: 5% 할인</li>
+                </ul>
+            </div>
+
+            <button onclick="getDiscount()">할인율 확인</button>
+
+            <!-- 결과 표시 영역 -->
+            <div id="DiscountResult" class="result"></div>
+        </div>
+    </div>
+    <script>
+        function getDiscount() {
+            let day = String(prompt("요일을 입력하세요(월, 화, 수, 목, 금, 토, 일) 또는 Enter로 오늘 요일:"));
+        
+            let daydiscount;
+            let percent;
+            let emoji;
+            let discount_state;
+
+            if (day === null || day.trim() === "") {
+                returnl;
+            }
+
+            day = day.trim(); 
+
+            let result = ""
+            switch(day) {
+                case "월": 
+                    daydiscount = "월요일 할인율";
+                    percent = "10%";
+                    emoji = "📅";
+                    discount_state = "기본 할인";
+                    break;
+                case "화": 
+                    daydiscount = "화요일 할인율";
+                    percent = "10%";
+                    emoji = "📅";
+                    discount_state = "기본 할인";
+                    break;
+                case "수": 
+                    daydiscount = "수요일 할인율";
+                    percent = "15%";
+                    emoji = "👍";
+                    discount_state = "좋은 할인!";
+                    break;
+                case "목": 
+                    daydiscount = "목요일 할인율";
+                    percent = "15%";
+                    emoji = "👍";
+                    discount_state = "좋은 할인!";
+                    break;
+                case "금": 
+                    daydiscount = "금요일 할인율";
+                    percent = "20%";
+                    emoji = "🎉";
+                    discount_state = "최대 할인!";
+                    break; 
+                case "토": 
+                    daydiscount = "토요일 할인율";
+                    percent = "5%";
+                    emoji = "📅";
+                    discount_state = "기본 할인";
+                    break; 
+                case "일": 
+                    daydiscount = "일요일 할인율";
+                    percent = "5%";
+                    emoji = "📅";
+                    discount_state = "기본 할인";
+                    break;        
+            }
+
+            document.getElementById("DiscountResult").innerHTML
+                = `
+                    <div style="line-height: 0.5;">
+                        <div style="font-weight: bold; ">
+                            <h3>${daydiscount} : <span style ="color: yellow; font-size:1.3em">${percent}</span></h3>
+                        </div>
+                        <div>
+                            <h3>${emoji} ${discount_state}</h3>
+                        </div>
+                        <div>
+                            <small style="color: #ccc;">💡할인을 적용하여 쇼핑하세요!</small>
+                        </div>
+                    </div>
+                `;
+        }
+    </script>
+</body>
+</html>

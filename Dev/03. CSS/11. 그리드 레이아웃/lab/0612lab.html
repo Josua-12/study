@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제품 카드 Grid Layout</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+            line-height: 1.6rem; /* 줄간격 */
+        }
+        .page-title {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+        /* 그리드 컨테이너 */
+        .product-grid {
+            max-width: 1200px;
+            margin: 0 auto; /* 중앙 정렬 */
+            display: grid; /* 그리드 레이아웃 활성화 */
+            /* 반응형 열 생성(최소한 300px이고, 균등하게 배치) */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 20px; /* 그리드 아이템 간 간격 */
+            padding: 20px;            
+        }
+        /* 제품 카드 스타일 */
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        /* 카드 호버 효과 */
+        .product-card:hover {
+            transform: translateY(-5px); /* 위로 살짝 이동 */
+            box-shadow: 0 5px 2px rgba(0, 0, 0, 0.15);
+        }
+        /* 제품 이미지 영역 */
+        .product-image {
+            width: 100%; /* 전체 너비 */
+            height: 200px; /* 고정 높이 */
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            display: flex; 
+            align-items: center; /* 세로 중앙 정렬 */
+            justify-content: center;/* 가로 중앙 정렬 */
+            color: white;
+            font-weight: bold;
+        }
+        .product-info {
+            padding: 20px;
+        }
+        .product-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .product-description {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        .product-price {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 15px;
+        }
+        .buy-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .buy-button:hover {
+            background-color: #2980b9;
+        }
+        /* 반응형 디자인 - 태블릿 */
+        @media (max-width: 768px) {
+            .product-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));  
+                                                      /* 더 작은 최소 너비 */
+                gap: 15px; /* 간격 줄임 */
+                padding: 15px;
+            }
+            .page-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* 반응형 디자인 - 모바일 */
+        @media (max-width: 480px) {
+            .product-grid {
+                grid-template-columns: 1fr; /* 한 줄에 하나씩 */
+                gap: 1px; /* 간격 줄임 */
+                padding: 10px;
+            }
+            body {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="page-title">쇼핑몰 - 제품</h1>
+    <div class="product-grid">
+        <div class="product-card">
+            <div class="product-image">
+                📱iPhoneOS 26
+            </div>
+            <div class="product-info">
+                <h3 class="product-name">iOS 26</h3>
+                <p class="product-description">Use visual intelligence with what's onscreen. Create polls and backgrounds in Messages.</p>
+                <div class="product-price">1,550,000원</div>
+                <button class="buy-button">장바구니 담기</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image">
+                📱macOS 26
+            </div>
+            <div class="product-info">
+                <h3 class="product-name">iOS 26</h3>
+                <p class="product-description">Use visual intelligence with what's onscreen. Create polls and backgrounds in Messages.</p>
+                <div class="product-price">1,550,000원</div>
+                <button class="buy-button">장바구니 담기</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image">
+                📱iPadOS 26
+            </div>
+            <div class="product-info">
+                <h3 class="product-name">iOS 26</h3>
+                <p class="product-description">Use visual intelligence with what's onscreen. Create polls and backgrounds in Messages.</p>
+                <div class="product-price">1,550,000원</div>
+                <button class="buy-button">장바구니 담기</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image">
+                📱watchOS 26
+            </div>
+            <div class="product-info">
+                <h3 class="product-name">iOS 26</h3>
+                <p class="product-description">Use visual intelligence with what's onscreen. Create polls and backgrounds in Messages.</p>
+                <div class="product-price">1,550,000원</div>
+                <button class="buy-button">장바구니 담기</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image">
+                📱visionOS 26
+            </div>
+            <div class="product-info">
+                <h3 class="product-name">iOS 26</h3>
+                <p class="product-description">Use visual intelligence with what's onscreen. Create polls and backgrounds in Messages.</p>
+                <div class="product-price">1,550,000원</div>
+                <button class="buy-button">장바구니 담기</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image">
+                📱ipodOS 26
+            </div>
+            <div class="product-info">
+                <h3 class="product-name">iOS 26</h3>
+                <p class="product-description">Use visual intelligence with what's onscreen. Create polls and backgrounds in Messages.</p>
+                <div class="product-price">1,550,000원</div>
+                <button class="buy-button">장바구니 담기</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

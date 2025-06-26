@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 객체 프로퍼티 수정
+        let cat = {
+            name: '길냥이',
+            age: 3,
+            color: 'white',
+        }
+        cat.age = 1;
+        cat['color']= 'yellow';
+        console.log(cat);
+
+        let cat2 = {
+            name: '길냥이',
+            age: 3,
+            color: 'white',
+        }
+        cat2.age = 1;
+        cat2['color'] = 'yellow';
+
+        const cat3 = {
+            name: '길냥이',
+            age: 3,
+            color: 'white',
+        }
+        /* cat3 = {
+            age: 2,
+        } */
+
+        // 객체 프로퍼티 삭제 => delete 키워드 사용
+        const cat4 = {
+            name: '길냥이',
+            age: 3,
+            color: 'white',
+        }
+        delete cat4.color;
+        delete cat4["age"];
+    </script>
+</body>
+</html>

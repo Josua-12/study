@@ -1,0 +1,23 @@
+1. 블록 레벨과 인라인 레벨을 바꾸는 속성  
+    1) display 
+        - block : 블록 레벨 요소로 표시함
+        - inline : 인라인 레벨 요소로 표시함
+        - inlien-block : 인라인 레벨처럼 배치하지만 블록 레벨처럼 너비와 높이를
+                         지정할 수 있음
+        - none : 해당 요소를 화면에 표시하지 않음
+
+2. 왼쪽이나 오른쪽으로 배치하는 속성
+    1) float
+        - left : 해당 요소를 문서의 왼쪽에 배치함
+        - right : 해당 요소를 문서의 오른쪽에 배치함
+        - none : 기본값. 해당 요소를 좌우 어느 쪽에도 배치하지 않음
+
+    2) float 속성을 사용해 가로로 배치함
+    3) float 속성을 해제하는 속성  
+        - clear
+            - left
+                - float : left를 해제함 
+            - right 
+                - float : right를 해제함
+            - both
+                - float : left와  float : right를 해제함

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;    /* 가로 가운데 */
+            align-items: center;        /* 세로 가운데 */
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        let how = prompt("얼마까지 더할까요?");
+        let sum = 0;
+
+
+
+
+        if(how === null || isNaN(how) ) {
+            document.write("올바른 숫자를 입력해주세요");
+        } else {
+            for(let i = 1; i <= how; i++) {
+            sum += i;
+             }
+        
+        document.write(`1부터 ${how}까지 더하면 ${sum}`)
+        }
+    
+        
+
+
+        
+    </script>
+</body>
+</html>

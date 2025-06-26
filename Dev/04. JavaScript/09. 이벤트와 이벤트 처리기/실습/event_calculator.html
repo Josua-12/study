@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>계산기</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            max-width: 400px; /* 최대 너비 제한 */
+            margin: 50px auto; /* 상하 50px, 좌우 자동 (중앙) 정렬 */
+            padding: 20px; /* 내부 여백 */
+            background-color: #f0f0f0;
+        }
+        .calculator {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        #display {
+            width: 100%;
+            height: 50px;
+            font-size: 24px;
+            text-align: right;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            background-color: #f9f9f9;
+            box-sizing: border-box; /* 패딩과 테두리를 너비에 포함 */
+        }
+        /* 버튼 그리드 컨테이너 스타일 */
+        .buttons {
+            display: grid; /* css Grid 레이아웃 사용 */
+            grid-template-columns: repeat(4, 1fr); /* 4갸 열, 동일한 너비 */
+            grid-template-rows: repeat(5, 50px) /* 명시적으로 5행 정의, 각 50px 높이 */;
+            gap: 10px;
+        }
+        /* 모든 버튼의 공통 스타일 */
+        button {
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .number {
+            background-color: #e8e8e8;
+            color: #333;
+        }
+        .number:hover {
+            background-color: #d0d0d0;
+        }
+        .operator {
+            background-color: #007bff;
+            color: white;
+        }
+        .operator:hover {
+            background-color: #0056b3;
+        }
+        .clear {
+            background-color: #dc3545;
+            color: white;
+        }
+        .clear:hover {
+            background-color: #28a745;
+        }
+        .equals {
+            background-color: #28a745;
+            color: white;
+            grid-row: span 2; /* 세로로 2해에 걸쳐 표시 */
+        }
+        .equals:hover {
+            background-color: #218821;
+        }
+        .zero {
+            grid-column: span 2; /* 가로로 2열에 걸쳐 표시 */
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h1>🧮 간단한 계산기</h1>
+        <input type="text" id="display" readonly>
+
+        <div class="buttons">
+            <!-- 첫 번째 줄 : clear, backspace, /, * -->
+            <button class="clear" onclick="clearDisplay()">C</button>
+            <button class="clear" onclick="backspace()">🔙</button>
+            <button class="operator" onclick="appendToDisplay('/')">/</button>
+            <button class="operator" onclick="appendToDisplay('*')">*</button>
+
+            <!-- 두 번째 줄 : 7, 8, 9, - -->
+            <button class="number" onclick="appendToDisplay('7')">7</button>
+            <button class="number" onclick="appendToDisplay('8')">8</button>
+            <button class="number" onclick="appendToDisplay('9')">9</button>
+            <button class="operator" onclick="appendToDisplay('-')">-</button>
+
+            <!-- 세 번째 줄 : 4, 5, 6, + -->
+            <button class="number" onclick="appendToDisplay('4')">4</button>
+            <button class="number" onclick="appendToDisplay('5')">5</button>
+            <button class="number" onclick="appendToDisplay('6')">6</button>
+            <button class="operator" onclick="appendToDisplay('+')">+</button>
+
+            <!-- 네 번째 줄 : 1, 2, 3, = -->
+            <button class="number" onclick="appendToDisplay('1')">1</button>
+            <button class="number" onclick="appendToDisplay('2')">2</button>
+            <button class="number" onclick="appendToDisplay('3')">3</button>
+            <button class="equals" onclick="calculate('=')">=</button>
+
+            <!-- 다섯 번째 줄 : ., 0 -->
+            <button class="zero" onclick="appendToDisplay('0')">0</button>
+            <button class="number" onclick="appendToDisplay('.')">.</button>
+        </div>
+    </div>
+    <script>
+        // 전역 변수
+        let currentInput = ''; // 사용자가 입력한 숫자, 연산자들
+        // 화면 표시 함수
+        function appendToDisplay(value) {
+            const display = document.getElementById("display");
+            // 현재 입력값에 새로운 값을 추가 (문자열 연결)
+            currentInput += value;
+            // 화면에 업데이트된 계산식 표시
+            display.value = currentInput;
+            console.log('입력됨 : ', value, ' 현재 식 : ', currentInput);
+        }
+        // 화면을 완전히 지우는 함수(c버튼)
+        function clearDisplay() {
+            const display = document.getElementById("display");
+            // 모든 값 초기화
+            currentInput = '';  // 입력된 변수 비우기
+            display.value = '';
+
+            console.log('계산기가 초기화되었습니다.');
+        }
+
+        // 마지막 입력값을 지우는 함수
+        function backspace() {
+            // DOM에서 디스플레이 요소 가져오기
+            const display = document.getElementById("display");
+            // slice() : 마지막 문자 제외하고 자르기
+            currentInput = currentInput.slice(0, -1); // 현재 입력값에서 마지막 문자 제거
+            // 화면 업데이트
+            display.value = currentInput;
+            // 콘솔에 백스페이스 정보 출력
+            console.log('백스페이스, 현재식 : ', currentInput);
+        }
+
+        function calculate() {
+            // DOM에서 디스플레이 요소 가져오기
+            const display = document.getElementById("display");
+
+            try {
+                // 입력된 식이 비어있으면 아무것도 하지 않음
+                if (currentInput === '') {
+                    return; //함수종료
+                }
+
+                // 현재 입력값을 계산
+                let result = eval(currentInput);
+                // 결과가 소수점 8자리까지만 표시
+                result = Math.round(result * 100000000) / 100000000;
+
+                // 결과를 화면에 표시
+                display.value = result;
+
+                // 다음 계산을 위해 결과를 새로운 시작점으로 설정
+                currentInput = result.toString();
+
+                // 콘솔에 계산 완료 정보 출력
+                console.log('계산 완료 : ', result);
+
+            } catch(error) {
+                // 계산 오류 발생 시 (잘못된 수식 등)
+                display.value = 'Error';  // 에러 메시지 표시
+                currentInput = '';  // 입력 변수 초기화
+                console.log('계산 오류', error.message);
+                // 2초 후 화면 자동 초기화
+                setTimeout(clearDisplay, 2000);
+            }
+        }
+
+        // 키보드 입력 이벤트 처리 
+        // 사용자가 버튼을 클릭하지 않아도 키보드 숫자, 연산자, Enter, Backspace 등 직접 입력해서 이벤트 처리함
+        document.addEventListener('keydown', function(event) {
+            const key = event.key; // 눌린 키 값 가져오기
+            // 숫자 키 처리(0~9)
+            if(key >= '0' && key <= '9') {
+                appendToDisplay(key); // 숫자를 화면에 추가
+            }
+            // 연산자 키 처리 (+, -, *, /)
+            else if(key === '+' || key === '-' || key === '*' || key === '/') {
+                appendToDisplay(key); // 연산자를 화면에 추가
+            }
+            // 소수점 처리
+            else if(key === '.') {
+                appendToDisplay(key); //소수점을 화면에 추가
+            }
+            // Enter 키로 계산 처리
+            else if(key === 'Enter') {
+                event.preventDefault(); //기본 동작 방지
+                calculate(); //계산 함수 호출
+            }
+            // Escape 처리
+            else if(key === 'Escape') {
+                clearDisplay();
+            }
+            // Backspace 키로 계산 처리
+            else if(key === 'Backspace') {
+                event.preventDefault(); //기본 동작 방지
+                backspace(); //계산 함수 호출
+            }
+
+            console.log('키보드 입력 : ', key);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background: white;
+            color: black;
+            text-align: center;
+            font-family: sans-serif;
+            padding-top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>배경색 바꾸기 테스트</h1>
+    <script>
+        /* confirm()창을 띄워 사용자 선택 받기 */
+        let reply = confirm("정말 배경 색상을 파란색으로 바꾸시겠습니까?");
+        /* 사용자가 선택한 값을 콘솔 */
+        console.log("사용자 응답 값 : ", reply); /* true 또는 false */
+        /* 확인을 눌렀을 때 파란색 배경으로 전환 */
+        if(reply) {
+            document.body.style.backgroundColor = "blue";
+            document.body.style.color = "yellow";
+        }
+        /* 취소를 누르면 아무 변화없이 기본 흰색 유지 */
+    </script>
+</body>
+</html>

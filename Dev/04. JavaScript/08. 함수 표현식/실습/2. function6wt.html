@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        p {
+            font-size: 1.2em;
+        }
+        .accent {
+            font-weight: bold;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        (function() {
+            let name = prompt("이름을 입력하세요");
+            let age = prompt("나이를 입력하세요");
+            let isAdult = false;
+
+            if(age !== null && !isNaN(age) && age.trim() !== "") {
+                isAdult = Number(age)  >= 20;
+                document.write(
+                    `<p>안녕하세요, <span class="accent">${name}</span>님!</p>`+
+
+                    `<p>당신은 <span class="accent">${isAdult ? 
+                                    "성인" : "미성년자"}</span>입니다.</p>`)
+            } else {
+                document.write("<p>올바른 나이를 입력해 주세요</p>")
+            }
+        }());
+        console.log(typeof name);
+        console.log(typeof age);
+        console.log(typeof isAdult);
+    </script>
+</body>
+</html>

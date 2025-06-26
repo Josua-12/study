@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .red {
+            color: red;
+        }
+        .green {
+            color: green;
+        }
+        .aqua {
+            color: aqua;
+        }
+        /* 이렇게 해도 됨 */
+    </style>
+</head>
+<body>
+    <script>
+        /*  1부터 100까지 5의 배수일 경우에는 빨간색 글자,
+            7의 배수일 경우에는 초록색 글자 그리고 5의 배수이며 7의 배수일 경우에는 아쿠아색 글자로 출력하시오 */
+        
+        for(let i = 1; i <= 100; i++) {
+            if(i % 5 === 0 && i % 7 !== 0) {
+                document.write(`<p style="color: red;">${i}</p>`)
+            } else if(i % 7 === 0 && i % 5 !== 0) {
+                document.write(`<p style="color: green;">${i}</p>`)
+            } else if(i % 7 === 0 && i % 5 === 0) {
+                document.write(`<p style="color: aqua;">${i}</p>`)
+            }
+        }
+
+        /* for(let i = 1; i <= 100; i++) {
+            if(i % 5 === 0 && i % 7 !== 0) {
+                document.write(`<p class=red;">${i}</p>`)
+            } else if(i % 7 === 0 && i % 5 !== 0) {
+                document.write(`<p class=green;">${i}</p>`)
+            } else if(i % 7 === 0 && i % 5 === 0) {
+                document.write(`<p class=aqua;">${i}</p>`)
+            }
+        } */
+    </script>
+</body>
+</html>

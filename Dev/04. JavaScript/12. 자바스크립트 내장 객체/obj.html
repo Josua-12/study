@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let obj = new Object();  // 생성자 함수를 사용해 객체 생성
+        console.log(obj);
+
+        let obj2 = {};  // 객체는 중괄호를 사용해서 객체 생성 (객체 리터럴 방법)
+        console.log(obj2);
+
+        // 프로퍼티의 key값을 고유한 값으로 작성해야 함
+        // 프로퍼티의 value값으로 여러 가지 자료형의 값을 넣을 수 있음
+        let book = {
+            title: '자바스크립트 짱!', // 객체의 프로퍼티(속성)
+            author: '이순신',
+            category: 'IT 전문서',
+            year: undefined,
+            color: function() {
+                console.log('apple');
+            }
+        };
+
+        let car = {
+            name: '팰리세이드',
+            model: 'SUV',
+            color: 'white',
+        }
+        console.log(car.name);  // 점 표기법
+        console.log(car.model);
+        console.log(car.color);
+        console.log(car["name"]); // 괄호 표기법 사용(객체 이름뒤 대괄호 안에 key값을 작성해주는 방식)
+        console.log(car["model"]);
+        console.log(car["color"]);
+
+        const getValue = (key) => {
+            console.log(car[key]);  // 함수 내부에 괄호 표기법 사용해 객체 프로퍼티의 값 출력함
+        }
+
+        let cat = {
+            age: 2,
+        }
+
+        cat.name = '길냥이'; // 점표기법으로 객체 프로퍼티 추가
+        // 괄호표기법으로 객체 이름 뒤 대괄호 안에 새로 추가할 프로퍼티 key값 작성
+        cat ['color'] = 'white'; 
+    </script>
+</body>
+</html>

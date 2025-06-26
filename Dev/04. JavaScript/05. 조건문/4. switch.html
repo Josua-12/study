@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Switch 문</title>
+    <link rel="stylesheet" href="css/4. switch.css">
+</head>
+<body>
+    <script>
+        let session = prompt("LLM 컨퍼런스 세션을 선택해 주세요. 1-RAG, 2-RangChain, 3-Agent");
+
+        // session 변수의 값에 따라 다른 동작을 실행
+        switch(session) {
+            case "1": 
+                document.write("<p>RAG 세션은 <strong>302호</strong>에서 진행됩니다.</p>");
+                break;
+            case "2":
+                document.write("<p>Rangchain 세션은 <strong>401호</strong>에서 진행됩니다.</p>");
+                break;
+            case "3":
+                document.write("<p>Agent 세션은 <strong>501호</strong>에서 진행됩니다.</p>");
+                break;
+            default: 
+                alert("잘못입력했습니다.")
+        }
+    </script>
+</body>
+</html>

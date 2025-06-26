@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>원형 그라데이션</title>
+    <style>
+        div {
+            width: 500px;
+            height: 300px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        .grad1 {
+            background: red;
+            background: radial-gradient(circle, purple, rgb(202, 1, 253));
+                    /* 중앙에서 시작하여 보라색에서 자주색으로 변하는 원형 그라데이션 */
+        }
+        .grad2 {
+            background: red;
+            background: linear-gradient(to bottom, rgb(250, 159, 174), rgb(213, 140, 250) 50%, rgb(213, 140, 250));
+                    /* 위에서 아래로 분홍색->연보라색->연보라색으로 변하는 그라데이션
+                       중간 위치 50% */
+        }
+        .grad3 {
+            background: red;
+            background: radial-gradient(ellipse, purple, rgb(202, 1, 253));
+                    /* 중앙에서 시작하여 보라색에서 자주색으로 변하는 타원형 그라데이션 */
+        }
+    </style>
+</head>
+<body>
+    <div class="grad1"></div>
+    <div class="grad2"></div>
+    <div class="grad3"></div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul {
+            list-style: none;
+        }
+        li {
+            width: 100px;
+            display: inline-block;
+        }
+        li a {
+            padding: 5px 20px;
+            font-size: 14px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        /* 속성 값의 끝 부분이 일치하는 요소에 스타일 지정 */
+        a[href $= "hwp"] {
+            background: url(images/bg.jpg) no-repeat left center;
+        }
+        /* 속성 값의 끝 부분이 일치하는 요소에 스타일 지정 */
+        a[href $= "xls"] {
+            background: url(images/s.jpg) no-repeat left center;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li><a href="intro.hwp">hwp 파일</a></li>
+        <li><a href="intro.xls">엑셀 파일</a></li>
+    </ul>
+</body>
+</html>

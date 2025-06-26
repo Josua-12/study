@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /* 
+            - var로 선언한 변수
+                - 선언 전에 접근해도 undefined가 출력되어 버그가 숨어
+                  지나갈 수 있음
+            - let(또는 const)로 선언한 변수
+                - 선언 전에 접근하면 명확하게 ReferenceError가 발생함
+                - 이로 인해 let과 const가 더 안전하며, 예측 가능한 코드를 작성하는 데 도움이 됨
+        */
+        let x = 10;
+
+        function display() {
+            console.log(x);
+            console.log(y);
+            let y = 20;
+        }
+
+        display(); //함수호출,  ReferenceError로 인해 중지
+    </script>
+</body>
+</html>

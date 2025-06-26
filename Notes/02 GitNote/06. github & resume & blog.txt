@@ -1,0 +1,10 @@
+1. HTML, CSS, 이미지 파일로 리력서 만들기
+    1) 사용할 파일 준비하기
+    2) local repository 생성하기
+    3) remote repository 푸시하기
+    4) 원격 저장소를 페이지로 전환하기 
+        - (settings -> pages -> Branch를 None에서 Main으로 -> save) [github에서]
+    5) 다음 주소로 접속하기
+        - https://josua-12.github.io/resume/
+        - https://아이디.github.io/저장소명(repositoryName)/
+        

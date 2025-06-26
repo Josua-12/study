@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            display: flex;
+            width: 600px;
+            border: 2px solid black;
+        }
+        .box {
+            height: 100px;
+            color: white;
+            text-align: center;
+            line-height: 100px;
+        }
+        .box1 {
+            flex-grow: 1; /* 남은 공간 비율 : 1 */
+            background-color: coral;
+        }
+        .box2 {
+            flex-grow: 2; /* 남은 공간 비율 : 2 */
+            background-color:steelblue;
+        }
+        .box3 {
+            flex-grow: 3; /* 남은 공간 비율 : 3 */
+            background-color: olive;
+        }
+    </style>
+</head>
+<body>
+    <h2>flex-grow 테스트</h2>
+    <div class="container">
+        <div class="box box1">grow : 1</div>
+        <div class="box box2">grow : 2</div>
+        <div class="box box3">grow : 3</div>
+    </div>
+</body>
+</body>
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카드 레이아웃</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box; /* 패딩/ 테두리를 요소 크기에 포함 */
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            padding: 2rem;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .phase-title {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            /* -webkit-text-fill-color: transparent; webkit 기반 브라우저에서만 사용 */
+            color: #f8f9fa;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .phase-description {
+            color: #6c757d;
+            font-size: 1.1rem;
+        }
+        .card-container {
+            display: flex; /* Flexbox 컨테이너로 설정 */
+            flex-wrap: wrap; /* 아이템이 넘치면 다음 줄로 이동함 */
+            gap: 1.5rem; /* 카드 간 일정한 간격 (margin) */
+            padding: 0.1rem;
+            max-width: 1200px; /* 최대 너비 제한 => 너무 넓어지지 않게 */
+            margin: 0 auto; /* 컨테이너를 페이지 중앙에 배치 */
+            justify-content: center; /* 카드들을 가로축 중앙에 배치 */
+        }
+        /* 개별 카드 스타일 */
+        .card {
+            flex: 1 1 280px; /* flex-grow, flex-shrink, flex-basis 
+                                최소 280px, 공간이 있으면 확장, 부족하면 축소*/
+            max-width: 320px; /* 카드가 너무 커지지 않도록 최대 너비 제한 */
+            background: white; /* 카드 배경 */
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
+            overflow: hidden; /* 카드 내용이 둥근 모서리를 넘지 않게 */
+            transition: transform 0.3s ease; /* 호버 애니메이션을 위한 트랜지션 */
+        }
+        .card:hover {
+            transform: translateY(-5px); /* 마우스 올리면 카드가 5px 위로 이동 */
+        }
+        .card-image {
+            width: 100%; /* 카드 전체 너비 차지 */
+            height: 200px; /* 고정 높이로 일관성 유지 */
+            display: flex; /* 내부 텍스트 중앙 정렬을 위함 */
+            align-items: center; /* 세로 중앙 정렬 */
+            justify-content: center; /* 가로 중앙 정렬 */
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        /* 각 카드별로 다른 그라데이션 배경 적용 */
+        .card:nth-child(1) .card-image{
+            background: linear-gradient(45deg, #ff6b6b, #ffa500);
+        }
+        .card:nth-child(2) .card-image{
+            background: linear-gradient(45deg, #ffa201, #ffd500);
+        }
+        .card:nth-child(3) .card-image{
+            background: linear-gradient(45deg, #ffd500, #92db00);
+        }
+        .card:nth-child(4) .card-image{
+            background: linear-gradient(45deg, #92db00, #00ffff);
+        }
+        .card:nth-child(5) .card-image{
+            background: linear-gradient(45deg, #00ffff, #000dff);
+        }
+        .card:nth-child(6) .card-image{
+            background: linear-gradient(45deg, #1100ff, #9d00ff);
+        } 
+        .card-content {
+            padding: 1.5rem; /* 카드 내부 여백  */
+        }
+        .card-title{
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        .card-description {
+            color: #7f8c8d;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+        .card-footer {
+            display: flex; /* Flexbox로 가격과 버튼 배치 */
+            justify-content: space-between; /* 양쪽끝으로 요소가 분리됨 */
+            align-items: center; /* 세로 중앙 정렬 */
+        }
+        .card-price {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        .card-btn {
+            padding: 0.7rem 1.5rem;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+        .card-btn:hover {
+            background-color: #2980b9;
+        }
+        /* 반응형 디자인 - 모바일 화면 대응
+           768px 이하 화면에 적용되는 스타일 */
+        @media (max-width:768px) {
+            .card-container {
+                padding: 0;
+                gap: 1rem; /* 카드 간격을 줄려서 공간 절약 */
+            }
+            .card {
+                flex: 1 1 100%; /* 모바일에서는 카드가 전체 너비 차지 */
+                max-width: none; /* 최대 너비 제한 해제 */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 페이지 상단 헤더 영역 -->
+    <div class="header">
+        <!-- 메인 타이틀 -->
+         <h1 class="phase-title">카드 레이아웃</h1>
+         <!-- 설명 텍스트 -->
+          <p class="phase-description">flex에서 인지한 flex-wrap을 활용한 기본 그리드</p>
+     </div>
+     <!-- 메인 카드 컨테이너 -->
+    <div class="card-container">
+        <!-- 첫번째 상품카드 -->
+        <div class="card">
+            <!-- 상품 이미지 영역(텍스트로 표현) -->
+            <div class="card-image">스마트폰</div>
+            <!-- 상품 정보 영역 -->
+            <div class="card-content">
+                <!-- 상품명 -->
+                <h3 class="card-title">프리미엄 스마트폰</h3>
+                <!-- 상품 설명 -->
+                <p class="card-description">최신 AI 기술이 집약된 플래그십 모델</p>
+                <!-- 가격, 버튼이 있는 하단 영역 -->
+                <div class="card-footer">
+                    <span class="card-price">1,000,000원</span>
+                    <button class="card-btn">구매</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 두번째 상품카드 -->
+        <div class="card">
+            <!-- 상품 이미지 영역(텍스트로 표현) -->
+            <div class="card-image">노트북</div>
+            <!-- 상품 정보 영역 -->
+            <div class="card-content">
+                <!-- 상품명 -->
+                <h3 class="card-title">GPU 탑재 노트북</h3>
+                <!-- 상품 설명 -->
+                <p class="card-description">최신 고성능 크래픽카드 탑재</p>
+                <!-- 가격, 버튼이 있는 하단 영역 -->
+                <div class="card-footer">
+                    <span class="card-price">2,100,000원</span>
+                    <button class="card-btn">구매</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 세번째 상품카드 -->
+        <div class="card">
+            <!-- 상품 이미지 영역(텍스트로 표현) -->
+            <div class="card-image">태블릿</div>
+            <!-- 상품 정보 영역 -->
+            <div class="card-content">
+                <!-- 상품명 -->
+                <h3 class="card-title">프로 태블릿</h3>
+                <!-- 상품 설명 -->
+                <p class="card-description">창작과 업무를 위한 테블릿</p>
+                <!-- 가격, 버튼이 있는 하단 영역 -->
+                <div class="card-footer">
+                    <span class="card-price">900,000원</span>
+                    <button class="card-btn">구매</button>
+                </div> 
+            </div>
+        </div>   
+        <!-- 네번째 상품카드 -->
+        <div class="card">
+            <!-- 상품 이미지 영역(텍스트로 표현) -->
+            <div class="card-image">이어폰</div>
+            <!-- 상품 정보 영역 -->
+            <div class="card-content">
+                <!-- 상품명 -->
+                <h3 class="card-title">ANC 이어폰</h3>
+                <!-- 상품 설명 -->
+                <p class="card-description">프리미엄 오디오 경험</p>
+                <!-- 가격, 버튼이 있는 하단 영역 -->
+                <div class="card-footer">
+                    <span class="card-price">300,000원</span>
+                    <button class="card-btn">구매</button>
+                </div>
+            </div>
+             
+        </div> 
+        <!-- 다섯번째 상품카드 -->
+        <div class="card">
+            <!-- 상품 이미지 영역(텍스트로 표현) -->
+            <div class="card-image">스마트워치</div>
+            <!-- 상품 정보 영역 -->
+            <div class="card-content">
+                <!-- 상품명 -->
+                <h3 class="card-title">스마트워치</h3>
+                <!-- 상품 설명 -->
+                <p class="card-description">건강과 스마트 기능의 조합</p>
+                <!-- 가격, 버튼이 있는 하단 영역 -->
+                <div class="card-footer">
+                    <span class="card-price">550,000원</span>
+                    <button class="card-btn">구매</button>
+                </div> 
+            </div>
+        </div> 
+        <!-- 여섯번째 상품카드 -->
+        <div class="card">
+            <!-- 상품 이미지 영역(텍스트로 표현) -->
+            <div class="card-image">모니터</div>
+            <!-- 상품 정보 영역 -->
+            <div class="card-content">
+                <!-- 상품명 -->
+                <h3 class="card-title">4K 모니터</h3>
+                <!-- 상품 설명 -->
+                <p class="card-description">선명한 4K 해상도</p>
+                            <div class="card-footer">
+                <span class="card-price">990,000원</span>
+                <button class="card-btn">구매</button>
+            </div> 
+            </div>
+            <!-- 가격, 버튼이 있는 하단 영역 -->
+        </div> 
+    </div>
+</body>
+</html>

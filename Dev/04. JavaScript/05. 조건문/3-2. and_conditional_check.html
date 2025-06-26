@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조건문</title>
+</head>
+<body>
+    <script>
+        let numberOne = parseInt(prompt('50 미만의 숫자를 입력하세요.'));
+        let numberTwo = parseInt(prompt('50 미만의 숫자를 입력하세요.'));
+        
+        console.log("입력된 첫 번째 숫자 :", numberOne);
+        console.log("입력된 두 번째 숫자 :", numberTwo);
+        console.log("첫 번째 숫자 < 50 :", numberOne < 50);
+        console.log("두 번째 숫자 < 50 :", numberTwo < 50);
+
+        //AND 연산자 (&&) 사용 : 두 조건이 모두 참이어야 true
+        if(numberOne < 50 && numberTwo < 50)
+            alert('두 개의 숫자 모두 50 미만입니다.')
+        else
+            alert('조건에 맞지 않는 숫자가 있습니다.')
+    </script>
+</body>
+</html>

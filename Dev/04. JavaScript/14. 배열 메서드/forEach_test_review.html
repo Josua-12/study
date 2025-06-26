@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>forEach 활용 - 직원 정보 출력 시스템</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+        }
+        .employee-card {
+            background: #f9f8fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            transition: transform 0.2s;
+        }
+        .employee-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .employee-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 5px;
+        }
+        .employee-info {
+            color: #666;
+            margin: 3px 0;
+        }
+        .section {
+            margin: 30px 0;
+            padding: 20px;
+            border-left: 4px solid #007bff;
+            background: #f8f9fa;
+        }
+        .section h2 {
+            color: #007bff;
+            margin-top: 0;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .output {
+           background: #e9ecef; 
+           padding: 15px;
+           border-radius: 5px;
+           margin: 10px 0;
+           font-family: monospace;
+           white-space: pre-line; /* 줄바꿈 유지 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>forEach 활용 - 직원 정보 출력 시스템</h1>
+        <div class="section">
+            <h2>목표</h2>
+            <p><strong>forEach</strong>메서드를 사용하여 배열의 각 요소를 순회하여 
+                    데이터를 출력하는 방법을 연습합니다.</p>
+            <p>실무에서는 직원 목록, 상품 목록 등을 화면에 표시할 때 자주 사용됩니다.</p>
+        </div>
+        <div class="section">
+            <h2>👐직원 데이터</h2>
+            <div id="employeeList"></div>
+        </div>
+        <div class="section">
+            <h2>🔧평가 문제</h2>
+            <button onclick="displayAllEmployees()">1. 전체 직원 목록 출력</button>
+            <button onclick="displayEmployeesByDepartment()">2. 부서별 직원 출력</button>
+            <button onclick="displayOddEmployees()">3. 홀수 번째 직원들</button>
+            <div id="output" class="output"></div>
+        </div>
+    </div>
+
+    <script>
+        // 직원 데이터 구조
+        const employees = [
+            {
+                id: 1,
+                name: "이순신",
+                department: "개발팀",
+                position: "시니어 개발자",
+                salary: 55000000,
+                email: "lee.sh@choongang.com",
+                phone: "010-1234-5678",
+                hireDate: "2020-03-15"
+            },
+            {
+                id: 2,
+                name: "신사임당",
+                department: "마케팅팀",
+                position: "마케팅 매니저",
+                salary: 48000000,
+                email: "shin.sed@choongang.com",
+                phone: "010-2345-6789",
+                hireDate: "2019-07-22"
+            },
+            {
+                id: 3,
+                name: "이방원",
+                department: "개발팀",
+                position: "주니어 개발자",
+                salary: 38000000,
+                email: "lee.bw@choongang.com",
+                phone: "010-3456-7890",
+                hireDate: "2022-01-10"
+            },
+            {
+                id: 4,
+                name: "류성룡",
+                department: "인사팀",
+                position: "인사 담당자",
+                salary: 42000000,
+                email: "ryu.sl@choongang.com",
+                phone: "010-4567-8901",
+                hireDate: "2021-05-03"
+            },
+            {
+                id: 5,
+                name: "손흥민",
+                department: "영업팀",
+                position: "영업 대리",
+                salary: 40000000,
+                email: "son.hm@choongang.com",
+                phone: "010-5678-9012",
+                hireDate: "2021-11-18"
+            }
+        ];
+
+        // 페이지 로드 시 직원 카드 표시
+        window.onload = function() {
+            displayEmployeeCards();
+        };
+        
+        // 직원 카드 형태로 표시하는 함수
+        function displayEmployeeCards() {
+            const container = document.getElementById('employeeList');
+            let html = '';
+            
+            // forEach를 사용하여 각 직원의 정보를 카드 형태로 변환
+            employees.forEach((employee, index) => {
+                html += `
+                    <div class="employee-card">
+                        <div class="employee-name">${employee.name}(${employee.position})</div>
+                        <div class="employee-info">🏢 부서 : ${employee.department}</div>
+                        <div class="employee-info">💰 급여 : ${employee.salary}</div>
+                        <div class="employee-info">📧 이메일 : ${employee.email}</div>
+                        <div class="employee-info">📞 연락처 : ${employee.phone}</div>
+                        <div class="employee-info">📅 입사일 : ${employee.hireDate}</div>
+                    </div>
+                `;
+            }); 
+
+            container.innerHTML = html;  // 직원 카드 HTML 생성
+            console.log("직원 카드가 성공적으로 표기되었습니다.");
+        };
+
+        // 1. 전체 직원 목록을 화면에 출력, 콘솔에 출력
+        function displayAllEmployees() {
+            const output = document.getElementById('output');
+            let result = "==== 전체 직원 목록 ====\n\n";
+            
+            // forEach
+            employees.forEach((employee) => {
+                result += `${employee.name} - ${employee.department} ${employee.position}\n`;
+                console.log(`${employee.name} - ${employee.department} ${employee.position}\n`);
+            });
+
+            output.textContent = result;
+        }
+
+        // 2. 부서별로 직원을 그룹화하여 출력
+        function displayEmployeesByDepartment() {
+            const output = document.getElementById("output");
+            let result = "==== 부서별 직원 목록 현황 ====\n\n";
+
+            // 부서별 그룹화를 위한 객체
+            const departmentGroups = {};
+
+            // forEach를 사용하여 부서별로 그룹화
+            employees.forEach((employee) => {
+                //  부서가 없으면 빈 배열로 초기화 후 아래의 push로 직원 추가
+                if(!departmentGroups[employee.department]) {
+                    departmentGroups[employee.department] = [];
+                }               
+                // 해당 부서에 "직원" 추가
+                departmentGroups[employee.department].push(employee);
+            });
+
+            // 각 부서별로 직원 목록 출력
+            Object.keys(departmentGroups).forEach((department) => {
+                result += `📁 ${department}: \n`;
+                // 해당 부서의 직원들을 순회하며 출력
+                departmentGroups[department].forEach((employee, index) => {
+                    result += `${index + 1}, ${employee.name} (${employee.position}) \n`;
+                });
+                result += "\n"
+            });
+            output.textContent = result;
+        }
+
+        // 3. 홀수번째
+        function displayOddEmployees() {
+            const output = document.getElementById("output");
+            let result = "==== 부서별 직원 목록 현황 ====\n\n";
+            result += "🔢 조건 : 목록에서 홀수 번째 위치 (1, 3, 5번째)에 있는 직원\n\n";
+            let oddEmployees = [];
+            let oddCount = 0;
+            let oddTotalCount = 0;
+            
+            
+
+            employees.forEach((employee, index) => {
+                if((index+1) % 2 !== 0) {
+                    oddCount++;
+                    oddTotalCount += employee.salary
+                    oddEmployees.push(employee);
+                    result += `${index+1}번째 : ${employee.name}\n`,
+                    result += `직책 : ${employee.position}\n`,
+                    result += `부서 : ${employee.department}\n`,
+                    result += `급여 : ${(employee.salary).toLocaleString()}\n\n`
+                    
+                }
+            });
+            result += `📈 홀수 번째 직원 통계 :\n`
+            result += `총 인원 : ${oddCount}명\n`
+            result += `총 급여 : ${oddTotalCount.toLocaleString()}원\n`
+            result += `평균 급여 : ${Math.round(oddTotalCount/oddCount).toLocaleString()}원\n\n`
+
+
+            const departmentCount = {};
+            oddEmployees.forEach(employee => {
+                if (!departmentCount[employee.department]) {
+                    departmentCount[employee.department] = 0;
+                }
+                departmentCount[employee.department]++;
+            });
+            result += `🏢 부서별 분포 : \n\n`;
+            Object.keys(departmentCount).forEach(department => {
+                result += `- ${department} : ${departmentCount[department]}명\n`;
+            });
+            
+
+            output.textContent = result;
+        }
+
+    </script>
+</body>
+
+
+</html>

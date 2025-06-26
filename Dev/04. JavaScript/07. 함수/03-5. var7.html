@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>블록 스코프</title>
+</head>
+<body>
+    <script>
+        const user = "Lee";
+        console.log(`나의 이름은 ${user}`);
+
+        const user = "Kim";  // 같은 블록에서 user를 다시 선언  SyntaxError
+        console.log(`나의 이름은 ${user}`);  //실행 안됨
+    </script>
+</body>
+</html>

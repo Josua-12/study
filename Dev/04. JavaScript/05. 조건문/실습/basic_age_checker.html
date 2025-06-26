@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나이 체크기</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        /* 메인 컨테이너 */
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: #2d3436;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #2d3436;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #74b9ff;
+        }
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: #a29bfe;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #6c5ce7;
+        }
+        .result-card {
+            background: #e8f4fd;
+            border: 2px solid #74b9ff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .result-emoji {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        .result-text {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2d34e6;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎂나이 체크기</h1>
+
+        <h3>🎂나이를 입력하고 결과를 확인해보세요</h3>
+
+        <div class="input-group">
+            <label for="ageinput">나이 입력(0-120세) :</label>
+            <input id="ageinput" placeholder="25" min="0" max="120"></input>
+        </div>
+    
+
+        <button class="btn" onclick="checkage()">🔍나이 확인하기</button>
+
+        <!-- 결과 표시 영역 -->
+        <div id="ageresult" class="result-card hidden">
+            <div id="ageemoji" class="result-emoji"></div>
+            <div id="agetext" class=".result-text"></div>
+        </div>
+    </div>
+
+    <script>
+        /* 나이 체크 함수 -  */
+        function checkage() {
+            /* 입력칸에서 사용자가 입력한 나이 가져오기 */
+            let ageinput2 = document.getElementById("ageinput").value; /* 입력칸의 값을 문자열로 가져옴 */
+
+            let ageinput = Number(ageinput2);
+
+            /* 빈 값 체크 */
+            if(ageinput === "") {
+                alert("나이를 입력해주세요!");
+                document.getElementById("ageinput").focus(); /* 입력칸에 커서 이동 */
+                return; /* 함수를 여기서 끝냄 */
+            } 
+            
+            /* 숫자 검증 - 숫자가 아닌 값 체크 */
+            /* 경고창 띄우기 ("숫자만 입력해 주세요!") */
+            if(isNaN(ageinput)) {
+                alert("숫자만 입력해 주세요!");
+                document.getElementById("ageinput").value = '';
+                return;
+            }
+        
+            // 범위 검증 - 나이가 올바른 범위인지 체크 
+            
+            // 음수라면("나이는 양수로 입력해주세요")
+             if(ageinput < 0) {
+                alert("나이를 양수로 입력해주세요!")
+                document.getElementById("ageinput").value = '';
+                return;
+            }
+            // 120세 초과라면 ("나이를 120세 미만으로 입력해주세요!")
+            if(ageinput > 120) {
+                alert("나이를 120세 미만으로 입력해주세요!")
+                document.getElementById("ageinput").value = '';
+                return;
+            }
+            //정확히 0이라면
+            //경고창 띄우기 ("나이는 0일 수  없어요! 1 이상을 입력해주세요!")
+            if(ageinput === 0) {
+                alert("나이는 0일 수 없어요! 1 이상을 입력해주세요!")
+                document.getElementById("ageinput").value = '';
+                return;
+            }
+            //소수점 검증 (Math.floor(), 나이는 정수로 입력해주세요!)
+            if(!Number.isInteger(ageinput)) {
+                alert("나이는 정수로 입력해주세요!");
+                document.getElementById("ageinput").focus();
+                return;
+            }
+            // 모든 검증 통과 (나이에 따른 분류하기)
+            // 65세 이상(할아버지 할머니 이모티콘 / **세는 어르신이시네요! 건강하세요)
+            // 20세 이상(청년 이모티콘 / **세는 성인입니다. 성인 인증 완료)
+            // 14세 이상(학생 이모티콘 / **세는 청소년입니다. 보호자 동의가 필요해요)
+            // 14세 미만(아기 이모티콘 / **세는 어린이입니다. 부모님과 함께 이용하세요)
+            let emoji = "";
+            let message = "";
+
+            if (ageinput >= 65) {
+                emoji = "👵🏻👴🏻";
+                message = `'${ageinput}세는 어르신이시네요! 건강하세요~'`;
+            } else if (ageinput >= 20) {
+                emoji = "👱🏻‍♀️🧑🏻";
+                message = `'${ageinput}는 성인입니다. 성인 인증 완료'`;
+            } else if (ageinput >= 14) {
+                emoji = "🧑🏻‍🎓✏️";
+                message = `'${ageinput}세는 청소년입니다. 보호자 동의가 필요해요'`;
+            } else if (ageinput < 14) {
+                emoji = "👶🏻🍼";
+                message = `'${ageinput}세는 어린이입니다. 부모님과 함께 이용하세요'`;
+            }
+            // 결과를 화면에 보여주기
+            document.getElementById("ageemoji").textContent = emoji;
+            document.getElementById("agetext").textContent = message;
+            document.getElementById("ageresult").classList.remove("hidden");
+            // 콘솔에 결과 출력하기
+            console.log(`입력된 나이: ${ageinput}, 메시지: ${message}`);
+        }
+    </script>
+</body>
+</html>

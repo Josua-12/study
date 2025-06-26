@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>박스모델 - 마진</title>
+</head>
+<style>
+    div {
+        width: 200px;
+        height: 100px;
+        display: inline-block;
+        border: 1px solid #222;
+    }
+    #margin1 {margin: 50px;} /* 상하좌우 모두 50px */
+    #margin2 {margin: 30px 50px;} /* 위,아래 30px, 좌,우 50px */
+    #margin3 {margin: 30px 20px 50px;} /* 위 30px, 좌,우 20px, 아래 50px */
+    #margin4 {margin: 30px 50px 30px 50px;} /* 순서대로 위 우 아래 좌  */
+    
+</style>
+<body>
+    <div id="margin1"></div>
+    <div id="margin2"></div>
+    <div id="margin3"></div>
+    <div id="margin4"></div>
+    <div id="margin5"></div>
+</body>

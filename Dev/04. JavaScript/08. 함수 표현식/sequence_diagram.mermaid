@@ -1,0 +1,12 @@
+sequenceDiagram
+  participant User as 사용자
+  participant DOM as DOM Element
+  participant calculator()
+  participant Val as Validation
+  participant Math as 익명함수(add/sub/mul/div)
+  participant UI as showResult()
+  participant Console as Console Log
+
+
+  User->>DOM: 1. 숫자 입력 (num1, num2)
+  

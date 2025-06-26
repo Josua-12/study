@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 매개변수가 없을 경우 */
+        // 일반 함수 표현식
+        const getTime = function() {
+            return new Date().toLocaleTimeString();
+        }
+
+        const getTime2 = () => new Date().toLocaleTimeString();
+
+        /* document.write(`현재 시각은 ${getTime()} 입니다.`); */
+        document.write(`현재 시각은 ${getTime2()} 입니다.`);
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나무 주문하기</title>
+    <link rel="stylesheet" href="css/required.css">
+</head>
+<body>
+    <form>
+        <fieldset>
+            <legend>배송 정보</legend>
+            <ul id="shipping">
+                <li>
+                    <label for="">주문 상품</label>
+                    <input type="text" id="prod" value="야외용 3KG" readonly>
+                </li>
+                <li>
+                    <label for="user_name">이름</label>
+                    <input type="text" id="user_name" autofocus required>
+                </li>
+                <li>
+                    <label for="user_addr">배송 주소</label>
+                    <input type="text" id="user_addr" 
+                        required placeholder="예) 서울시 마포구 신촌역 부근">
+                </li>
+                <li>
+                    <label for="user_email">이메일</label>
+                    <input type="email" id="user_email">
+                </li>
+                <li>
+                    <label for="user_tel">연락처</label>
+                    <input type="tel" id="user_tel" 
+                        placeholder="하이픈 빼고 입력해 주세요" required>
+                </li>
+                <li>
+                    <label for="path">주문 경로</label>
+                    <select id="path">
+                        <option value="sns">SNS</option>
+                        <option value="ai">AI</option>
+                        <option value="search">Search</option>
+                        <option value="offline">Offline</option>
+                    </select>
+                </li>
+                <li>
+                    <label for="area">요청사항들</label>
+                    <textarea id="area" cols="40" rows="4"></textarea>
+                </li>
+            </ul>
+        </fieldset>
+        <div>
+            <input type="submit" value="주문하기">
+            <input type="reset" value="취소하기">
+        </div>
+    </form>
+</body>
+</html>

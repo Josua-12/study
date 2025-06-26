@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>플렉스 박스 레이아웃</title>
+    <style>
+        /* 모든 컨테이너가 공통으로 사용할 스타일 */
+        .container {
+            display: flex; /* 플렉스 컨테이너로 지정하여 플렉스
+                              박스 레이아웃 활성화 */
+            background-color: #eee;
+            border: 1px solid #222;
+            margin-bottom: 30px;
+        }
+        /* 플렉스 아이템(박스) 기본 스타일
+           컨테이너 안에 들어갈 박스들의 공통 스타일 */
+        .box {
+            padding: 5px 45px;
+            margin: 5px;
+            width: 80px;
+        }
+        /* 홀수 번째 박스 스타일 (1, 3, 5번 ...) 
+           :nth-child(odd) 선택자로 홀수번째 자식 요소 선택*/
+        .box:nth-child(odd) {
+            background-color: rgb(255, 187, 0);
+        }
+        /* 짝수 번째 박스 스타일 (2, 4, 6번 ...) 
+           :nth-child(even) 선택자로 짝수번째 자식 요소 선택*/
+        .box:nth-child(even) {
+            background-color: rgb(35, 220, 35);
+        }
+        /* 박스 안의 텍스트 스타일 - 숫자가 박스 중앙에 굵게 표시 */
+        p {
+            text-align: center;
+            font-weight: bold;
+        }
+        #opt1 {
+            flex-flow: row wrap;
+        }
+        #opt2 {
+            flex-flow: row nowrap;
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- 가로 + 줄바꿈 (row wrap) -->
+    <div class="container" id="opt1">
+        <div class="box"><p>1</p></div>
+        <div class="box"><p>2</p></div>
+        <div class="box"><p>3</p></div>
+        <div class="box"><p>4</p></div>
+        <div class="box"><p>5</p></div>
+        <div class="box"><p>6</p></div>
+    </div>
+    <!-- 가로 + 줄바꿈없음 (row nowrap) -->
+    <div class="container" id="opt2">
+        <div class="box"><p>1</p></div>
+        <div class="box"><p>2</p></div>
+        <div class="box"><p>3</p></div>
+        <div class="box"><p>4</p></div>
+        <div class="box"><p>5</p></div>
+        <div class="box"><p>6</p></div>
+    </div>
+
+</body>
+</html>

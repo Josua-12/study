@@ -1,0 +1,77 @@
+1. 하이퍼링크 삽입하기
+    1) 링크를 삽입하는 <a> 태그와 href 속성 
+        - 텍스트 링크 
+        - 이미지 링크
+    2) 링크를 새 탭에서 열어주는 target 속성
+        - target 속성에 _blank를 지정
+
+2. 입력 양식 작성
+    1) 폼을 만드는 <form> 태그
+        - <form [속성="속성값"]>여러 폼 요소</form>
+        - <form> 태그의 속성
+            - method : get, post
+            - name
+            - action : <form> 태그 안의 내용을 
+                       처리해 줄 서버 프로그램을 지정함
+    2) 폼 요소를 그룹으로 묶는 <fieldset>, <legend> 태그
+        - 하나의 폼 안에서 여러 구역을 나우어 표시할 때
+          <fieldset> 태그를 사용함.
+        - <legend> 태그는 <fieldset> 태그로 묶은 그룹에
+          제목을 붙일 수 있음(<fieldset>안에 <legend> 태그가 n개 들어갈 수 있음)
+    3) 폼 요소에 레이블을 붙이는 <lable> 태그
+        - 입력란 가까이에 표시하는 텍스트임 
+        - <lable for="id명">레이블명</lable>
+          <input id="id명">
+          - <lable> 태그의 for 속성과 
+            폼 요소(like input태그)의 id 속성을 이용해서 서로 연결함 
+    4) 다양한 곳에서 사용하는 웹 폼의 <input> 태그
+        - <input> 태그의 type속성 살피기
+            - text : 기본값
+              password
+              search
+              url
+              email
+              tel
+              checkbox
+              radio(둘 중 하나) ...
+    5) 체크 박스와 라디오 버튼을 나타내는 
+       type="checkbox", type="radio"
+    6) 숫자 입력 필드를 나타내는 
+       type="number", type="range"
+    7) 날짜 입력을 나타내는 
+       type="date", type="month", type="week"
+        - 웹 문서나 앱에 달력을 넣을 때 이용함
+    8) 시간 입력을 나타내는 
+       type="time", type="datetime-local"
+    9) 전송, 리셋 버튼을 나타내는 
+       type="submit", type="Reset"
+    10) 기본 버튼 나타내는  
+        type='botton"
+    11) 파일 첨부할 때 사용하는
+        type="file"
+    12) 히든 필드 만들 때 사용하는
+        type="hidden"
+
+3. input 태그의 주요 속성
+    1) 입력 커서를 자동으로 갖다놓는 autofocus 속성
+    2) 힌트를 표시해주는 placeholder 속성
+    3) 읽기 전용 필드를 만들어 주는 readonly 속성
+    4) 필수 입력 필드를 지정하는 required 속성
+
+4. 폼에서 사용하는 여러가지 태그
+    1) 여러 줄을 입력하는 텍스트 영역 <textarea> 태그
+        - cols, rows 
+    2) 드롭다운 목록을 만들어주는 <select>, <option> 태그
+        - <select>
+            - size, multiple 속성 
+        - <option>
+            - value, selected... 속성
+
+5. <pre> 태그
+    1) The Preformatted Text Element
+    2) 태그 내부의 공백, 줄바꿈, 들여쓰기 등을 그대로 화면에 표시함
+    3) 중요한 텍스트를 그대로 보여줄 때 사용함
+
+6. <code> 태그
+    1) pre 태그와 함께 사용하면 들여쓰기와 줄바꿈이 그대로 유지되어 가독성이 좋아짐
+    2) 코드 조각, 명령어, 변수명 등을 표시할 때 사용함

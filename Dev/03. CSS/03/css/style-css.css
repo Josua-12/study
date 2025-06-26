@@ -1,0 +1,36 @@
+/* 전체 컨테이너 스타일 */
+#container {
+    width: 520px; /* 크기 */
+    border: 1px solid black; /* 겉 박스 */
+    padding: 20px 40px; /* 겉 박스 내 여백 */
+    margin: 0px auto; /* 위쪽 여백 0, 좌우 여백 자동 맞추기*/
+}
+
+ul {
+    list-style-type: none; /* list style 없애기*/
+    padding: 0; /* 기본 패딩 제거 */
+}
+
+li {
+    line-height: 30px; /* 줄간격 */
+}
+
+li label [for] {
+    width: 60px;
+    display: inline-block; /* 인라인-블록 : 한 줄에 배치되며너도 너비, 높이 조절 가능*/
+    text-align: left; 
+}
+
+/*  개인정보 들여쓰기 
+        - h4:nth-of-type(1) => 첫번째 h4요소(개인정보)를 선택
+        - +ul => 해당 h4 바로 다음에 오는 ul 요소를 선택 */
+h4:nth-of-type(1) + ul{
+    margin-left: 30px;
+}
+
+/*  개인정보 들여쓰기 
+        - h4:nth-of-type(2) => 두번째 h4요소(지원분야)를 선택
+        - +ul => 해당 h4 바로 다음에 오는 ul 요소를 선택 */
+h4:nth-of-type(2) + ul{
+    margin-left: 30px;
+}

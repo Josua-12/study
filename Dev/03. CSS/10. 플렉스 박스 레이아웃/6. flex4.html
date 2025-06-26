@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>플렉스 박스 레이아웃 - 주축 정렬(justify-content)</title>
+    <style>
+        .container {
+            display: flex; /* 플렉스 컨테이너로 지정하여 플렉스
+                              박스 레이아웃 활성화 */
+            background-color: #eee;
+            border: 1px solid #222;
+            margin-bottom: 30px;
+        }
+        .box {
+            padding: 5px 45px;
+            margin: 5px;
+            width: 80px;
+        }
+        .box:nth-child(odd) {
+            background-color: rgb(255, 187, 0);
+        }
+        .box:nth-child(even) {
+            background-color: rgb(35, 220, 35);
+        }
+        p {
+            text-align: center;
+            font-weight: bold;
+        }
+        /* 주축 정렬 - 주축(main axis) 방향으로 플렉스 아이템들을  어떻게 배치할지 결정 */
+        #opt1 {
+            justify-content: flex-start; /* 주축의 시작점에 아이템들을 모음 */
+        }
+        /* 주축 정렬 */
+        #opt2 {
+            justify-content: flex-end; /* 주축의 끝점에 아이템들을 모음 */
+        }
+        /* 주축 정렬 */
+        #opt3 {
+            justify-content: center; /* 주축의 중앙에 아이템들을 모음 */
+        }
+        /* 양쪽 정렬 + 균등 배분 
+                - 양 끝에는 여백 없음
+                - 네비게이션 바에서 자주 사용함 */
+        #opt4 {
+            justify-content: space-between; /* 첫 항목 - 시작점, 마지막 항목 - 끝점,
+                                               나머지 아이템들은 균등하게 */
+        }
+        /* 전체 균등 분배
+                - 양쪽 여백은 아이템 간 여백의 절반
+                - 카드 레이아웃에 적합 */
+        #opt5 {
+            justify-content: space-around; /* 모든 아이템 주위에 동일한 여백 */
+        }
+        /* 완전 균등 분배
+                - 모든 여백이 동일 (아이템 간, 양끝 포함)
+                - 가장 균등한 분배 방식 */
+        #opt6 {
+            justify-content: space-evenly;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="opt1">
+        <div class="box"><p>1</p></div>
+        <div class="box"><p>2</p></div>
+        <div class="box"><p>3</p></div>
+        <div class="box"><p>4</p></div>
+    </div>
+    <div class="container" id="opt2">
+        <div class="box"><p>1</p></div>
+        <div class="box"><p>2</p></div>
+        <div class="box"><p>3</p></div>
+        <div class="box"><p>4</p></div>
+    </div>
+    <div class="container" id="opt3">
+        <div class="box"><p>1</p></div>
+        <div class="box"><p>2</p></div>
+        <div class="box"><p>3</p></div>
+        <div class="box"><p>4</p></div>
+    </div>
+    <div class="container" id="opt4">
+        <div class="box"><p>1</p></div>
+        <div class="box"><p>2</p></div>
+        <div class="box"><p>3</p></div>
+        <div class="box"><p>4</p></div>
+    </div>
+    <div class="container" id="opt5">
+        <div class="box"><p>1</p></div>
+        <div class="box"><p>2</p></div>
+        <div class="box"><p>3</p></div>
+        <div class="box"><p>4</p></div>
+    </div>
+    <div class="container" id="opt6">
+        <div class="box"><p>1</p></div>
+        <div class="box"><p>2</p></div>
+        <div class="box"><p>3</p></div>
+        <div class="box"><p>4</p></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+legend {
+    font-weight: bold;
+}
+
+li{
+    margin: 15px;
+}
+
+ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+input[type="text"], input[type="tel"], input[type="email"]{
+    width: 180px; /*너비*/
+}
+
+ul li label {   /* #shipping 요소의 하위 li label 요소에 적용 */
+    width: 80px;
+    float: left;   /* 좌우 배치 */
+    display: block;
+    text-align: left;   /* 텍스트 왼쪽 정렬 */
+}
+
+
+div {
+    width: 400px;
+    margin: 15px;
+}
+
+input[type="submit"], input[type="reset"] {
+    text-align: center;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px #ccc;
+}
+
+input[type="submit"] {
+    margin-right: 20px;
+}
+
+fieldset { 
+        border-width: 0px;
+}

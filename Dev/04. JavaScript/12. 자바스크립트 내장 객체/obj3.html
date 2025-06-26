@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 객체 함수 프로퍼티
+        const person = {
+            name: '신사임당',
+            age: 20,
+            print: function() {
+                console.log('hello JS');
+            }
+        };
+        person.print(); //점표기법
+        person['print'](); //괄호표기법
+
+        const person2 = {
+            name: '신사임당',
+            age: 20,
+            print: function() {
+                console.log(`제 이름은 ${this.name}입니다.`);
+            }
+        };
+        person2.print();
+    </script>
+</body>
+</html>

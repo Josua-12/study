@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기본 웹사이트 레이아웃</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+        .website-container {
+            display: grid; /* CSS Grid 레이아웃 활성화 */
+            /* 2개의 열 생성: 
+                - 첫 번째 열 : 1fr (남은 공간 모두 차지)
+                - 두 번째 열 : 300px (사이드바 고정 너비) */
+            grid-template-columns: 1fr 300px;
+            /* 3개의 해당 생성:
+                - 첫 번째 행 : 80px (헤더 고정 높이)
+                - 두 번째 행 : 1fr (사이드바 고정 너비)
+                - 세 번째 행 : 60px (푸터 고정 너비) */
+            grid-template-rows: 80px 1fr 60px;
+
+            gap: 20px; /* Grid 아이템간 간격 20px로 설정 */
+
+            max-width: 1200px; /* 최대 너비 */
+            min-height: 100vh; /* 최소 높이를 화면 전체 높이로 설정 */
+            margin: 0 auto; /* 컨테이너를 가로 중앙에 배치 */
+            padding: 20px;
+        }
+        /* 헤더 영역 스타일 */
+        .header {
+            /* 헤더는 첫번째 열부터 마지막 열까지 전체 너비 차지 */
+            grid-column: 1 / -1;
+            /* 135도 각도의 그라데이션 배경(파란색 -> 보라색) */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;/* 텍스트 색상 */
+            display: flex; /* flexbox 레이아웃 활성화 */
+            align-items: center; /* 세로 중앙 정렬 */
+            justify-content: space-between; /* 좌우 양쪽 끝으로 정렬 */
+            padding: 0 2rem; /* 좌우 패딩 (32px=2rem) */
+            border-radius: 8px; 
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        /* 로고 스타일 */
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        /* 네비게이션 스타일 */
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+        /* 네비게이션 링크 */
+        .nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            /* 호버 시 배경색 변화에 0.3초 애니메이션 효과 */
+            transition: background-color 0.3s ease;
+        }
+        /* 네비게이션 링크 호버 효과 */
+        .nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        /* 메인 컨텐츠 영역 */
+        .main-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow-y: auto; /* 내용이 넘칠 경우 세로 스크롤 표시 */
+        }
+        /* 메인 컨텐츠 제목 스타일 */
+        .main-content h1 {
+            color: #333;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #667eea; /* 가로 구분선 */
+            padding-bottom: 0.5rem;
+        }
+        /* 메인 컨텐츠 문단 스타일 */
+        .main-content p {
+            margin-bottom: 1rem;
+            text-align: justify; /* 양쪽 정렬 */
+        }
+        /* 사이드바 영역 스타일 */
+        .sidebar {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        /* 사이드바 제목 스타일 */
+        .sidebar h3 {
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        /* 사이드바 리스트 스타일 */
+        .sidebar ul {
+            list-style: none;
+        }
+        .sidebar li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e9ecef; /* 가로 구분선 */
+        }
+        .sidebar li:last-child {
+            border-bottom: none;
+        }
+        /* 푸터 영역 스타일 */
+        .footer {
+            grid-column: 1 / -1; /* 푸터는 전체 너비 차지 */
+            background: #343a40;
+            color: white;
+            display: flex;
+            align-items: center; /* 세로 중앙 정렬 */
+            justify-content: center; /* 가로 중앙 정렬 */
+            border-radius: 8px;
+            text-align: center; /* 텍스트 중앙 정렬 */
+        }
+        /* 모바일 반응형 스타일 */
+        @media (max-width: 768px) {
+            .website-container {
+                grid-template-columns: 1fr; /* 1열로 변경(사이드바가 아래로 이동) */
+                grid-template-rows: 70px auto auto 50px;
+                gap: 15px;
+                padding: 15px;
+            }
+            .header {
+                flex-direction: column;
+                gap: 1rem; /* 로고와 메뉴 간격 */
+                padding: 1rem;
+            }
+            .nav { gap: 1rem;}
+            .main-content, .sidebar {padding: 1rem;}
+        }
+        /* 태블릿 */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .website-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="website-container">
+        <!-- 헤더 영역 : 전체 너비 차지 -->
+        <header class="header">
+            <div class="logo">⌚ ChoongangWebSite </div>
+            <nav class="nav">
+                <a href="#">홈</a>
+                <a href="#">소개</a>
+                <a href="#">서비스</a>
+                <a href="#">연락처</a>
+            </nav>
+        </header>
+        <!-- 메인 컨텐츠 영역 : 첫 번째 열에 위치 -->
+        <main class="main-content">
+            <h1>메인 콘텐츠 영역</h1>
+            <p>
+                이 영역은 웹사이트의 주요 내용이 들어가는 곳입니다.
+                블로그 포스트, 상품 목록, 뉴스 기사, 회사 소개 등
+                사용자가 가장 많이 보게 될 중요한 컨텐츠의 위치입니다.
+            </p>
+            <p>
+                CSS Grid를 사용하면 이런 복잡한 레이아웃도 간단하게 구현할 수 있습니다.
+                <code>grid-template-columns</code>와 <code>grid-template-rows</code>
+                레이아웃의 기본 구조를 정의하고, 각 영역을 적절히 배치할 수 있습니다.
+            </p>
+            <p>
+                이 패턴은 대부분의 웹 사이트에서 사용하는 기본적인 구조로,
+                블로그, 뉴스 사이트, 기업 홈페이지 등에서 널리 활용됩니다.
+            </p>
+            <h2>Grid의 장점</h2>
+            <ul>
+                <li>✅ 복잡한 2차원 레이아웃을 간단하게 구현</li>
+                <li>✅ 반응형 웹 디자인에 최적화</li>
+                <li>✅ 코드의 가독성과 유지보수성 향상</li>
+                <li>✅ Flexbox와 함께 사용하여 더욱 강력한 레이아웃 구현</li>
+            </ul>
+        </main>
+            <!-- 사이드바 영역 : 두 번째 열에 위치 -->
+        <aside class="sidebar">
+            <h3>🎵 사이드바</h3>
+            <ul>
+                <li>❤️ 인기 게시물</li>
+                <li>✨ 최근 업데이트</li>
+                <li>🔥 태그 클라우드</li>
+                <li>😂 LLM 사이트</li>
+                <li>⭐ 소셜 미디어</li>
+                <li>😭 뉴스레터 구독</li>
+                <li>🫶 광고 배너</li>
+            </ul>
+            <div style="background: #e3f2fd;">
+                <h4>😊 팁</h4>
+                <p>
+                    사이드바는 보통 300px 정도의 고정 너비를 사용하며, 중요하지 않은 
+                    보조 정보나 광고를 배치합니다.
+                </p>
+            </div>
+        </aside>
+        <!-- 푸터 영역 : 전체 너비 차지 -->
+        <footer class="footer">
+            <p>&copf; 2025 ChoongangWebSite. All rights reserved. | 개인정보처리방침 | 이용약관 </p>
+        </footer>
+    </div>
+</body>
+</html>

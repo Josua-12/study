@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 라디오 버튼 클릭했을 때 label 스타일 지정 */
+      #signup input:checked + label {
+        color: red;
+        font-weight: bold;
+      }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form id="signup">
+            <fieldset>
+             <legend>객실 형태</legend>
+                <ul>
+                    <li>
+                        <input type="radio" name="room" id="basic">
+                        <label for="basic">기본형(최대 2인)</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="room" id="basic">
+                        <label for="basic">가족형(최대 8인)</label>
+                    </li>
+                </ul>
+             </fieldset>
+             <button type="submit">제출</button>
+        </form>
+    </div>
+</body>
+</html>

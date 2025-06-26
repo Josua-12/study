@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function calcSum(n) {
+            let sum = 0;
+            for(let i = 1; i <= n; i++) 
+                sum += i;
+            document.write(`1부터 ${n}까지 더하면 ${sum}`);    
+        }
+
+        let userNumber = prompt("얼마까지 더할까요?");
+        if(userNumber !== null & userNumber.trim() !== "" && !isNaN(userNumber)) {
+            calcSum(parseInt(userNumber));
+        } else {
+            document.write("올바른 숫자를 입력해 주세요.");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+#nt {
+    padding-left: 20px;
+
+}
+
+#nnt {
+    padding-left: 20px;
+
+}
+
+
+ul {
+    padding-left: 0px;
+}
+
+li {
+    list-style: none;
+}
+
+#nt label {
+    width: 80px;
+    float: left;
+}

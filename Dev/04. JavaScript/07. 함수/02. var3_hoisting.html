@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var x = 10; // 전역 변수
+
+        function displayNumber() {
+            console.log(`x is ${x}`); //전역 변수 x 값 출력
+            console.log(`y is ${y}`); //지역 변수 y는 호이스팅 되어 있지만 아직 값 미할당 => undefined 출력
+            var y = 20;
+        }
+
+        displayNumber(); //함수 호출
+
+
+        function displayNumber2() {
+            var y = 20;
+            console.log(`x is ${x}`); //전역 변수 x 값 출력
+            console.log(`y is ${y}`); //지역 변수 y는 호이스팅 되어 있지만 아직 값 미할당 => undefined 출력
+            
+        }
+
+        displayNumber2(); //함수 호출
+    </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var sum = 0;        // 전역 변수 선언
+            function addNumber() {
+
+                sum = 10 + 20;
+                result = 10 * 20; // result 변수 선언하지 않고 그냥 사용함
+                                  // var 없이 변수를 사용하면 전역 변숙 됨
+                                  // 편리할 수도 있으나 큰 프로젝트에서 큰 위험이 될 수 있음
+            }
+            addNumber()         // 함수 호출
+            console.log(sum)
+            console.log(result)
+    </script>
+</body>
+</html>

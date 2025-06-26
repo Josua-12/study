@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>성적 등급 계산기</title>
+    <style>
+        body {
+            background-color: #0c3268;
+            color: rgb(243, 243, 243);
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;  /* 최대 너비 */
+            margin: 0 auto;  /* 가운데 정렬 */
+        }
+        h1 {
+            text-align: center;
+            color: yellow;
+            text-shadow: 2px 2px 2px #000;
+        }
+        .exercise {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border-left: 5px solid yellow;
+        }
+        .result {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        button {
+            background-color: yellow;
+            color: #0c3268;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #ffeb3b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯성적 등급 계산기</h1>
+        
+        <div class="exercise">
+            <h3>점수를 입력하여 등급을 확인하세요</h3>
+            <p>0-100점 사이의 점수를 입력하면 A, B, C, D, F 등급으로 변환해드립니다.</p>
+            <p><strong>등급 기준: </strong>A: 100-90, B: 89-80, C: 79-70, D: 69-60, F: 59-0</p>
+            <button onclick="gradeCalculator()">성적 등급 확인</button>
+            <!-- 결과를 표시할 영역 -->
+            <div id="gradeResult" class="result"></div>
+        </div>
+    </div>
+    <script>
+        function gradeCalculator() {
+            let score = parseInt(prompt("점수를 입력하세요 (0-100):"));
+            let grade;  // 등급 저장 변수 선언
+            
+            //입력값 유효성 검사
+            //isNaN() : 숫자가 아닌지 확인하는 함수
+            //innerHTML : 요소 내부의 HTML 내용을 변경하는 속성
+            if(score < 0 || score > 100 || isNaN(score)) {
+                document.getElementById('gradeResult').innerHTML ='올바른 점수를 입력해주세요!';
+                return;  // 함수 실행을 중단하고 빠져나감
+            }
+
+            // Math.floor() : 소수점 이하를 버리는 함수
+            // score/10 : 점수의 "십의 자리" 숫자를 추출하기 위해서 
+            switch(Math.floor(score/10)) {
+                case 10:
+                case 9:
+                    grade = "A";
+                    break;  //switch문 빠져나가기
+                case 8:
+                    grade = "B";
+                    break;
+                case 7:
+                    grade = "C";
+                    break;
+                case 6:
+                    grade = "D";
+                    break;
+                default:  // 위의 모든 경우에 해당하지 않으면
+                    grade = "F";
+            }
+
+            // 결과를 HTML에 출력
+            // 템플릿 리터럴(``)
+            // ${변수명} : 변수 값을 문자열에 삽입하는 문법
+            document.getElementById('gradeResult').innerHTML = `점수: ${score}점<br>등급:
+                <span style="color:yellow; font-size: 1.5em;">${grade}</span>`;
+        }   
+
+        window.onload = function() {
+            console.log("성적 등급 계산기가 준비되었습니다.");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+/* CSS 리셋(기본 스타일 초기화)
+    - 브라우저마다 다른 기본 스타일을 통일시키기 위함 */
+
+* {
+    margin: 0; /* 모든 요소의 바깥 여백 제거 */
+    padding: 0; /* 모든 요소의 안쪽 여백 제거 */
+    box-sizing: border-box; /* 패딩과 보더를 요소 크기에 포함 */
+}
+
+body {
+    background: rgb(9, 100, 160);
+}
+/* 기본 레이아웃(모바일 우선)
+    - 가장 작은 화면부터 스타일링 시작 */
+
+#container {
+    width: 320px; /* 컨테이너 너비 고정 */
+    margin: 50px auto; /* 상하 50px, 좌우 중앙 정렬 */
+}
+
+.card {
+    position: relative; /* 자식 요소(.words)의 절대 위치 기준점 */
+    width: 300px;
+    height: 500px;
+    margin: 20px 10px;
+    border: 1px solid #0f0f0f33;
+    background-color: #ffffff;
+}
+
+.words {
+    position: absolute; /* 절대 위치(부모인 .card 기준) */
+    left: 10px;
+    top: 300px;
+    padding: 10px;
+    text-align: center;
+}
+
+/* 태블릿 레이아웃
+   화면 크기 : 768px~1439px */
+@media screen and (min-width: 768px) and (max-width: 1439px){
+    #container{
+        width: 570px; /* 컨테이너 너비 증가 */
+        margin: 50px auto; /* 중앙 정렬 유지 */
+    }
+    .card {
+        position: relative; /* 자식 요소(.words)의 절대 위치 기준점 */
+        width: 550px;
+        height: 250px;
+        margin: 20px 10px;
+        border: 1px solid #0f0f0f33;
+        background-color: #ffffff;
+    }
+    .words {
+    position: absolute; /* 절대 위치(부모인 .card 기준) */
+    left: 310px;
+    top: 50px;
+    text-align: center;
+    width: 200px;
+    }
+} 
+
+/* 데스크탑 레이아웃
+   화면 크기 : 1440px 이상 */
+@media screen and (min-width: 1400px){
+    #container{
+        width: 1140px; /* 컨테이너 최대 너비 */
+        margin: 50px auto; /* 중앙 정렬 유지 */
+    }
+    .card {
+        position: relative; /* 자식 요소(.words)의 절대 위치 기준점 */
+        float: left; /* 카드들을 가로로 나란히 배치 */
+        width: 550px;
+        height: 250px;
+        margin: 10px;
+        border: 1px solid #0f0f0f33;
+        background-color: #ffffff;
+    }
+    
+    .words {
+    position: absolute; /* 절대 위치(부모인 .card 기준) */
+    left: 310px;
+    top: 50px;
+    text-align: center;
+    width: 200px;
+    }
+} 

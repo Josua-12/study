@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>소리 조절하기</h1>
+    <!-- 
+        input 요소(슬라이더) 속성들
+            - type="range" : 슬라이더 형태 입력 필드 만듦
+            - min="0" : 슬라이더의 최솟값 0으로 설정
+            - max="100" : 슬라이더의 최댓값 100으로 설정
+            - step="1" : 슬라이더 움직일 때 1씩 증가/감소하도록 설정
+            - value="20" : 슬라이더의 초기값을 20으로 설정
+            - oninput="..." : 슬라이더 값이 변경될 때마다 실행되는 js 코드
+                - document.getElementById('selected-value')
+                    : ID가 'selected-value'인 요소를 찾음(get)
+                        = id="selected-value"
+                - this.value : 자기 자신 즉, 현재 슬라이더의 값을 가져옴
+                - .innerText : 찾은 요소의 텍스트 내용을 슬라이더 값으로 변경함
+    -->
+    <input type="range" min="0" max="100" step="1" value="20" 
+    oninput="document.getElementById('selected-value').innerText = this.value">
+    <span id="selected-value"></span>
+
+    <h1>날짜 지정하기</h1>
+    <input type="date">
+    <input type="date" min="2025-05-28" max="2025-05-31">
+    <input type="month">
+    <input type="week">
+
+    <h1>시간 지정하기</h1>
+    <input type="time">
+    <input type="datetime-local">
+</body>
+</html>

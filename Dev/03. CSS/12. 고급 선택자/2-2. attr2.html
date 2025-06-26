@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul {
+            list-style: none;
+        }
+        li {
+            width: 100px;
+            display: inline-block;
+        }
+        li a {
+            padding: 5px 20px;
+            font-size: 14px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        /* target 속성 값이 _blank인 a 요소에만 스타일 지정 */
+        a[target=_balnk] {
+         padding-right: 30px;  
+         background: url(images/bg.jpg) no-repeat center right;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li><a href="https://www.apple.com/" target="_blank">Apple</a></li>
+        <li><a href="https://www.apple.com/kr/ipad-pro/">아이패드 프로</a></li>
+        <li><a href="https://www.apple.com/kr/macbook-pro/">맥북 프로</a></li>
+    </ul>
+</body>
+</html>

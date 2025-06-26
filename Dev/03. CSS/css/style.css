@@ -1,0 +1,9 @@
+h1 {
+    padding: 10px;
+    background-color: aquamarine;
+    color: #ccc;
+}
+p{
+    font-style: italic; /* 이탤릭체 */
+    
+}

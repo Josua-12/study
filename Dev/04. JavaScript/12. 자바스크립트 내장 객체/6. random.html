@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h1>당첨자 발표</h1>
+        <script>
+            let seed = prompt('전체 응모자 수 : ', '');
+            // 1부터 seed까지의 랜덤한 정수(왜? +1 때문에 1부터 시작)
+            let picked = Math.floor((Math.random() * seed) + 1);    
+            
+            document.write(`<p>전체 응모자 수 : ${seed}명</p>`)
+            document.write(`<p>당첨자 : ${picked}번</p>`)
+        </script>
+    </div>
+</body>
+</html>

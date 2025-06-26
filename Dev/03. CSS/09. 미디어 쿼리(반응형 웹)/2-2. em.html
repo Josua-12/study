@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .content {
+            font-size: 1.5em; /* 부모(body)의 기본 크기(16px)의 1.5배 = 24px */
+        }
+        p { 
+            font-size: 1em; /* 부모 요소와 같은 크기 */
+        }
+    </style>
+</head>
+<body>
+    <!-- 브라우저 기본 크기로 표시 -->
+    <h1>골든 리트리버</h1>
+    
+    <!-- body의 기본 크기로 표시 (보통 16px) -->
+    <p>골든 리트리버(영어: Golden Retriever)는 개의 품종 중 하나로, 골든 리트리버의 원산지는 영국의 스코틀랜드이다.</p>
+    
+    <!-- .content 클래스가 적용된 div (24px로 설정됨) -->
+    <div class="content">
+        <!-- 이 p 태그들은 .content의 크기(24px)를 기준으로 1em =24px -->
+        <p>또한 골든 리트리버는 근육질의 몸에 건강하고 산뜻한 느낌을 준다.</p>
+        <p>금색의 윤기나는 털을 가지고 있는데, 속털은 방수성이고 겉털은 탄력성이 있다.</p>
+    </div>
+</body>
+</html>

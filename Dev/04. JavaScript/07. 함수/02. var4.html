@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            var로 선언한 변수는 같은 스코프 내에서 재선언과 재할당이 모두 가능함 
+         */
+        var seed = 3;       // 전역 변수
+
+        for(var i = 1; i <= 5; i++) {
+            var seed =5;        // for문 안에서 seed를 다시 var로 재선언 => 전역 seed를 덮어씀
+            var result = seed * 2;
+            console.log(result);
+        }
+    </script>
+</body>
+</html>

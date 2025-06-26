@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box; /* 박스 크기 계산에 padding, border 포함 */
+        }
+        .container {
+             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6; /* 줄간격 1.6배로 설정 */
+            background: linear-gradient(135deg/* 색상 기울기 */, 
+                                            #667eea 0%, #764ba2);
+            padding: 40px 20px; /* 페이지 전체에 여백 설정 */
+            min-height: 100vh; /* 현재 화면(브라우저 창)의 높이 기준으로 비율을 설정하는 단위 */
+        }
+        div > div { /* .card */
+            background: white;
+            border-radius: 16px; /* 둥근 모서리 */
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            width: 80%;
+            text-align: center; /* 전체 내용 중앙 정렬 */
+            margin: 0 auto;
+        }
+        div > header /* header */ {
+            background-color: #2c3e50; 
+            color: white;
+            padding: 20px;
+            border-top-left-radius: 16px;
+            border-top-right-radius: 16px;
+        }
+        header > h1 /* h1 */ {
+            margin-bottom: 10px;
+        }
+        div > main {
+            text-align: left;
+            padding: 20px 15px;
+        }
+        section > h2 {
+            color: #2c3e50;
+            line-height: 3rem;
+            border-bottom: 3px solid #3498db;
+            margin-bottom: 15px;            
+        }
+        section > p { 
+            border-left: 1px solid #ccc;
+            padding: 0px 20px;
+            
+        }
+        h2 + p {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        h2 ~ ul {
+            list-style: none;
+            
+        }
+        .skills li {
+            color: white;
+            background: #3498db;
+            margin: 5px;
+            border-radius: 3px;
+            padding: 10px;
+        }
+        .experience li {
+            list-style: none;
+            border-left: 4px solid #1aad5c;
+            margin: 10px;
+            padding: 10px;
+        }
+        footer {
+            text-align: center;
+            background-color: #2c3e50; 
+            color: white;
+            padding: 20px;
+            border-bottom-left-radius: 16px;
+            border-bottom-right-radius: 16px;
+            font-size: 13px;
+        }
+        .skills ul li {
+            padding-left: 10px;
+            list-style-position: inside;
+        }
+            </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <header>
+                <h1>이개발(Lee Developer)</h1>
+                <p>자바 백엔드 개발 지원자</p>
+            </header>
+                <main>
+                    <section>
+                        <h2>자기소개</h2>
+                        <p>안녕하세요! 열정적인 백엔드 개발 지원자입니다.</p>
+                        <p>AI 시대에 LLM 기반에 관심이 많습니다.</p>
+                        <p>지속적인 학습과 성장을 통해 좋은 개발자가 되고 싶습니다.</p>
+                    </section>
+                    <section>
+                        <h2>핵심 기술</h2>
+                        <p>현재 보유한 기술 스텍입니다.</p>
+                        <ul class="skills">
+                            <li>HTML5 & CSS3</li>
+                            <li>JavaScript(ES6+)</li>
+                            <li>Java</li>
+                                <ul>
+                                    <li>Basic</li>
+                                    <li>Advance</li>
+                                </ul>
+                            </li>
+                            <li>Git & Github</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>핵심 경험</h2>
+                        <p>지금까지의 학습 여정입니다.</p>
+                        <ul class="experience">
+                            <li>
+                                <strong>기반 기술</strong>
+                                <ul>
+                                    <li>HTML, CSS, JavaScript 기초 학습</li>
+                                    <li>반응형 웹 레이아웃 실습</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Java 과정</strong>
+                                <ul>
+                                    <li>자바 기본 학습</li>
+                                    <li>JDBC 학습</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </section>
+                </main>
+            <footer class="footer">
+                <p>&copf; 2025 이개발. 모든 권리 보유 <br>
+                이 페이지는 CSS 고급 선택자를 위해 제작되었습니다.</p>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>

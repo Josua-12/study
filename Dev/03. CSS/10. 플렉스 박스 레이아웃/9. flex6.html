@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>플렉스 박스 레이아웃</title>
+    <style>
+        .container {
+            width: 450px;
+            height: 150px; /* 이유 : 교차축 정렬 보기 위해 
+                                     높이 필요 */
+            display: flex; 
+            background: #eee;
+            border: 1px solid #222;
+            align-items: center; /* 교차축의 중앙에 배치 */
+        }
+        .box {
+            padding: 5px 45px;
+            margin: 5px;
+            width: 80px;
+        }
+        .box:nth-child(odd) {
+            background-color: rgb(255, 187, 0);
+        }
+        .box:nth-child(even) {
+            background-color: rgb(35, 255, 35);
+        }
+        p {
+            text-align: center;
+            font-weight: bold;
+        }
+        #box1 {
+            align-self: flex-start;
+        }
+        #box3 {
+            align-self: stretch; /* 교차축에 가득 차게 늘림 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container" >
+        <div class="box" id="box1"><p>1</p></div>
+        <div class="box" id="box2"><p>2</p></div>
+        <div class="box" id="box3"><p>3</p></div>
+        <div class="box" id="box4"><p>4</p></div>
+    </div>
+</body>
+</html>

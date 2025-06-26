@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<h1>, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 
+        * 화면 너비
+          - 767px 이하
+          - 768px~1023px
+          - 1024px 이상   
+        기본 레이아웃 (중앙 정렬 - Flexbox 사용) */
+        body {
+            display: flex; /* 플랙스 컨테이너로 설정 */
+            justify-content: center; /* 가로 중앙 정렬 */
+            align-items: center; /* 세로 중앙 정렬 */
+            height: 100vh; /* 뷰포트 높이 100 (화면 전체 높이) */
+        }
+        h1 {
+            font-size: 4rem;
+        }
+
+        /* 1) 데스크톱용
+              - 미디어 쿼리가 적용되지않는 기본 상태
+              - 화면 크기가 1024px 이상일 때 적용됨 */
+        body {
+            background: white
+        }
+
+        /* 2) 태블릿 화면 배경
+              - 화면 크기 : 768px ~ 1023px */
+        @media screen and (min-width: 768px) and (max-width:1023px) {
+            body {
+                background: gray;
+                color: white;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>오늘도 화이팅하세요!</h1>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>박스모델</title>
+    <style>
+        div {
+            width: 200px;
+            height: 100px;
+            border-style: solid; /* 테두리 스타일 = 실선 */
+            display: inline-block; /* inline은 넓이 높이가 없는데 inline-block은 
+                                      넓이 높이 설정 가능 */
+            margin: 15px;
+        }
+
+        /* 테두리 두께 지정하기 */
+        .box1 {border-width: 2px;}
+        .box2 {border-width: thick thin;} /* 속성값이 2개 - 첫번째값은 위아래값이 되고
+                                                           두번째값은 좌우값이 됨 */
+        .box3 {border-width: thick thin thin;} /* 속성값이 3개 - 첫번째값은 위,
+                                                                두번째값은 좌우,
+                                                                세번째값은 아래가 됨 */ 
+        .box4 {border-width: 10px 5px 5px 10px;} /* 속성값이 4개 - 첫번째값은 위
+                                                                  두번째값은 오른쪽
+                                                                  세번째값은 왼쪽
+                                                                  네번째값은 아래쪽 됨 */
+    </style>
+</head>
+<body>
+    <div class="box1"></div>
+    <div class="box2"></div>
+    <div class="box3"></div>
+    <div class="box4"></div>
+</body>
+</html>

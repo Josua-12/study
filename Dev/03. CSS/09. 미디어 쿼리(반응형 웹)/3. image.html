@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>반응형 이미지</title>
+    <style>
+        p {
+            font-size: 1.5rem; /* 텍스트 크기를 rem 단위로 설정 */
+        }
+        /* 반응형 이미지 만들기 */
+        .top {
+            max-width: 100%; /* 이미지가 부모 요소의 너비를 넘지 않도록 제한 
+                                화면이 작아지면 이미지도 자동으로 작아짐 
+                                화면이 커져도 원본 이미지 크기 이상으로는 커지지 않음 */
+            height: auto; /* 너비에 맞춰 자동으로 조절 
+                             이미지 비율(가로세로 비율)이 유지됨.
+                             이미지가 깨지지 않음 */
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p>브라우저 창의 크기를 조절해보세요.</p>
+        <img src="image/cutie cat.png" alt="사고하는 고양이"
+            class="top">
+    </div>
+</body>
+</html>

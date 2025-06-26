@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>박스모델</title>
+</head>
+<style>
+    *{
+        box-sizing: border-box;     /* 모든 요소에 박스 모델 적용 */
+
+    }
+
+    div {
+        border: 1px solid #000;
+        margin-bottom: 20px;
+    }
+    
+    .box1 {
+        width: 400px;       /* 고정 너비 : 항상 400px */
+        height: 100px;      /* 고정 높이 : 항상 100px */
+        padding: 20px;      /* 내부 여백 : 상우하좌(시계방향) 20px*/
+    }
+
+    .box2 {
+        width: 70%;         /* 가변 너비 : 부모 요소의 너비의 70% */
+        height: 100px;      /* 고정 높이 : 항상 100px */
+    }
+</style>
+<body>
+    <div class="box1">CSS box model 은 각 요소에 대해 시각적 서식 모델에 따라 생성되고 배치되는 안팎 여백을 포함한 사각형 박스를 위한 CSS 모듈입니다.</div>
+    <div class="box2">CSS box model 은 각 요소에 대해 시각적 서식 모델에 따라 생성되고 배치되는 CSS 모듈입니다.</div>
+    </body>
+</html>

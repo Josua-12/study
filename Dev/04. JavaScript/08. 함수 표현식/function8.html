@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>퀴즈</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .accent{
+            color: #0074d9;
+            font-weight: bold;
+        }
+        .result {
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        (function(){
+            let userName2 = prompt("이름을 입력하세요.")
+            let score = 0;
+
+            // 퀴즈 문항, 정답 배열로 나열
+            const quiz = [
+                {q: "대한민국의 수도는 어디인가요?", a: "서울"},
+                {q: "3 + 5 = ?", a: "8"},
+                {q: "HTML의 약자는?", a: "HyperText Markup Language"}
+            ]
+
+            // 퀴즈 진행
+            for(let i = 0; i < quiz.length; i++) {
+                let userAnswer = prompt(quiz[i].q)
+                if(userAnswer !== null && userAnswer.trim() === quiz[i].a) {
+                    score++;
+                }
+            }
+
+            // 결과 출력
+            document.write(
+                `<p>안녕하세요, <span class='accent'>${userName2}</span>님</p>` +
+                `<div><span>${score} / ${quiz.length}</span></div>` // 점수 출력
+            )
+        }());
+
+        
+        console.log(typeof userName2);
+        console.log(typeof score);
+    </script>
+</body>
+</html>

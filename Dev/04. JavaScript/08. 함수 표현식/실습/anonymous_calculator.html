@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>익명 함수 계산기</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+        .calculator {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            width: 350px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 25px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+        button {
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            color: white;
+        }
+        .add {background-color: #007bff;}
+        .subtract {background-color: #28a745;}
+        .multiply {background-color: #ffc107;}
+        .divide {background-color: #dc3535;}
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .result {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #007bff;
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            display: none;  /* 초기에는 결과 영역 숨김 처리 */
+        }
+        .error {
+            border-left-color: #dc3545;
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h1>익명 함수 계산기</h1>
+        
+        <div class="input-group">
+            <label for="num1">첫 번째 숫자</label>
+            <input type="number" id="num1" value="10">
+        </div>
+
+        <div class="input-group">
+            <label for="num2">두 번째 숫자</label>
+            <input type="number" id="num2" value="5">
+        </div>
+        <div class="buttons">
+            <button class="add" onclick="calculate('add')">➕ 더하기</button>
+            <button class="subtract" onclick="calculate('subtract')">➖ 빼기</button>
+            <button class="multiply" onclick="calculate('multiply')">✖️ 곱하기</button>
+            <button class="divide" onclick="calculate('divide')">➗ 나누기</button>
+        </div>
+
+        <div id="result" class="result"></div>
+
+    </div>
+    <script>
+        //덧셈 익명함수
+         let add = function(a, b) {
+            console.log(`덧셈 : ${a} + ${b} = ${a+b}`);
+            return a + b;
+        }
+        //뺄셈 익명함수
+         let subtract = function(a, b) {
+            console.log(`뺄셈 : ${a} - ${b} = ${a-b}`);
+            return a - b;
+        }
+        //곱셈 익명함수
+         let multiply = function(a, b) {
+            console.log(`곱셈 : ${a} * ${b} = ${a*b}`);
+            return a * b;
+        }
+        //나눗셈 익명함수 (0으로 나누기 처리 포함)
+         let divide = function(a, b) {
+            if(b === 0) {
+                console.log(`나눗셈 오류 : 0으로 나눌 수 없음`);
+                return "오류: 0으로 나눌 수 없습니다.";
+            }
+            console.log(`나눗셈 : ${a} / ${b} = ${a/b}`);
+            return a / b;
+        }
+
+        // 결과 표시 익명 함수
+        let showResult = function(message, isError=false) {
+            // HTML에서 결과 표시 영역 찾기
+            let resultDiv = document.getElementById("result");
+
+            // 메시지 설정 및 화면에 표시
+            // textContent : HTML 태그를 무시하고 텍스트만 표시함
+            resultDiv.textContent = message;
+            resultDiv.style.display = 'block'; // 결과 영역 보이기
+
+            // 에러/성공에 따른 스타일 적용
+            if(isError) { // 에러 메시지인 경우
+                resultDiv.className = 'result error';
+            } else {
+                resultDiv.className = 'result';
+            }
+
+            console.log(`화면 표시 : ${message}`);
+        }
+
+        
+        // 메인 계산 함수(일반 함수 정의)
+        function calculate(operation) {
+            // 입력값 가져오기
+            let num1 = parseFloat(document.getElementById('num1').value);
+            let num2 = parseFloat(document.getElementById('num2').value);
+
+            // 입력값 검증
+            if(isNaN(num1) || isNaN(num2)) {
+                showResult("❎ 올바른 숫자를 입력하세요!", true);
+                return
+            }
+
+            // 연산 수행
+            let result;
+            let operationName;
+
+            switch(operation) {
+                case 'add': 
+                    result = add(num1, num2);   // 덧셈 익명함수 호출
+                    operationName = "더하기";
+                    break;
+                case 'subtract': 
+                    result = subtract(num1, num2);   // 뺄셈 익명함수 호출
+                    operationName = "빼기";
+                    break;
+                case 'multiply': 
+                    result = multiply(num1, num2);   // 곱셈 익명함수 호출
+                    operationName = "곱하기";
+                    break;
+                case 'divide': 
+                    result = divide(num1, num2);   // 나눗셈 익명함수 호출
+                    operationName = "나누기";
+                    break;
+            };
+            
+            // 결과 표시
+            if(typeof result === 'string') {
+                // 에러 메시지인 경우
+                showResult(result, true);
+            } else {
+                // 정상 결과인 경우
+                showResult(`${operationName} : ${num1} ${getSymbol(operation)} ${num2} = ${result}`);
+            };
+        };
+
+        // 연산자 기호로 변환하는 익명함수
+        let getSymbol = function(operation) {
+            let symbols = {
+                'add' : '+',
+                'subtract' : '-',
+                'multiply' : '*',
+                'divide' : '/'
+            };
+            return symbols[operation] || '?';   // 기본값은 '?' 설정 (반환)
+        };
+
+        window.onload = function() {
+            console.log("익명함수 계산기 시작!");
+            console.log(" add(10, 5) //덧셈 테스트");
+
+            // 1초 후 자동 시작
+            setTimeout(function() {
+                console.log("Demo : 10 + 5 계산 실행");
+                calculate('add');
+            }, 1000);
+        };
+
+        // 콘솔에서 직접 테스트할 수 있도록 window 객체에 등록
+        window.add = add;
+        window.substract = subtract;
+        window.multiply = multiply;
+        window.divide = divide;
+        window.showResult = showResult;
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>계절별 추천 활동</title>
+    <style>
+        body {
+            background-color: #0c3268;
+            color: rgb(243, 243, 243);
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 900px;  /* 최대 너비 */
+            margin: 0 auto;  /* 가운데 정렬 */
+        }
+        h1 {
+            text-align: center;
+            color: yellow;
+            text-shadow: 2px 2px 2px #000;
+            margin-bottom: 30px;
+        }
+        .exercise {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border-left: 5px solid yellow;
+        }
+        .season-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .season-card {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .season-card:hover {
+            border-color: yellow;
+            transform: translateY(-5px);
+        }
+        .result {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            margin-top: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            border-left: 4px solid yellow;
+        }
+        button {
+            background-color: yellow;
+            color: #0c3268;
+            border: none;
+            padding: 12px 25px;
+            margin: 10px 5px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #ffeb3b;
+        }
+        .current-season {
+            background-color: rgba(255, 255, 255, 0.25);
+            border-color: yellow !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>☀️계절별 추천 활동</h1>
+
+        <div class="exercise">
+            <h3>월을 입력하여 계절과 추천 활동을 확인하세요</h3>
+            <p>1월부터 12월까지 입력하면 해당 계절의 특색과 추천 활동을 안내해드립니다.</p>
+
+            <!-- 계절별 정보 카드 -->
+            <div class="season-info">
+                <div class="season-card">
+                    <h4>❄️겨울(12월~2월)</h4>
+                    <p>스키, 스노우보드, 온천, 핫초콜릿 마시기, 눈사람 만들기</p>
+                </div>
+                <div class="season-card">
+                    <h4>🌺봄(3월~5월)</h4>
+                    <p>벚꽃구경, 피크닉, 하이킹, 자전거 타기, 나물 캐기</p>
+                </div>
+                <div class="season-card">
+                    <h4>🏖️여름(6월~8월)</h4>
+                    <p>해수욕, 캠핑, 페스티벌, 아이스크림 먹기, 수영 하기</p>
+                </div>
+                <div class="season-card">
+                    <h4>🍂가을(9월~11월)</h4>
+                    <p>단풍구경, 등산, 독서, 따뜻한 차 마시기, 산책하기</p>
+                </div>
+            </div>
+
+            <button onclick="seasonActivity()">계절 활동 추천</button>
+            <button onclick="getCurrentSeason()">현재 계절 확인</button>
+
+            <!-- 결과 표시 영역 -->
+            <div id="seasonResult" class="result"></div>
+        </div>
+    </div>
+
+    <script>
+        // 계절별 추천 활동 메인 함수
+        function seasonActivity() {
+            let month = parseInt(prompt("월을 입력하세요 (1-12): "));
+
+            let season;  // 계절명 저장할 변수 선언
+            let activity;  // 추천 활동 저장할 변수 선언
+            let emoji;  // 계절별 이모지 저장할 변수 선언
+            let tips;  // 추가 팁 저장할 변수 선언
+
+            // 입력값에 대한 유효성 검사
+            if(month < 1 || month > 12 || isNaN(month)) {
+                document.getElementById("seasonResult").innerHTML = "❌ 1-12 사이의 월을 입력해주세요!";
+                return;
+            }
+
+            switch(month) {
+                case 12:
+                case 1: 
+                case 2: 
+                    season = "겨울";
+                    activity = "스키, 스노우보드, 온천, 핫초콜릿 마시기, 눈사람 만들기";
+                    emoji = "❄️"
+                    tips = "따뜻하게 입고 겨울 스포츠를 즐겨보세요~!"
+                    break;
+                case 3:
+                case 4: 
+                case 5: 
+                    season = "봄";
+                    activity = "벚꽃구경, 피크닉, 하이킹, 자전거 타기, 나물 캐기";
+                    emoji = "🌺"
+                    tips = "날씨가 좋으니 야외 활동을 즐겨보세요~!"
+                    break;
+                case 6:
+                case 7: 
+                case 8: 
+                    season = "여름";
+                    activity = "해수욕, 캠핑, 페스티벌, 아이스크림 먹기, 수영 하기";
+                    emoji = "🏖️"
+                    tips = "더위를 피해 시원한 곳에서 활동하세요~!"
+                    break;
+                case 9:
+                case 10: 
+                case 11: 
+                    season = "가을";
+                    activity = "단풍구경, 등산, 독서, 따뜻한 차 마시기, 산책하기";
+                    emoji = "🍂"
+                    tips = "선선한 날씨에 자연을 만끽하세요~!"
+                    break;
+            }
+            
+            // 결과를 HTML에 출력
+            // 템플릿 리터럴(` `)과 ${변수명} 문법 사용
+            document.getElementById("seasonResult").innerHTML 
+            = `
+                <div style="text-align: center; margin-bottom: 15px;">
+                    <h2>
+                        ${month}월은 <span style="color: yellow; font-size: 1.3em;">${emoji}${season}</span>
+                        입니다.
+                    </h2>
+                </div>
+                <div style = "background-color: rgba(255, 255, 255, 0.1); padding: 15px; 
+                                border-radius: 8px;">
+                    <p><strong>추천 활동 : </strong></p>
+                    <p style = "font-size: 1.1em; margin: 10px 0">${activity}</p>
+                    <p><strong>팁 : </strong> ${tips}</p>
+                </div>
+                <div style = "margin-top: 15px; text-align:">
+                    <small style="color: #ccc;">계절을 만끽해 보세요!</small>
+                </div>
+
+
+            `;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/reserve.css">
+</head>
+<body>
+    <form>
+        <fieldset>
+            <legend>예약 정보</legend>
+            <ul id="reserve">
+                <li>
+                    <label for="user_name">이름</label>
+                    <input type="text" id="user_name" required>
+                </li>
+                <li>
+                    <label for="user_tel">휴대폰</label>
+                    <input type="tel" id="user_tel" required>
+                </li>
+                <li>
+                    <label for="user_email">이메일</label>
+                    <input type="email" id="user_email" required>
+                </li>
+            </ul>
+        </fieldset>
+        <div>
+            <input type="submit" value="주문하기">
+            <input type="reset" value="취소하기">
+        </div>
+    </form>
+</body>
+</html>

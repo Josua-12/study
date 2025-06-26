@@ -1,0 +1,52 @@
+1. 클라우드 컴퓨팅
+    1) 정의 : 사용자가 물리적인 서버를 직접 구매, 설치, 관리하지 않아도, 
+             필요한 컴퓨터 자원(예: 저장공간(데이터 스토리지), 컴퓨팅 파워)을 
+             필요할 때 즉시(on-demand) 제공받을 수 있는 컴퓨팅 방식.
+    2) 주요 특징 
+        - 즉시 사용 가능: 클릭 몇 번만으로 수분 내에 컴퓨팅 자원이 활성화됨
+        - 사용한 만큼 과금: 자원을 사용한 만큼만 비용을 지불
+        - 빠른 실험과 실패 가능: 자원을 쉽게 확보하고 회수할 수 있어 
+          빠르게 시도하고 실패할 수 있는 구조
+         -규모의 경제: 클라우드 제공업체는 대규모 인프라를 통해 효율적인 서비스 제공 가능
+
+2. 클라우드 컴퓨팅 서비스 모델 (https://www.hanbit.co.kr/data/editor/20240610095629_ckeditor.jpg)
+                    1) On-site             1) IaaS                      2) Paas                     3) SaaS
+    Application      you manage              you manage                   you manage                  service provider manages
+    Data             you manage              you manage                   you manage                  service provider manages
+    Runtime          you manage              you manage                   service provider manages    service provider manages
+    Middleware       you manage              you manage                   service provider manages    service provider manages
+    OS               you manage              you manage                   service provider manages    service provider manages
+    Virtualization   you manage              service provider manages     service provider manages    service provider manages
+    Servers          you manage              service provider manages     service provider manages    service provider manages
+    Storage          you manage              service provider manages     service provider manages    service provider manages
+    Networking       you manage              service provider manages     service provider manages    service provider manages
+
+3. IaaS (Infrastructure as a Service)
+    1) 특징
+        - 물리적 서버 관리 불필요: 서버, 스토리지, 네트워크 등 
+          인프라를 클라우드 제공업체가 관리
+        - 유연한 확장성: 필요 시 자원을 쉽게 늘리거나 줄일 수 있음
+        - 사용한 만큼 과금: 사용량 기반 요금제
+    2) 단점
+        - 비용: 상대적으로 고가, 선불 요금제나 예약 인스턴스를 활용하면 
+          절감 가능
+        - 보안: 논리적 격리와 인증을 통해 보안을 보장하지만, 사용자가 
+          직접 구성해야 할 부분도 존재
+        - 예시 서비스 : AWS (Amazon Web Services), Microsoft Azure, Google Cloud Platform (GCP)
+
+4. PaaS (Platform as a Service)
+    1) 특징
+        - 인프라 + 운영환경 제공: 하드웨어 및 소프트웨어 유지관리 불필요
+        - 개발에 집중 가능: 코드 작성, 빌드, 배포를 위한 플랫폼 환경 제공
+        - 빠른 개발과 배포에 유리
+    2) 단점
+        - 플랫폼 종속성: 특정 PaaS 환경에 종속되어 자유도가 제한될 수 있음
+
+5. SaaS (Software as a Service)
+    1) 특징
+        - 완성된 소프트웨어 제공: 모든 기능과 유지관리를 제공업체가 담당
+        - 설치 없이 사용 가능: 웹 브라우저 등으로 바로 접근 가능
+    2) 단점
+        - 비용 문제: 장기적으로 사용 시 누적 비용이 클 수 있음
+        - 제한된 커스터마이징: 사용자가 원하는 대로 기능을 수정하거나 
+          추가하기 어려움

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>지원서</title>
+    <link rel="stylesheet" href="css/apply2.css">
+</head>
+<body>
+    <h1>자바, 스프링 개발자 지원서</h1>
+    <p>JAVA, Spring, LLM에 대한 기술적 이해와 경험이 있는 분을 모십니다.</p>
+    <hr>
+    <fieldset>
+        <legend>
+            <ul>
+                <h3>개인정보</h3>
+                <li id="nt">
+                    <label for="uname">이름</label>
+                    <input type="text" id="uname" required>
+                    <br>
+                    <label for="utel">연락처</label>
+                    <input type="tel" id="utel" required>
+                </li>
+                <h3>지원분야</h3>
+                <li id="nnt">
+                    <input type="radio">
+                    <label>자바 개발자</label>
+                    <br>
+                    <input type="radio">
+                    <label>스프링, 스프링부트 개발자</label>
+                    <br>
+                    <input type="radio">
+                    <label>AI Agent 개발자</label>
+                </li>
+                <h3>지원동기</h3>
+                <li>
+                    <textarea cols="40" rows="4"
+                        placeholder="본사 지원 동기를 간략히 써 주세요."></textarea>
+                </li>
+            </ul>
+            <div>
+                <input type="submit" value="접수하기">
+                <input type="reset" value="다시 쓰기">
+            </div>
+        </legend>
+    </fieldset>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .element-text::first-letter {
+            font-size: 2em;
+            color: #0078d7;
+            font-weight: bold;
+        }
+        .element-text::first-line {
+            background: #f0f8ff;
+            letter-spacing: 2px; /* 자간 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>가상 요소 ::first-letter, ::first-line</h2>
+        <p class="element-text">
+            가상 요소를 사용하면 텍스트의 첫 글자나 첫 줄에만 특별한 스타일을 
+            줄 수 있습니다. <br>
+            이 문단의 첫 글자는 크게, 첫 줄은 배경색이 다르게 표시됩니다.
+        </p>
+    </div>
+</body>
+</html>

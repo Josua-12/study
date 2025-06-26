@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let array1 = ["green", "blue"];
+        let array2 = ["purple", "yellow"];
+
+        console.log(array1.concat(array2));
+        console.log(array1.concat("red"));
+        console.log(array1.concat("red", "orange"));
+        console.log(array1.concat(array2, "red", "orange"));
+        console.log(array1.concat(array2, ["red", "orange"], "pink"));
+        console.log('');
+
+        let color3 = ["green", "blue", "purple"];
+        console.log(color3.join());
+        console.log(color3.join(" "));
+        console.log(color3.join(", "));
+        console.log(color3.join(" + "));
+        console.log(color3.join(" - "));
+        console.log('');
+    
+        console.log(color3);
+        console.log(color3.sort());
+        console.log(color3.sort().reverse());
+</script>
+</body>
+</html>

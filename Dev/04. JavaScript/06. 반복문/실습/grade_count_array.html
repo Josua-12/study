@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript 객체를 활용한 학점 분류</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 20px;
+            background-color: #f0f8ff;
+        }
+        pre {
+            background: #e0ecff;
+            padding: 10px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>JavaScript 객체를 활용한 학점 분류</h1>
+    <pre id="output"></pre>
+
+    
+    <script>
+        let gradeCount = {
+            A: 0,   //A학점 인원 수
+            B: 0,   //B학점 인원 수 
+            C: 0,   //C학점 인원 수
+            D: 0,   //D학점 인원 수
+            F: 0    //F학점 인원 수
+        };
+        let scores = [95, 82, 67, 8, 76, 89, 45, 99];
+
+        for(let score of scores) {
+            if(score >= 90) {
+                gradeCount.A++; //90점 이상이면 A이고, A는 1씩 올라감
+            } else if(score >= 80) {
+                gradeCount.B++; //80점 이상이면 B이고, B는 1씩 올라감
+            } else if(score >= 70) {
+                gradeCount.C++; //70점 이상이면 C이고, C는 1씩 올라감
+            } else if(score >= 60) {
+                gradeCount.D++; //60점 이상이면 D이고, D는 1씩 올라감
+            } else {
+                gradeCount.F++;
+            }
+        }
+
+        let output = `
+            학점별 분포 결과
+            A 학점: ${gradeCount.A}
+            B 학점: ${gradeCount.B}
+            C 학점: ${gradeCount.C}
+            D 학점: ${gradeCount.D}
+            F 학점: ${gradeCount.F}
+        `;
+
+        // textContent : HTML 요소 내부의 텍스트 내용을 설정하거나 가져오는 속성
+        document.getElementById("output").textContent = output;
+    </script>
+</body>
+</html>

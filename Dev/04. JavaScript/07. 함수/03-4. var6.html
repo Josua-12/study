@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /* 
+            let은 블록 스코프를 가지며, 중복 선언을 허용하지 않아 코드의 안전성을 높임
+        */
+        function choongang() {
+            let x = 1;  // 블록 스코프
+            console.log(x);
+            let x = 2;   //같은 블록에서 x를 다시 선언 => SyntaxError 발생
+            console.log(x);     // 실행되지 않ㅇ므
+        }
+        choongang();
+    </script>
+</body>
+</html>

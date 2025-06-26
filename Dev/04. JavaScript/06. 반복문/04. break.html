@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>구구단</title>
+    <link rel="stylesheet" href="css/02. 중첩 for(구구단)2.css">
+</head>
+<body>  
+    <h1>구구단</h1>
+    <div class="container">
+    <script>
+        for(let i = 2; i <= 9; i++) {
+            document.write(`<div class="times">`);
+            document.write(`<h3>${i}단</h3>`)
+            for(let j = 1; j <= 9; j++) {
+                document.write(`${i} X ${j} = ${i * j}<br>`);
+            }
+            document.write(`</div>`);
+
+            if(i === 5) {       // 5단까지만 표시하고, 바깥쪽 단에만 적용해야 하기 때문에 바깥 for에 걸리도록 함
+                break;
+            }
+        }
+    </script>
+    </div>
+</body>
+</html>

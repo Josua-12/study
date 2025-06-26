@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function calculateSum(a, b) {
+            let sum = a + b;
+            console.log("합계는 : ", sum);
+            return sum;
+        }
+
+        function onButtonClick() {
+            let result = calculateSum(5,10);
+            document.getElementById("result").textContent = `결과 : ${result}`;
+        }
+    </script>
+</head>
+<body>
+    <h1>디버깅 테스트</h1>
+    <button onclick="onButtonClick()">계산 실행</button>
+    <p id="result">결과 출력 위치</p>
+</body>
+</html>

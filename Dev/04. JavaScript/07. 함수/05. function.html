@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            padding-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function addNumber(num1, num2) {  // 두 매개변수(num1, num2)를 받아 더하는 함수 선언
+            let sum = num1 + num2
+            return sum;                   // sum 값을 반환
+        }
+        let result = addNumber(2, 3);// addNumber 함수 호출(2, 3 전달), 결과를 result에 반환
+        document.write(`두 수를 더한 값 : ${result}`)
+    </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> <!-- 문자인코딩 방식 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table, th, td {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+        }
+        th, td { padding : 10px 20px;}
+    </style>
+</head>
+<body>
+    <h2>상품 구성</h2>
+    <table>
+        <caption>용도별 상품 구성</caption>
+        <colgroup>
+            <col style="background-color: #eee;">  <!-- 첫번째 열의 배경색 지정 -->
+            <col> <!-- 스타일이 없어도 <col>을 명시해줘야 함 -->
+            <col span ="2" style ="width: 150px;"> <!-- 세번째, 네번째 열을 묶어서 너비 지정 -->
+        </colgroup>
+        <thead>
+            <tr>
+                <th>용도</th>
+                <th>종량</th>
+                <th>갯수</th>
+                <th>가격</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td rowspan="2">선물용</td> <!-- 2개의 행을 합치기 -->
+                <td>5kg</td>
+                <td>11과</td>
+                <td>30,000원</td>
+            </tr>
+            <tr>
+               <td>5kg</td>         <!-- 3개의 셀만 작성 -->
+               <td>11과</td>
+               <td>30,000원</td>
+            </tr>
+            <tr>
+                <td rowspan="2">선물용</td>  <!-- 2개의 행을 합치기 -->
+                <td>5kg</td>
+                <td>11과</td>
+                <td>30,000원</td>
+            </tr>
+            <tr>
+               <td>5kg</td>     <!-- 3개의 셀만 작성 -->
+               <td>11과</td>
+               <td>30,000원</td>
+            </tr>                      
+        </tbody>
+
+    </table>
+</body>
+</html>

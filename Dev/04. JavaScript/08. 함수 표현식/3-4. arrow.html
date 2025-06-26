@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 매개변수 기본형 */
+        // 일반 함수 표현식
+        const greet = function() {
+            return "좋은 한 주 되었습니까?";
+        }
+
+        //화살표 함수
+        const greet2 = () => {return "좋은 한 주 되었습니까?";}
+
+        //화살표 함수 (명령줄이 1일때는 중괄호와 return 생략가능)
+        const greet3 = () => "좋은 한주";
+        document.write(greet());
+        document.write(greet2());
+        document.write(greet3());
+    </script>
+</body>
+</html>

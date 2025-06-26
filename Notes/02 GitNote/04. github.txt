@@ -1,0 +1,52 @@
+1. 원격저장소
+    1) 지역 저장소(local repository)
+        - 만약 실수로 삭제되면 곤란해짐
+    2) 원격 저장소(remote repository = 별칭 origin)
+        - DVCS
+        - 백업
+        - 협업
+
+2. 깃허브
+    1) 회원가입
+    2) 원격 저장소 만들기 : your repository -> Create
+        - https://github.com/Josua-12/test1.git
+        - https://github.com/아이디/저장소명.git
+    3) 원격 저장소 삭제하기 : settings -> 제일 밑에 -> delete this repository
+
+3. 지역 저장소를 원격 저장소에 연결하기
+    1) 원격 저장소에 연결하기
+        - git remote add origin 원격저장소주소(관례적으로 origin이라는 이름으로 등록함)
+    2) 리모트에 주소가 등록되어있는지 여부 확인하기
+        - git remote -v
+    3) 원격 저장소에 등록 삭제하기
+        - git remote remove origin
+
+4. 지역 저장소와 원격 저장소 동기화하기
+    1) 원격 저장소에 커밋 처음으로 올리기(push)
+        - git push -u origin main(브랜치명)
+    2) 원격 저장소에 파일 올리기 (커밋 처음 올린 이후)
+        - git push
+
+5. 원격 저장소에서 직접 커밋하기
+
+6. 원격 저장소에서 커밋 내려받기
+    - git pull (push와 반대)
+        - 원격 저장소와 지역 저장소의 상태가 같아지도록
+        - 원격 저장소의 커밋을 지역 저장소로 가져옴
+        - 원격 저장소의 최신 커밋을 지역 저장소에 합쳐 줌
+        - 리모트 저장소에서 로컬 저장소 데이터를 가져오기(git fetch) + Merge 하기 
+            - 주의사항은 머지까지 하기 때문에 코드 충돌이 발생할 수 있음
+          (ex) git pull origin main
+    - git clone (클론, 클로닝)
+        - 원격 저장소 복제하기
+        - 원격 저장소에 담긴 내용 전체를 지역 저장소로 똑같이 가져오기
+        - 형식
+            - git clone (원격 저장소 주소) .
+            - 예시) git clone https://github.com/Josua-12/test1.git
+
+7. 원격 브랜치 정보 가져오기
+    1) git fetch
+        - 깃허브로 팀 작업할 때 다른 개발자가 원격 저장소에 푸시한 내용을 가져옴
+        - 주의사항은 데이터를 로컬로 가져오지만 자동으로 작업 브랜치에 Merge는 하지 않음
+        - 가져온 변경 내용에 의해 로컬 환경에 영향을 미치지 않음
+        - 주로 머진 이전에 확인하는 용도로 활용함

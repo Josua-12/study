@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> CSS Grid Layout</title>
+    <style>
+        .container {
+            width: 700px;
+            display: grid;
+            /* 열 3개 생성, 각각 동일한 크기로 지정 
+               => Grid 라인이 1, 2, 3, 4번으로 생성됨(세로선)*/
+            grid-template-columns: repeat(3, 1fr);
+            /* 행 3개 생성, 각각 높이 100px로 설정
+               => Grdi 라인이 1, 2, 3, 4번으로 생성됨(가로선) */
+            grid-template-rows: repeat(3, 100px);
+            gap: 1rem; /* 16px */
+        }
+        .box {
+            padding: 15px;
+            color: #fff;
+            text-align: center;
+        }
+        .box1 {
+            background-color: #3689ff;
+            /* 열 방향 : 1번 라인부터 마지막(-1) 라인까지
+               즉, 1열 ~ 3열 전체 차지( 1 / 4 )
+               -1은 마지막 라인을 의미하는 편리한 표기법 */
+            grid-column: 1 / -1;
+            /* 행 시작 : 1행에 위치
+               grid-row: 1 / 2; */ 
+            grid-row-start: 1;
+        }
+        .box2 {
+            background-color: green;
+            /* 행 방향 : 2번 라인부터 마지막(-1) 라인까지
+                         즉, 2행~3행을 차지 (2 / 4 와 동일) */
+            grid-row: 2 / -1;
+            /* 열 시작 : 1번 라인부터 (1열에 위치) 
+               즉 grid-column: 1 / 2; 와 동일*/ 
+            grid-column-start: 1;
+        }
+        .box3 {
+            background-color: orange;
+            /* 열 방향 : 2번 라인부터 마지막(-1) 라인
+               즉, 2열~3열을 차지 (2 / 4) */
+            grid-column: 2 / -1;
+            /* 행 시작 : 2번 라인부터(2행에 위치)
+               grid-row: 2 / 3; 과 동일 */
+            grid-row-start: 2;
+        }
+        .box4 {
+            background-color: yellowgreen;
+            /* 열 시작 : 2번 라인부터
+               grid-column : 2 / 3;와 동일 */
+            grid-column-start: 2;
+            /* 행 시작 : 3번 라인부터(3행에 위치)
+               grid-row: 3 / 4;과 동일 */
+            grid-row: 3;
+        }
+        .box5 {
+            background-color: red;
+            /* 열 방향 : 3번 라인부터 마지막 (-1)라인까지
+               즉, 3열 : 3 / 4; 와 동일 */
+            grid-column: 3;
+            /* 행 방향 : 3번 라인부터 마지막(-1)라인까지
+               3행을 차지(3 / 4와 동일) */
+            grid-row: 3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box box1">box1</div> <!-- 1행 전체 차지 -->
+        <div class="box box2">box2</div> <!-- 1열, 2-3행 차지 -->
+        <div class="box box3">box3</div>
+        <div class="box box4">box4</div>
+        <div class="box box5">box5</div>
+    </div>
+</body>
+</html>

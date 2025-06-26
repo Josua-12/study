@@ -1,0 +1,28 @@
+#aa {
+    font-weight: bold;
+}
+
+ul {
+    list-style: none;
+    margin-block-start: 20px;
+}
+
+#ddd {
+    padding-inline-start: 0px;
+}
+
+fieldset {
+        border-color: gray;
+        border-width: 1px;   
+        width: 500px;
+        height: px;   
+}
+
+li{
+    margin: 15px;
+}
+
+#ntnt li label{ 
+    width: 80px;
+    float: left;   /* 좌우 배치 */
+}

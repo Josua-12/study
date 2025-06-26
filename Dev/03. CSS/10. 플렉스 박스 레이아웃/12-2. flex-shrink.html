@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            display: flex;
+            width: 400px;
+            border: 2px solid black;
+        }
+        .box {
+            height: 100px;
+            color: white;
+            text-align: center;
+            line-height: 100px;
+            flex-basis: 200px; /* 동일한 기본 크기 설정 */
+        }
+        .box1 {
+            flex-shrink: 1; /* 기본으로 줄어드는 비율 : 1 */
+            background-color: coral;
+        }
+        .box2 {
+            flex-shrink: 2; /* 2배 더 많이 줄어듦 : 2 */
+            background-color:steelblue;
+        }
+        .box3 {
+            flex-shrink: 3; /* 3배 더 많이 줄어듦 : 3 */
+            background-color: olive;
+        }
+    </style>
+</head>
+<body>
+    <h2>flex-grow 테스트</h2>
+    <div class="container">
+        <div class="box box1">shrink : 1</div>
+        <div class="box box2">shrink : 2</div>
+        <div class="box box3">shrink : 3</div>
+    </div>
+</body>
+</body>
+</html>

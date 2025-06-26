@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조건문</title>
+</head>
+<body>
+    <script>
+        let userNumber = prompt("숫자를 입력하세요.");
+
+        if(userNumber !== null) {
+            /* if(parseInt(userNumber) % 3 === 0) {
+                alert('3의 배수입니다.')
+            } else {
+                alert('3의 배수가 아닙니다.')
+            } 
+이렇게 표현 할 수도 있음
+=>*/        (parseInt(userNumber) % 3 === 0) ? alert('3의 배수입니다.') : alert('3의 배수가 아닙니다.')
+        }
+        else {
+            alert('입력이 취소되었습니다.')
+        }
+    </script>
+</body>
+</html>
