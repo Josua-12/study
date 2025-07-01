@@ -1,0 +1,173 @@
+1. intro
+    1) AWS 활용해서 웹 서비스 운영시 가장 널리 사용하는 서비스인 EC2.
+    
+    2) 배포 (deployment)
+        - 우리가 만든 서비스를 서버나 클라우드 환경에 업로드하는 것
+        - 일반적으로 웹 서비스를 개발할 때 로컬호스트(localhost)라는 자신의 컴퓨터 주소를 사용
+            : 다른 컴퓨터에서 접근할 수 없는 주소
+    
+    3) IP 주소
+        - 인터넷에서 특정 컴퓨터를 가리키는 주소
+        - ping 명령어 사용하면 특정 도메인 주소와 네트워크 연결 상태 확인할 수 있음
+    
+    4) 포트
+        - 한 컴퓨터 내에서 실행되는 특정 프로그램의 주소
+        - 잘 알려진 포트 (well-known port)
+            : 0번 부터 1023번까지 특정 용도로 사용(권장)
+                (1)역할이 정해져 있는 포트
+                    (ex.) 22번 포트 : SSH
+                          80번 포트 : HTTP 
+                          443번 포트 : HTTPS
+    
+    5) EC2 인스턴스
+        - EC2에서 빌리는 컴퓨터 한 대를 뜻함
+        - EC2 인스턴스 = 컴퓨터 한 대
+        - OS 이미지 (컴퓨터의 핵심 SW)
+        - 인스턴스 유형
+        - 스토리지(HDD, SSD)
+    
+    6) EC2 사용하는 이유
+        - 관리 부담 절감
+        - 손쉬운 보안 설정
+
+
+2. EC2 인스턴스 시작하기
+    1)
+    2) 인스턴스 시작 화면 들어가기
+        - 네트웍크 설정
+
+        - 스토리지 구성
+    3) 인스턴스에 원격 접속하기
+        - 연결
+
+
+3. 탄력적 IP
+    1) EC2 인스턴스를 중지하고 다시 시작할 때마다 퍼플릭 IP 주소가 변경됨
+    2) AWS에서는 탄력적 IP를 제공해서 IP가 변경되지 않도록 해줌
+    3) 고정된 IP 주소
+
+4 EC2에 백엔드 서버 배포하기
+    1) EC 인스턴스 접속하기
+    2) JDK 설치하기
+        - ubuntu@ip-172-31-47-4:/$ sudo apt update : 패키지 관리 시스템 정보 업데이트
+        - ubuntu@ip-172-31-47-144:~$ sudo apt install openjdk-17-jdk -y : JKD 설치
+    3) 깃 허브에서 프로젝트 가져오기
+        - https://github.com/campusseven24/aws-ec2-springboot.git
+    4) application.yml 파일 만들기
+        - ubuntu@ip-172-31-47-4:~/aws-ec2-springboot/src/main/resources$ 
+        - server:
+            port: 80
+    5) 프로젝트 실행하기
+        - 실행하기 전에 빌드 과정 거쳐야 함
+    6) 서버 상태 확인
+        - ubuntu@ip-172-31-41-48:~/aws-ec2-springboot$ ./gradlew clean build -x test
+        - ubuntu@ip-172-31-41-48:~/aws-ec2-springboot/build/libs$ sudo nohup java -jar aws-ec2-springboot-0.0.1-SNAPSHOT.jar  &
+        - ubuntu@ip-172-31-41-48:~/aws-ec2-springboot/build/libs$ sudo lsof -i:80
+    7) IP 주소로 접속하기
+        
+    8) 서버 종료하기
+        - ubuntu@ip-172-31-41-48:~/aws-ec2-springboot/build/libs$ sudp kill 10504
+
+
+
+     - history - 
+     
+    1  sudo apt update
+    2  sudo apt install openjdk-17-jdk -y
+    3  pwd
+    4  git clone https://github.com/campusseven24/aws-ec2-springboot.git
+    5  ls
+    6  cd aws-ec2-springboot/
+    7  ls
+    8  cd gradle/
+    9  ls
+   10  cd wrapper/
+   11  ls
+   12  cd..
+   13  cd ..
+   14  ls
+   15  cd ..
+   16  ls
+   17  cd src
+   18  ls
+   19  cd main
+   20  ls
+   21  cd resources
+   22  ls
+   23  cd ..
+   24  ls
+   25  cd resources/
+   26  vi application.yml
+   27  cat application.yml
+   28  cd
+   29  pwd
+   30  ls
+   31  cd aws-ec2-springboot/
+   32  ls
+   33  ls -al
+   34  sudo chmod +x ./gradlew
+   35  ls -al
+   36  cd ..
+   37  pwd
+   38  ls
+   39  mkdir test
+   40  ls
+   41  cd test/
+   42  cd ..
+   43  ls
+   44  cd test/
+   45  ll
+   46  vi test.txt
+   47  cat test.txt
+   48  ll
+   49  chmod +x test.txt
+   50  ll
+   51  chmod -w .
+   52  ll
+   53  chmod -w test.txt
+   54  ll
+   55  chmod +w .
+   56  ll
+   57  chmod u+w test.txt
+   58  ll
+   59  chmod g+w test.txt
+   60  ll
+   61  chmod o-r test.txt
+   62  ll
+   63  chmod 777
+   64  ll
+   65  chmod 777 test.txt
+   66  l
+   67  ll
+   68  chmod 644 test.txt
+   69  ll
+   70  chmod 600 test.txt
+   71  ll
+   72  ./gradlew clean build -x test
+   73  ll
+   74  cd ..
+   75  ls
+   76  aws-ec2-springboot/
+   77  ./gradlew clean build -x test
+   78  ls
+   79  aws-ec2-springboot/
+   80  ls
+   81  cd aws-ec2-springboot/
+   82  ls
+   83  ./gradlew clean build -x test
+   84  ls
+   85  ll
+   86  cd build
+   87  ll
+   88  cd libs
+   89  ll
+   90  ls
+   91  sudo nohup java -jar aws-ec2-springboot-0.0.1-SNAPSHOT.jar 
+   92  sudo nohup java -jar aws-ec2-springboot-0.0.1-SNAPSHOT.jar &  
+   93  sudo lsof -i:80
+   94  ls
+   95  ls -al
+   96  sudo nohup java -jar aws-ec2-springboot-0.0.1-SNAPSHOT.jar  &
+   97  sudp kill 10504
+   98  history
+

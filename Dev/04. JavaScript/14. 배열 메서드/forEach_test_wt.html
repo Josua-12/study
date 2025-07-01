@@ -97,6 +97,10 @@
             <button onclick="displayAllEmployees()">1. 전체 직원 목록 출력</button>
             <button onclick="displayEmployeesByDepartment()">2. 부서별 직원 출력</button>
             <button onclick="findOddPositionEmployees()">3. 홀수 번째 직원들</button>
+            <button onclick="demonstrateIndexUsage()">4. 인덱스 활용 패턴</button>
+            <button onclick="findSeniorEmployees()">5. 시니어급 직원 찾기</button>
+            <button onclick="employeesHireYear()">6. 직원별 연차 계산</button>
+
             <div id="output" class="output"></div>
         </div>
     </div>
@@ -284,9 +288,193 @@
                 });
 
             output.textContent = result;
-        }
+        };
 
-    </script>
+        // 4. 인덱스 사용법 
+        function demonstrateIndexUsage() {
+            // 결과를 출력할 DOM 요소 선택
+            const output = document.getElementById("output");
+            // 결과 문자열 초기화
+            let result = "==== 인덱스 활용 패턴 ====\n\n";
+            // 패턴 설명 제목 추가
+            result += "⛨ forEach에서 인덱스를 활용하는 다양한 패턴들\n\n";
+            // 패턴1 : 순번 표시 (1부터 시작) - 가장 기본적인 패턴
+            result += "1️⃣ 순번 표시 패턴: \n ";
+            employees.forEach((employee, index) => {
+                result += `${index + 1}번. ${employee.name}\n`;
+            }); 
+
+            /* // 내가한거
+            result += "\n\n2️⃣ 첫 번째/마지막 요소 특별 처리: \n"
+            employees.forEach((employees, index, array) => {
+                if(index === 0) {
+                    result += `🥇 첫 번째: ${employees.name}\n`
+                } else if (index === 4) {
+                    result += `🏁 마지막: ${employees.name}\n`
+                } else {
+                    result += `👤 ${employees.name}\n`
+                }
+            }); */
+
+            // 쌤이 하신거
+            result += "\n2️⃣ 첫 번째/마지막 요소 특별 처리: \n"
+            employees.forEach((employee, index, array) => {
+                let prefix = "";
+                if(index === 0) {
+                    prefix = "🥇 첫 번째: "
+                } else if (index === array.length -1) {
+                    prefix = "🏁 마지막: "
+                } else {
+                    prefix = "👤 "
+                }
+                result += `${prefix} ${employee.name}\n`
+            });
+
+            /* // 내가 한거 
+            result += "\n3️⃣ 짝수/홀수 인덱스 구분: \n"
+            employees.forEach((employee, index) => {
+                (parseInt(index) % 2 === 0) ? result += `🤍 짝수 인덱스[${index}]: ${employee.name}\n` 
+                                        :result += `🖤 홀수 인덱스[${index}]: ${employee.name}\n`;
+            }); */
+
+            // 쌤이 하신거
+            // 패턴 3 : 3️⃣ 짝수/홀수 인덱스 구분:
+            result += "\n3️⃣ 짝수/홀수 인덱스 구분: \n"
+            employees.forEach((employee, index) => {
+                const emoji = (index % 2 === 0) ? "⚪" : "⚫";
+                const type = (index % 2 === 0) ? "짝수" : "홀수";
+                result += `${emoji} ${type} 인덱스[${index}]: ${employee.name}\n`;
+            });
+
+            
+            // 패턴 4
+            /* 
+                Math.floor(0/3) + 1 = 1
+                Math.floor(1/3) + 1 = 1
+
+                Math.floor(3/3) + 1 = 2
+                Math.floor(4/3) + 1 = 2
+                
+                Math.floor(6/3) + 1 = 3
+                ...
+
+                (0 % 3) + 1 = 1
+                (1 % 3) + 1 = 2
+                (2 % 3) + 1 = 3
+            */
+            // 내가 한거
+            /* result += "\n 4️⃣ 그룹 단위 처리 (3명씩): \n"
+            employees.forEach((employee, index) => {
+                const group = Math.floor(index / 3) + 1;
+                const num = Math.floor(index % 3) + 1; // 정수로 떨어져서 굳이 Math.floor 안써도 됨
+                result += `그룹 ${group}, ${num}번째 : ${employee.name}\n`
+            }); */
+            
+            // 쌤이 하신거
+
+            result += "\n 4️⃣ 그룹 단위 처리 (3명씩): \n"
+            employees.forEach((employee, index) => {
+                const groupNumber = Math.floor(index / 3) + 1;
+                const positionInGroup = (index % 3) + 1;
+                result += `그룹 ${groupNumber}, ${positionInGroup}번째 : ${employee.name}\n`
+            });
+            output.textContent = result;
+        };    
+        // 5. 시니어급 직원 찾기 - 조건
+        function findSeniorEmployees() {
+                // 조건 : 직책에 '시니어' 또는 '매니저'가 포함된 직원
+                // 결과를 출력할 DOM 요소 선택
+            const output = document.getElementById("output");
+            // 결과 문자열 초기화
+            let result = "==== 시니어급 직원 찾기 ====\n\n";
+
+            result += "🎯 조건 : 직책에 '시니어' 또는 '매니저'가 포함된 직원\n";
+            result += "📝 검색 결과 : \n";
+
+            let seniorCount = 0;
+            let totalSalary = 0;
+
+            employees.forEach((employee, index) => {
+                if(employee.position.includes('시니어') ||
+                    employee.position.includes('매니저')) {
+                        seniorCount++;
+                    result += `${seniorCount}. ${employee.name} - ${employee.position}\n`;
+                    result += `부서: ${employee.department}\n`;
+                    result += `급여: ${employee.salary.toLocaleString()}원\n`;
+                    result += `입사일: ${employee.hireDate}\n\n`;
+                }
+            });
+            
+            // 조건에 만족하는 사원이 없는 경우
+            if(seniorCount === 0) {
+                result += "시니어급 직원이 없습니다.\n"
+            } else {
+                result += `총 ${seniorCount}명의 시니어급 직원이 있습니다. \n`;
+                // 평균 급여
+                let totalSalary = 0;
+                employees.forEach((employee) => {
+                    if(employee.position.includes('시니어') ||
+                    employee.position.includes('매니저')) {
+                        totalSalary += employee.salary; //급여합계
+                    }
+                }); 
+                // 평균 급여
+                const averageSalary = 
+                    Math.round(totalSalary/seniorCount);
+                result += `💰 시니어급 평균 급여: ${averageSalary.toLocaleString()}원\n`;
+            }
+
+            output.textContent = result;
+        };
+            
+        // 6. 직원별 연차 계산
+        function employeesHireYear() {
+            const output = document.getElementById("output");
+            let result = "==== 직원별 연차 계산 ====\n\n";
+            const baseYear = 2025;
+
+            result += `📅 기준 연도 : 2025년\n`
+            result += "👥 직원별 근무 연차 : \n\n"
+
+            let totalYears = 0;
+            let skilledCount = 0;
+            let juniorCount = 0;
+
+            employees.forEach((employee, index) => {
+                const hireDate = new Date(employee.hireDate);
+                const hireYear = hireDate.getFullYear();
+                const yearsOfService = baseYear - hireYear;
+
+                totalYears += yearsOfService;
+
+                if (yearsOfService >= 5) {
+                    result += `${index + 1}. ${employee.name} ${yearsOfService}년차 🏆 베테랑\n`;
+                    skilledCount++;
+                } else if(yearsOfService >= 3){
+                    result += `${index + 1}. ${employee.name} ${yearsOfService}년차 💪 숙련자\n`;
+                    skilledCount++;
+                } else {
+                    result += `${index + 1}. ${employee.name} ${yearsOfService}년차 🐣 신입/경험자\n`;
+                    juniorCount++;
+                }
+                result += `입사일 : ${employee.hireDate}\n`
+                result += `부서 : ${employee.department}\n\n`
+            });
+            
+            const averageYears = (employees.length > 0) 
+                ? (totalYears / employees.length).toFixed(1) 
+                : "0";
+
+                
+                result += `📊 통계 정보: \n`
+                result += `평균 근무 연차 : ${averageYears}년\n`
+                result += `숙련 직원수: ${skilledCount}명 (3년차 이상)\n`
+                result += `신입/경헙자: ${juniorCount}명\n`
+                   
+            output.textContent = result;
+        };
+        
+    </script> 
 </body>
 
 
