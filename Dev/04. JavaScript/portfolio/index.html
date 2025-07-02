@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav class="navbar">
+                <div class="logo">My Portfolio</div>
+                <button class="hamburger" aria-label="메뉴 열기">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="menu-container">
+                    <ul class="nav-links">
+                        <li><a href="#">홈</a></li>
+                        <li><a href="#">소개</a></li>
+                        <li><a href="#">기술</a></li>
+                        <li><a href="#">프로젝트</a></li>
+                        <li><a href="#">연락처</a></li>
+                        <li><button class="follow-btn">팔로우</button></li>
+                    </ul>
+                    
+                </div>
+            </nav>
+        </header>
+        <main id="home">
+
+        </main>
+    </div>
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
