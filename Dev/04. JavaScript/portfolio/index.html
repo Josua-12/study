@@ -8,30 +8,61 @@
 </head>
 <body>
     <div class="container">
-        <header>
-            <nav class="navbar">
-                <div class="logo">My Portfolio</div>
-                <button class="hamburger" aria-label="메뉴 열기">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-                <div class="menu-container">
-                    <ul class="nav-links">
-                        <li><a href="#">홈</a></li>
-                        <li><a href="#">소개</a></li>
-                        <li><a href="#">기술</a></li>
-                        <li><a href="#">프로젝트</a></li>
-                        <li><a href="#">연락처</a></li>
-                        <li><button class="follow-btn">팔로우</button></li>
-                    </ul>
-                    
-                </div>
-            </nav>
-        </header>
-        <main id="home">
-
+        <div class="header-container">
+            <header>
+                <nav class="navbar">
+                    <div class="logo">My Portfolio</div>
+                    <button class="hamburger" aria-label="메뉴 열기">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <div class="header-menu-container">
+                        <ul class="nav-links">
+                            <li><a href="#">홈</a></li>
+                            <li><a href="#">소개</a></li>
+                            <li><a href="#">기술</a></li>
+                            <li><a href="#">프로젝트</a></li>
+                            <li><a href="#">연락처</a></li>
+                            <li><button class="follow-btn">팔로우</button></li>
+                        </ul>
+                        
+                    </div>
+                </nav>
+            </header>
+        </div>
+        <main id="home" class="main-container">
+            <!-- - 상세한 자기소개 텍스트
+                 - 완성 프로젝트 수, 팔로워, Github 커밋수
+                 - 연속 학습일 수  -->
+            <section class="presentation-section">
+                <h2>조수아</h2>
+                <h3>간략한 자기소개</h3>
+                <div class="complete-project">완성 프로젝트 수</div>
+                <div class="follower">팔로워</div>
+                <div class="github-commitCount">Github 커밋 수</div>
+                <div class="learning-streak">연속 학습일 수</div>
+            </section>
+            <section class="skill-section">
+                <!-- - 보유 기술을 태그 형태로 표시
+                     - 클릭 시 선택/해제 기능
+                     - 선택된 스킬 색상 변경, 알림(alert) -->
+            </section>
+            <section class="project-section">
+                <!-- - 최소 3개의 프로젝트 카드
+                     - 각 프로젝트 별 이미지, 제목, 설명, 기술 스택
+                     - Github / Live Demo 링크 버튼 -->
+            </section>
+            <section class="contact-section">
+                <!-- - 연락처 정보 표시 (이메일, 전화, 위치, Github)
+                     - 메시지 전송 폼 (이름, 이메일, 메시지) -->
+            </section>
         </main>
+        <footer class="footer-container">
+            <!-- - 저작권 정보
+                 - 소셜 링크 -->
+            
+        </footer>
     </div>
     <script>
         const hamburger = document.querySelector('.hamburger');
