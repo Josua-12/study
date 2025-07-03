@@ -1,4 +1,4 @@
-package first;
+package first2;
 
 /*
  * 안녕하세요, 자바 세계!

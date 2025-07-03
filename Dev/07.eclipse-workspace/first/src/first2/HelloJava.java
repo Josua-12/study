@@ -1,4 +1,4 @@
-package first;
+package first2;
 
 /*
  * 1) 자바 언어는 대소문자를 구별함

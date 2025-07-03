@@ -20,6 +20,7 @@ public class Var6 {
 		c = a / b;
 		System.out.println("나눗셈: " + a + " / " + b + " = " + c );
 		c = a % b;
+		
 		System.out.println("나머지: " + a + " % " + b + " = " + c );
 		System.out.println(); 
 		System.out.println(); 

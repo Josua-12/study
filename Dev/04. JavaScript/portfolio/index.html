@@ -8,30 +8,96 @@
 </head>
 <body>
     <div class="container">
-        <header>
-            <nav class="navbar">
-                <div class="logo">My Portfolio</div>
-                <button class="hamburger" aria-label="메뉴 열기">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-                <div class="menu-container">
-                    <ul class="nav-links">
-                        <li><a href="#">홈</a></li>
-                        <li><a href="#">소개</a></li>
-                        <li><a href="#">기술</a></li>
-                        <li><a href="#">프로젝트</a></li>
-                        <li><a href="#">연락처</a></li>
-                        <li><button class="follow-btn">팔로우</button></li>
-                    </ul>
-                    
+        <div class="header-container">
+            <header>
+                <nav class="navbar">
+                    <div class="logo">My Portfolio</div>
+                    <button class="hamburger" aria-label="메뉴 열기">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <div class="header-menu-container">
+                        <ul class="nav-links">
+                            <li><a href="#" class="nav-link">홈</a></li>
+                            <li><a href="#" class="nav-link">소개</a></li>
+                            <li><a href="#" class="nav-link">기술</a></li>
+                            <li><a href="#" class="nav-link">프로젝트</a></li>
+                            <li><a href="#" class="nav-link">연락처</a></li>
+                            <li><button class="follow-btn">팔로우</button></li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+        </div>
+        <main id="home" class="main-container">
+            <!-- - 상세한 자기소개 텍스트
+                 - 완성 프로젝트 수, 팔로워, Github 커밋수
+                 - 연속 학습일 수  -->
+            <section class="presentation-section">
+                <h2>조수아</h2>
+                <h3>간략한 자기소개</h3>
+                <div class="complete-project">완성 프로젝트 수</div>
+                <div class="follower">팔로워</div>
+                <div class="github-commitCount">Github 커밋 수</div>
+                <div class="learning-streak">연속 학습일 수</div>
+            </section>
+            <section class="skill-section">
+                <!-- - 보유 기술을 태그 형태로 표시
+                     - 클릭 시 선택/해제 기능
+                     - 선택된 스킬 색상 변경, 알림(alert) -->
+                <div class="skill-tags">
+                    <h2>보유 기술</h2>
+                    <button class="skill-tag-selectable">HTML5</button>
+                    <button class="skill-tag-selectable">CSS</button>
+                    <button class="skill-tag-selectable">JavaScript</button>
+                    <button class="skill-tag-selectable">JAVA</button>
                 </div>
-            </nav>
-        </header>
-        <main id="home">
-
+                
+            </section>
+            <section class="project-section">
+                <!-- - 최소 3개의 프로젝트 카드
+                     - 각 프로젝트 별 이미지, 제목, 설명, 기술 스택
+                     - Github / Live Demo 링크 버튼 -->
+                <h2>프로젝트</h2>
+                <div class="project-cards">
+                    <div class="project-card">
+                        <p>프로젝트 1</p>
+                    </div>
+                    <div class="project-card">
+                        <p>프로젝트 2</p>
+                    </div>
+                    <div class="project-card">
+                        <p>프로젝트 3</p>
+                    </div>
+                </div>
+            </section>
+            <section class="contact-section">
+                <!-- - 연락처 정보 표시 (이메일, 전화, 위치, Github)
+                     - 메시지 전송 폼 (이름, 이메일, 메시지) -->
+                <h2>연락처</h2>
+                <div class="info">
+                    <p>Email</p>
+                    <p>전화</p>
+                    <p>위치</p>
+                    <p>Github</p>
+                </div>
+                <form class="contact-form">
+                    <input type="text" name="name" placeholder="이름" required>
+                    <input type="email" name="email" placeholder="이메일" required>
+                    <textarea name="message" placeholder="메시지를 입력하세요" rows="5" required></textarea>
+                    <button type="submit">메시지 보내기</button>
+                </form> 
+            </section>
         </main>
+        <footer class="footer-container">
+            <!-- - 저작권 정보
+                 - 소셜 링크 -->
+            <div class="copyright">
+                <p>&copy;2025 Jo-sua Portfolio. All right reserved. </p>
+            </div>
+            <div class="social-link">소셜링크</div>
+        </footer>
     </div>
     <script>
         const hamburger = document.querySelector('.hamburger');

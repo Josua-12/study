@@ -1,4 +1,4 @@
-package first;
+package first2;
 
 public class HelloIntroduce {
 	public static void main(String[] args) {
