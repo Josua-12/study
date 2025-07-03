@@ -8,6 +8,7 @@ public class IF5 {
 		int age = 19;
 		System.out.println("연령: " + age);
 		int discount = 0;
+		System.out.println(discount);
 		
 		if(price >= 10000 && age == 20){
 			discount += 2000;
