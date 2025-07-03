@@ -9,7 +9,9 @@ public class LocaleFormatLab {
 	public static void main(String[] args) {
 		double amount = 1234567.89;
 		double percentage = 0.1234;
+		System.out.println(percentage);
 		Date currentDate = new Date(); // 현재 날짜 객체 생성
+		System.out.println(currentDate);
 		
 		// 한국의 숫자 표기 규칙에 맞춰 숫자를 포맷팅하는 객체
 		NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.KOREA);
