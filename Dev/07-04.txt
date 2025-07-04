@@ -1,0 +1,34 @@
+07-04
+
+
+좌측 4개 아이콘
+제일 위에 있는 별 눌렀다가 my-server 삭제
+오른쪽 버튼 눌러서 rename하고
+my-express-deploy로 바꾸기
+창 닫고, 모다엑스 다시 구동하고 더블 클릭
+
+sudo apt update 
+sudo apt install -y curl
+curl -fsSL https://deb.nodesource.com/setup_22.x -o nodesource_setup.sh
+sudo -E bash nodesource_setup.sh
+cat nodesource_setup.sh
+nodesource_setup.sh
+sudo apt install -y nodejs
+node -v
+git clone https://github.com/campusseven24/aws-ec2-express.git
+vim app.js
+vim .env
+sudo npm i -g pm2
+sudo pm2 start app.js
+sudo pm2 log 	#앱 오류 로그 확인 -> ctrl+C로 로그 나가기
+npm install dotenv -> dotenv 다운
+sudo pm2 start app.js
+sudo pm2 kill -> 강제로 pm2 죽이기
+
+vim app.js 에서 주석 넣으려면 i 누르고, 방향키로 옮길 수 있음
+나가려면 esc -> shift+: -> q -> enter
+저장하려면 esc -> shift+: -> wq -> enter
+
+
+
+https://deb.nodesource.com/setup_22.x -o nodesource_setup.sh

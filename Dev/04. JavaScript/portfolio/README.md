@@ -86,10 +86,7 @@
 
 1. **css 변수 설정**
     ```CSS
-    element {
-    --main-bg-color: brown;
-    }
-    element {
+    :root {
     --main-bg-color: brown;
     }
     ```

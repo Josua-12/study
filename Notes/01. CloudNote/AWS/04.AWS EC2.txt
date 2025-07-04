@@ -171,3 +171,46 @@
    97  sudp kill 10504
    98  history
 
+5. EC2에 익스프레스 서버 배포하기
+    1) EC2 인스턴스 접속하기
+    2) Node.js 설치하기 
+        - 22 버전 사용
+        - 익스프레스 4.x.x 버전
+
+        - 터미널
+            - ubuntu@ip-172-31-43-105:~$ sudo apt update
+            - ubuntu@ip-172-31-43-105:~$ sudo apt install -y curl
+                - curl
+                    - 대표적인 용도 : 웹 페이지 요청
+                    - 예)
+                        - curl http://google.com
+                    - 옵션
+                        - -f
+
+ubuntu@ip-172-31-37-73:~$ curl -fsSL https://deb.nodesource.com/setup_22.x -o nodesource_setup.sh
+
+ubuntu@ip-172-31-37-73:~$ sudo -E bash nodesource_setup.sh
+
+ubuntu@ip-172-31-37-73:~$ sudo apt install -y nodejs
+
+ubuntu@ip-172-31-37-73:~$ node -v  # node.js가 잘 설치됐는지 확인
+
+ubuntu@ip-172-31-37-73:~$ git clone https://github.com/campusseven24/aws-ec2-express.git
+
+    3) 깃허브에서 익스프레스 프로젝트 git clone
+    4) .env 파일 만들기
+        - 보안을 유지해야 하는 민감한 정보를 포함하는 파일
+        - 깃으로 버전 관리하지 않음
+
+        - ubuntu@ip-172-31-37-73:~/aws-ec2-express$ vim .env
+    5) pm2로 익스프레스 서버 실행하기
+        - pm2 설치 
+            - ubuntu@ip-172-31-43-105:~/aws-ec2-express$ sudo npm i -g pm2
+            - ubuntu@ip-172-31-37-73:~/aws-ec2-express$ sudo pm2 log #앱 오류 로그 확인
+            - ubuntu@ip-172-31-37-73:~/aws-ec2-express$ npm install dotenv
+        - pm2를 활용해서 익스프레스 서버 실행
+
+    6) IP 주소로 접속하기
+    7) 익스프레스 서버 종료하기
+        - sudo pm2 kill
+

@@ -1,0 +1,23 @@
+2025-06-30
+
+1교시(리눅스)
+aws 인스턴트 만들때 포트 범위 22로 되어있어야 사용 가능하고
+http는 80포트
+
+2교시(ModaX)
+실행 > Sesscion > SSH > aws 인스턴스의 퍼블릭 IPv4 주소 입력(Remote host) > Specify usename 체크 후 ubuntu 입력 > 
+Advanced SSH settings > Use private key 체크 후 파일 모양 선택, aws 에서 키 만든거 넣기> OK
+
+3. 
+if, else elseif, forEach(array도 쓰고, array,length)
+
+4. 
+forEach문 하는데 index 
+3항연산자 2번 쓰면 됨
+
+5. 
+함수 math에ㅔ서 제공한 함수 사용
+math.floor() = 소수점 버림
+
+6. 
+Date.prototype.getFullYear()
