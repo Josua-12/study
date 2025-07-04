@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조수아 - 자바 풀스택 개발자</title>
+    <link rel="stylesheet" href="css/style copy.css">
+</head>
+<body>
+    <!-- 네비게이션 바 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- 로고 -->
+            <div class="nav-logo">
+                <span onclick="">🧑‍💻</span>
+                <span>조수아</span>
+            </div>
+            <ul class="nav-menu">
+                <!-- 앵커 링크 : SPA처럼 페이지 내 섹션 이동 -->
+                <li><a href="#home">홈</a></li>
+                <li><a href="#about">소개</a></li>
+                <li><a href="#skills">기술</a></li>
+                <li><a href="#projects">프로젝트</a></li>
+                <li><a href="#contacts">연락처</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 메인 화면 -->
+    <section class="hero-main" id="home">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">안녕하세요! 저는 <span class="highlight">조수아</span>입니다</h1>
+                    <p class="hero-subtitle">Java FullStack Developer</p>
+                    <p class="hero-description">
+                        사용자 경험을 중시하는 자바 풀스택 개발자입니다.
+                        새로운 기술을 배우는 것을 좋아하며, 
+                        클린하고 효율적인 코드를 작성하기 위해 노력합니다.
+                    </p>
+                    <div class="learning-streak">
+                        <h3 class="learning-day">교육 캠프 경과 일수 : <span class="accent" id="result"></span>일</h3>
+                        
+                    </div>
+                    <div class="hero-buttons">
+                        <button class="btn-primary" onclick>프로젝트 보기</button>
+                        <button class="btn-secondary" onclick>이력서 다운로드</button>
+                    </div>
+                    <div>
+                        <h3>보유 기술</h3>
+                        <div class="skill-tags">
+                            <p class="skill-tag HTML5">HTML5</p>
+                            <p class="skill-tag CSS">CSS</p>
+                            <p class="skill-tag JavaScript">JavaScript</p>
+                            <p class="skill-tag JAVA">JAVA</p>
+                        </div>
+                    </div>
+                    <h3 class="sosial-media">소셜 미디어</h3>
+                    <div class="social-links">
+                        <div class="social-item">
+                            <button class="social-btn github">
+                                <img class="image" src="images/github.png" alt="Github"/>
+                            </button>
+                            <p>GitHub</p>
+                        </div>
+                        <div class="social-item">
+                            <button class="social-btn linkedin">
+                                <img class="image" src="images/linkedin-124.png" alt="Linkedin"/>
+                            </button>
+                            <p>LinkedIn</p>
+                        </div>
+                        <div class="social-item">
+                            <button class="social-btn email">
+                                <img class="image" src="images/gamil.png" alt="Gmail"/>
+                            </button>
+                            <p>Email</p>
+                        </div>
+                        <div class="social-item">
+                            <button class="social-btn portfolio">
+                                <img class="image" src="images/velog-h5p7x66jgid6eh4epnqf7.webp" alt="Gmail"/>
+                            </button>
+                            <p>Blog</p>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="hero-image">
+                    <div class="profile-image" onclick="">🗿</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 소개 섹션 -->
+    <section class="about" id="about">
+        <div class="container">
+
+        </div>
+    </section>
+
+    <!-- 스킬 섹션 -->
+    <section id="skills" class="skills">
+        <div>
+
+        </div>
+    </section>
+
+    <!-- 프로젝트 섹션 -->
+    <section id="projects" class="projects">
+        <div>
+
+        </div>
+    </section>
+
+    <!-- 연락처 -->
+    <section id="contact" class="contact">
+        <div>
+            
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 조수아. 모든 권리 보유.</p>
+            <div class="footer-social">
+                <button onclick="">Github</button>
+                <button onclick="">LinkedIn</button>
+                <button onclick="">Email</button>
+            </div>
+        </div>
+    </footer>
+    <script>
+        let now = new Date(); // 특정한 파라미터를 주지 않으면 오늘 날짜로 객체 지정
+        let firstDay = new Date("2025-05-27"); // 시작 날짜를 객체로 지정
+
+        // 1970년 1월 1일 0시 0분 0초부터 지금까지의 밀리 초 경과 시간 (정수)
+        let toNow = now.getTime(); // 오늘까지 지난 시간 (밀리초)(1970.01.01~)
+        let tofirst = firstDay.getTime(); // 2025년 05월 27일까지 지난 시간(1970.01.01~2025.05.27)
+        let passTime = toNow - tofirst; // 5월 27일부터 오늘까지 지난 시간 (밀리초)
+
+        // 밀리 초를 일 수로 계산하고 반올림 , round : 소수 첫째자리에서 반올림해서 정수
+        passTime= Math.round(passTime/(1000*60*60*24)) //1초 * 60(1분에) * 60(1시간에) *24(하루에)
+        document.querySelector("#result").innerText = passTime;
+    </script>
+</body>
+</html>
