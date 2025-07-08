@@ -1,3 +1,5 @@
+
+
 package condition;
 
 public class LambdaSwitchLab {

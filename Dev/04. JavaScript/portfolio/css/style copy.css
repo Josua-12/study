@@ -16,7 +16,7 @@
 
 /* body 기본 스타일 */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     line-height: 1.6;  /* 줄 간격 */
     color: var(--text-color);   /* CSS 변수 사용 */
     overflow-x: hidden;     /* 가로 스크롤 방지 */
@@ -26,7 +26,6 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 2rem;
 }
 
 /* 섹션 공통 스타일 */
@@ -114,9 +113,11 @@ section {
 }
 
 .accent {
-  background: rgba(255, 255, 255, 0.3);
-  padding: 0px 4px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 3px 5px;
   border-radius: 25%;
+  font-size: 25px;
+  color: #b23731;
 }
 
 /* 메인 섹션 */
@@ -124,11 +125,12 @@ section {
     /* 대각선 그라디언트 배경 */
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     color: white;
-    padding: 8rem 0 5rem;
+    padding: 6rem 0rem;
     margin-top: 70px;
-    min-height: 90vh;   /* 뷰포트 높이의 90% */
+    min-height: 70vh;   /* 뷰포트 높이의 90% */
     display: flex;
     align-items: center;
+    justify-items: center;
 }
 
 .hero-container {
@@ -272,6 +274,7 @@ section {
 .hero-image {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .profile-image {
@@ -312,3 +315,30 @@ section {
   padding: 0 0.5rem;
   text-align: center;
 }
+
+.contact-form {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+
+.message {
+  width: 100%;
+  padding: 5px;
+  margin: 10px 0px;
+  border: 1px solid #2c3e50;
+  border-radius: 4px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.send {
+  width: 30%;
+  height: 30px;
+  background: linear-gradient(45deg, #ff9a9e, #fecfef);
+  border: none;
+  border-radius: 3px;
+}
+
+.hero-text h3 {
+  margin-top: 15px;
+}
+
