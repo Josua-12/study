@@ -49,11 +49,11 @@ public class MethodTraining2 {
 		
 	}	
 	
-	private static void primeChecker(Scanner scanner) {
+	public static void primeChecker(Scanner scanner) {
 		System.out.println("\n=== 문제 2: 소수 판별하기 ===");
 		System.out.println("숫자를 입력하면 소수인지 판별해드립니다.");
 		System.out.print("숫자를 입력하세요");
-		int number = scanner.nextInt();
+		int number = scanner.nextInt(); // 판별한 숫자 입력받기
 		
 		boolean isPrime = true;
 		
@@ -94,7 +94,7 @@ public class MethodTraining2 {
 		printSeparator();
 		
 	}
-	private static void printSeparator() {
+	public static void printSeparator() {
 		System.out.println("---------------------------------------");
 	}
 	public static int findMax(int a, int b) {
