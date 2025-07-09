@@ -7,9 +7,9 @@
 
 /* 전역에서 사용할 CSS 변수 - 색상값 정의, 일관성 향상 */
 :root {
-    --primary-color: #667eea;     /* 주요 색상 */  
-    --secondary-color: #764ba2;   /* 보조 색상 */
-    --text-color: #2c3e50;       /* 어두운 텍스트 */
+    --primary-color: #EDE6DB;     /* 주요 색상 */  
+    --secondary-color: #7D4E57;   /* 보조 색상 */
+    --text-color: #2C2C2C;       /* 어두운 텍스트 */
     --white: #ffffff;            /* 밝은 배경 */
     --shadow: rgba(0, 0, 0, 0.1);   /* 그림자 효과 */
 }
@@ -35,13 +35,14 @@ section {
 
 /* 네비게이션 */
 .navbar {
-    background: var(--white);
+    background: var(--primary-color);
     box-shadow: 0 2px 20px var(--shadow);
     position: fixed;    /* 스크롤해도 상단에 고정 */
     top: 0;
     width: 100%;
     z-index: 1000;      /* 다른 요소 위에 표시 */
     transition: all 0.3s ease;   /* 부드러운 변화 효과 */
+   
 }
 
 .nav-container {
@@ -78,6 +79,7 @@ section {
     list-style: none;
     align-items: center;
     gap: 2rem;
+    
 }
 
 .nav-menu a {
@@ -89,7 +91,7 @@ section {
 }
 
 .nav-menu a:hover {
-    color: var(--primary-color);
+    color: var(--secondary-color);
 }
 
 /* 호버시 나타나는 밑줄 효과 */
@@ -97,7 +99,7 @@ section {
     content: '';
     width: 0;
     height: 2px;
-    background: var(--primary-color);
+    background: var(--secondary-color);
     position: absolute;
     bottom: -5px;
     left: 0;
@@ -123,8 +125,8 @@ section {
 /* 메인 섹션 */
 .hero-main {
     /* 대각선 그라디언트 배경 */
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    color: white;
+    background: var(--primary-color);
+    color: var(--text-color);
     padding: 6rem 0rem;
     margin-top: 70px;
     min-height: 70vh;   /* 뷰포트 높이의 90% */
@@ -154,7 +156,7 @@ section {
 
 .highlight {
     /* 그라디언트 텍스트 효과 */
-    background: linear-gradient(45deg, #ff9a9e, #fecfef);
+    background: var(--secondary-color);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;      /* 텍스트에만 그라디언트 적용 */
@@ -190,14 +192,14 @@ section {
 }
 
 .btn-primary {
-  background: white;
+  background: var(--secondary-color);
   color: var(--primary-color);
 }
 
 .btn-secondary {
   background: transparent;
-  color: white;
-  border: 2px solid white;
+  color: var(--secondary-color);
+  border: 2px solid var(--secondary-color);
 }
 
 .btn-primary:hover {
@@ -207,7 +209,7 @@ section {
 
 .btn-secondary:hover {
   background: white;
-  color: var(--primary-color);
+  color: var(--secondary-color);
 }
 
 .skill-tags{
@@ -281,14 +283,29 @@ section {
   width: 300px;
   height: 300px;
   border-radius: 50%;
-  background: linear-gradient(45deg, #ff9a9e, #fecfef);
+  background: radial-gradient(circle at center, #ff9a9e, #fecfef);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 8rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  border: 5px solid rgba(0, 0, 0, 0.3);
+  position: relative;
+  border: none;
+  z-index: 1;
+}
+
+.profile-image::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: inherit; /* 그라디언트 배경 복사 */
+  filter: blur(30px); /* ✅ 블러 효과 */
+  opacity: 1;        /* 살짝 흐리게 */
+  z-index: -1;         /* 뒤에 배치 */
+  transform: scale(1.5); /* 퍼지는 느낌 */
 }
 
 .profile-image:hover {

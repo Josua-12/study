@@ -2,7 +2,7 @@ package condition;
 /*
  * 간단한 주문 처리 시스템 
  */
-public class OrderSimpleLab {
+public class OrderSimpleLap_wt {
 
 	public static void main(String[] args) {
 		//고객의 주문 정보

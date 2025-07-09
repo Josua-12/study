@@ -21,6 +21,9 @@ public class PracticeArrayDemo {
 			int choice = scanner.nextInt();
 			
 			switch(choice) {
+				case 2:
+					backArrayOutput();
+					break;
 				case 1:
 					basicArrayOutput();
 					break;
@@ -30,34 +33,74 @@ public class PracticeArrayDemo {
 				default:
 					System.out.println("잘못된 선택입니다. 다시 입력해주세요.");
 			}
+			System.out.println("\n계속하려면 Enter를 누르세요.");
+			scanner.nextLine(); // 이전 nextInt()가 남긴 개행문자(\n) 제거
+			
+			scanner.nextLine(); // 버퍼가 비어있으므로 사용자의 새로운 Enter 입력
 		}
+	}
+
+	private static void backArrayOutput() {
+		System.out.println("=== 배열 기본 출력 ===");
+				
+				// 배열 크기 입력
+				System.out.print("배열 크기를 입력하세요 : ");
+				int count = scanner.nextInt();
+				
+				// 배열 동적 생성
+				int[] numbers = new int[count];
+				
+				//데이터 입력
+				System.out.println(count + "개의 정수를 입력하세요 : ");
+				for(int i = 0; i < count; i++) {
+					System.out.print((i + 1) + "번째 수 : ");
+					numbers[i] = scanner.nextInt();		
+				}
+				
+				
+				System.out.print("정순 출력 : ");
+				for(int i = 0; i < count; i++) {
+					System.out.print(numbers[i]);
+					if(i < count -1) {
+						System.out.print(", ");
+					}
+				}
+				System.out.println();
+				System.out.print("역순 출력 : ");
+				for(int i = count-1; i >= 0; i--) {
+					System.out.print(numbers[i]);  // 현재 인덱스의 값 출력
+					
+					// 배열의 마지막 요소를 제외한 경우에만 콤마와 공백(, ) 출력
+					if(i > 0) {
+						System.out.print(", ");
+					}
+				}
+		
 	}
 
 	private static void basicArrayOutput() {
 		System.out.println("=== 배열 기본 출력 ===");
+		
+		// 배열 크기 입력
 		System.out.print("배열 크기를 입력하세요 : ");
 		int count = scanner.nextInt();
-		int[][] scores = new int[count][3];
 		
+		// 배열 동적 생성
+		int[] numbers = new int[count];
 		
-		//과목명 저장할 배열
-		String[] subjects = {"1번째", "2번째", "3번째"};
-		
-		// 4명의 학생에 대한 반복
+		//데이터 입력
+		System.out.println(count + "개의 정수를 입력하세요 : ");
 		for(int i = 0; i < count; i++) {
-			System.out.println((i+1) + "개의 정수를 입력하세요 : ");
-			
-			// 3개 과목에 대해 반복
-			for(int j = 0; j < 3; j++) {
-				System.out.print(subjects[j] + " 수 : ");
-				// 2차원 배열 점수 저장
-				scores[i][j]= scanner.nextInt();
-				System.out.print(scores[j]);  // 현재 인덱스의 값 출력
-				
-				// 배열의 마지막 요소를 제외한 경우에만 콤마와 공백(, ) 출력
-				if(j < scores.length-1) {
-					System.out.print(", ");				
-				}
+			System.out.print((i + 1) + "번째 수 : ");
+			numbers[i] = scanner.nextInt();		
+		}
+		
+		// 결과 출력
+		System.out.println("입력된 데이터 : ");
+		for(int i = 0; i < count; i++) {
+			System.out.print(numbers[i]);
+			if(i < count -1) {
+				System.out.print(", ");
 			}
 		}
 	}
@@ -65,7 +108,9 @@ public class PracticeArrayDemo {
 	private static void displayMenu() {
 		System.out.println("\n=== 메뉴 선택 ===");		
 		System.out.println("1. 배열 기본 출력 (순차 출력)");
+		System.out.println("2. 배열 역순 출력");
 		System.out.println("0. 프로그램 종료");
 		System.out.print("선택 : ");
+		
 	}
 }
