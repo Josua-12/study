@@ -1,0 +1,28 @@
+07-09
+
+scan
+
+public static void solveFindMax(Scanner scanner) {
+System.out.println("\n=== 문제 1: 최대값 찾기 ===");
+System.out.println("여러 개의 숫자를 입력하여 최댓값을 찾아보세요.");
+System.out.print("숫자 개수를 입력하세요: ");
+int count = scanner.nextInt(); // 입력받을 숫자의 개수
+		
+// 최대값을 저장할 변수(가장 작은 값으로 초기화)
+int max = Integer.MIN_VALUE;
+		
+// 반복문으로 숫자들을 하나씩 입력받기
+for(int i = 1; i <= count; i++) {
+	System.out.print(i + "번째 숫자: ");
+	int number = scanner.nextInt();
+	// 최대값 업데이트하는 메서드 호출
+	max = findMax(max, number);
+}
+System.out.println("최댓값: " + max);
+printSeparator();
+
+charecter as
+for문으로 i--;
+
+scanner.next(); = 공백 전까지 단어 하나만 입력받음
+scanner.nextLine(); = 공백 포함 한 줄 전체 입력 받음
