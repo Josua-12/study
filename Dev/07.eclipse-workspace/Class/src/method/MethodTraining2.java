@@ -43,12 +43,34 @@ public class MethodTraining2 {
 			case 2:
 				primeChecker(scanner);
 				break;
+			case 3:
+				StringUpsideDown(scanner);
+				break;
 			default:
 				System.out.println("잘못된 번호입니다.");
 		}
 		
 	}	
 	
+	private static void StringUpsideDown(Scanner scanner) {
+		System.out.println("\n=== 문제 5: 문자열 뒤집기 ===");
+		System.out.println("문자열을 입력하면 거꾸로 뒤집어드립니다.");
+		scanner.nextLine();
+		
+		System.out.print("문자열을 입력하세요: ");
+		String str = scanner.nextLine();
+		
+		System.out.println("원본: " + str);
+		System.out.print("뒤집은 결과: ");
+		
+		for (int i = str.length() -1; i >= 0; i--) {
+			char ch = str.charAt(i);
+			System.out.print(ch);
+		}
+		
+		System.out.println();
+		printSeparator();
+	}
 	public static void primeChecker(Scanner scanner) {
 		System.out.println("\n=== 문제 2: 소수 판별하기 ===");
 		System.out.println("숫자를 입력하면 소수인지 판별해드립니다.");
@@ -108,6 +130,7 @@ public class MethodTraining2 {
 		System.out.println("\n=== 문제 목록 ===");
 		System.out.println("1. 최대값 찾기(배열 없이)");
 		System.out.println("2. 소수 판별하기");
+		System.out.println("3. 문자열 뒤집기");
 		System.out.println("0. 프로그램 종료");
 		System.out.println();
 		
