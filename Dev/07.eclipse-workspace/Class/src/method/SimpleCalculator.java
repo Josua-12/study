@@ -29,7 +29,9 @@ public class SimpleCalculator {
 					result = add(num1, num2);
 					break;
 				case "/":
-					result = divide(num1, num2);
+					if(num2 != 0) {
+						result = divide(num1, num2);
+					}
 					break;
 				default: 
 					System.out.println("❌ 지원하지 않는 연산자입니다.");
