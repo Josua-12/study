@@ -12,7 +12,7 @@
         <div class="nav-container">
             <!-- 로고 -->
             <div class="nav-logo">
-                <span onclick="">🧑‍💻</span>
+                <span onclick="" class="nav-image"><img src="images/KakaoTalk_20250713_143757541.png"></span>
                 <span>Jo-Sua</span>
             </div>
             <ul class="nav-menu">
@@ -45,11 +45,11 @@
                         <button class="btn-primary" onclick>프로젝트 보기</button>
                         <button class="btn-secondary" onclick>이력서 다운로드</button>
                     </div>
-            </div>
-            <div class="hero-image">
-                <div class="profile-image" onclick=""><img src="images/KakaoTalk_20250709_092049269.png"></div>
-            </div>
-        </div>
+                </div>
+                <div class="hero-image">
+                    <div class="profile-image" onclick=""><img src="images/KakaoTalk_20250709_092049269.png"></div>
+                </div>
+             </div>
     </section>
 
     <!-- 소개 섹션 -->
@@ -58,26 +58,26 @@
             <div class="container">
                 <h2 class="section-title">소개</h2>
                 <div class="about-content">
-                <div class="about-text">
-                    <p>
-                    안녕하세요! 저는 <strong>조수아</strong>입니다.<br/>
-                    Java를 기반으로 한 백엔드와 프론트엔드를 모두 경험하며 
-                    풀스택 역량을 키우고 있습니다.
-                    </p>
-                    <p>
-                    사용자 경험을 최우선으로 생각하며, 클린 코드와 효율적인 시스템 구축에 관심이 많습니다.<br/>
-                    새로운 기술을 배우는 데 두려움이 없고, 팀워크와 커뮤니케이션을 중요하게 생각합니다.
-                    </p>
-                    <p>
-                    앞으로 클라우드와 보안 분야까지 역량을 넓혀 안정적이고 확장성 있는 서비스를 만드는 <br/>
-                    개발자가 되고 싶습니다.
-                    </p>
-                </div>
-                <div class="about-image">
-                    <img src="images/profile.jpg" alt="프로필 사진">
+                    <div class="about-text">
+                        <p>
+                        안녕하세요! 저는 <strong>조수아</strong>입니다.<br/>
+                        Java를 기반으로 한 백엔드와 프론트엔드를 모두 경험하며 
+                        풀스택 역량을 키우고 있습니다.
+                        </p>
+                        <p>
+                        사용자 경험을 최우선으로 생각하며, 클린 코드와 효율적인 시스템 구축에 관심이 많습니다.<br/>
+                        새로운 기술을 배우는 데 두려움이 없고, 팀워크와 커뮤니케이션을 중요하게 생각합니다.
+                        </p>
+                        <p>
+                        앞으로 클라우드와 보안 분야까지 역량을 넓혀 안정적이고 확장성 있는 서비스를 만드는 <br/>
+                        개발자가 되고 싶습니다.
+                        </p>
+                    </div>
+                    <div class="about-image">
+                        <img src="images/profile.jpg" alt="프로필 사진">
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
     </section>
 
@@ -85,22 +85,22 @@
     <section id="skills" class="skills">
         <div>
             <h2>보유 기술</h2>
-                    <div>
-                        <div class="skill-tags">
-                            <p class="skill-tag">HTML5</p>
-                            <p class="skill-tag">CSS</p>
-                            <p class="skill-tag">JavaScript</p>
-                            <p class="skill-tag">JAVA</p>
-                            <p class="skill-tag">React</p>
-                        </div>
+                <div>
+                    <div class="skill-tags">
+                        <p class="skill-tag">HTML5</p>
+                        <p class="skill-tag">CSS</p>
+                        <p class="skill-tag">JavaScript</p>
+                        <p class="skill-tag">JAVA</p>
+                        <p class="skill-tag">React</p>
                     </div>
+                </div>
         </div>
     </section>
 
     <!-- 프로젝트 섹션 -->
     <section id="projects" class="projects">
         <div>
-
+            <!-- 프로젝트 들어갈 자리 -->
         </div>
     </section>
 
@@ -108,39 +108,38 @@
     <section id="contact" class="contact">
         <div>
             <h2 class="sosial-media">소셜 미디어</h2>
-                    <div class="social-links">
-                        <div class="social-item">
-                            <button class="social-btn github">
-                                <img class="image" src="images/github.png" alt="Github"/>
-                            </button>
-                            <p>GitHub</p>
-                        </div>
-                        <div class="social-item">
-                            <button class="social-btn linkedin">
-                                <img class="image" src="images/linkedin.png" alt="Linkedin"/>
-                            </button>
-                            <p>LinkedIn</p>
-                        </div>
-                        <div class="social-item">
-                            <button class="social-btn email">
-                                <img class="image" src="images/gmail.png" alt="Gmail"/>
-                            </button>
-                            <p>Email</p>
-                        </div>
-                        <div class="social-item">
-                            <button class="social-btn portfolio">
-                                <img class="image" src="images/velog.png" alt="Gmail"/>
-                            </button>
-                            <p>Blog</p>
-                        </div>
+                <div class="social-links">
+                    <div class="social-item">
+                        <button class="social-btn github">
+                            <img class="image" src="images/github.png" alt="Github"/>
+                        </button>
+                        <p>GitHub</p>
                     </div>
-                    <h3>연락 방법</h3>
-                    <form class="contact-form">
-                        <textarea class="message" placeholder="성함과 메일을 함께 입력해주시면 바로 연락드리겠습니다!" rows="5" required></textarea>
-                        <button class="send" type="submit">메시지 보내기</button>
-                    </form>
-                    
+                    <div class="social-item">
+                        <button class="social-btn linkedin">
+                            <img class="image" src="images/linkedin.png" alt="Linkedin"/>
+                        </button>
+                        <p>LinkedIn</p>
+                    </div>
+                    <div class="social-item">
+                        <button class="social-btn email">
+                            <img class="image" src="images/gmail.png" alt="Gmail"/>
+                        </button>
+                        <p>Email</p>
+                    </div>
+                    <div class="social-item">
+                        <button class="social-btn portfolio">
+                            <img class="image" src="images/velog.png" alt="Gmail"/>
+                        </button>
+                        <p>Blog</p>
+                    </div>
                 </div>
+                <h3>연락 방법</h3>
+                <form class="contact-form">
+                    <textarea class="message" placeholder="성함과 메일을 함께 입력해주시면 바로 연락드리겠습니다!" rows="5" required></textarea>
+                    <button class="send" type="submit">메시지 보내기</button>
+                </form>
+            </div>
         </div>
     </section>
 
