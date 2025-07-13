@@ -64,6 +64,22 @@ section {
     color: var(--text-color);
 }
 
+.nav-image {
+    width: 50px;       /* 네비게이션 바 안에 딱 맞게 */
+    height: 50px;
+    display: flex;     /* 가운데 정렬용 */
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;  /* 이미지가 넘치면 잘라내기 */
+}
+
+/* 실제 이미지 크기 */
+.nav-image img {
+  width: 100%;       /* 껍데기 꽉 채우기 */
+  height: 100%;
+  object-fit: contain;  /* 비율 유지하면서 전체 노출 (cover면 꽉 채우고 잘림) */
+}
+
 .nav-logo span:first-child {
     font-size: 2rem;
     cursor: pointer;
@@ -259,12 +275,14 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* ✅ 기본 그림자 */
 }
 
 .social-btn:hover {
   background-color: white;
   color: var(--primary-color);
   transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* ✅ 진한 그림자 */
 }
 
 .image {
@@ -310,7 +328,7 @@ section {
 
 .profile-image:hover {
   transform: scale(1.05);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .social-links {
