@@ -28,5 +28,11 @@ public class ConstructorMain {
 		System.out.println("\n3-3. FlexibleAccount - 매개변수 생성자 사용");
 		FlexibleAccount flexibleAccount3 = new FlexibleAccount("custom-003", "이순신", 32000);
 		flexibleAccount3.printInfo();
+		
+		System.out.println("\n === 생성자 정리 ===");
+		System.out.println("* 생성자를 정의하지 않으면 기본 생성가 자동 생성됨");
+		System.out.println("* 매개변수가 있는 생성자를 정의하면 기본 생성자가 자동 생성되지 않음");
+		System.out.println("* 필요하면 기본 생성자를 명시적으로 정의해야 함");
+		System.out.println("* 생성자는 객체가 생성될 때 반드시 호출됨");
 	}
 }
