@@ -6,7 +6,7 @@ public class AccessData {
 	private int privateField;
 	
 	public void publicMethod() {
-		System.out.println("publicMethod 호출 :" + publicField);
+		System.out.println("publicMethod 호출 : " + publicField);
 	}
 	
 	void defaultMethod() {
@@ -22,5 +22,8 @@ public class AccessData {
 		publicField = 100;
 		defaultField = 200;
 		privateField = 300;
+		publicMethod();
+		defaultMethod();
+		privateMethod();
 	}
 }
