@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Specification-Title: Java Platform API Specification
-Specification-Version: 17
-Specification-Vendor: Oracle Corporation
-Implementation-Title: Java Runtime Environment
-Implementation-Version: 17.0.15
-Implementation-Vendor: Oracle Corporation
-Created-By: 16 (Oracle Corporation)
-
