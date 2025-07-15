@@ -11,7 +11,7 @@ public class SpeakerMain {
 		speaker.volumeUp();
 		speaker.showVolumn();
 		
-		speaker.volume = 200;		// 필드에 직접 접근
+		//speaker.volume = 200;		// 필드에 직접 접근(private 접근 오류)
 		speaker.showVolumn();
 	}
 }
