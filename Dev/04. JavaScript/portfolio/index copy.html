@@ -54,9 +54,9 @@
 
     <div class="middle">
         <!-- 소개 섹션 -->
-        <section class="about" id="about">
+        <section class="about aria" id="about">
             <div class="container">
-                <h2 class="section-title">소개</h2>
+                <h2 class="section middleTitle">소개</h2>
                 <div class="about-content">
                     <div class="about-image">
                         <img src="images/프로필 사진.jpg" alt="프로필 사진" class="profile">
@@ -81,66 +81,66 @@
         </section>
 
         <!-- 스킬 섹션 -->
-        <section id="skills" class="skills">
+        <section id="skills" class="skills aria">
             <div class="container">
-                <h2>보유 기술</h2>
-                    <div>
-                        <div class="skill-tags">
-                            <p class="skill-tag">HTML5</p>
-                            <p class="skill-tag">CSS</p>
-                            <p class="skill-tag">JavaScript</p>
-                            <p class="skill-tag">JAVA</p>
-                            <p class="skill-tag">React</p>
-                        </div>
+                <h2 class="middleTitle">보유 기술</h2>
+                <div>
+                    <div class="skill-tags">
+                        <p class="skill-tag">HTML5</p>
+                        <p class="skill-tag">CSS</p>
+                        <p class="skill-tag">JavaScript</p>
+                        <p class="skill-tag">JAVA</p>
+                        <p class="skill-tag">React</p>
                     </div>
+                </div>
             </div>
         </section>
 
         <!-- 프로젝트 섹션 -->
-        <section id="projects" class="projects">
+        <section id="projects" class="projects aria">
             <div class="container">
+                <h2 class="middleTitle">진행한 프로젝트</h2>
                 <!-- 프로젝트 들어갈 자리 -->
             </div>
         </section>
 
         <!-- 연락처 -->
-        <section id="contact" class="contact">
+        <section id="contact" class="contact aria">
             <div class="container">
-                <h2 class="sosial-media">소셜 미디어</h2>
-                    <div class="social-links">
-                        <div class="social-item">
-                            <button class="social-btn github">
-                                <img class="image" src="images/github.png" alt="Github"/>
-                            </button>
-                            <p>GitHub</p>
-                        </div>
-                        <div class="social-item">
-                            <button class="social-btn linkedin">
-                                <img class="image" src="images/linkedin.png" alt="Linkedin"/>
-                            </button>
-                            <p>LinkedIn</p>
-                        </div>
-                        <div class="social-item">
-                            <button class="social-btn email">
-                                <img class="image" src="images/gmail.png" alt="Gmail"/>
-                            </button>
-                            <p>Email</p>
-                        </div>
-                        <div class="social-item">
-                            <button class="social-btn portfolio">
-                                <img class="image" src="images/velog.png" alt="Gmail"/>
-                            </button>
-                            <p>Blog</p>
-                        </div>
+                <h2 class="middleTitle">소셜 미디어</h2>
+                <div class="social-links">
+                    <div class="social-item">
+                        <button class="social-btn github">
+                            <img class="image" src="images/github.png" alt="Github"/>
+                        </button>
+                        <p>GitHub</p>
+                    </div>
+                    <div class="social-item">
+                        <button class="social-btn linkedin">
+                            <img class="image" src="images/linkedin.png" alt="Linkedin"/>
+                        </button>
+                        <p>LinkedIn</p>
+                    </div>
+                    <div class="social-item">
+                        <button class="social-btn email">
+                            <img class="image" src="images/gmail.png" alt="Gmail"/>
+                        </button>
+                        <p>Email</p>
+                    </div>
+                    <div class="social-item">
+                        <button class="social-btn portfolio">
+                            <img class="image" src="images/velog.png" alt="Gmail"/>
+                        </button>
+                        <p>Blog</p>
                     </div>
                 </div>
             </div>
         </section>
         
         <!-- 연락처 -->
-        <section id="contactMethod" class="contactMethod">
+        <section id="contactMethod" class="contactMethod aria">
             <div class="container">
-                <h2>연락 방법</h2>
+                <h2 class="middleTitle">연락 방법</h2>
                 <form class="contact-form">
                     <textarea class="message" placeholder="성함과 메일을 함께 입력해주시면 바로 연락드리겠습니다!" rows="5" required></textarea>
                     <button class="send" type="submit">메시지 보내기</button>
@@ -149,7 +149,6 @@
         </section>
     </div>
 
-    <!-- 푸터 -->
     <footer class="footer">
         <div class="container">
             <p>&copy; 2025 조수아. 모든 권리 보유.</p>
@@ -160,6 +159,8 @@
             </div>
         </div>
     </footer>
+    </body>
+   
     <script>
         let now = new Date(); // 특정한 파라미터를 주지 않으면 오늘 날짜로 객체 지정
         let firstDay = new Date("2025-05-27"); // 시작 날짜를 객체로 지정

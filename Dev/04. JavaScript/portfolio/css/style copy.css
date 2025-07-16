@@ -231,20 +231,23 @@ section {
 .skill-tags{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  margin-bottom: 10px;
+  margin: 10px 0px;
+  
 }
 
 .skill-tag {
-  margin-top: 10px;
+  margin-bottom: 8px;
   display: flex;
   padding: 5px 10px;
-  border: 1px solid rgb(153, 153, 153);
   margin-left: 5px;
   align-items: center;
   justify-content: center;
   border-radius: 15px;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: #A26769;
   transition: all 0.3s ease;
+  color: #F8F4EF;
+  border: 1px solid #3d2627;
+  font-weight: 500;
 }
 
 .skill-tag:hover {
@@ -346,9 +349,10 @@ section {
 }
 
 .social-item p {
-  font-size: small;
+  font-size: 14px;
   padding: 0 0.5rem;
   text-align: center;
+  font-weight: 520;
 }
 
 .contact-form {
@@ -368,9 +372,11 @@ section {
 .send {
   width: 30%;
   height: 30px;
-  background: linear-gradient(45deg, #ff9a9e, #fecfef);
+  background: #A26769;
+  color: #F8F4EF;
   border: none;
   border-radius: 3px;
+  font-weight: 500;
 }
 
 .hero-text h3 {
@@ -380,17 +386,33 @@ section {
 .middle {
   margin: 50px 30px;
   padding: 40px;
+  background: #D9CAB3;
+  border-radius: 10px;
+}
+
+.middleTitle {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #B0888A;
+  font-weight: 900;
 }
 
 .profile { 
-  width: 80px;
-  height: 80px;
+  width: 60%;
+  height: 60%;
   object-fit: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.about {
-  background: var(--primary-color);
+.aria {
+  background: #F8F4EF;
+  padding: 30px;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  color: #4F3C3C;
 }
 .about-content {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 2fr;
 }
