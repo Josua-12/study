@@ -22,7 +22,7 @@ body {
     overflow-x: hidden;     /* 가로 스크롤 방지 */
 }
 
-/* 공통 켄터이너 */
+/* 공통 컨테이너 */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -377,3 +377,20 @@ section {
   margin-top: 15px;
 }
 
+.middle {
+  margin: 50px 30px;
+  padding: 40px;
+}
+
+.profile { 
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+.about {
+  background: var(--primary-color);
+}
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
