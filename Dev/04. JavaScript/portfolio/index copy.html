@@ -52,12 +52,15 @@
              </div>
     </section>
 
-    <!-- 소개 섹션 -->
-    <section class="about" id="about">
-        <div class="container">
+    <div class="middle">
+        <!-- 소개 섹션 -->
+        <section class="about" id="about">
             <div class="container">
                 <h2 class="section-title">소개</h2>
                 <div class="about-content">
+                    <div class="about-image">
+                        <img src="images/프로필 사진.jpg" alt="프로필 사진" class="profile">
+                    </div>
                     <div class="about-text">
                         <p>
                         안녕하세요! 저는 <strong>조수아</strong>입니다.<br/>
@@ -73,75 +76,78 @@
                         개발자가 되고 싶습니다.
                         </p>
                     </div>
-                    <div class="about-image">
-                        <img src="images/profile.jpg" alt="프로필 사진">
+                </div>
+            </div>
+        </section>
+
+        <!-- 스킬 섹션 -->
+        <section id="skills" class="skills">
+            <div class="container">
+                <h2>보유 기술</h2>
+                    <div>
+                        <div class="skill-tags">
+                            <p class="skill-tag">HTML5</p>
+                            <p class="skill-tag">CSS</p>
+                            <p class="skill-tag">JavaScript</p>
+                            <p class="skill-tag">JAVA</p>
+                            <p class="skill-tag">React</p>
+                        </div>
+                    </div>
+            </div>
+        </section>
+
+        <!-- 프로젝트 섹션 -->
+        <section id="projects" class="projects">
+            <div class="container">
+                <!-- 프로젝트 들어갈 자리 -->
+            </div>
+        </section>
+
+        <!-- 연락처 -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2 class="sosial-media">소셜 미디어</h2>
+                    <div class="social-links">
+                        <div class="social-item">
+                            <button class="social-btn github">
+                                <img class="image" src="images/github.png" alt="Github"/>
+                            </button>
+                            <p>GitHub</p>
+                        </div>
+                        <div class="social-item">
+                            <button class="social-btn linkedin">
+                                <img class="image" src="images/linkedin.png" alt="Linkedin"/>
+                            </button>
+                            <p>LinkedIn</p>
+                        </div>
+                        <div class="social-item">
+                            <button class="social-btn email">
+                                <img class="image" src="images/gmail.png" alt="Gmail"/>
+                            </button>
+                            <p>Email</p>
+                        </div>
+                        <div class="social-item">
+                            <button class="social-btn portfolio">
+                                <img class="image" src="images/velog.png" alt="Gmail"/>
+                            </button>
+                            <p>Blog</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- 스킬 섹션 -->
-    <section id="skills" class="skills">
-        <div>
-            <h2>보유 기술</h2>
-                <div>
-                    <div class="skill-tags">
-                        <p class="skill-tag">HTML5</p>
-                        <p class="skill-tag">CSS</p>
-                        <p class="skill-tag">JavaScript</p>
-                        <p class="skill-tag">JAVA</p>
-                        <p class="skill-tag">React</p>
-                    </div>
-                </div>
-        </div>
-    </section>
-
-    <!-- 프로젝트 섹션 -->
-    <section id="projects" class="projects">
-        <div>
-            <!-- 프로젝트 들어갈 자리 -->
-        </div>
-    </section>
-
-    <!-- 연락처 -->
-    <section id="contact" class="contact">
-        <div>
-            <h2 class="sosial-media">소셜 미디어</h2>
-                <div class="social-links">
-                    <div class="social-item">
-                        <button class="social-btn github">
-                            <img class="image" src="images/github.png" alt="Github"/>
-                        </button>
-                        <p>GitHub</p>
-                    </div>
-                    <div class="social-item">
-                        <button class="social-btn linkedin">
-                            <img class="image" src="images/linkedin.png" alt="Linkedin"/>
-                        </button>
-                        <p>LinkedIn</p>
-                    </div>
-                    <div class="social-item">
-                        <button class="social-btn email">
-                            <img class="image" src="images/gmail.png" alt="Gmail"/>
-                        </button>
-                        <p>Email</p>
-                    </div>
-                    <div class="social-item">
-                        <button class="social-btn portfolio">
-                            <img class="image" src="images/velog.png" alt="Gmail"/>
-                        </button>
-                        <p>Blog</p>
-                    </div>
-                </div>
-                <h3>연락 방법</h3>
+        </section>
+        
+        <!-- 연락처 -->
+        <section id="contactMethod" class="contactMethod">
+            <div class="container">
+                <h2>연락 방법</h2>
                 <form class="contact-form">
                     <textarea class="message" placeholder="성함과 메일을 함께 입력해주시면 바로 연락드리겠습니다!" rows="5" required></textarea>
                     <button class="send" type="submit">메시지 보내기</button>
                 </form>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
     <!-- 푸터 -->
     <footer class="footer">
