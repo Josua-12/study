@@ -30,5 +30,38 @@ public class CastingMain {
 		System.out.println("다운 캐스팅 후 자식 메서드 호출");
 		child.childMethod();
 		
+		System.out.println();
+		System.out.println("다운캐스팅 활용하기");
+		demoDowncastingUsage();
+	}
+
+	/*
+	 * 인사관리 시스템 데모
+	 */
+	private static void demoDowncastingUsage() {
+		
+		System.out.println("--- 인사 관리 시스템 ---");
+		
+		// 부모 타입 배열
+		Parent[] employees = {
+				new Parent("정직원", 1),
+				new Child("개발자", 2, "JAVA"),
+				new Child("디자이너", 3, "UI/UX")
+		};
+		
+		// 모든 직원에 대해 기본 정보 출력하기
+		for(int i = 0; i < employees.length; i++) {
+			System.out.println("=== " + (i + 1) + "번째 직원 정보 ===");
+			employees[i].toString();
+			
+			// 개발자인 경우에만 작업 수행
+			if(employees[i] instanceof Child) {
+				System.out.println("개발자 발견했음! 특별 작업 수행하기");
+				// 다운캐스팅
+				Child developer = (Child)employees[i];
+				developer.childMethod();	// 자식객체의 기능 수행
+			}
+			System.out.println();
+		}
 	}
 }
