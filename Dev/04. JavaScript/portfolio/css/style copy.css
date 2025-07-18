@@ -7,10 +7,15 @@
 
 /* 전역에서 사용할 CSS 변수 - 색상값 정의, 일관성 향상 */
 :root {
-    --primary-color: #EDE6DB;     /* 주요 색상 */  
-    --secondary-color: #7D4E57;   /* 보조 색상 */
-    --text-color: #2C2C2C;       /* 어두운 텍스트 */
-    --white: #ffffff;            /* 밝은 배경 */
+    --nav-color: #27374D;     /* 네비게이션 영역 색상 */
+    --nav-highlight: #D0A85C; /* 네비게이션 하이라이트 */ 
+    --nav-button-color: #526D82;
+    --nav-font-color: #F1F6F9;
+    --middle-color: #9DB2BF;
+    --middle-highlight: #4D6D8C;
+    --middle-button-color: #5C768D;
+    --middle-font-color: #1C1C1C;
+    --middle-background-color: #DDE6ED;
     --shadow: rgba(0, 0, 0, 0.1);   /* 그림자 효과 */
 }
 
@@ -35,7 +40,7 @@ section {
 
 /* 네비게이션 */
 .navbar {
-    background: var(--primary-color);
+    background: var(--nav-color);
     box-shadow: 0 2px 20px var(--shadow);
     position: fixed;    /* 스크롤해도 상단에 고정 */
     top: 0;
@@ -61,7 +66,7 @@ section {
     gap: 10px;
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--text-color);
+    color: var(--nav-font-color);
 }
 
 .nav-image {
@@ -100,14 +105,14 @@ section {
 
 .nav-menu a {
     text-decoration: none;
-    color: var(--text-color);
+    color: var(--nav-font-color);
     font-weight: 500;
     transition: color 0.3s ease;
     position: relative;   /* ::after 가상 요소를 위한 포지셔닝  */
 }
 
 .nav-menu a:hover {
-    color: var(--secondary-color);
+    color: var(--nav-highlight);
 }
 
 /* 호버시 나타나는 밑줄 효과 */
@@ -115,7 +120,7 @@ section {
     content: '';
     width: 0;
     height: 2px;
-    background: var(--secondary-color);
+    background: var(--nav-highlight);
     position: absolute;
     bottom: -5px;
     left: 0;
@@ -135,14 +140,14 @@ section {
   padding: 3px 5px;
   border-radius: 25%;
   font-size: 25px;
-  color: #b23731;
+  color: var(--nav-highlight);
 }
 
 /* 메인 섹션 */
 .hero-main {
     /* 대각선 그라디언트 배경 */
-    background: var(--primary-color);
-    color: var(--text-color);
+    background: var(--nav-color);
+    color: var(--nav-font-color);
     padding: 6rem 0rem;
     margin-top: 70px;
     min-height: 70vh;   /* 뷰포트 높이의 90% */
@@ -172,7 +177,7 @@ section {
 
 .highlight {
     /* 그라디언트 텍스트 효과 */
-    background: var(--secondary-color);
+    background: var(--nav-highlight);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;      /* 텍스트에만 그라디언트 적용 */
@@ -208,24 +213,24 @@ section {
 }
 
 .btn-primary {
-  background: var(--secondary-color);
-  color: var(--primary-color);
+  background: var(--nav-highlight);
+  color: var(--nav-color);
 }
 
 .btn-secondary {
   background: transparent;
-  color: var(--secondary-color);
-  border: 2px solid var(--secondary-color);
+  color: var(--nav-highlight);
+  border: 2px solid #D0A85C;
 }
 
 .btn-primary:hover {
   transform: translateY(-3px); /* 호버 시 위로 이동 */
-  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .btn-secondary:hover {
-  background: white;
-  color: var(--secondary-color);
+  background: var(--nav-highlight);
+  color: var(--nav-color);
 }
 
 .skill-tags{
@@ -243,17 +248,15 @@ section {
   align-items: center;
   justify-content: center;
   border-radius: 15px;
-  background-color: #A26769;
+  background-color: var(--middle-highlight);
   transition: all 0.3s ease;
-  color: #F8F4EF;
-  border: 1px solid #3d2627;
+  color: var(--nav-font-color);
   font-weight: 500;
 }
 
 .skill-tag:hover {
   transform: translateY(-3px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .sosial-media {
@@ -270,8 +273,7 @@ section {
   height: 50px;
   border-radius: 50%;
   border: 2px solid rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.1); /* 반투명 배경 */
-  color: white;
+  background: white;
   font-size: 1.2rem;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -282,8 +284,7 @@ section {
 }
 
 .social-btn:hover {
-  background-color: white;
-  color: var(--primary-color);
+  background-color: var(--middle-button-color);
   transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* ✅ 진한 그림자 */
 }
@@ -304,7 +305,7 @@ section {
   width: 300px;
   height: 300px;
   border-radius: 50%;
-  background: radial-gradient(circle at center, #ff9a9e, #fecfef);
+  background: radial-gradient(circle at center, #D0A85C, #eccb90);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -372,7 +373,7 @@ section {
 .send {
   width: 30%;
   height: 30px;
-  background: #A26769;
+  background: var(--middle-button-color);
   color: #F8F4EF;
   border: none;
   border-radius: 3px;
@@ -384,16 +385,16 @@ section {
 }
 
 .middle {
-  margin: 50px 30px;
-  padding: 40px;
-  background: #D9CAB3;
+  width: 100%;
+  padding: 5rem 3rem;
+  background: var(--middle-background-color);
   border-radius: 10px;
 }
 
 .middleTitle {
   text-align: center;
   margin-bottom: 15px;
-  color: #B0888A;
+  color: var(--middle-highlight);
   font-weight: 900;
 }
 
@@ -406,11 +407,11 @@ section {
   justify-content: center;
 }
 .area {
-  background: #F8F4EF;
+  background: var(--middle-color);
   padding: 30px;
   border-radius: 5px;
   margin-bottom: 30px;
-  color: #4F3C3C;
+  color: var(--middle-font-color);
 }
 .about-content {
   display: grid;
