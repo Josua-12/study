@@ -1,7 +1,7 @@
 package memory;
 /*
- *  - stack 메모리에서 메소드 프레임 생성/제거
- *  - 메소드 호출 시 매개변수 전달
+ *  - stack 메모리에서 메서드 프레임 생성/제거
+ *  - 메서드 호출 시 매개변수 전달
  */
 public class JVMStack {
 	public static void main(String[] args) {
