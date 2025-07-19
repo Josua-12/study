@@ -417,3 +417,69 @@ section {
   display: grid;
   grid-template-columns: 1fr 2fr;
 }
+
+/* 햄버거 버튼 스타일 */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+  background: none;
+  border: none;
+  z-index: 1001;
+}
+
+.hamburger span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: var(--nav-font-color);
+  border-radius: 2px;
+}
+
+/* 네비게이션 메뉴 */
+.nav-menu {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-menu {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    flex-direction: column;
+    background-color: var(--middle-highlight);
+    border-radius: 3px;
+    width: 20rem;
+    display: none;
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    gap: 5px;
+  }
+
+  .nav-menu li {
+    background-color: var(--middle-color);
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .nav-menu a {
+    color: var(--nav-color);
+    font-weight: 600;
+    font-size: large;
+  }
+
+  .nav-menu.active {
+    display: flex;
+  }
+}
