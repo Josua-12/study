@@ -7,7 +7,7 @@
 
 /* 전역에서 사용할 CSS 변수 - 색상값 정의, 일관성 향상 */
 :root {
-    --nav-color: #27374D;     /* 네비게이션 영역 색상 */
+    --nav-color: #304562;     /* 네비게이션 영역 색상 */
     --nav-highlight: #D0A85C; /* 네비게이션 하이라이트 */ 
     --nav-button-color: #526D82;
     --nav-font-color: #F1F6F9;
@@ -48,6 +48,14 @@ section {
     z-index: 1000;      /* 다른 요소 위에 표시 */
     transition: all 0.3s ease;   /* 부드러운 변화 효과 */
    
+}
+
+.navbar.scrolled {
+  background-color: rgba(48, 69, 98, 0.4); /* 반투명 배경 */
+  backdrop-filter: blur(10px); /* 배경 흐림 효과 */
+  -webkit-backdrop-filter: blur(10px); /* 사파리 호환 */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* 살짝 그림자 추가 */
+  transition: all 0.3s ease;
 }
 
 .nav-container {
@@ -143,6 +151,9 @@ section {
   color: var(--nav-highlight);
 }
 
+.hero-title {
+  padding-bottom: 3rem;
+}
 /* 메인 섹션 */
 .hero-main {
     /* 대각선 그라디언트 배경 */
@@ -293,14 +304,18 @@ section {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
-  background-color: var(--middle-button-color);
-  padding: 1rem;
+  margin-top: 0;
+  border-radius: 10px;
 }
 
 .project div {
   display: flex;
-  justify-items: center;
+  justify-content: center;
   align-items: center;
+  border-radius: 5px;
+  background-color: var(--middle-button-color);
+  color: var(--middle-background-color);
+  height: 10rem;
 }
 
 .image {
@@ -443,7 +458,7 @@ section {
   z-index: 1001;
 }
 
-.hamburger span {
+.bar {
   display: block;
   width: 25px;
   height: 3px;
@@ -459,27 +474,34 @@ section {
 }
 
 @media (max-width: 768px) {
+  
+
   .hamburger {
     display: flex;
   }
 
   .nav-menu {
-    position: absolute;
-    top: 70px;
-    right: 0;
-    flex-direction: column;
-    background-color: var(--middle-highlight);
-    border-radius: 3px;
-    width: 20rem;
     display: none;
-    padding: 1rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    gap: 5px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    height: 50vh;
+
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    z-index: 999;
   }
 
   .nav-menu li {
     background-color: var(--middle-color);
-    width: 100%;
+    width: 80%;
     padding: 10px;
     border-radius: 5px;
     display: flex;
@@ -496,4 +518,13 @@ section {
   .nav-menu.active {
     display: flex;
   }
+}
+
+.hero {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 2rem;
 }
