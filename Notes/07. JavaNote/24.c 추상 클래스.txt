@@ -1,0 +1,20 @@
+1. 추상 클래스 (abstract class)
+    1) 추상적 
+        - 구체적이지 않고 막연한 것
+    2) 구체적이지 않은 클래스 <===> concrete class
+    3) 정의
+        - 구현 코드 없이 메서드의 선언만 있는 추상메서드(abstract method)를 포함한 클래스
+        - 추상 클래스는 항상 추상 메서드를 포함함
+        - 추상 메서드는 구현 코드가 없음
+            - 메서드의 함수 몸체(body)가 없다는 뜻임
+    4) abstract 예약어를 사용
+    5) 추상 클래스는 new 할 수 없음 (인스턴스화 할 수 없음)
+
+2. 메서드   
+    1) 메서드 선언(declaration) : 반환타입, 메서드 이름, 매개변수
+    2) 메서드 정의(definition)
+        - 메서드 구현(implementation)과 동일한 의미
+        - 구현부(body)를 가짐 { }
+    3) 예)
+        int add(int x, int y) { };
+        abstract int add(int x, int y);     // 추상 메서드
