@@ -1,4 +1,4 @@
-package smartcar;
+package smartcar2;
 
 public class HybridCar extends Car {
 

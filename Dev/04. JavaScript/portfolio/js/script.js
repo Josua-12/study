@@ -28,3 +28,28 @@ window.addEventListener('scroll', () => {
     navbar.classList.remove('scrolled');
   }
 });
+
+const username = "Josua-12"; // ← 너의 GitHub ID로 바꿔줘!
+const apiUrl = `https://api.github.com/users/Josua-12/events/public`;
+
+async function getCommitCount() {
+    try {
+        const response = await fetch(apiUrl);
+        const events = await response.json();
+        let commitCount = 0;
+
+        // 최근 이벤트 중 PushEvent만 골라 커밋 수 계산
+        events.forEach(event => {
+        if (event.type === "PushEvent") {
+            commitCount += event.payload.commits.length;
+    }
+    });
+
+    document.getElementById("commit-count").textContent = commitCount + "회";
+} catch (error) {
+    console.error("커밋 수 가져오기 실패:", error);
+    document.getElementById("commit-count").textContent = "오류";
+}
+}
+
+getCommitCount();
