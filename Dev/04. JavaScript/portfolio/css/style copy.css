@@ -363,6 +363,13 @@ section {
   aspect-ratio: 4 / 3; /* 💡 정사각형/비율 유지할 경우 */
   overflow: hidden;
   border-radius: 10px;
+  transition: transform 0.5s ease;
+}
+
+.portfolio:hover {
+  background-color: var(--nav-color);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 .portfolio img{
