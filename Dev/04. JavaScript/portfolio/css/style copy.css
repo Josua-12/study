@@ -246,34 +246,58 @@ section {
 }
 
 .skill {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
 }
 
 .skill-tags{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 0 15px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
 }
 
 .skill-tag {
   padding: 0.5rem 1rem;
-  min-width: 8rem;      /* 💡 최소 너비 확보 */
-  text-align: center;   /* 💡 가운데 정렬 */
+  min-width: 13rem;
+  text-align: center;
   background-color: var(--middle-button-color);
   color: var(--middle-background-color);
   border-radius: 8px;
-  font-size: 0.9rem;
+  font-size: 1rem;
   white-space: nowrap;
-  width: fit-content;   /* 있어도 되고, 없어도 됨 */
+  width: fit-content;
   cursor: pointer;
+  margin-bottom: 10px;
 }
+
 
 .skill-tag:hover {
   transform: translateY(-3px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.skill-detail {
+  margin-top: 5px;
+  padding: 8px 12px;
+  background: #f0f0f0;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: #333;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  overflow: hidden;
+  max-height: 200px;
+  opacity: 1;
+  white-space: normal;   /* 줄바꿈 허용 */
+  line-height: 1.4;      /* 가독성 좋은 줄 간격 */
+}
+
+.skill-detail.show {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .sosial-media {

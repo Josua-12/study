@@ -98,8 +98,8 @@
                         <p class="skill-tag" onclick="selectSkill(this, 'CSS')">CSS</p>
                         <p class="skill-tag" onclick="selectSkill(this, 'JavaScript')">JavaScript</p>
                         <p class="skill-tag" onclick="selectSkill(this, 'JAVA')">JAVA</p>
-                        <p class="skill-tag" onclick="selectSkill(this, 'React')">React</p>
                     </div>
+                    <div class="skill-description"></div>
                 </div>
             </div>
         </section>
@@ -159,9 +159,11 @@
             </div>
             <div class="container">
                 <p class="middleTitle">연락 방법</p>
-                <form class="contact-form">
-                    <textarea class="message" placeholder="성함과 메일을 함께 입력해주시면 바로 연락드리겠습니다!" rows="5" required></textarea>
-                    <button class="send" type="submit" onclick="alert('빠른 시일 내에 연락 드리겠습니다. 감사합니다.')">메시지 보내기</button>
+                <form class="contact-form" id="contact-form">
+                    <input type="text" id="name" placeholder="이름" required>
+                    <input type="email" id="email" placeholder="이메일" required>
+                    <textarea class="message" id="message" placeholder="성함과 메일을 함께 입력해주시면 바로 연락드리겠습니다!" rows="5" required></textarea>
+                    <button class="send" type="submit">메시지 보내기</button>
                 </form>
             </div>
         </section>

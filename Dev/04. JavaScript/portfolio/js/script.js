@@ -22,14 +22,16 @@ const navMenu = document.querySelector(".nav-menu");
 
 window.addEventListener('scroll', () => {
   const navbar = document.querySelector('.navbar');
+  
   if(window.scrollY > 50) {
     navbar.classList.add('scrolled');
   } else {
     navbar.classList.remove('scrolled');
   }
+
 });
 
-const username = "Josua-12"; // ← 너의 GitHub ID로 바꿔줘!
+const username = "Josua-12"; 
 const apiUrl = `https://api.github.com/users/Josua-12/events/public`;
 
 async function getCommitCount() {
@@ -53,3 +55,70 @@ async function getCommitCount() {
 }
 
 getCommitCount();
+
+const form = document.getElementById('contact-form');
+
+form.addEventListener('submit', function (e) {
+  e.preventDefault(); // 기본 제출 방지
+
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const message = document.getElementById('message').value.trim();
+
+  // 입력값이 비었는지 체크
+  if (!name || !email || !message) {
+    alert("모든 항목을 입력해주세요!");
+    return;
+  }
+
+  // 확인창 보여주기
+  const isConfirmed = confirm(
+    `다음 내용으로 전송할까요?\n\n이름: ${name}\n이메일: ${email}\n메시지: ${message}`
+  );
+
+  // 사용자가 확인 누르면 실행
+  if (isConfirmed) {
+    alert("전송 완료! 감사합니다 :)");
+
+    // 👉 실제 서버 전송 코드가 있다면 여기에 작성
+    // fetch(...) 또는 form.submit()
+
+    form.reset(); // 폼 초기화
+  } else {
+    alert("전송이 취소되었습니다.");
+  }
+
+  function isValidEmail(email) {
+  return /\S+@\S+\.\S+/.test(email);
+  }
+});
+
+const skillDescriptions = {
+  "HTML5": "웹의 기본 구조와 시멘틱 태그 활용에 능숙하며, 접근성 좋은 마크업 작성이 가능합니다.",
+  "CSS": "Flexbox, Grid, 반응형 디자인, 애니메이션 및 트랜지션 효과 구현에 숙련되어 있으며, CSS 변수와 모던 디자인 패턴 활용 가능합니다",
+  "JavaScript": "JavaScript는 웹 페이지에 동적인 기능을 추가하는 스크립트 언어입니다.",
+  "JAVA": "..",
+};
+
+function selectSkill(element, skillName) {
+  // 같은 태그 클릭 시 토글
+  if(element.classList.contains('active')) {
+    element.classList.remove('active');
+    element.querySelector('.skill-detail').remove();
+    return;
+  }
+
+  // 이미 열려 있는 다른 상세설명 닫기
+  document.querySelectorAll('.skill-tag.active').forEach(activeTag => {
+    activeTag.classList.remove('active');
+    activeTag.querySelector('.skill-detail').remove();
+  });
+
+  // 상세설명 div 생성 및 추가
+  const detailDiv = document.createElement('div');
+  detailDiv.className = 'skill-detail';
+  detailDiv.textContent = skillDescriptions[skillName] || "상세 설명이 없습니다.";
+
+  element.appendChild(detailDiv);
+  element.classList.add('active');
+}
