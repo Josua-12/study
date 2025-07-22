@@ -7,168 +7,174 @@
     <link rel="stylesheet" href="css/style copy.css">
 </head>
 <body>
-    <!-- 네비게이션 바 -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <!-- 로고 -->
-            <div class="nav-logo">
-                <span onclick="" class="nav-image"><img src="images/KakaoTalk_20250713_143757541.png"></span>
-                <span>Jo-Sua</span>
+    <header>
+        <!-- 네비게이션 바 -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <!-- 로고 -->
+                <div class="nav-logo">
+                    <span onclick="" class="nav-image"><img src="images/KakaoTalk_20250713_143757541.png" alt="개발자 사진"></span>
+                    <span>Jo-Sua</span>
+                </div>
+                <ul class="nav-menu">
+                    <!-- 페이지 내 섹션 이동 -->
+                    <li><a href="#home">홈</a></li>
+                    <li><a href="#about">소개</a></li>
+                    <li><a href="#skills">기술</a></li>
+                    <li><a href="#projects">프로젝트</a></li>
+                    <li><a href="#contacts">연락처</a></li>
+                </ul>
+                <button class="hamburger" aria-label="메뉴 열기">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
             </div>
-            <ul class="nav-menu">
-                <!-- 앵커 링크 : SPA처럼 페이지 내 섹션 이동 -->
-                <li><a href="#home">홈</a></li>
-                <li><a href="#about">소개</a></li>
-                <li><a href="#skills">기술</a></li>
-                <li><a href="#projects">프로젝트</a></li>
-                <li><a href="#contacts">연락처</a></li>
-            </ul>
-            <button class="hamburger" aria-label="메뉴 열기">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- 메인 화면 -->
+        <section class="hero-main" id="home">
+            <div class="hero-container">
+                <button>☀️</button>
+                <button id="darkModeToggle">🌕</button>
+                <h1 class="hero-title">안녕하세요! 저는 <span class="highlight">조수아</span>입니다</h1>
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <p class="hero-subtitle">Java FullStack Developer</p>
+                        <p class="hero-description" id="about">
+                            사용자 경험을 중시하는 자바 풀스택 개발자입니다.
+                            새로운 기술을 배우는 것을 좋아하며, 
+                            클린하고 효율적인 코드를 작성하기 위해 노력합니다.
+                        </p>
+                        <div class="hero-buttons">
+                            <button class="btn-primary" onclick="document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });">프로젝트 보기</button>
+                            <button class="btn-secondary" onclick="alert('이력서가 다운로드 되었습니다.')">이력서 다운로드</button>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <div class="profile-image" onclick=""><img src="images/KakaoTalk_20250709_092049269.png" alt="인사하고 있는 사진"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="middle">
+            <!-- 소개 섹션 -->
+            <section class="about area" id="about">
+                <div class="container">
+                    <p class="section middleTitle">소개</p>
+                    <div class="about-content">
+                        <div class="about-image">
+                            <img src="images/프로필 사진.jpg" alt="프로필 사진" class="profile">
+                        </div>
+                        <div class="about-text">
+                            <p>
+                            안녕하세요! 저는 <strong>조수아</strong>입니다.<br/>
+                            Java를 기반으로 한 백엔드와 프론트엔드를 모두 경험하며 
+                            풀스택 역량을 키우고 있습니다.
+                            </p>
+                            <p>
+                            사용자 경험을 최우선으로 생각하며, 클린 코드와 효율적인 시스템 구축에 관심이 많습니다.<br/>
+                            새로운 기술을 배우는 데 두려움이 없고, 팀워크와 커뮤니케이션을 중요하게 생각합니다.
+                            </p>
+                            <p>
+                            앞으로 클라우드와 보안 분야까지 역량을 넓혀 안정적이고 확장성 있는 서비스를 만드는 <br/>
+                            개발자가 되고 싶습니다.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="learning-streaks">
+                        <h3 class="learning-streak">교육 캠프 경과 일수 : <span class="accent" id="result"></span> 일</h3> 
+                        <h3 class="learning-streak">완성 프로젝트 수 : <span class="accent" id="result">1</span> 개</h3>
+                        <h3 class="learning-streak">GitHub Commit 수 : <span class="accent" id="commit-count">불러오는 중...</span></h3>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 스킬 섹션 -->
+            <section id="skills" class="skills area">
+                <div class="container">
+                    <p class="middleTitle">보유 기술</p>
+                    <div class="skill">
+                        <div class="skill-tags">
+                            <p class="skill-tag" onclick="selectSkill(this, 'HTML5')">HTML5</p>
+                            <p class="skill-tag" onclick="selectSkill(this, 'CSS')">CSS</p>
+                            <p class="skill-tag" onclick="selectSkill(this, 'JavaScript')">JavaScript</p>
+                            <p class="skill-tag" onclick="selectSkill(this, 'JAVA')">JAVA</p>
+                        </div>
+                        <div class="skill-description"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 프로젝트 섹션 -->
+            <section id="projects" class="projects area">
+                <div class="container">
+                    <p class="middleTitle">진행한 프로젝트</p>
+                    <!-- 프로젝트 들어갈 자리 -->
+                    <!-- 3개의 프로젝트 들어갈거니까 잘 비워두셈 -->
+                    <div class="project">
+                        <div class="portfolio">
+                            <h3 class="portfolio-title">포트폴리오 제작</h3>
+                            <img src="images/포트폴리오.png" class="portfolio-img" alt="진행한 프로젝트 중 포트폴리오 사진">
+                            <p class="portfolio-main">HTML5, CSS, JavaScript를 활용하여 반응형 포트폴리오 웹사이트를 직접 설계하고 제작했습니다.
+    자기소개, 기술 스택, 프로젝트, 연락처 등의 정보를 한눈에 확인할 수 있도록 구성하였으며, 사용자 경험을 고려한 깔끔한 UI/UX 디자인에 중점을 두었습니다.</p>
+                        </div>
+                        <div>..</div>
+                        <div>..</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 연락처 -->
+            <section id="contact" class="contact area">
+                <div class="container">
+                    <p class="middleTitle">소셜 미디어</p>
+                    <div class="social-links">
+                        <div class="social-item">
+                            <a href="https://github.com/Josua-12" class="social-btn github">
+                            <img class="image" src="images/github.png" alt="Github"/>
+                            </a>
+                            <p>GitHub</p>
+                        </div>
+
+                        <div class="social-item">
+                            <a href="https://" target="_blank" class="social-btn linkedin">
+                            <img class="image" src="images/linkedin.png" alt="LinkedIn"/>
+                            </a>
+                            <p>LinkedIn</p>
+                        </div>
+
+                        <div class="social-item">
+                            <a href="mailto:sua@example.com" class="social-btn email">
+                            <img class="image" src="images/gmail.png" alt="Gmail"/>
+                            </a>
+                            <p>Email</p>
+                        </div>
+
+                        <div class="social-item">
+                            <a href="https://velog.io/@sua86268/posts" class="social-btn velog">
+                            <img class="image" src="images/velog.png" alt="Velog"/>
+                            </a>
+                            <p>velog</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <p class="middleTitle">연락 방법</p>
+                    <form class="contact-form" id="contact-form">
+                        <input type="text" id="name" placeholder="이름" required>
+                        <input type="email" id="email" placeholder="이메일" required>
+                        <textarea class="message" id="message" placeholder="성함과 메일을 함께 입력해주시면 바로 연락드리겠습니다!" rows="5" required></textarea>
+                        <button class="send" type="submit">메시지 보내기</button>
+                    </form>
+                </div>
+            </section>
         </div>
-    </nav>
-
-    <!-- 메인 화면 -->
-    <section class="hero-main" id="home">
-        <div class="hero-container">
-            <h1 class="hero-title">안녕하세요! 저는 <span class="highlight">조수아</span>입니다</h1>
-            <div class="hero-content">
-                <div class="hero-text">
-                    <p class="hero-subtitle">Java FullStack Developer</p>
-                    <p class="hero-description" id="about">
-                        사용자 경험을 중시하는 자바 풀스택 개발자입니다.
-                        새로운 기술을 배우는 것을 좋아하며, 
-                        클린하고 효율적인 코드를 작성하기 위해 노력합니다.
-                    </p>
-                    <div class="hero-buttons">
-                        <button class="btn-primary" onclick="document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });">프로젝트 보기</button>
-                        <button class="btn-secondary" onclick="alert('이력서가 다운로드 되었습니다.')">이력서 다운로드</button>
-                    </div>
-                </div>
-                <div class="hero-image">
-                    <div class="profile-image" onclick=""><img src="images/KakaoTalk_20250709_092049269.png"></div>
-                </div>
-             </div>
-        </div>
-    </section>
-
-    <div class="middle">
-        <!-- 소개 섹션 -->
-        <section class="about area" id="about">
-            <div class="container">
-                <p class="section middleTitle">소개</p>
-                <div class="about-content">
-                    <div class="about-image">
-                        <img src="images/프로필 사진.jpg" alt="프로필 사진" class="profile">
-                    </div>
-                    <div class="about-text">
-                        <p>
-                        안녕하세요! 저는 <strong>조수아</strong>입니다.<br/>
-                        Java를 기반으로 한 백엔드와 프론트엔드를 모두 경험하며 
-                        풀스택 역량을 키우고 있습니다.
-                        </p>
-                        <p>
-                        사용자 경험을 최우선으로 생각하며, 클린 코드와 효율적인 시스템 구축에 관심이 많습니다.<br/>
-                        새로운 기술을 배우는 데 두려움이 없고, 팀워크와 커뮤니케이션을 중요하게 생각합니다.
-                        </p>
-                        <p>
-                        앞으로 클라우드와 보안 분야까지 역량을 넓혀 안정적이고 확장성 있는 서비스를 만드는 <br/>
-                        개발자가 되고 싶습니다.
-                        </p>
-                    </div>
-                </div>
-                <div class="learning-streaks">
-                    <h3 class="learning-streak">교육 캠프 경과 일수 : <span class="accent" id="result"></span> 일</h3> 
-                    <h3 class="learning-streak">완성 프로젝트 수 : <span class="accent" id="result">1</span> 개</h3>
-                    <h3 class="learning-streak">GitHub Commit 수 : <span class="accent" id="commit-count">불러오는 중...</span></h3>
-                </div>
-            </div>
-        </section>
-
-        <!-- 스킬 섹션 -->
-        <section id="skills" class="skills area">
-            <div class="container">
-                <p class="middleTitle">보유 기술</p>
-                <div class="skill">
-                    <div class="skill-tags">
-                        <p class="skill-tag" onclick="selectSkill(this, 'HTML5')">HTML5</p>
-                        <p class="skill-tag" onclick="selectSkill(this, 'CSS')">CSS</p>
-                        <p class="skill-tag" onclick="selectSkill(this, 'JavaScript')">JavaScript</p>
-                        <p class="skill-tag" onclick="selectSkill(this, 'JAVA')">JAVA</p>
-                    </div>
-                    <div class="skill-description"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 프로젝트 섹션 -->
-        <section id="projects" class="projects area">
-            <div class="container">
-                <p class="middleTitle">진행한 프로젝트</p>
-                <!-- 프로젝트 들어갈 자리 -->
-                <!-- 3개의 프로젝트 들어갈거니까 잘 비워두셈 -->
-                <div class="project">
-                    <div class="portfolio">
-                        <h3 class="portfolio-title">포트폴리오 제작</h3>
-                        <img src="images/포트폴리오.png" class="portfolio-img">
-                        <p class="portfolio-main">HTML5, CSS, JavaScript를 활용하여 반응형 포트폴리오 웹사이트를 직접 설계하고 제작했습니다.
-자기소개, 기술 스택, 프로젝트, 연락처 등의 정보를 한눈에 확인할 수 있도록 구성하였으며, 사용자 경험을 고려한 깔끔한 UI/UX 디자인에 중점을 두었습니다.</p>
-                    </div>
-                    <div>..</div>
-                    <div>..</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 연락처 -->
-        <section id="contact" class="contact area">
-            <div class="container">
-                <p class="middleTitle">소셜 미디어</p>
-                <div class="social-links">
-                    <div class="social-item">
-                        <a href="https://github.com/Josua-12" class="social-btn github">
-                        <img class="image" src="images/github.png" alt="Github"/>
-                        </a>
-                        <p>GitHub</p>
-                    </div>
-
-                    <div class="social-item">
-                        <a href="https://" target="_blank" class="social-btn linkedin">
-                        <img class="image" src="images/linkedin.png" alt="LinkedIn"/>
-                        </a>
-                        <p>LinkedIn</p>
-                    </div>
-
-                    <div class="social-item">
-                        <a href="mailto:sua@example.com" class="social-btn email">
-                        <img class="image" src="images/gmail.png" alt="Gmail"/>
-                        </a>
-                        <p>Email</p>
-                    </div>
-
-                    <div class="social-item">
-                        <a href="https://velog.io/@sua86268/posts" class="social-btn velog">
-                        <img class="image" src="images/velog.png" alt="Velog"/>
-                        </a>
-                        <p>velog</p>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <p class="middleTitle">연락 방법</p>
-                <form class="contact-form" id="contact-form">
-                    <input type="text" id="name" placeholder="이름" required>
-                    <input type="email" id="email" placeholder="이메일" required>
-                    <textarea class="message" id="message" placeholder="성함과 메일을 함께 입력해주시면 바로 연락드리겠습니다!" rows="5" required></textarea>
-                    <button class="send" type="submit">메시지 보내기</button>
-                </form>
-            </div>
-        </section>
-    </div>
-
+    </main>
+    
     <footer class="footer">
         <div class="container">
             <p>&copy; 2025 조수아. 모든 권리 보유.</p>
