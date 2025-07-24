@@ -22,7 +22,7 @@
 /* body 기본 스타일 */
 body {
     font-family: Arial, Helvetica, sans-serif;
-    line-height: 1.6;  /* 줄 간격 */
+    line-height: 1.7;  /* 줄 간격 */
     color: var(--text-color);   /* CSS 변수 사용 */
     overflow-x: hidden;     /* 가로 스크롤 방지 */
     width: 100%;
@@ -160,7 +160,6 @@ section {
     background: var(--nav-color);
     color: var(--nav-font-color);
     padding: 6rem 0rem;
-    margin-top: 70px;
     min-height: 70vh;   /* 뷰포트 높이의 90% */
     display: flex;
     align-items: center;
@@ -247,33 +246,34 @@ section {
 
 .skill {
   display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
   justify-content: center;
-  align-items: center;
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
 }
 
 .skill-tags{
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
 }
 
 .skill-tag {
-  padding: 0.5rem 1rem;
-  min-width: 13rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1 1 200px;
+  max-width: 400px;
   text-align: center;
   background-color: var(--middle-button-color);
   color: var(--middle-background-color);
   border-radius: 8px;
   font-size: 1rem;
-  white-space: nowrap;
-  width: fit-content;
+  padding: 0.5rem;
   cursor: pointer;
-  margin-bottom: 10px;
+  transition: transform 0.5s ease;
 }
-
 
 .skill-tag:hover {
   transform: translateY(-3px);
@@ -283,20 +283,26 @@ section {
 .skill-detail {
   margin-top: 5px;
   padding: 8px 12px;
-  background: #f0f0f0;
+  background: var(--middle-color);
   border-radius: 6px;
   font-size: 0.9rem;
   color: #333;
-  transition: max-height 0.3s ease, opacity 0.3s ease;
+
+  /* 애니메이션 추가 */
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateY(-5px); /* 약간 위에서 시작 */
+  opacity: 0;
   overflow: hidden;
-  max-height: 200px;
-  opacity: 1;
-  white-space: normal;   /* 줄바꿈 허용 */
-  line-height: 1.4;      /* 가독성 좋은 줄 간격 */
+  max-height: 100px;
+  overflow-y: auto;
+  white-space: normal;
+  line-height: 1.4;
 }
 
 .skill-detail.show {
+  max-height: 200px;   /* 충분한 높이로 애니메이션되도록 */
   opacity: 1;
+  transform: translateY(0); /* 제자리로 */
   pointer-events: auto;
 }
 
@@ -355,15 +361,15 @@ section {
 
 .portfolio {
   display: grid;
-  grid-template-rows: repeat(3);
+  grid-template-rows: repeat(3, auto);
   justify-content: center;
   align-items: center;
   max-width: 100%;
-  width: 100%; 
-  aspect-ratio: 4 / 3; /* 💡 정사각형/비율 유지할 경우 */
-  overflow: hidden;
+  width: 100%;
+  overflow: visible;
   border-radius: 10px;
   transition: transform 0.5s ease;
+  padding: 10px;
 }
 
 .portfolio:hover {
@@ -373,7 +379,7 @@ section {
 }
 
 .portfolio img{
-  width: 80%;
+  width: 100%;
   height: 60%;
   object-fit: cover; /* or contain */
   display: block;
@@ -529,6 +535,8 @@ section {
   border-radius: 5px;
 }
 
+
+
 .area {
   background: var(--middle-color);
   border-radius: 5px;
@@ -580,7 +588,7 @@ section {
 
   .hero-left,
   .hero-right {
-    width: 100%;
+    min-width: 100%;
   }
 
   .hero-right img {
@@ -666,11 +674,11 @@ section {
 }
 
 .about-image img {
-  padding: 0 10px;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 5px;
+   padding: 0 10px;
+    width: auto;
+    height: 10%;
+    object-fit: contain;
+    border-radius: 5px;
 }
 
 .about-content {
