@@ -101,24 +101,42 @@ const skillDescriptions = {
 };
 
 function selectSkill(element, skillName) {
-  // 같은 태그 클릭 시 토글
-  if(element.classList.contains('active')) {
+  const existingDetail = element.querySelector('.skill-detail');
+
+  // 같은 태그 클릭 시: 닫기
+  if (element.classList.contains('active')) {
     element.classList.remove('active');
-    element.querySelector('.skill-detail').remove();
+    if (existingDetail) {
+      existingDetail.classList.remove('show');
+      setTimeout(() => {
+        existingDetail.remove();
+      }, 300); // transition 시간 후 삭제
+    }
     return;
   }
 
-  // 이미 열려 있는 다른 상세설명 닫기
+  // 다른 열려 있는 태그 닫기
   document.querySelectorAll('.skill-tag.active').forEach(activeTag => {
     activeTag.classList.remove('active');
-    activeTag.querySelector('.skill-detail').remove();
+    const oldDetail = activeTag.querySelector('.skill-detail');
+    if (oldDetail) {
+      oldDetail.classList.remove('show');
+      setTimeout(() => {
+        oldDetail.remove();
+      }, 300);
+    }
   });
 
-  // 상세설명 div 생성 및 추가
+  // 새로운 상세 설명 추가
   const detailDiv = document.createElement('div');
   detailDiv.className = 'skill-detail';
   detailDiv.textContent = skillDescriptions[skillName] || "상세 설명이 없습니다.";
 
   element.appendChild(detailDiv);
   element.classList.add('active');
+
+  // 브라우저 렌더링 이후 show 클래스 추가 → 애니메이션 작동
+  setTimeout(() => {
+    detailDiv.classList.add('show');
+  }, 10);
 }
