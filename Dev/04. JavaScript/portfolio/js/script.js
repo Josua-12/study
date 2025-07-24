@@ -47,7 +47,7 @@ async function getCommitCount() {
     }
     });
 
-    document.getElementById("commit-count").textContent = commitCount + "회";
+    document.getElementById("commit-count").textContent = commitCount;
 } catch (error) {
     console.error("커밋 수 가져오기 실패:", error);
     document.getElementById("commit-count").textContent = "오류";
@@ -78,7 +78,7 @@ form.addEventListener('submit', function (e) {
 
   // 사용자가 확인 누르면 실행
   if (isConfirmed) {
-    alert("전송 완료! 감사합니다 :)");
+    alert("전송 완료! 확인 후 연락드리겠습니다! 감사합니다 :)");
 
     // 👉 실제 서버 전송 코드가 있다면 여기에 작성
     // fetch(...) 또는 form.submit()
