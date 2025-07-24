@@ -534,9 +534,6 @@ section {
   object-fit: cover;
   border-radius: 5px;
 }
-
-
-
 .area {
   background: var(--middle-color);
   border-radius: 5px;
@@ -546,7 +543,11 @@ section {
 }
 .about-content {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 3fr;
+}
+
+.about-text {
+  margin: 15px;
 }
 
 /* 햄버거 버튼 스타일 */
@@ -668,20 +669,13 @@ section {
   font-size: 2rem;
 }
 
-.profile {
-  width: 3rem;
-  height: 5rem;
+.about-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
-.about-image img {
-   padding: 0 10px;
-    width: auto;
-    height: 10%;
-    object-fit: contain;
-    border-radius: 5px;
-}
-
 .about-content {
+  grid-template-columns: 1fr; /* 세로 정렬로 전환 */
   text-align: left;
 }
 
