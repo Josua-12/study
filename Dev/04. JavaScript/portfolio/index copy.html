@@ -19,7 +19,7 @@
                 <ul class="nav-menu">
                     <!-- 페이지 내 섹션 이동 -->
                     <li><a href="#home">홈</a></li>
-                    <li><a href="#about">소개</a></li>
+                    <li><a href="#about-animation">소개</a></li>
                     <li><a href="#skills">기술</a></li>
                     <li><a href="#projects">프로젝트</a></li>
                     <li><a href="#contacts">연락처</a></li>
@@ -41,7 +41,7 @@
                 <div class="hero-content">
                     <div class="hero-text">
                         <p class="hero-subtitle">Java FullStack Developer</p>
-                        <p class="hero-description" id="about">
+                        <p class="hero-description">
                             사용자 경험을 중시하는 자바 풀스택 개발자입니다.
                             새로운 기술을 배우는 것을 좋아하며, 
                             클린하고 효율적인 코드를 작성하기 위해 노력합니다.
@@ -59,8 +59,9 @@
         </section>
 
         <div class="middle">
+            <div id="about-animation" class="animation"></div>
             <!-- 소개 섹션 -->
-            <section class="about area" id="about">
+            <section class="about area">
                 <div class="container">
                     <p class="section middleTitle">소개</p>
                     <div class="about-content">
@@ -90,13 +91,14 @@
                     <div class="learning-streaks">
                         <h3 class="learning-streak">교육 캠프 경과 일수 : <span class="accent" id="result"></span> 일</h3> 
                         <h3 class="learning-streak">완성 프로젝트 수 : <span class="accent" id="result">1</span> 개</h3>
-                        <h3 class="learning-streak">GitHub Commit 수 : <span class="accent" id="commit-count">불러오는 중...</span></h3>
+                        <h3 class="learning-streak">GitHub Commit 수 : <span class="accent" id="commit-count">불러오는 중...</span> 회</h3>
                     </div>
                 </div>
             </section>
-
+            
             <!-- 스킬 섹션 -->
-            <section id="skills" class="skills area">
+            <div id="skills" class="animation"></div>
+            <section  class="skills area">
                 <div class="container">
                     <p class="middleTitle">보유 기술</p>
                     <div class="skill">
@@ -112,7 +114,8 @@
             </section>
 
             <!-- 프로젝트 섹션 -->
-            <section id="projects" class="projects area">
+            <div id="projects" class="animation"></div>
+            <section  class="projects area">
                 <div class="container">
                     <p class="middleTitle">진행한 프로젝트</p>
                     <!-- 프로젝트 들어갈 자리 -->
@@ -131,7 +134,8 @@
             </section>
 
             <!-- 연락처 -->
-            <section id="contact" class="contact area">
+            <div id="contacts" class="animation"></div>
+            <section  class="contact area">
                 <div class="container">
                     <p class="middleTitle">소셜 미디어</p>
                     <div class="social-links">
@@ -143,17 +147,10 @@
                         </div>
 
                         <div class="social-item">
-                            <a href="https://" target="_blank" class="social-btn linkedin">
+                            <a href="https://buly.kr/CLzhT3E" target="_blank" class="social-btn linkedin">
                             <img class="image" src="images/linkedin.png" alt="LinkedIn"/>
                             </a>
                             <p>LinkedIn</p>
-                        </div>
-
-                        <div class="social-item">
-                            <a href="mailto:sua@example.com" class="social-btn email">
-                            <img class="image" src="images/gmail.png" alt="Gmail"/>
-                            </a>
-                            <p>Email</p>
                         </div>
 
                         <div class="social-item">
@@ -181,9 +178,8 @@
         <div class="container">
             <p>&copy; 2025 조수아. 모든 권리 보유.</p>
             <div class="footer-social">
-                <button onclick=""><a href="https://github.com/Josua-12"></a>Github</button>
-                <button onclick="">LinkedIn</button>
-                <button onclick="">Email</button>
+                <a href="https://github.com/Josua-12"><button onclick="">Github</button></a>
+                <a href="https://velog.io/@sua86268/posts"><button onclick="">Velog</button></a>
             </div>
         </div>
     </footer>

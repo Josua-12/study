@@ -263,8 +263,8 @@ section {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex: 1 1 200px;
-  max-width: 400px;
+  width: 250px; 
+  flex: 0 0 auto;
   text-align: center;
   background-color: var(--middle-button-color);
   color: var(--middle-background-color);
@@ -281,6 +281,8 @@ section {
 }
 
 .skill-detail {
+  display: grid;
+  grid-template-columns: 1fr;
   margin-top: 5px;
   padding: 8px 12px;
   background: var(--middle-color);
@@ -443,8 +445,7 @@ section {
 
 .social-links {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4개 열 */
-  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr); /* 4개 열 */
   margin-top: 1rem;
 }
 
@@ -527,11 +528,15 @@ section {
   justify-content: center;
 }
 
+.animation {
+  height: 2.5rem;
+}
+
 .about-image img {
   padding: 0 10px;
   width: 90%;
   height: 90%;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 5px;
 }
 .area {
@@ -574,6 +579,23 @@ section {
   display: flex;
   gap: 1.5rem;
   list-style: none;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--middle-color);
+  padding: 10px;
+  color: var(--nav-font-color);
+}
+
+.footer-social {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding: 5px;
 }
 
 @media (max-width:768px) {
