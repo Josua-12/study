@@ -10,6 +10,8 @@ let passTime = toNow - tofirst; // 5월 27일부터 오늘까지 지난 시간 (
 passTime= Math.round(passTime/(1000*60*60*24)) //1초 * 60(1분에) * 60(1시간에) *24(하루에)
 document.querySelector("#result").innerText = passTime;
 
+
+
 document.addEventListener("DOMContentLoaded", () => {
 const hamburger = document.querySelector(".hamburger");
 const navMenu = document.querySelector(".nav-menu");

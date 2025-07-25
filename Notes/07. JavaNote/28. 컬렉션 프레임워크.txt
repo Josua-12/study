@@ -44,24 +44,24 @@
 4. 주요 클래스와 인터페이스     
     
                         Interface Iterable<T>
-                                 ^
+                                 ⋀
                                 /|\
                                  |
                                  |
                         Interface Collection<E>
                                 - The root interface int the collection framework
-                                 ^
-                                /|\
-                                 |
-                                 |
-                        Interface List<E>
-                        - 순서가 있는 데이터 집합
-                        - 추가된 데이터의 순서 유지됨
-                        - 데이터 중복도 허용함
-                        - Class ArrayList<E>
-                        - Class LinkedList<E>
-                        - Class Vector<E>
-                        - Class Stack<E>
+                                 ⋀                                   ⋀
+                                /|\                                 /|\
+                                 |                                   |
+                                 |                                   |
+                        Interface List<E>                     Interface Set<E>
+                        - 순서가 있는 데이터 집합               - 데이터의 순서가 유지되지 않음
+                        - 추가된 데이터의 순서 유지됨           - 중복된 데이터가 제거됨
+                        - 데이터 중복도 허용함                  - Class HashSet<E>
+                        - Class ArrayList<E>                  - Class TreeSet<E>
+                        - Class LinkedList<E>                 - 순서와 관계없이 유일한 값 관리
+                        - Class Vector<E>                     - 저장된 순서와 출력된 순서는 다를 수 있음
+                        - Class Stack<E>                      - 
 
 5. List<E> 컬렉션 인터페이스    
     1) 배열과 가장 비슷한 구조를 가지고 있는 자료구조  
@@ -77,3 +77,24 @@
         - remove(Object o) : 객체가 존재하면 제거함
         - iterator()
         - clear()
+
+6. Interface Iterator<E>
+    1) Collection 요소를 순회
+    2) 컬렉션 프레임워크에 저장된 요소들을 하나씩 차례로 참조하는 것
+    3) 순서가 있는 List 인터페이스의 경우는 Iterator를 사용하지 않고 get(int index) 메서드를 활용할 수 있음
+    4) Set 인터페이스의 경우 get(int index) 메서드가 제공되지 않으므로 Iterator를 이용하여 객체를 순회함
+    5) 메서드  
+        - boolean hasNext()
+            - 이후의 요소가 더 있는지를 체크하는 메서드
+        - E next()
+            - 다음에 있는 요소를 반환
+    
+7. Interface Set<E>
+    1) 중복되지 않게 자료를 관리
+        - 멤버의 중복 여부를 체크하기 위해 인스턴스의 동일성을 확인해야 함
+        - 동일성 구현을 위해 필요에 따라 equals()와 hashCode() 메서드를 재정의 함
+    2) 저장 순서가 유지되지 않음
+    3) 데이터 중복 저장을 허용하지 않음
+    4) 예
+        - 아이디 동일한 경우 같은 멤버이므로 중복되지 않도록 Member 클래스의 equals()와 hashCode() 메서드를 재정의 해야 함
+        
