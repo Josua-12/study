@@ -1,0 +1,761 @@
+/* 전역 리셋과 기본 설정 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 전역에서 사용할 CSS 변수 - 색상값 정의, 일관성 향상 */
+:root {
+    --nav-color: #304562;     /* 네비게이션 영역 색상 */
+    --nav-highlight: #D0A85C; /* 네비게이션 하이라이트 */ 
+    --nav-button-color: #526D82;
+    --nav-font-color: #F1F6F9;
+    --middle-color: #9DB2BF;
+    --middle-highlight: #4D6D8C;
+    --middle-button-color: #5C768D;
+    --middle-font-color: #1C1C1C;
+    --middle-background-color: #DDE6ED;
+    --shadow: rgba(255, 255, 255, 0.1);   /* 그림자 효과 */
+}
+
+[data-theme="dark"] {
+    --nav-color: #1a1a1a;
+    --nav-highlight: #ffd700;
+    --nav-button-color: #333333;
+    --nav-font-color: #e0e0e0;
+    --middle-color: #2d2d2d;
+    --middle-highlight: #ffd700;
+    --middle-button-color: #404040;
+    --middle-font-color: #e0e0e0;
+    --middle-background-color: #1f1f1f;
+    --shadow: rgba(255, 255, 255, 0.1);
+}
+
+/* body 기본 스타일 */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.7;  /* 줄 간격 */
+    color: var(--text-color);   /* CSS 변수 사용 */
+    overflow-x: hidden;     /* 가로 스크롤 방지 */
+    width: 100%;
+}
+
+/* 공통 컨테이너 */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* 섹션 공통 스타일 */
+section {
+    padding: 0 5rem ;
+}
+
+/* 네비게이션 */
+.navbar {
+    background: var(--nav-color);
+    box-shadow: 0 2px 20px var(--shadow);
+    position: fixed;    /* 스크롤해도 상단에 고정 */
+    top: 0;
+    width: 100%;
+    z-index: 1000;      /* 다른 요소 위에 표시 */
+    transition: all 0.3s ease;   /* 부드러운 변화 효과 */
+}
+
+.navbar.scrolled {
+  background: rgba(48, 69, 98, 0.4) !important;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+.nav-menu {
+  background: rgba(48, 69, 98, 0.4) !important;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+[data-theme="dark"] .navbar.scrolled {
+  background: rgba(26, 26, 26, 0.4) !important;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+
+.nav-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;      /* Flexbox 레이아웃 */
+    justify-content: space-between;   /* 양 끝 정렬 */
+    align-items: center;
+    height: 70px;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--nav-font-color);
+}
+
+.nav-image {
+    width: 50px;       /* 네비게이션 바 안에 딱 맞게 */
+    height: 50px;
+    display: flex;     /* 가운데 정렬용 */
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;  /* 이미지가 넘치면 잘라내기 */
+}
+
+/* 실제 이미지 크기 */
+.nav-image img {
+  width: 100%;       /* 껍데기 꽉 채우기 */
+  max-width: 300px;
+  height: auto;
+  border-radius: 50%;
+  object-fit: cover;  /* 비율 유지하면서 전체 노출 (cover면 꽉 채우고 잘림) */
+}
+
+.nav-logo span:first-child {
+    font-size: 2rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.nav-logo span:first-child:hover {
+    transform: scale(1.2);   /* 크기 확대 */
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    gap: 2rem;
+    background: transparent; 
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: var(--nav-font-color);
+    font-weight: 500;
+    transition: color 0.3s ease;
+    position: relative;   /* ::after 가상 요소를 위한 포지셔닝  */
+}
+
+.nav-menu a:hover {
+    color: var(--nav-highlight);
+}
+
+/* 호버시 나타나는 밑줄 효과 */
+.nav-menu a::after {
+    content: '';
+    width: 0;
+    height: 2px;
+    background: var(--nav-highlight);
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    transition: width 0.3s ease;
+}
+
+.nav-menu a:hover::after {
+    width: 100%;    /* 호버 시 전체 너비로 확장 */
+}
+
+.theme-toggle {
+    margin: 1rem;
+    background: none;
+    border-radius: 50px;
+    width: 50px;
+    height: 30px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    margin-left: 1rem;
+}
+
+
+
+.accent {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 3px 5px;
+  border-radius: 5px;
+  font-size: 25px;
+  color: rgb(193, 5, 5);
+}
+
+.hero-title {
+  padding-bottom: 3rem;
+}
+/* 메인 섹션 */
+.hero-main {  
+    width: 100%;
+    background: var(--nav-color);
+    color: var(--nav-font-color);
+    padding: 6rem 0rem;
+    min-height: 70vh;   /* 뷰포트 높이의 90% */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;  /* 두 개의 동일한 너비 열 */
+    gap: 4rem;
+    align-items: center;
+}
+
+.hero-title {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.highlight {
+    /* 그라디언트 텍스트 효과 */
+    background: var(--nav-highlight);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;      /* 텍스트에만 그라디언트 적용 */
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.9;   /* 투명도로 계층 구조 표현 */
+}
+
+.hero-description {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  opacity: 0.8;
+  line-height: 1.8;   /* 본문 가독성을 위한 넓은 줄 간격 */
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.btn-primary, .btn-secondary {
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: var(--nav-highlight);
+  color: var(--nav-color);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--nav-highlight);
+  border: 2px solid #D0A85C;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px); /* 호버 시 위로 이동 */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.btn-secondary:hover {
+  background: var(--nav-highlight);
+  color: var(--nav-color);
+}
+
+.skill {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.skill-tags{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.skill-tag {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 250px; 
+  flex: 0 0 auto;
+  text-align: center;
+  background-color: var(--middle-button-color);
+  color: var(--middle-background-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.5s ease;
+}
+
+[data-theme="dark"] .skill-tag {
+  color: var(--nav-font-color);
+}
+
+.skill-tag:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.skill-detail {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin-top: 5px;
+  padding: 8px 12px;
+  background: var(--middle-color);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: #333;
+
+  /* 애니메이션 추가 */
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateY(-5px); /* 약간 위에서 시작 */
+  opacity: 0;
+  overflow: hidden;
+  max-height: 100px;
+  overflow-y: auto;
+  white-space: normal;
+  line-height: 1.4;
+}
+
+.skill-detail.show {
+  max-height: 200px;   /* 충분한 높이로 애니메이션되도록 */
+  opacity: 1;
+  transform: translateY(0); /* 제자리로 */
+  pointer-events: auto;
+}
+
+.sosial-media {
+  margin-bottom: 10px;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* ✅ 기본 그림자 */
+}
+
+.social-btn:hover {
+  background-color: var(--middle-button-color);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* ✅ 진한 그림자 */
+}
+
+.project {
+  display: grid;
+  grid-template-columns: repeat(3 auto);
+  gap: 1rem;
+  max-width: 1200px;
+  margin: 0 15px;
+  border-radius: 10px;
+  height: auto;
+  
+}
+
+.project div {
+  border-radius: 5px;
+  background-color: var(--middle-button-color);
+  color: var(--middle-background-color);
+  display: flex;  
+  align-items: center;  
+  padding: 1rem;
+  flex-direction: column;
+  padding: 0px 15px;
+}
+
+.portfolio {
+  max-width: 100%;
+  width: 100%;
+  overflow: visible;
+  border-radius: 10px;
+  transition: transform 0.5s ease;
+  padding: 0 10px;
+}
+
+[data-theme="dark"] .portfolio {
+  color: var(--nav-font-color);
+}
+
+.portfolio:hover {
+  background-color: var(--nav-color);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.portfolio img{
+  width: 100%;
+  height: 60%;
+  object-fit: cover; /* or contain */
+  display: block;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.portfolio-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+}
+
+
+
+.portfolio-main {
+  width: 90%;
+}
+
+.image {
+  width: 50px;
+  height: 50px;
+  padding: 3px;
+  border-radius: 50%;
+} 
+.hero-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-image {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, #D0A85C, #f39c06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  border: none;
+  z-index: 1;
+}
+
+.profile-image::before {
+  content: '';
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  border-radius: 50%;
+  background: inherit; /* 그라디언트 배경 복사 */
+  filter: blur(15px); /* ✅ 블러 효과 */
+  opacity: 1;        /* 살짝 흐리게 */
+  z-index: -1;         /* 뒤에 배치 */
+  transform: scale(1.5); /* 퍼지는 느낌 */
+}
+
+.profile-image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.social-links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 4개 열 */
+  margin-top: 1rem;
+}
+
+.social-item {
+  display: flex;
+  flex-direction: column; /* 버튼 위, 텍스트 아래 */
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.learning-streaks {
+  margin: 20px 15px;
+}
+
+.learning-streak {
+  margin-bottom: 10px;
+}
+
+.social-item p {
+  font-size: 14px;
+  padding: 0 0.5rem;
+  text-align: center;
+  font-weight: 520;
+}
+
+.contact-form {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+
+.message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  padding: 5px;
+  margin: 10px auto;
+  border: 1px solid #2c3e50;
+  border-radius: 4px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.send {
+  width: 30%;
+  height: 30px;
+  background: var(--middle-button-color);
+  color: #F8F4EF;
+  border: none;
+  border-radius: 3px;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+.hero-text h3 {
+  margin-top: 15px;
+}
+
+.middle {
+  width: 100%;
+  padding: 5rem 3rem;
+  background: var(--middle-background-color);
+  border-radius: 10px;
+}
+
+.middleTitle {
+  text-align: center;
+  margin-bottom: 15px;
+  color: var(--middle-highlight);
+  font-weight: 900;
+  font-size: 30px;
+  padding-top: 15px;
+}
+
+.profile {
+  width: 4rem;
+  height: 5.5rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.animation {
+  height: 2.5rem;
+}
+
+.about-image img {
+  padding: 0 10px;
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+  border-radius: 5px;
+}
+.area {
+  background: var(--middle-color);
+  border-radius: 5px;
+  margin: 15px 15px;
+  color: var(--middle-font-color);
+  padding: 20px 5px;
+}
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+
+.about-text {
+  margin: 15px;
+}
+
+/* 햄버거 버튼 스타일 */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+  background: none;
+  border: none;
+  z-index: 1001;
+}
+
+.bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: var(--nav-font-color);
+  border-radius: 2px;
+}
+
+/* 네비게이션 메뉴 */
+.nav-menu {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--middle-color);
+  padding: 10px;
+  color: var(--nav-font-color);
+}
+
+.footer-social {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding: 5px;
+}
+
+@media (max-width:768px) {
+
+  .section {
+    padding: 0;
+}
+   .hero-main {
+    flex-direction: column;
+    padding: 4rem 1.5rem;
+    text-align: center;
+  }
+
+  .hero-left,
+  .hero-right {
+    min-width: 100%;
+  }
+
+  .hero-right img {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+
+  .hero-content {
+    grid-template-columns: 1fr; /* 세로 정렬로 전환 */
+    text-align: center;
+  }
+
+  .hero-image img {
+    max-width: 350px;  /* 모바일에서 더 작게 */
+    margin: 2rem auto 0; /* 가운데 정렬 */
+  }
+
+  .hero-buttons {
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+
+
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-menu {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    height: 50vh;
+
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+  }
+
+  .nav-menu.scrolled {
+    background-color: rgba(48, 69, 98, 0.4);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+
+  .nav-menu li {
+    background-color: var(--middle-color);
+    width: 80%;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .nav-menu a {
+    color: var(--nav-color);
+    font-weight: 600;
+    font-size: large;
+  }
+
+  .nav-menu.active {
+    display: flex;
+  }
+
+
+.hero {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 2rem;
+}
+
+.about-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.about-content {
+  grid-template-columns: 1fr; /* 세로 정렬로 전환 */
+  text-align: left;
+}
+
+.middle {
+  padding: 1rem;
+}
+
+.area {
+  
+  padding: 20px 10px;
+}
+
+}
