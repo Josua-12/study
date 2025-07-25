@@ -1,3 +1,24 @@
+const themeToggle = document.querySelector('.theme-toggle');
+const body = document.body;
+let currentTheme = 'light'; // localStorage 대신 변수 사용
+
+// 테마 적용 함수
+function applyTheme(theme) {
+    if (theme === 'dark') {
+        body.setAttribute('data-theme', 'dark');
+        currentTheme = 'dark';
+    } else {
+        body.removeAttribute('data-theme');
+        currentTheme = 'light';
+    }
+}
+
+// 토글 버튼 이벤트
+themeToggle.addEventListener('click', () => {
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    applyTheme(newTheme);
+});
+
 let now = new Date(); // 특정한 파라미터를 주지 않으면 오늘 날짜로 객체 지정
 let firstDay = new Date("2025-05-27"); // 시작 날짜를 객체로 지정
 

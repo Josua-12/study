@@ -16,7 +16,20 @@
     --middle-button-color: #5C768D;
     --middle-font-color: #1C1C1C;
     --middle-background-color: #DDE6ED;
-    --shadow: rgba(0, 0, 0, 0.1);   /* 그림자 효과 */
+    --shadow: rgba(255, 255, 255, 0.1);   /* 그림자 효과 */
+}
+
+[data-theme="dark"] {
+    --nav-color: #1a1a1a;
+    --nav-highlight: #ffd700;
+    --nav-button-color: #333333;
+    --nav-font-color: #e0e0e0;
+    --middle-color: #2d2d2d;
+    --middle-highlight: #ffd700;
+    --middle-button-color: #404040;
+    --middle-font-color: #e0e0e0;
+    --middle-background-color: #1f1f1f;
+    --shadow: rgba(255, 255, 255, 0.1);
 }
 
 /* body 기본 스타일 */
@@ -50,13 +63,23 @@ section {
     transition: all 0.3s ease;   /* 부드러운 변화 효과 */
 }
 
-.navbar.scrolled .nav-menu {
-  background-color: rgba(48, 69, 98, 0.4);
+.navbar.scrolled {
+  background: rgba(48, 69, 98, 0.4) !important;
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
 }
 
+.nav-menu {
+  background: rgba(48, 69, 98, 0.4) !important;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
 
+[data-theme="dark"] .navbar.scrolled {
+  background: rgba(26, 26, 26, 0.4) !important;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
 
 .nav-container {
     max-width: 1200px;
@@ -111,7 +134,7 @@ section {
     list-style: none;
     align-items: center;
     gap: 2rem;
-    
+    background: transparent; 
 }
 
 .nav-menu a {
@@ -141,6 +164,20 @@ section {
 .nav-menu a:hover::after {
     width: 100%;    /* 호버 시 전체 너비로 확장 */
 }
+
+.theme-toggle {
+    margin: 1rem;
+    background: none;
+    border-radius: 50px;
+    width: 50px;
+    height: 30px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    margin-left: 1rem;
+}
+
+
 
 .accent {
   background: rgba(0, 0, 0, 0.1);
@@ -274,6 +311,10 @@ section {
   transition: transform 0.5s ease;
 }
 
+[data-theme="dark"] .skill-tag {
+  color: var(--nav-font-color);
+}
+
 .skill-tag:hover {
   transform: translateY(-3px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
@@ -368,6 +409,10 @@ section {
   padding: 0 10px;
 }
 
+[data-theme="dark"] .portfolio {
+  color: var(--nav-font-color);
+}
+
 .portfolio:hover {
   background-color: var(--nav-color);
   transform: translateY(-3px);
@@ -389,6 +434,8 @@ section {
   align-items: center;
   margin: 1rem;
 }
+
+
 
 .portfolio-main {
   width: 90%;
@@ -598,7 +645,7 @@ section {
 @media (max-width:768px) {
 
   .section {
-    padding: 0cqi;
+    padding: 0;
 }
    .hero-main {
     flex-direction: column;
