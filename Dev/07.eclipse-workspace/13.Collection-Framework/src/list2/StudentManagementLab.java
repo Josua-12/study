@@ -13,7 +13,6 @@ public class StudentManagementLab {
 
 	// 전역변수
 	private static List<Student> students = new ArrayList<>();
-	
 	private static Scanner scanner = new Scanner(System.in);
 	
 	public static void main(String[] args) {
@@ -34,6 +33,7 @@ public class StudentManagementLab {
 				case 2: viewAllStudents(); break;
 				case 3: searchStudent(); break;
 				case 4: updateStudent(); break;
+				case 5: removeStudent(); break;
 				default: System.out.println("잘못된 선택입니다.");
 			}
 		} while(choice != 0);
@@ -43,6 +43,43 @@ public class StudentManagementLab {
 		
 	}
 	
+	/*
+	 * 메서드 자체는 delete() 사용
+	 * 
+	 */
+	private static void removeStudent() {
+		System.out.print("✂️ 삭제할 학생 이름 :");
+		String targetName = scanner.nextLine();
+		
+		// targetName이 array 안에 있는지 검사
+		Iterator<Student> itr = students.iterator(); // 반복자 호출
+		boolean removed = false;  // 삭제 성공 여부 저장하는 변수(flag)
+		while(itr.hasNext()) {
+			Student student = itr.next();
+			if(student.getName().equals(targetName)) {
+				// 삭제 확인 과정
+				System.out.printf("⚠️ 정말로 '%s' 학생을 삭제하시겠습니까? (y/n)", targetName);
+				String confirm = scanner.nextLine();
+				
+				if(confirm.toLowerCase().equals("y") || confirm.equals("예")) {
+					itr.remove();
+					System.out.println("✂️ '" + targetName + "' 학생이 삭제되었습니다.");
+					removed = true;
+				} else {
+					System.out.println("❌ 삭제가 취소되었습니다.");
+					removed = true;		// if 구문에 연계되는 true, false이기 때문에 사용자를 찾긴 한거니까 true로 작성해야 함
+				}
+				break; // 찾았으므로 loof 종료
+			}
+		}
+		// targetName을 찾지 못한 경우
+		if(!removed) {
+			System.out.println("❌ 해당 학생을 찾을 수 없습니다.");
+		} else {
+			System.out.println("🏢 현재 총 학생 수 : " + students.size());
+		}
+	}
+
 	/*
 	 * 기존 데이터 검색 후 수정
 	 * 현재 정보 보여준 후 새 정보 입력받기

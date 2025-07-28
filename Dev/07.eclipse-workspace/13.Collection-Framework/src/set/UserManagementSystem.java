@@ -29,16 +29,16 @@ public class UserManagementSystem {
 			System.out.println("4. 전체 사용자 목록");
 			System.out.println("5. 사용자 수 확인");
 			System.out.println("0. 종료");
-			System.out.println("선택: ");
+			System.out.print("선택: ");
 			
 			// 숫자 입력 예외 처리
 			int choice;
 			try {
 				choice = scanner.nextInt();
-				scanner.nextInt();  // 개행문자 처리
+				scanner.nextLine();  // 개행문자 처리
 				
 			} catch(Exception e) {
-				System.out.println("❌ 숫자를 입력해주세요.");
+				System.out.print("❌ 숫자를 입력해주세요.");
 				scanner.nextInt();	// 잘못된 입력 제거
 				continue;			// 다시 메뉴로
 			}
@@ -77,9 +77,9 @@ public class UserManagementSystem {
 		System.out.println("📊 현재 등록된 학생 수 : " + userCount + "명");
 		
 		if(userCount == 0) {
-			System.out.println("💡 사용자를 등록해보세요! (메뉴 1번 선택)");
+			System.out.print("💡 사용자를 등록해보세요! (메뉴 1번 선택)");
 		} else if(userCount >= 100) {
-			System.out.println("⚠️ 사용자 수가 많습니다. 성능 최적화를 고려해 보세요. (메뉴 1번 선택)");
+			System.out.print("⚠️ 사용자 수가 많습니다. 성능 최적화를 고려해 보세요. (메뉴 1번 선택)");
 		}
 	}
 
@@ -98,15 +98,52 @@ public class UserManagementSystem {
 		System.out.println("-".repeat(30));	// 구분 선
 		System.out.println("총 " + registeredUsers.size() + "명의 사용자가 등록되어 있습니다.");
 	}
-
+	
+	/*
+	 * 사용자 삭제하는 메서드
+	 */
 	private static void deleteUser(Scanner scanner) {
-		// TODO Auto-generated method stub
+		System.out.print("삭제할 사용자 ID를 입력하세요 : ");
+		String userId = scanner.nextLine().trim();
 		
+		if(userId.isEmpty()) {
+			System.out.println("❌ 사용자 ID를 입력해 주세요.");
+			return;
+		}
+		
+		// 중요 계정 삭제 방지
+		if("admin".equals(userId)) {
+			System.out.println("⚠️ 관리자 계정은 삭제할 수 없습니다.");
+			return;
+		}
+		
+		if(registeredUsers.remove(userId)) {
+			System.out.println("✅ 사용자 '" + userId + "'가 삭제되었습니다.");
+		} else {
+			System.out.println("⚠️ 삭제할 사용자 '" + userId + "'를 찾을 수 없습니다.");
+		}
 	}
 
+	
+	/*
+	 * 사용자 존재 여부 조회하는 메서드
+	 * boolean contains(Object o)
+	 */
 	private static void searchUser(Scanner scanner) {
-		// TODO Auto-generated method stub
+		System.out.print("조회할 사용자 ID를 입력하세요: ");
+		String userId = scanner.nextLine().trim(); // trim = 공백 제거
 		
+		// 빈 입력 체크
+		if(userId.isEmpty()) {
+			System.out.println("❌ 사용자 ID를 입력해 주세요.");
+			return;
+		}
+		
+		if(registeredUsers.contains(userId)) {
+			System.out.println("✅ 사용자 '" + userId + "'가 시스템에 등록되어 있습니다.");
+		} else {
+			System.out.println("❌ 사용자 '" + userId + "'를 찾을 수 없습니다.");
+		}
 	}
 
 	private static void registerUser(Scanner scanner) {
@@ -126,6 +163,7 @@ public class UserManagementSystem {
 		
 		if(userId.contains(" ")) {
 			System.out.println("❌ 사용자 ID에는 공백이 포함될 수 없습니다.");
+			return;
 		}
 		
 		// HashSet의 add() 메서드 호출
