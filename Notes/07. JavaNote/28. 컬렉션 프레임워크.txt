@@ -102,3 +102,26 @@
     7) 요소를 인덱스로 식별할 수 없음
     8) 요소 검색 속도가 매우 빠름
         
+8. Interface Map<K, V> 컬렉션 인터페이스
+    1) Key와 Value 한 쌍으로 데이터를 저장
+        - 엔트리(entry) 단위로 입력 받음
+    2) Key는 중복 저장 불가, Value는 중복 저장 가능
+    3) 데이터 추가 
+        - V put(K key, V value) 
+    4) 데이터 변경
+        - default V replace(K key, V value) 
+    5) 데이터 추출
+        - V get(Object key)
+            - 매개변수의 Key 값에 해당하는 value를 리턴
+        - Set<K> keyset()
+            - Map 데이터 중 Key들만 뽑아 Set 객체로 리턴
+    6) 데이터 삭제
+        - V remove(Object key)
+            - 입력 매개 변수 key를 갖는 엔트리 삭제
+            - 단, 해당 Key가 없으면 아무런 동작을 하지 않음
+    7) 대표적인 구현 클래스     
+        - Class HashMap<K,V>
+            - 가장 많이 사용되는 Map 인터페이스 기반 클래스 
+            - key-value를 쌍으로 관리하는 메서드를 구현함 
+                - key를 이용하여 값을 저장하고, key를 이용하여 값을 꺼내오는 방식 
+            - key가 되는 객체는 중복될 수 없고, 객체의 유일성을 비교하기 위한 equals()와 hashCode() 메서드를 구현해야 함.

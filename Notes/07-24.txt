@@ -1,0 +1,13 @@
+07-24
+
+.hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;  /* 두 개의 동일한 너비 열 */
+    gap: 4rem;
+    align-items: center;
+}
+
+.hero-content {
+    grid-template-columns: 1fr; /* 세로 정렬로 전환 */
+    text-align: center;
+  }
