@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>13.Collection-Framework</name>
+	<name>15.Lambda</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -16,7 +16,7 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1753767594510</id>
+			<id>1753767594519</id>
 			<name></name>
 			<type>30</type>
 			<matcher>
