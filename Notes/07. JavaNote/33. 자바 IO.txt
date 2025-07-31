@@ -62,3 +62,82 @@
                 - 읽은 자료의 바이트 수를 반환함
             - void close()
                 - 입력 
+    2) OutputStream
+        - 바이트 단위로 쓰는 스트림 중 최상위 클래스
+        - FileOutputStream, ByteArrayOutputStream, FilterOutputStream
+        - void write(int b)
+            - 한 바이트를 출력함
+        - void write(byte[] b)
+            - b[] 배열에 저장된 모든 데이터를 출력함
+        - void write(byte[] b, int off, int len)
+            - b[] 배열의 off 위치부터 len 개의 데이터를 출력함
+        - void flush()
+            - 출력 버퍼에 남아있는 데이터를 강제로 출력함
+        - void close()
+            - 스트림을 닫고, 출력 버퍼에 남아있는 데이터를 비움
+
+5. 문자 단위 스트림
+    1) Class Reader
+        - 문자 단위로 읽는 스트림 중 최상위 스트림
+        - 하위 클래스
+            - Class FileReader
+            - Class InputStreamReader
+            - Class BufferedReader
+        - 자료를 읽는 메서드    
+            - int read()
+                - 파일로부터 한 문자를 읽고 그 값을 반홚마
+            - int read(char[] cbuf)
+                - 파일로부터 문자 배열 cbuf의 문자를 읽음
+            - int read(char[] cbuf, int off, int len)
+                - 파일로부터 문자 배열 cbuf의 off 위치에서부터 len 개수만큼 읽음
+            
+            - void close()
+                - 스트림과 연결된 파일 리소스를 닫음
+    2) Class Writer 
+        - 문자 단위로 출력하는 스트림 중 가장 최상위 스트림
+        - 하위 클래스
+            - Class FileWriter
+            - Class OutputStreamWriter
+            - Class BufferedWriter
+        - 자료를 쓰는 메서드
+            - void write(int c)
+                - 한 문자를 파일에 출력함
+            - void write(char[] cbuf)
+                - 문자 배열 cbuf의 내용을 파일에 출력함
+            - void write(char[] cbuf, int off, int len)
+                - 문자 배열 cbuf의 off 위치에서부터 len 개수만큼 읽음
+            - void write(String str, int off, int len)
+                - 문자열 str의 off 위치에서부터 len 개수만큼 읽음
+
+            - void flush()
+                - 파일에 출력하기 전에 자료가 있는 공간(출력 버퍼)을 비워 출력함
+            - void close()
+                - 파일과 연결된 스트림을 닫음
+                - 출력 버퍼도 비워짐
+
+6. 보조 스트림  
+    1) 다른 스트림에 기능을 추가하는 보조 스트림
+    2) 입출력 대상이 되는 파일이나 네트워크에 직접 쓰거나 읽는 기능은 없음
+    3) Wrapper 스트림이라고 함
+        - 다른 스트림을 감쌈
+        - 생성자의 매개변수로 다른 스트림을 받음
+    4) FilterInputStream과 FileOutputStream 생성자
+        - protected FilterInputStream(InputStream in)
+            - 생성자의 매개변수로 InputStream을 받음
+        - FilterOutputStream(OutputStream out)
+            - 생성자의 매개변수로 OutputStream을 받음
+    5) 구성
+        - 기반 스트림 + 보조 스트림
+        - 바이트 단위 파일 입력 스트림 + 문자로 변환 기능 추가 + 버퍼링 기능 추가
+    6) Buffered 스트림
+        - BufferedInputStream
+            - 바이트 단위로 읽는 스트림에 버퍼링 기능을 제공
+        - BufferedOutputStream
+            - 바이트 단위로 출력하는 스트림에 버퍼링 기능을 제공
+        - BufferedReader
+            - 문자 단위로 읽는 스트림에 버퍼링 기능 제공
+        - BufferedWriter
+            - 문자 단위로 쓰는 스트림에 버퍼링 기능을 제공
+
+7. File 클래스
+    1) 파일이라는 개념을 추상화한 클래스
