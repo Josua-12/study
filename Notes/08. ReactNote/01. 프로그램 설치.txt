@@ -1,0 +1,12 @@
+1. VS Code 설치
+    1) 확장 프로그램 설치하기
+        - Live Server
+        - open in browser
+        - Auto Rename tag
+        - Prettier - Code formatter
+        - CSS Peek
+        - Auto Import
+        - Auto Import - ES6, TS, JSX, TSX
+        - Reactjs code snippets
+        - ES7 React/Redux/GraphQL/React-Native snippets
+        
