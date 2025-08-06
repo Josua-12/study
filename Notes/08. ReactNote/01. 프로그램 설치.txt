@@ -21,8 +21,9 @@
     1) index.html
     2) index.js 
     3) App.js
-        모든 컴포너트의 중심
+        - 모든 컴포너트의 중심
         - 조건에 따라 화면을 바꿔가며 보여주는 SPA 구조
+        - 전역 범위(global)
 
 5. SPA
     1) Single Page Application

@@ -1,0 +1,44 @@
+1. style = {{ ... }}
+    1) 부모 컴포넌트(App.js)에서 스타일을 자식(Slider.js)에게 전달함
+
+2. props
+    1) 자식 컴포넌트가 전달받은(부모-> 자식 단방향) 속성을 담는 객체
+    2) properies(속성)의 줄임말
+    3) 부모 컴포넌트가 자식 컴포넌트에게 값을 전달할 때 사용하는 객체 
+    4) props는 자식 컴포넌트가 외부 데이터를 전달받는 방법
+
+3. props.style  
+    1) 부모가 보낸 스타일 객체를 꺼내어 <div>에 적용함
+
+4. Main.js      
+    1) style2
+        - 스타일을 객체 형태로 정의
+        - 스타일 속성을 가진 객체
+    2) style={객체}
+        - JSX에서 인라인 스타일을 적용하는 기본 문법
+
+5. Footer.js    
+    1) className 속성
+        - Footer 컴포넌트에서 외부 css 파일(App.css)의 클래스를 불러와서 className 속성을 통해 JSX 요소에 스타일을 적용
+
+6. 정리
+    1) 컴포넌트 계층 구조 
+        - App (최상위 부모)
+            - Header
+            - Slider
+            - Main (중간 부모)
+                - Dog (자식)
+                - Cat (자식)
+            - Footer
+            - Footer2
+
+    2) 주요 내용
+        - import / export : 컴포넌트를 모듈로 관리하는 방법
+        - 스타일링
+            - inline style
+            - className 사용법
+        - props 
+            - 부모에서 자식으로 데이터 전달
+        - 컴포넌트 구성
+            - 함수형 컴포넌트
+            - 화살표 함수 컴포넌트
