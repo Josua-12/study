@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+.footerStyle {
+  background-color: tomato;
+  color: #fff;
+  height: 100px;
+}
+
+.footerStyle2 {
+  background-color: pink;
+  color: #fff;
+  height: 100px;
+}

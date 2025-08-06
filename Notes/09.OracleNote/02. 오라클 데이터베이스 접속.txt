@@ -1,0 +1,10 @@
+1. 접속 관련 참고 체크 파일
+    1) 위치
+        - D:\app\admin\product\21c\homes\OraDB21Home1\network\admin
+            - listener.OraDB21Home1
+            - tnsnames.ora 
+
+            - 혹시 문제있다면 HOST = localhost로 변경하고 아래 명령어 실행
+                - C:\Users\user>lsnctl reload
+
+                - 

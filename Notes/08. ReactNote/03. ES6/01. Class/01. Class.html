@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            class는 함수의 한 유형
+                - 객체를 생성하기 위한 템플릿
+                - 속성 construct() 메서드 내부에 할당
+                - 클래스 이름의 대소문자를 확인함
+                    - 대문자로 Car라는 이름으로 정의함
+                - 생성자 함수는 객체가 초기화될 때 자동으로 호출됨
+                    - 클래스의 인스턴스(객체)를 생성하고 초기화함
+                - 메서드를 추가 가능
+        */
+       class Car {
+        constructor(name) {
+            this.brand = name;
+        }
+        
+        present() {
+            return `I have a ` + this.brand;
+        }
+       }
+
+       const mycar = new Car("Tasman");
+       //document.write(mycar.brand);
+       document.write(mycar.present());
+    </script>
+</body>
+</html>

@@ -6,6 +6,7 @@ import Header from './components/Header';
 import Slider from './components/Slider';
 import Main from './components/Main';
 import Footer from './components/Footer';
+import Footer2 from './components/Footer2';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Slider style={{width:"100%", color:"white", height:"200px", background:"gold"}}></Slider>
       <Main/>
       <Footer/>
+      <Footer2/>
     </div>
   );
 }
