@@ -2,6 +2,7 @@ package com.shopping.service;
 
 import com.shopping.model.User;
 import com.shopping.repository.UserRepository;
+import com.shopping.util.ValidationUtils;
 
 /*
  * 사용자 관련 비즈니스 로직을 처리하는 서비스 클래스
@@ -23,24 +24,12 @@ public class UserService {
 	 */
 	
 	public User register(String id, String password, String name) {
+		// 입력값 검증 (한 곳에 모아서 처리)
+		validateRegisterInput(id, password, name);
+		
 		// 비지니스 로직 1: ID 중복불가
 		if(userRepository.existsById(id)) {
 			throw new RuntimeException("이미 존재하는 ID입니다." + id);
-		}
-		
-		// 비지니스 로직 2: 패스워드 최소 4자리 길이 체크
-		if(password == null || password.length() < 4) {
-			throw new RuntimeException("패스워드는 최소 4자리 이상이어야 합니다.");
-		}
-		
-		// 비지니스 로직 3: 이름 필수 입력 체크
-		if(name == null || name.trim().isEmpty()) {
-			throw new RuntimeException("이름을 입력해 주세요.");
-		}
-		
-		// 비지니스 로직 4: 이름 길이 체크(2자 이상)
-		if(name.trim().length() < 2) {
-			throw new RuntimeException("이름은 2자 이상이어야 합니다.");
 		}
 		
 		// User 객체 생성
@@ -48,10 +37,21 @@ public class UserService {
 		
 		// Repository 기능 호출
 		User saveduser = userRepository.save(user);
+		
 		System.out.println("새 사용자 등록: "+ saveduser.getId());
 		
 		return saveduser;
 		
+	}
+
+	/*
+	 *  회원 가입 입력값 검증
+	 */
+	private void validateRegisterInput(String id, String password, String name) {
+		ValidationUtils.requireNonEmpty(id,"ID를 입력해주세요.");
+		ValidationUtils.requireMinLength(password, 4, "패스워드는 최소 4자리 이상이어야 합니다.");
+		ValidationUtils.requireNonEmpty(name, "이름을 입력해주세요.");
+		ValidationUtils.requireMinLength(name.trim(), 2, "이름은 2자 이상이어야 합니다.");
 	}
 	
 	
@@ -66,8 +66,4 @@ public class UserService {
 	
 	
 	
-	
-	
-	
 }
-
