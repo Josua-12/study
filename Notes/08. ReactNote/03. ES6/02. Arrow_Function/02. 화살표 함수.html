@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Arrow Function</h1>
+    <p>화살표 함수 (ES6 방식)</p>
+    <p id="demo"></p>
+    <script>
+        // ES6 화살표 함수 - 새로운 함수 선언 방식
+        // function 키워드 대신 => (화살표)를 사용함
+        // 문법 : (매개변수) => { 함수 본문 }
+        // 장점 : 더 간결한 문법
+
+        hello = () => {
+            return "Hello World!"
+        }
+        
+        // 함수를 호출하고 반환값을 HTML 요소에 표시하시오
+         document.getElementById("demo").innerHTML = hello();
+    </script>
+</body>
+</html>

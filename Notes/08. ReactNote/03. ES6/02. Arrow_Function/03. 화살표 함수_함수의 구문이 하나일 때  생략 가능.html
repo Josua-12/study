@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Arrow Function - 간략한 방식</h1>
+    <p>화살표 함수 (ES6 방식)</p>
+    <p id="demo"></p>
+    <script>
+        // 화살표 함수의 특별한 문법
+        //  - 암시적 반환(Implicit Return)
+        // 함수에 명령문이 하나만 있고 그것이 값을 반환하는 경우 :
+        // 1) 중괄호 { } 생략 가능
+        // 2) return 키워드 생략 가능
+        // 간략한 형태 : () => 반환값
+        /*
+            장점 : 코드가 더 간결해짐
+                   가독성이 향상됨
+                   간단한 계산이나 값 반환에 매우 유용함
+        */
+        hello = () => "Hello World"
+
+        // 함수를 호출하고 반환값을 HTML 요소에 표시하시오
+         document.getElementById("demo").innerHTML = hello();
+    </script>
+</body>
+</html>
