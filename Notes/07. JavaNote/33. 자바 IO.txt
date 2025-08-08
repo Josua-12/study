@@ -141,3 +141,25 @@
 
 7. File 클래스
     1) 파일이라는 개념을 추상화한 클래스
+
+8. 직렬화 
+    1) 직렬화와 역직렬화 
+        - 클래스의 인스턴스가 생성되면 인스턴스의 상태, 즉 인스턴스 변수값은 마치 생명체처럼 계속 변함.
+        - 인스턴스의 어느 순간 상태를 그대로 저장하거나 네트워크를 통해 전송할 일이 발생할 수 있음
+          => 이를 직렬화(serialization)라고 함.
+
+        - 직렬화란 인스턴스 내용을 연속 스트림으로 만드는 것임.
+        - 직렬화 과정에서는 인스턴스 변수값을 스트림으로 만드는 일을 함.
+
+        - 저장된 내용이나 전송받은 내용을 다시 복원하는것
+          => 역직렬화(deserialization)    
+
+   2) ObjectInputStream, ObjectOutputStream을 사용하여 구현함       
+        - 생성자
+            - ObjectInputStream(InputStream in)
+            - ObjectOutputStream(OutputStream out)
+
+    3) Interface Serializable
+        - 직렬화는 인스턴스 내용이 외부로 유출되는 것 
+        - 프로그래머가 직렬화 하겠다는 의도를 표시해야함 
+            - Serializable 마커 인터페이스 구현함
