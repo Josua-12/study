@@ -9,7 +9,7 @@ import java.io.Serializable;
  * 
  */
 public class User implements Serializable{
-	// 직렬화 버전 UID (파일 저장/읽기 시 클래스 버전 관리)
+	// 직렬화 번전 UID (파일 저장/읽기 시 클래스 버전 관리)
 	private static final long serialVersionID = 1L;
 	
 	// 필드

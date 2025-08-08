@@ -1,123 +1,6 @@
-package main;
+2025-08-04 오전 수정 사항
 
-import java.time.LocalDate;
-import java.util.Scanner;
-
-import exception.LibraryException;
-import service.Library;
-
-/*
- * 도서관리 시스템의 메인 클래스
- * 사용자 인터페이스와 프로그램
- */
-public class LibraryManagementSystem {
-	
-	private Library library;		// 도서관 서비스 객체
-	private Scanner scanner;		// 사용자 입력
-	
-	public LibraryManagementSystem() throws LibraryException {
-		this.library = new Library("중앙도서관");
-		this.scanner = new Scanner(System.in);
-		initializeData();		// 초기 데이터 설정
-	}
-	
-	// 초기 데이터 설정
-	private void initializeData() throws LibraryException {
-		library.addBook("2025-1", "혼공", "신용균", "프로그래밍", LocalDate.of(2025, 1, 1));
-		library.addBook("2025-2", "LLM", "이순신", "프로그래밍", LocalDate.of(2025, 5, 1));
-		library.addBook("2025-3", "LLM", "이순신", "프로그래밍", LocalDate.of(2025, 5, 1));
-		library.addBook("2025-4", "LLM", "이순신", "프로그래밍", LocalDate.of(2025, 5, 1));
-		library.addBook("2025-5", "LLM", "이순신", "프로그래밍", LocalDate.of(2025, 5, 1));
-		
-		// 기본 회원 데이터 추가
-		library.addMember("M001", "이순신", "010-1234-5678");
-		library.addMember("M002", "신사임당", "010-1234-5678");
-		library.addMember("M003", "류성룡", "010-1234-5678");
-		
-		// 기본 사서 데이터 추가
-		library.addLibrarian("L001", "중사서", "010-2345-6789", "대출반", "팀장ㄴ");
-	}
-	
-	public static void main(String[] args) throws LibraryException {
-		LibraryManagementSystem system = new LibraryManagementSystem();
-		system.run();
-	}
-
-	// 프로그램 메인 실행
-	public void run() {
-		System.out.println("=== 도서관 관리 시스템에 오신 것을 환영합니다. ===\n");
-		
-		while(true) {
-			displayMainMenu();
-			
-			int choice = Integer.parseInt(scanner.nextLine());
-			
-			// 사용자 선택에 따른 메서드 호출
-			switch(choice) {
-				case 1 :		// 도서 관리
-					handleBookManagement();
-					break;
-				추가 -------------------------------------------------------------------
-				case 2 :		// 회원 관리
-					handelMemberManagement();	
-				추가 -------------------------------------------------------------------
-
-				case 5 :
-					library.displayLibraryStatics();
-					break;
-				case 0 :
-					System.out.println("\n도서관 관리 시스템을 종료합니다. 감사합니다.");
-					scanner.close();
-					return;
-				default :
-					System.out.println("\n잘못된 선택입니다. 다시 입력해주세요.");
-					break;
-			}
-			
-		}
-	}
-
-	private void handelMemberManagement() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	// 도서 관리 서브 메뉴 처리
-	private void handleBookManagement() {
-		while(true) {
-			System.out.println("\n=== 도서 관리 ===");
-			System.out.println("1. 도서 추가");
-			System.out.println("2. 전체 도서 목록");
-			System.out.println("3. 대출 가능한 도서");
-			System.out.println("4. 연체된 도서");
-			System.out.println("0. 메인 메뉴로 돌아가기");
-			System.out.print("선택하세요 : ");
-			
-			int choice = Integer.parseInt(scanner.nextLine());
-			
-			switch(choice) {
-				case 1:	// 도서 추가
-					addNewBook();
-					break;
-				case 2: // 전체 도서 목록
-					library.displayAllBooks();
-					break;
-				case 3: // 대출 가능한 도서
-					library.displayAvaliableBooks();
-					break;
-				case 4:	// 연체된 도서 
-					library.displayOverdueBooks();
-					break;
-				case 0:		// 메인 메뉴로 돌아가기
-					return;
-				default:
-					System.out.println("잘못된 선택입니다.");
-					break;
-			}
-		}
-	}
-
-	// 새 도서 추가
+// 새 도서 추가
 	private void addNewBook() {
 		System.out.print("ISBN을 입력하세요 : ");
 		String isbn = scanner.nextLine().trim();
@@ -149,20 +32,51 @@ public class LibraryManagementSystem {
 		} catch (LibraryException e) {
 			//e.printStackTrace();
 			System.out.println(e.getMessage());
-		} catch	(Exception e) {
+		} 추가------------------------------------------------------------------------
+		   catch (Exception e) {
 			System.out.println("예상치 못한 오류가 발생했습니다.");
+		} 추가------------------------------------------------------------------------
+		  // 위의 catch에서 LibraryException 이외의 예외사항을 처리하기 위해 추가
+	}
+
+
+
+
+
+private void handleBookManagement() {
+		while(true) {
+			System.out.println("\n=== 도서 관리 ===");
+			System.out.println("1. 도서 추가");
+			System.out.println("2. 전체 도서 목록");
+			System.out.println("3. 대출 가능한 도서");
+			System.out.println("4. 연체된 도서");
+			System.out.println("0. 메인 메뉴로 돌아가기");
+			System.out.print("선택하세요 : ");
+			
+			int choice = Integer.parseInt(scanner.nextLine());
+			
+			switch(choice) {
+				case 1:	// 도서 추가
+					addNewBook();
+					break;
+				추가-------------------------------------------------
+				case 2: // 전체 도서 목록
+					library.displayAllBooks();
+					break;
+				// Library.java에 구현되어 있는 displayAllBooks 가져오기
+				case 3: // 대출 가능한 도서
+					library.displayAvaliableBooks();
+					break;
+				case 4: // 연체된 도서 
+					library.displayOverdueBooks();
+					break;
+				추가-------------------------------------------------
+				case 0:		// 메인 메뉴로 돌아가기
+					return;
+				default:
+					System.out.println("잘못된 선택입니다.");
+					break;
+			}
 		}
 	}
 
-	// 메인 메뉴 출력
-	private void displayMainMenu() {
-		System.out.println("\n=== 메인 메뉴 ===");
-		System.out.println("1. 도서 관리");
-		System.out.println("2. 회원 관리");
-		System.out.println("3. 대출/반납 관리");
-		System.out.println("4. 검색 및 조회");
-		System.out.println("5. 통계 정보");
-		System.out.println("0. 종료");
-		System.out.print("메뉴를 선택하세요 : ");
-	}
-}

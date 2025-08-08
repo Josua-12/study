@@ -1,10 +1,8 @@
 package com.shopping;
 
-import com.shopping.controller.MainController;
-
 /*
  * == 메인 메뉴 ==
- * 로그인되ㄴ지 않음
+ * 로그인되지 않은 상태
  * 
  * 1. 사용자 관리
  * 2. 상품 보기
@@ -13,7 +11,7 @@ import com.shopping.controller.MainController;
  * 
  * 선택 : 1
  * 
- * == 사용자 관리 메뉴 == (UserController)
+ * == 사용자 관리 메뉴 ==
  * 1. 회원 가입
  * 2. 로그인
  * 3. 로그아웃
@@ -61,9 +59,4 @@ import com.shopping.controller.MainController;
  */
 public class Main {
 	
-	  public static void main(String[] args) {
-	      // 메인 컨트롤러 인스턴스 생성
-	      MainController mainController = new MainController();
-	      mainController.start();
-	   }
 }
