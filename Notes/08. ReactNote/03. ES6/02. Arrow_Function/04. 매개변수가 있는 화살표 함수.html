@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Arrow Function - 매개변수</h1>
+    <p>화살표 함수 (ES6 방식)</p>
+    <p id="demo"></p>
+    <script>
+        // 매개변수가 있는 화살표 함수
+        // 문법: (매개변수) => 표현식
+        // 템플릿 리터럴(`)을 사용하면 문자열 결합 연산자를 쓰지 않고 더 깔끔한 표현 가능
+        // hello = (val) => `Hello &{val}`
+        hello = (val) => `Hello ${val}`;
+
+        // "World"를 매개변수로 전달
+        document.getElementById("demo").innerHTML = hello("World");
+    </script>
+</body>
+</html>

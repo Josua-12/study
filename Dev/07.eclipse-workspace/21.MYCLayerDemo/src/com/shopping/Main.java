@@ -4,7 +4,7 @@ import com.shopping.controller.MainController;
 
 /*
  * == 메인 메뉴 ==
- * 로그인되ㄴ지 않음
+ * 로그인되지 않음
  * 
  * 1. 사용자 관리
  * 2. 상품 보기
@@ -34,6 +34,16 @@ import com.shopping.controller.MainController;
  * 환영합니다. [사용자]님!
  * 초기 잔액: 10000.0원
  *  
+ *  
+ *  == 로그인 ==
+ *  아이디 : user001
+ *  패스워드 : test1234
+ *  [FileManager] 파일 읽기 성공 : data_\_users.dat	-> _실제로 들어가는 내용 아님, 오류 없애려고
+ *  [UserService] 로그인 성공 : user001
+ *  세션 생성 : user001님 로그인
+ *  로그인 성공!
+ *  	환영합니다, user001님!
+ *  
  */
 
 
@@ -59,6 +69,22 @@ import com.shopping.controller.MainController;
  * 
  
  */
+/*
+ * * 로그인 기능의 주요 요구사항
+ * 	- 사용자 ID와 비밀번호를 통한 인증
+ *  - 세션 관리를 통한 로그인 상태 유지
+ *  - 파일 시스템 기반 사용자 데이터 영속성
+ *  - 예외 처리 및 유효성 검증
+ * 
+ * * 로그인 프로세스 흐름
+ * 	- UI Layer : 사용자로부터 ID/PW 입력받기
+ * 	- Controller : 입력값 유효성 검증
+ *  - Service : 비즈니스 로직 처리(인증)
+ *  - Respository : 사용자 데이터 조회
+ *  - FileManager : 파일에서 데이터 로드
+ *  - SessionManager : 로그인 세션 생성
+ */
+
 public class Main {
 	
 	  public static void main(String[] args) {

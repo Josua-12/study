@@ -1,0 +1,38 @@
+1. 문자 함수
+    1) 대소문자 변환
+        - UPPER() : 대문자로 변환
+        - LOWER() : 소문자로 변환
+        - INITCAP() : 첫글자만 대문자 
+    2) 문자열 조작
+        - LENGTH() : 문자열 길이
+        - SUBSTR() : 문자열 추출
+        - INSTR() : 문자 위치 찾기
+        - REPLACE() : 문자 치환
+        - CONCAT() : 문자 연결
+    3) 공백 처리
+        - LPAD() : 왼쪽 채우기
+        - RPAD() : 오른쪽 채우기 
+        - TRIM() : 공백 제거
+        - LTRIM() : 왼쪽 공백 제거
+        - RTRIM() : 오른쪽 공백 제거
+2. 숫자 함수
+    1) 반올림/버림
+        - ROUND() : 반올림
+        - TRUNC() : 버림
+    2) 올림/내림
+        - CEIL() : 올림
+        - FLOOR() : 내림
+    3) 나머지
+        - MOD()
+3. 날짜 함수
+    1) 날짜 연산
+        - ADD_MONTHS()
+        - MONTHS_BETWEEN()
+    2) 날짜 정보
+        - NEXT_DAY()
+        - LAST_DAY()
+    3) 날짜 반올림/버림
+        - ROUND()
+        - TRUNC()
+4. 변환 함수
+5. 일반 함수

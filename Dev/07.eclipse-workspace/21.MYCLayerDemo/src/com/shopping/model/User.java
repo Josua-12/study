@@ -54,8 +54,44 @@ public class User implements Serializable{
 			System.err.println("잔액은 음수가 될 수 없습니다.");
 		}
 	}
+
+	@Override
+	public String toString() {
+		return String.format("User[id=%s, name=%s, balance=%.2f]", 
+										id, name, balance);
+	}
 	
-	
+	/*
+	 * 객체 동등성 비교
+	 *  - ID가 같으면 같은 사용자로 판단
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		// 두 객체의 참조가 같으면(즉, 같은 인스턴스면) 바로 true를 반환함 
+		// - 불필요한 비교를 줄여서 성능 높임
+		if(this == obj) {
+			return true;
+		} 
+		
+		// 비교 대상이 null이거나, 클래스 타입이 다르면 (즉, 서로 다른 타입이면) false 반환
+		// - 이는 User 타입끼리만 동등성 비교를 하겠다는 의미
+		if(obj == null || getClass() != obj.getClass()) {
+			return false;
+		}
+		
+		User user = (User)obj;	// 다운캐스팅
+		return id != null && id.equals(user.id);
+	}
+
+	/*
+	 * 해시코드 생성
+	 * ID 기반으로 해시코드 생성
+	 * 	- id가 null이 아니면 id의 해시코드를 반환하고, id가 null이면 0을 반환 (3항 연산자 활용
+	 */
+	@Override
+	public int hashCode() {
+		return id != null ? id.hashCode() : 0;
+	}
 	
 	
 	
