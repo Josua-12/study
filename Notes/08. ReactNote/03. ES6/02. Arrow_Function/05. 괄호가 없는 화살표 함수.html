@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Arrow Function - 괄호 생략</h1>
+    <p>화살표 함수 (ES6 방식)</p>
+    <p id="demo"></p>
+    <script>
+        /*
+            매개변수가 하나일 때 괄호 생략 규칙
+
+                - 괄호 생략 가능한 경우
+                    - 매개변수가 정확히 1개일 때
+                    - 예) val => `Hello ${val}`
+                - 괄호 생략 불가능한 경우 :
+                    - 매개변수가 0개일 때: () => `Hello`;
+                    - 매개변수가 2개 이상일 때: (a, b) => a + b;
+                    - 매개변수가 기본값이 있을 때: (val = "World") => `Hello ${val}`;
+                    - 구조 분해를 사용할 때: ({name, age}) => `${name} is ${age}`;
+        */
+       hello = val => `Hello ${val}`;
+
+       document.getElementById("demo").innerHTML = hello("World");
+    </script>
+</body>
+</html>
