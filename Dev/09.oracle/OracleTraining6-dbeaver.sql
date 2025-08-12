@@ -46,5 +46,6 @@ SELECT
 	ROUND(SAL * 1.073) AS "원단위_반올림",
 	ROUND(SAL * 1.073, -1) AS "10원단위_반올림",
 	ROUND(SAL * 1.073, -2) AS "100원단위_반올림",
-	ROUND(SAL * 1.073, -3) AS "1000원단위_반올림"
+	ROUND(SAL * 1.073, -3) AS "1000원단위_반올림",
+	TRUNC(SAL * 1.073, -3) AS "1000원단위_반올림"
 FROM EMP
