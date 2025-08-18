@@ -1,0 +1,165 @@
+1. Repository 초기 설정
+    1) Github.com에서 Repository 생성
+        - 파일이 없는 저장소로 생성 
+    2) 로컬에서 IDE (eclipse)로 자바 프로젝트 생성
+        - 패키지 구조 포함 
+        - .gitignore 파일 포함  
+    3) 로컬과 리모트를 연결            
+
+    4) 로컬에서 develop 브랜치 생성
+        - git checkout -b develop
+        - git push -u origin develop
+
+    5) 팀원 초대
+        - Settings -> Manage acess -> Add people
+            - 팀원 Github ID로 초대 
+
+2. 브랜치 전략 
+    1) 브랜치 계층 구조 
+        - main (배포용, 최종 완성본)
+            |
+            |- develop (통합 개발)
+                    |
+                    |-- feature/domain-[엔티티]-[이니셜]
+                    |-- feature/exception-[타입]-[이니셜]
+                    |-- feature/util-[기능]-[이니셜]
+                    |-- feature/service-[기능]-[이니셜]
+                    |-- feature/controller-[기능]-[이니셜]
+                    |-- hotfix/[이슈명]-[이니셜]
+                    |-- release/v[버전]
+
+    2) 패키지별 브랜치 명명 규칙
+        - Domain 패키지 
+            - feature/domain-user-chj       # User 엔터티 
+            - feature/domain-product-chj    # Product 엔터티 
+            - feature/domain-order-chj      # Order 엔터티 
+            - feature/domain-cart-chj       # Cart 엔터티                    
+
+        - Controller 패키지 
+            - feature/controller-main-chj       # MainController
+            - feature/controller-user-chj       # UserCotroller 
+            - feature/controller-product-chj    # ProductController 
+            - feature/controller-order-chj      # OrderController
+            - feature/controller-admin-chj      # AdminController 
+
+        - Service 패키지 
+            - feature/service-auth-chj          # AuthenticationService
+            - feature/service-product-chj       # ProductService
+            - feature/service-order-chj         # OrderService
+            - feature/service-cart-chj          # CartService 
+            - feature/service-report-chj        # ReportService
+
+        - Repository 패키지 
+            - feature/repository-user-chj       # UserRepository 
+            - feature/repository-product-chj    # ProductRepository
+            - feature/repository-order-chj      # OrderRepository 
+
+        - Util 패키지 
+            - feature/util-file-chj             # FileManager
+            - feature/util-validation-chj       # InputValidator
+            - feature/util-session-chj          # SessionManager 
+
+3. 일일 워크플로우 
+    1) 시작 스탠드업 (17:00)
+        - 모든 브랜치 확인 (로컬 + 원격)
+            - git branch -a 
+                - 출력 예시 
+                    *develop
+                    main
+                    remotes/origin/main
+                    remotes/origin/develop
+                    remotes/origin/feature/controller-main-chj 
+                    remotes/origin/feature/controller-user-chj 
+                    remotes/origin/feature/domain-user-kge
+                    remotes/origin/feature/domain-product-kge
+                    ....    
+
+        - develop 최신화 
+            - git checkout develop
+            - git pull origin develop
+
+        - 어제 작업 확인 
+            - git log --oneline --graph -10  
+
+        - 오늘 작업 브랜치 생성
+            - git checkout -b feature/domain-user-chj   
+
+    2) 작업 중 (17:15 ~ 18:15) 
+        - 작업 단위별 커밋 
+            - git add User.java
+            - git commit -m "[feat] User 엔티티 클래스 구현 - 회원 정보 필드 정의"       
+
+        - 추가 작업 
+            - git add UserRole.java 
+            - git commit -m "[feat] UserRole 필드 추가 - USER, ADMIN 권한 구분"            
+
+    3) PR 생성 (18:20)
+        - 푸시 
+            - git push -u origin feature/domain-user-chj 
+
+        - Github Pull Request 생성
+            - 리뷰어 작성, 설명 작성
+        - feature/domain-user-chj => develop   
+
+    4) PR 병합 후 (18:30)
+        - develop 최신화 
+            - git checkout develop
+            - git pull origin develop
+
+        - 로컬 브랜치 정리 
+            - git branch -d feature/domain-user-chj     
+
+4. 팀 구성 및 역할 분담
+    1)    이름          역할        담당 패키지         주요 작업
+       ---------------------------------------------------------------
+         임지훈       팀장/개발자     domain, service   User 시스템, 인증 
+         김가은        개발자        domain, service    Product 관리  
+         황혜은        개발자        domain, service    Order 관리
+         장범준        개발자        controller, util   UI / 메뉴 시스템 
+
+    2) 개인별 브랜치 할당
+        - 임지훈 : 
+                - feature/domain-user-ijh 
+                - feature/service-auth-ijh 
+                - feature/repository-user-ijh 
+
+        - 김가은 :
+                - feature/domain-product-kge
+                - feature/service-product-kge
+                - feature/repository-product-kge
+
+5. 커밋 타입 및 예시
+    1)    타입          설명            예시
+      ---------------------------------------------
+         feat         새로운 기능     [feat] User 로그인 기능 구현 - 세션 관리 포함                                  
+         fix          버그 수정       [fix] NullPointerException 해결 - null 체크 추가 
+         docs         문서 수정       [docs] API 사용법 README 추가
+         refactor      리팩토링       [refactor] if-else를 OOO패턴으로 변경
+         test          테스트         [test] UserSerice 단위 테스트 추가 
+         chore         기타           [chore] .gitignore 업데이트 
+
+6. 좋은 커밋 vs 나쁜 커밋
+    1) 좋은 커밋 
+        git commit -m "[feat] User 로그인 기능 구현 - 세션 관리 포함" 
+
+    2) 나쁜 커밋 
+        git commit -m "수정"
+        git commit -m "User 추가함"
+
+7. 팀 현황 
+    1) 팀원         생성된 브랜치 수        병합된 PR       진행중
+     ---------------------------------------------------------
+      임지훈            5                     3            2
+      김가은            4                     3            1 
+      황혜은            4                     2            2  
+      장범준            3                     2            1
+
+    2) 패키지별 진행률 
+        패키지          완료            진행중          계획
+      ----------------------------------------------------
+        domain          4/5              1             0    
+        controller      2/4              2             0 
+        service         3/5              1             1
+        repository      2/4              1             1   
+        util            3/3              0             0
+        exception       2/3              1             0      
