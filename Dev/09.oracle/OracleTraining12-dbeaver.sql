@@ -209,4 +209,87 @@ WHERE EXISTS (
 -- 9-18 : 다중 열 서브쿼리
 /*
  * 	"각 부서에서 최고 급여를 받는 직원들을 조회하시오"
+ * 	- (부서번호, 급여) 쌍을 동시에 비교
  */
+SELECT DEPTNO, MAX(SAL)
+FROM EMP
+GROUP BY DEPTNO;
+
+SELECT *
+FROM EMP
+WHERE (DEPTNO, SAL) IN (
+		SELECT DEPTNO, MAX(SAL)
+		FROM EMP
+		GROUP BY DEPTNO
+	);
+
+-- 9-19 : 인라인 뷰 (FROM 절 서브쿼리) 사용
+/*
+ *	FROM절에 서브쿼리를 사용하여 가상 테이블 생성
+ *	"10번 부서 직원들과 부서 정보를 조인해서 출력하시오" 
+ */
+SELECT E10.EMPNO , E10.ENAME , E10.DEPTNO , D.DNAME , D.LOC 
+FROM (SELECT * FROM EMP WHERE DEPTNO = 10) E10, -- 인라인 뷰 : 10번 부서 직원
+(SELECT * FROM DEPT) D							-- 인라인 뷰 : 모든 부서
+WHERE E10.DEPTNO = D. DEPTNO ;
+
+-- 9-20. WITH절
+/*
+ *	WITH절을 사용하여 임시 테이블 정의
+ *	- 가독성이 좋고 재사용 가능 
+ */
+
+WITH 
+E10 AS (SELECT * FROM EMP WHERE DEPTNO = 10),	-- 10번 부서 직원
+D AS (SELECT * FROM DEPT)
+SELECT E10.EMPNO, E10.ENAME, E10. DEPTNO, D.DNAME, D.LOC
+FROM E10, D
+WHERE E10.DEPTNO = D.DEPTNO ;
+
+-- 9-21 : 스칼라 서브쿼리 (SELECT절 서브쿼리)
+/*
+ *  "각 직원의 등급과 부서명을 함께 표시하시오."
+ */
+SELECT E.EMPNO, E.ENAME, E.JOB, E.SAL,
+       (
+           SELECT GRADE
+           FROM SALGRADE
+           WHERE E.SAL BETWEEN LOSAL AND HISAL
+       ) AS SALGRADE,
+       E.DEPTNO,
+       (
+           SELECT D.DNAME
+           FROM DEPT D
+           WHERE E.DEPTNO = D.DEPTNO
+       ) AS DNAME
+FROM EMP E;
+
+
+-- SUBQUERY LAB
+/*
+ * 	평균 급여보다 많이 받으면서 MANAGER(JOB) 직급인 직원의
+ * 	사번, 이름, 직급, 급여를 조회하시오. 
+ */
+SELECT EMPNO, ENAME, JOB, SAL 
+FROM EMP
+WHERE JOB = 'MANAGER' 
+AND SAL > (
+		SELECT AVG(SAL)		
+		FROM EMP			
+);
+
+/*
+ *	4. ANY 연산자 사용
+ *
+ * 	SALESMAN 직급 중 누구보다도 급여를 많이 받는 다른 직급의 직원들을 조회하시오.
+ * 	(급여순으로 정렬) 
+ */
+SELECT EMPNO, ENAME, JOB, SAL
+FROM EMP
+WHERE JOB != 'SALESMAN'
+AND SAL > ANY (
+		SELECT SAL			
+		FROM EMP		
+		WHERE JOB = 'SALESMAN'
+	)
+ORDER BY SAL;
