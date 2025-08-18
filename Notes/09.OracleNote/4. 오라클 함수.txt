@@ -1,0 +1,93 @@
+
+0. 함수 구분
+    1) 단일행 함수 (Single Row Function) 
+        - 한 줄씩 처리하는 함수 
+    2) 다중행 함수 (Multi Row Function)     
+        - 여러 줄을 한번에 처리하는 함수    
+
+
+1. 문자 함수 
+    1) 대소문자 변환
+        - UPPER() : 대문자로 변환
+        - LOWER() : 소문자로 변환
+        - INITCAP() : 첫글자만 대문자
+    2) 문자열 조작 
+        - LENGTH() : 문자열 길이
+        - SUBSTR() : 문자열 추출 
+        - INSTR() : 문자 위치 찾기        
+        - REPLACE() : 문자 치환 
+        - CONCAT() : 문자 연결 
+    3) 공백 처리 
+        - LPAD() : 왼쪽 채우기 
+        - RPAD() : 오른쪽 채우기 
+        - TRIM() : 공백 제거 
+        - LTRIM() : 왼쪽 공백 제거
+        - RTRIM() : 오른쪽 공백 제거         
+2. 숫자 함수 
+    1) 반올림/버림
+        - ROUND() : 반올림
+        - TRUNC() : 버림
+    2) 올림/내림
+        - CEIL() : 올림
+        - FLOOR() : 내림 
+    3) 나머지 
+        - MOD()            
+3. 날짜 함수
+    1) 날짜 연산
+        - ADD_MONTHS()
+        - MONTHS_BETWEEN()
+    2) 날짜 정보
+        - NEXT_DAY()
+        - LAST_DAY()
+    3) 날짜 반올림/버림
+        - ROUND() : 기준점에 따라 반올림 (과거 또는 미래 시점으로)
+        - TRUNC() : 무조건 버림 (과거 시점으로)
+        - 일별/월별/분기별 집계 쿼리 작성시 
+        - 특정 기간의 시작 시점 구하기 
+
+4. 형변환 함수 
+
+            문자열(String)                       날짜(Date)
+                                ==========>
+                                 TO_DATE()
+                                <==========
+                                 TO_CHAR()
+
+            TO_DATE(파라미터1, 파라미터2)
+                    --------   -------
+                    변환할 문자열  FORMAT(문자열의 날짜 형식)
+                                   - 날짜 포맷
+                                   - 시간 포맷 
+                                   - 요일 포맷
+                                   - 기타 포맷    
+            TO_CHAR(파라미터1, 파라미터2)  
+                    --------  --------
+                    변환할 날짜 값  FORMAT(출력할 문자열 형식)                                                               
+
+5. NULL 처리 함수 
+    1) NVL
+    2) NVL2
+
+6. 집계 함수 
+    1) 데이터를 기반으로 한 정확한 의사결정을 하는데 필요한 함수 
+    2) SQL은 강력하고 편리한 집계 함수(Aggregate Function)를 제공함    
+    3) 여러 행의 데이터를 바탕으로 하나의 요약된 결과 값을 계산해주는 함수
+    4) 종류
+        - AVG(expression)
+        - count(expression)
+            - null과 특정 컬럼의 개수
+        - count(*)
+        - max(expression)
+        - min(expression)
+        - sum(expression)
+    5) Group by 
+        - 그룹으로 묶기 
+        - 특정 컬럼의 값이 같은 행들을 하나의 그룹으로 묶어주는 역할을 함
+        - 여러 컬럼 기준 그룹화 가능함 
+        - 주의 사항
+            - Select 절에는 Group by에 사용된 컬럼과 집계 함수만 사용가능함
+        - 그룹 필터링 
+            - having : 그룹으로 묶은 결과에 대해 다시 필터링 
+        - SQL 작동 순서
+            - FROM => WHERE => Group BY => HAVING => SELECT => ORDER BY
+
