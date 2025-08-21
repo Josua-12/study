@@ -1,0 +1,16 @@
+package com.shopping.service;
+
+import com.shopping.repository.FileUserRepository;
+
+public class AdminService {
+
+	private final FileUserRepository userRepository;
+	
+	public AdminService() {
+        this.userRepository = new FileUserRepository();
+    }
+	
+	public AdminService(FileUserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+}

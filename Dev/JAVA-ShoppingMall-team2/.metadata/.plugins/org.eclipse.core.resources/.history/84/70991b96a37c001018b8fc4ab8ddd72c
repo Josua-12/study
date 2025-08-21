@@ -1,0 +1,58 @@
+package com.shopping.test;
+
+import java.io.File;
+import com.shopping.model.User;
+import com.shopping.model.Admin;
+import com.shopping.repository.FileUserRepository;
+import com.shopping.repository.FileAdminRepository;
+import com.shopping.service.AuthService;
+
+public class AuthTest {
+
+    public static void main(String[] args) {
+        // 1. data 폴더 생성 및 기존 파일 삭제
+        File dataDir = new File("data");
+        if (!dataDir.exists()) dataDir.mkdir();
+        else {
+            for (File file : dataDir.listFiles()) {
+                file.delete();
+            }
+        }
+
+        // 2. Repository 생성
+        FileUserRepository userRepo = new FileUserRepository();
+        FileAdminRepository adminRepo = new FileAdminRepository();
+
+        // 3. AuthService 생성
+        AuthService authService = new AuthService(userRepo, adminRepo);
+
+        System.out.println("=== 인증 테스트 시작 ===\n");
+
+        try {
+            // 4. 일반 사용자 회원가입
+            User user1 = authService.registerUser("user1", "pass123", "user1@example.com", "사용자1");
+            System.out.println("회원가입 성공: " + user1);
+
+            // 5. 관리자 로그인 (기본 관리자)
+            Admin admin = (Admin) authService.login("admin@shopping.com", "admin123");
+            System.out.println("관리자 로그인 성공: " + admin.getName());
+
+            // 6. 일반 사용자 로그인
+            User loginUser = authService.login("user1@example.com", "pass123");
+            System.out.println("사용자 로그인 성공: " + loginUser.getName());
+
+            // 7. 로그아웃 테스트
+            authService.logout();
+            System.out.println("로그아웃 완료: " + !authService.isLoggedIn());
+
+        } catch (Exception e) {
+            System.err.println("오류 발생: " + e.getMessage());
+        }
+
+        System.out.println("\n=== 인증 테스트 완료 ===");
+
+        // 8. 저장된 파일 확인
+        System.out.println("users.dat 경로: " + new File("data/users.dat").getAbsolutePath());
+        System.out.println("admins.dat 경로: " + new File("data/admins.dat").getAbsolutePath());
+    }
+}

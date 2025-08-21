@@ -1,0 +1,66 @@
+package com.shopping.controller;
+
+import java.util.Scanner;
+
+import com.shopping.model.User;
+import com.shopping.repository.FileAdminRepository;
+import com.shopping.repository.FileUserRepository;
+import com.shopping.service.AuthService;
+import com.shopping.service.UserService;
+
+public class UserController {
+	private UserService userService;
+	private AuthService authService;
+	private Scanner scanner;
+	
+	// 로그인 성공 후 호출
+	private void showShoppingUserMenu(User user) {
+	    while (true) {
+	        System.out.println("\n╔════════════════════════════════════════════╗");
+	        System.out.println("║     🛍️  Java Shopping Mall                 ║");
+	        System.out.println("║     환영합니다, " + user.getName() + "님!                  ║");
+	        System.out.println("╚════════════════════════════════════════════╝\n");
+
+	        System.out.println("1. 상품 둘러보기");
+	        System.out.println("2. 상품 검색");
+	        System.out.println("3. 장바구니 관리");
+	        System.out.println("4. 주문하기");
+	        System.out.println("5. 주문 내역");
+	        System.out.println("6. 마이페이지");
+	        System.out.println("7. 로그아웃");
+	        System.out.print("\n메뉴를 선택하세요: ");
+
+	        String choice = scanner.nextLine();
+	        
+	        switch (choice) {
+            case "1":
+            	browseProducts();
+                System.out.println("상품 둘러보기 기능 호출");
+                break;
+            case "2":
+                System.out.println("상품 검색 기능 호출");
+                break;
+            case "3":
+                System.out.println("장바구니 관리 기능 호출");
+                break;
+            case "4":
+                System.out.println("주문하기 기능 호출");
+                break;
+            case "5":
+                System.out.println("주문 내역 기능 호출");
+                break;
+            case "6":
+                System.out.println("마이페이지 기능 호출");
+                break;
+            case "7":
+                logout(); // 로그아웃 처리
+                return;   // 메뉴 종료
+            default:
+                System.out.println("잘못된 선택입니다.");
+        }
+    }
+}
+
+	private void browseProducts() {
+		productController.list();   // 상품 목록 보여주기
+	}

@@ -1,0 +1,24 @@
+1. DDL의 특징
+    1) 데이터베이스 객체의 구조를 정의/변경/삭제
+    2) 자동 COMMIT (트랜잭션 즉시 종료)
+    3) ROLLBACK 불가능 - 신중히 실행
+    4) 주요 명령어
+        - CREATE, ALTER, DROP, TRUNCATE, RENAME
+    5) 테이블, 인덱스, 뷰 등 객체 관리
+
+2. DDL vs. DML
+    DDL (Data Definition Language)          DML (Data Manipulation Language)
+    ------------------------------------------------------------------------
+    구조 정의                                데이터 조작
+    자동 COMMIT, ROLLBACK 불가능             수동 COMMIT, ROLLBACK 가능
+
+3. CREATE TABLE - 테이블 생성
+
+4. ALTER TABLE - 테이블 구조 변경
+    1) 컬럼 추가 - ADD
+    2) 컬럼 이름 변경 - RENAME COLUMN
+    3) 컬럼 속성 변경 - MODIFY
+    4) 컬럼 삭제 - DROP COLUMN 
+    
+
+5. RENAME, TRUNCATE, DROP - 테이블 관리 

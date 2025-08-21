@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="com.shopping.model.User"/>
+    <fullyQualifiedTypeName name="com.shopping.Main"/>
+    <fullyQualifiedTypeName name="com.shopping.repository.UserRepository"/>
+</qualifiedTypeNameHistroy>

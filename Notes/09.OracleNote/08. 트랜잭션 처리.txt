@@ -1,0 +1,25 @@
+1. SQL 명령어 4가지 종류
+    1) DDL (Data Definition Language)
+        - CREATE, ALTER, DROP
+
+    2) DML (Data Manipulation Language)
+        - INSERT, SELECT, UPDATE, DELETE
+
+    3) DCL (Data Control Language)
+        - GRANT, REVOKE
+    
+    4) TCL (Transaction Control Language)
+        - 목적
+            - DML에 의해 수행된 데이터 변경 작업들을 하나의 '거래(Transcation)'단위로
+              묶어서 관리하는 언어임
+        - 예) 은행 계좌 이체
+        - 주요 명령어
+            - COMMIT : 트랜잭션의 모든 작업을 최종적으로 데이터베이스에
+            - ROLLBACK : 트랜잭션의 모든 작업을 취소하고 이전 상태로 되돌림
+        - 트랜잭션은 실무에서 매우 중요함
+
+2. ACID 특성
+    1) Atomicity (원자성)
+        - 모두 성공하거나 모두 실패
+    2) Consistency (일관성)
+        - 

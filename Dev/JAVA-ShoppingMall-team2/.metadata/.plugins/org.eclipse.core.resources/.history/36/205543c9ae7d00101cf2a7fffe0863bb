@@ -1,0 +1,99 @@
+package com.shopping.controller;
+
+import java.util.Scanner;
+
+import com.shopping.model.Admin;
+import com.shopping.model.User;
+import com.shopping.repository.FileAdminRepository;
+import com.shopping.repository.FileUserRepository;
+import com.shopping.service.AuthService;
+import com.shopping.service.UserService;
+
+public class UserController {
+	private UserService userService;
+	private AuthService authService;
+	private Scanner scanner;
+	
+	// 로그인 성공 후 호출
+	private void showShoppingUserMenu(User user) {
+	    while (true) {
+	        System.out.println("\n╔════════════════════════════════════════════╗");
+	        System.out.println("║     🛍️  Java Shopping Mall                 ║");
+	        System.out.println("║     환영합니다, " + user.getName() + "님!                  ║");
+	        System.out.println("╚════════════════════════════════════════════╝\n");
+
+	        System.out.println("1. 상품 둘러보기");
+	        System.out.println("2. 상품 검색");
+	        System.out.println("3. 장바구니 관리");
+	        System.out.println("4. 주문하기");
+	        System.out.println("5. 주문 내역");
+	        System.out.println("6. 마이페이지");
+	        System.out.println("7. 로그아웃");
+	        System.out.print("\n메뉴를 선택하세요: ");
+
+	        String choice = scanner.nextLine();
+	        
+	        switch (choice) {
+            case "1":
+            	browseProducts();
+                System.out.println("상품 둘러보기");
+                break;
+            case "2":
+            	searchProducts();
+                System.out.println("상품 검색");
+                break;
+            case "3":
+            	manageCart();
+                System.out.println("장바구니 관리");
+                break;
+            case "4":
+            	Order();
+                System.out.println("주문하기");
+                break;
+            case "5":
+            	ByingList();
+                System.out.println("주문 내역");
+                break;
+            case "6":
+            	myPage();
+                System.out.println("마이페이지");
+                break;
+            case "7":
+                logout(); // 로그아웃 처리
+                System.out.println("로그아웃");
+                return;   // 메뉴 종료
+            default:
+                System.out.println("잘못된 선택입니다.");
+        }
+    }
+}
+
+	private void logout() {
+		Object nowLoginObj = authService.getLoggedInUser();
+		if (nowLoginObj == null) {
+			System.out.println("로그인된 사용자가 없습니다.");
+			return;
+		}
+		
+		String userName = (nowLoginObj instanceof User ? ((User)nowLoginObj).getName() : ((Admin)nowLoginObj).getName());
+		authService.logout();
+		System.out.println(userName + "님이 로그아웃되었습니다.");
+	}
+
+	private void myPage() {
+		userController.myPage(session);
+	}
+
+	private void manageCart() {
+		cartController.menu();      // 장바구니 메뉴 실행
+	}
+
+	private void searchProducts() {
+		productController.search(); // 상품 검색 기능
+	}
+
+	private void browseProducts() {
+		productController.list();   // 상품 목록 보여주기
+	}
+	
+	
