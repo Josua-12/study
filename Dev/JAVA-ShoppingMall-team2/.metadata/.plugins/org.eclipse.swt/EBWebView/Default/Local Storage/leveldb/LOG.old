@@ -1,2 +1,3 @@
-2025/08/18-17:28:55.974 88ac Creating DB D:\Class\Dev\JAVA-ShoppingMall-team2\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Local Storage\leveldb since it was missing.
-2025/08/18-17:28:56.479 88ac Reusing MANIFEST D:\Class\Dev\JAVA-ShoppingMall-team2\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Local Storage\leveldb/MANIFEST-000001
+2025/08/21-09:09:51.837 5968 Reusing MANIFEST D:\Class\Dev\JAVA-ShoppingMall-team2\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Local Storage\leveldb/MANIFEST-000001
+2025/08/21-09:09:51.846 5968 Recovering log #3
+2025/08/21-09:09:51.848 5968 Reusing old log D:\Class\Dev\JAVA-ShoppingMall-team2\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Local Storage\leveldb/000003.log 

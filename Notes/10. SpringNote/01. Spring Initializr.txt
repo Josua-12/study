@@ -1,0 +1,55 @@
+1. 프로젝트 빌드 도구
+    1) Maven
+        - 전통적인 빌드 도구
+            - XML 기반 설정
+            - 안정적, 널리 사용
+    2) Gradle
+        - 자동화 빌드 도구
+            - Groovy/Kotlin 기반
+            - 유연하고 빠름
+    
+    3) 빌드 도구
+        - 코드 컴파일, 라이브러리 관리, 패키징을 자동화
+
+2. 프로그래밍 언어
+    1) Java - 가장 보편적
+    2) Kotlin - 모던 언어, 중급자
+    3) Groovy - 스크립트 언어
+
+3. Spring Boot 버전
+    1) 3.5.4 (안정 버전) - 프로덕션 환경용
+    2) SNAPSHOT 버전 - 개발중인 버전
+    3) M1, M2 (Milestonr) - 테스트 버전
+
+4. Project 정보
+    1) Group
+        - 회사/조직 도메인
+    2) Artifact
+        - 프로젝트 이름
+    3) Name
+        - 프로젝트 표시 이름 
+    4) Package
+        - Java 패키지명
+        - (Group + Artifact)
+    5) Packaging
+        - Jar (실행파일)
+        - War (웹서버용)
+
+5. Dependencieds (의존성 / 라이브러리)
+    1) Developer Tools
+        - Lombok
+            - getter/setter 자동화
+            - 반복 코드를 자동 생성
+    2) Web
+        - Spring Web
+            - 웹 애플리케이션 구축
+            - REST API 개발
+
+    3) Dependencies
+        - 프로젝트에서 사용할 추가 기능/라이브러리
+        - 필요한 기능
+
+6. 단축키
+    1) GENERATE : 프로젝트 생성
+    2) EXPLORE : 구조 미리보기
+

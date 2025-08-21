@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item key="hasShownOverlayPopupBefore" value="true"/>
+	<section name="java.lang.Class">
+		<item key="replaceBarOpen" value="false"/>
+		<list key="findhistory">
+			<item value="getUser"/>
+			<item value="listOr"/>
+			<item value="update"/>
+			<item value="ss"/>
+			<item value="findall"/>
+			<item value="userI"/>
+			<item value="object"/>
+			<item value="odject"/>
+			<item value="getLogg"/>
+			<item value="userRepository.findById(Id).toString();"/>
+			<item value="중복"/>
+			<item value="useR"/>
+			<item value="user"/>
+			<item value="get"/>
+			<item value="FileManager"/>
+		</list>
+	</section>
+</section>
