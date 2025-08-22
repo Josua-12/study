@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            background: #f9f9f9;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #007bff;
+        }
+        .error { color: red; }
+        .success { color: green; }
+    </style>
+</head>
+<body>
+    <h1>일반 함수 vs 화살표 함수 비교</h1>
+    <p>두 버튼을 클릭하고 차이를 확인</p>
+    <hr>
+
+    <button onclick="testNormal()">일반 함수 테스트</button>
+    <button onclick="testArrow()">화살표 함수 테스트</button>
+
+    <div id="result" class="box">
+        결과가 여기에 표시됩니다...
+    </div>
+
+    <script>
+        /*
+            일반 함수 = 공중 전화
+                       누가 걸든 상관 없이 항상 "공중 전화"
+                       내 번호(this)를 잃어버림!
+                       * this 결정 시점 : 실행할 때 결정
+                         setTimeout() 안에서 this = Window (전역)
+
+            화살표 함수 = 내 휴대폰
+                         항상 내 번호를 기억
+                         내 번호(this)를 유지!
+                         * this 결정 시점 : 만들 때 결정
+                           setTimeout() 안에서 this = 상위 객체
+        */
+        const myApp = {
+            appName: "나의 앱",
+            version: "1.0",
+            // 일반 함수 사용
+            showInfoNormal: function() {
+                document.getElementById('result').innerHTML = "1초 기다려주세요..."
+
+                // 일반 function을 사용
+                setTimeout(function() {
+                    document.getElementById('result').innerHTML =
+                    `<span class="error">일반 함수: , 앱 이름: ${this.appName} , 버전: ${this.version}</span>`;
+                }, 1000);
+            },
+            // 화살표 함수 사용
+            showInfoArrow: function() {
+                document.getElementById('result').innerHTML = "1초 기다려주세요..."
+
+                // 일반 function을 사용
+                setTimeout(() => {
+                    document.getElementById('result').innerHTML =
+                    `<span class="success">일반 함수: 앱 이름: ${this.appName}, 버전: ${this.version}</span>`;
+                }, 1000);
+            }
+        };
+
+        function testNormal() {
+            myApp.showInfoNormal();
+        }
+
+        function testArrow() {
+            myApp.showInfoArrow();
+        }
+    </script>
+</body>
+</html>

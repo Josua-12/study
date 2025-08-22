@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>1초 후에 카운트를 1 증가하는 카운터</h1>
+    <h2>현재 카운트 : <span id="count">0</span></h2>
+    <button onclick="startCounter()">카운터 시작</button>
+    <hr>
+
+    <script>
+        const counter = {
+            count: 0,
+
+            // 1초 후에 카운트를 1 증가시키는 함수
+            increase: function() {
+                console.log("1초 후 카운트 증가 시도..");
+                setTimeout(() => {
+                    this.count++;
+                    document.getElementById('count').textContent = this.count;
+                    console.log("카운트 증가! 현재 : ", this.count);
+                }, 1000)
+            }
+        };
+
+        function startCounter() {
+            counter.increase();
+        }
+    </script>
+</body>
+</html>

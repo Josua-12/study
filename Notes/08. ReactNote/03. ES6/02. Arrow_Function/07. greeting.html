@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>1초 후 이름 출력하기</h1>
+    <p>콘솔을 열어서 확인하세요(F12)</p>
+    <hr>
+
+    <script>
+        const person = {
+            name: "코딩신",
+            sayHello: function() {
+                setTimeout(() => {
+                    console.log(`안녕! 나는 ${this.name} 이야! `)
+                }, 1000)
+            }
+        };
+
+        person.sayHello();
+    </script>
+</body>
+</html>
