@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .product-info {
+            border-radius: 5px;
+            background-color: #f0f0f0;
+            padding: 20px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lab 1 : 2초 후 상품 정보 표시</h1>
+    <button onclick = "showProduct()">상품 정보 표시</button>
+
+    <div id="info" class="product-info">
+        여기에 상품 정보가 표시됩니다...
+    </div>
+    <hr>
+
+    <script>
+        const product = {
+            name: "맥북 프로", 
+            price: 2500000,
+            stock: 5,
+
+            // 2초 후에 상품 정보가 화면에 표시하는 함수
+            displayInfo: function() {
+                // 로딩 메시지 표시
+                document.getElementById('info').innerHTML = "로딩 중..."
+                setTimeout(() => {
+                    document.getElementById('info').innerHTML = 
+                    `<h3>상품명: ${this.name}</h3>
+                     <p>가격: ${this.price}원</p>
+                     <p>재고: ${this.stock}개</p>`;
+                }, 2000);
+            }
+        };
+
+        function showProduct() {
+            product.displayInfo();
+        }
+    </script>
+</body>
+</html>

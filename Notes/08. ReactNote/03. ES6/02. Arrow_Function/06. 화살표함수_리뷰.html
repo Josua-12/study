@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Arrow Funtion</h2>
+
+    <p id="demo1"></p>
+    <p id="demo2"></p>
+    <p id="demo3"></p>
+
+    <script>
+        // ES5 전통적인 함수 표현식
+        var hello1;
+
+        hello1 = function() {
+            return "Hello World!"
+        }
+
+        document.getElementById("demo1").innerHTML = hello1();
+
+        // ES6 화살표 함수 (중괄호와 return)
+        // ES6 권장 방식 : const 사용 (함수는 재할당할 일이 거의 없음)
+        const hello2 = () => { return "Hello World!" };
+        
+        document.getElementById("demo2").innerHTML = hello2();
+
+        // ES6의 화살표 함수 (가장 간결한 형태)
+        const hello3 = () => "Hello World!";
+
+        document.getElementById("demo3").innerHTML = hello3();
+    </script>
+</body>
+</html>

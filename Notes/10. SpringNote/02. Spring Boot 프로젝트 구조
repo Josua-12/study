@@ -1,0 +1,53 @@
+1. 프로젝트 폴더 구조
+    1) servlet/         # 프로젝트 루트
+        |
+        |-- gradle      # Gradle 래퍼 파일
+        |
+        |-- .idea       # IntelliJ 설정 (무시해도 됨)
+        |
+        |-- build       # 컴파일된 파일 (자동생성)
+        |
+        |-- out         # 실행 파일 (자동생성)
+        |
+        |-- src/        # 가장 중요 ! 여기서 코딩함
+        |
+            |-- main/   # 실제 애플리케이션 코드 
+                |
+                |-- java/       # java 소스 코드 
+                    |
+                    |-- ServletApplication.java     # 시작점
+                    |
+                    |-- ServletInitializer.java     # war 배포용
+                    |
+                    |-- .java                       # 사용자 추가 파일
+                |
+                |-- resource    # 설정 파일, 정적 자원
+                    |
+                    |-- application.properties      # 설정 파일
+                    |
+                    |-- static/                     # css, js, 이미지
+                    |
+                    |-- templates/                  # html 
+                |
+                |-- webapp      # 웹 리소스 (jsp 등)
+            |
+            |-- test/   # 테스트 코드 
+                |
+                |-- java/       # 테스트 java 파일
+        |
+        |-- build.gradle # 의존성 관리 (dependencies)
+
+    2) build.gradle 
+        - 의존성 관리
+
+2. ServletApplication.java 
+    1) 프로그램 시작점
+
+3. application.properties
+    1) 설정 파일
+
+4. 프로젝트 실행
+    1) ServletApplication.java 파일 열기 --> main() 메서드
+
+5. 실행 성공 확인
+    1) 브라우저에서 http://localhost:8080/
