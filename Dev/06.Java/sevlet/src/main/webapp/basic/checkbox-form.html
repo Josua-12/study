@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+    </style>
+</head>
+<body>
+  <div class="container">
+      <h2>체크박스 테스트 (복수 선택)</h2>
+
+      <div class="info">
+        <strong>체크 포인트</strong><br>
+        * 체크박스는 여러 개 선택 가능<br>
+        * 같은 name으로 여러 값이 전송됨<br>
+        * 서버에서 <code>getParameterValues("")</code>로 배열로 받음<br>
+        * <code>getParameter("")</code>를 쓰면 첫 번째 값만 받음 (데이터 손실!)<br>
+      </div>
+
+      <form method="post" action="/request-param">
+
+      </form>
+  </div>
+</body>
+</html>
