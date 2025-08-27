@@ -4,24 +4,116 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
+        /* 전체 페이지 스타일 */
+        body {
+          font-family: Arial, sans-serif;
+          margin: 40px;
+          background-color: #f5f5f5;
+        }
 
+        /* 메인 컨테이너 박스 스타일 */
+        .container {
+          background: white;
+          padding: 30px;
+          border-radius: 10px;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+          max-width: 600px;
+        }
+
+        h2 {
+          color: #2e7d32;
+        }
+
+        .form-group {
+          margin: 20px 0;
+          padding: 15px;
+          background: #e8f5e9;
+          border-radius: 5px;
+        }
+
+        .checkbox-group {
+          margin: 10px 0;
+        }
+
+        label {
+          display: block;
+          margin: 8px 0;
+          cursor: pointer;
+        }
+
+        input[type="checkbox"] {
+          margin-right: 10px;
+        }
+
+        button {
+          background: #4caf50;
+          color: white;
+          padding: 10px 30px;
+          border: none;
+          border-radius: 5px;
+          font-size: 16px;
+          cursor: pointer;
+        }
+
+        button:hover {
+          background: #45a049;
+        }
     </style>
 </head>
 <body>
-  <div class="container">
-      <h2>체크박스 테스트 (복수 선택)</h2>
-
-      <div class="info">
-        <strong>체크 포인트</strong><br>
+<div class="container">
+    <h2>체크박스 테스트 (복수 선택)</h2>
+    <div class="info">
+        <strong>체크포인트 : </strong><br>
         * 체크박스는 여러 개 선택 가능<br>
         * 같은 name으로 여러 값이 전송됨<br>
-        * 서버에서 <code>getParameterValues("")</code>로 배열로 받음<br>
-        * <code>getParameter("")</code>를 쓰면 첫 번째 값만 받음 (데이터 손실!)<br>
-      </div>
-
-      <form method="post" action="/request-param">
-
-      </form>
-  </div>
+        * 서버에서 <code>gerParameterValues("")</code>로 배열로 받음<br>
+        * <code>getParameter("")</code>를 쓰면 첫번째 값만 받음 (데이터 손실!)
+    </div>
+    <!--HTML Form
+        - method : HTTP 메서드 지정 (post = 데이터를 body에 포함)
+        - action : 데이터를 전송할 서버 URL (서블릿 매핑 주소)
+        -->
+    <form method="post" action="/request-param">
+        <div class="form-group">
+            <label>이름</label>
+            <!--name : 서버로 전송될 파라미터명, value : 기본값 설정-->
+            <input type="text" name="username" value="이순신">
+        </div>
+        <div class="form-group">
+            <label>나이</label>
+            <input type="text" name="age" value="25">
+        </div>
+        <div class="form-group">
+            <label>취미(여러 개 선택 가능)</label>
+            <div class="checkbox-group">
+                <label>
+                    <!-- name : 모두 'hobby'로 동일 (복수 선택을 위해)
+                         value : 서버로 전송될 실제 값
+                         checked : 기본 선택 상태-->
+                    <input type="checkbox" name="hobby" value="sports" checked>
+                    운동
+                </label>
+                <label>
+                    <input type="checkbox" name="hobby" value="music" checked>
+                    음악
+                </label>
+                <label>
+                    <input type="checkbox" name="hobby" value="reading">
+                    독서
+                </label>
+                <label>
+                    <input type="checkbox" name="hobby" value="game">
+                    게임
+                </label>
+                <label>
+                    <input type="checkbox" name="hobby" value="movie">
+                    영화
+                </label>
+            </div>
+        </div>
+        <button type="submit">전송하고 콘솔 확인</button>
+    </form>
+</div>
 </body>
 </html>

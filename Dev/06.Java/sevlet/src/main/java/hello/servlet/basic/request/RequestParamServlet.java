@@ -36,6 +36,15 @@ public class RequestParamServlet extends HttpServlet {
             System.out.println("username = " + name);
         }
 
+        // hobby 파라미터 처리 (체크박스)
+        String[] hobbies = request.getParameterValues("hobby");
+        if(hobbies != null) {
+            System.out.println("선택한 취미 " + hobbies.length + "개: ");
+            for (String hobby : hobbies) {
+                System.out.println(" - hobby = " + hobby);
+            }
+        }
+
         // 단순 "OK" 텍스트 메시지 브라우저 출력
         response.getWriter().write("OK");
     }
