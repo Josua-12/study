@@ -1,0 +1,9 @@
+1. 서블릿 기반 MVC와 스프링 MVC 비교
+    1) Front Controller --> DispatcherServlet
+    2) handlerMappingMap --> HandlerMapping
+    3) MyHandlerAdapter --> HandlerAdapter
+    4) ModelView --> ModelAndView
+    5) ViewResolver --> ViewResolver
+    6) MyView --> View
+
+2. DispatcherServlet
