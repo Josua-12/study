@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+   <h1>text vs utext</h1>
+   <ul>
+      <li>th:text = <span th:text=${data}></span></li>
+      <!-- 
+         th:utext - 위험한 방식 (Unescape)
+            - HTML 태그를 그대로 렌더링
+            - 화면 출력: <b>를 (굵은 글씨로 표시)
+            - 실무: 매우 제한적으로 사용함
+               - 관리자가 작성한 공지사항 HTML
+               - 신뢰할 수 있는 소스의 HTML 콘텐츠
+            - 주의: 절대 사용자 입력을 그대로 utext 로 출력하지 말아야 함
+               - XSS 공격 위험성이 있기 때문
+       -->
+      <li>th:utext = <span th:utext=${data}></span></li>         
+   </ul>
+   
+   <h1>[[...]]</h1>
+   <ul>
+      <li><span th:inline="none">[[...]]</span>[[${data}]]</li>
+   </ul>   
+</body>
+</html>

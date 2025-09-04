@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+   body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+   }
+   .section {
+      background-color: #f5f5f5;
+      padding: 15px;
+      margin: 20px ;
+      border-radius: 5px;
+   }
+   .basic {
+      background-color: #e3f2fd;
+   }
+   .description {
+	  color: #666;
+	  font-size: 14px;
+	  margin-left: 25px;
+		font-style: italic;
+	}
+	.product {
+		background-color: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+		border-left: 4px solid #ff9800;
+	}
+</style>
+</head>
+<body>
+   <h1>Thymeleaf Text 처리</h1>
+   <div class="section basic">
+      <h2>기본 출력</h2>
+         <ul>
+            <li><a href="/basic/text-basic">텍스트 출력 기본(th:text)</a></li>
+            <li><a href="/basic/text-unescaped">텍스트 출력(th:utext)</a></li>
+         </ul>
+   </div>
+   <div class="section basic">
+   		<h2>새로운 컨트롤러</h2>
+         <ul>
+            <li><a href="/practice/text-test">텍스트 처리 테스트</a></li>
+         </ul>
+   </div>
+   
+   <div class="section variable">
+	   	<h2>변수와 SpringEL</h2>
+	   	<ul>
+			<li><a href="/basic/variable">SpringEL 표현식 마스터</a></li>
+			<div class="description">객체, 리스트, 맵 접근 방법</div>
+		</ul>
+   </div>
+
+	<div class="section product">
+		<h2>쇼핑몰</h2>
+		<ul>
+			<li>
+				<a href="/product/detail">상품 상세 페이지 구현</a>
+				<div class="description">
+					실제 쇼핑몰 상품 상세 페이지 완벽 구현<br>
+					상품정보, 옵션, 리뷰, 할인, 배송 정보 통합<br>
+					SpringEL 모든 기능 활용 (객체, 리스트, 맵, 조건문, 지역변수)
+				</div>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

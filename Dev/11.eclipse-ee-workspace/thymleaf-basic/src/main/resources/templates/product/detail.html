@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	.container {max-width: 1200px; margin: 0 auto; padding: 20px;}
+	.price {font-size: 24px; color: #e74c3c; font-weight: bold;}
+</style>
+</head>
+<body>
+	<div class="container">	
+			<div class="product-info">
+				<h1>상품 상세 정보</h1>
+				<h2 th:text="${product.name}">상품명</h2>
+				<p>상품코드 : <span th:text="${product.id}">0000</span></p>
+				<p class="price" th:text="${product.formattedPrice}">0원</p>
+				<p>평점: <span th:text="${product.rating}">0.0</span> / 5.0</p>
+			</div>
+		
+		<!-- 상품 옵션 -->
+		<div class="options">
+			<h3>상품 옵션</h3>
+			<ul class="options">
+				<li th:each="option : ${options}">
+					<span th:text="${option.type}">옵션타입</span>:
+					<span th:text="${option.value}">옵션값</span>
+					<!-- 추가금액이 있을 때만 표시(조건부) -->
+				<!-- 	<span th:if="${option.additionalPrice > 0}"
+						  th:text="${}"></span>	--> 			
+				</li>
+			</ul>
+		</div>
+		
+		<div class="review" th:each="review, iterStat : ${reviews}">
+		    <p>
+		        <strong>리뷰 # <span th:text="${iterStat.count}">1</span></strong>
+		        | 작성자 : <span th:text="${review.writer}">작성자</span>
+		        | 평점 : <span th:text="${review.rating}">5</span>점
+		    </p>
+		</div>
+	</div>
+</body>
+</html>

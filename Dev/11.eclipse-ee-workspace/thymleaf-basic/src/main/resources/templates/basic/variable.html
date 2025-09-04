@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>SpringEL 표기법</h1>
+	
+	<!-- 단일 객체 접근 방법 3가지 -->
+	<ul> Object
+		<!-- 방법1: 점(.) 표기법 - 가장 일반적이고 간단한 방법 -->
+		<li>${user.username} = <span th:text="${user.username}"></span></li>
+		<!-- 방법2: 대괄호 표기법 - 속성명이 변수이거나 특수 문자 포함 -->
+		<li>${user['username']} = <span th:text="${user['username']}"></span></li>
+		<!-- 방법3: getter 메서드 직접 호출 - 거의 사용 안 함 -->
+		<li>${user.getUsername()} = <span th:text="${user.getUsername()}"></span></li>
+	</ul>
+	
+	<!-- List 컬렉션 접근 방법 3가지 -->
+	<ul>List
+		<li>${users[0].username} = <span th:text="${users[0].username}"></span></li>
+		<li>${users[0].['username']} = <span th:text="${users[0].['username']}"></span></li>
+		<li>${users[0].getUsername()} = <span th:text="${users[0].getUsername()}"></span></li> 
+	</ul>
+</body>
+</html>

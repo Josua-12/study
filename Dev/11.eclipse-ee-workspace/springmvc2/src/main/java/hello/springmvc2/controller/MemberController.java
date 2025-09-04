@@ -7,7 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import hello.springmvc2.Springmvc2Application;
 import hello.springmvc2.handler.MemberHandler;
@@ -67,10 +69,38 @@ public class MemberController {
 	 *  POST /members 요청 처리
 	 *  HTML 폼에서 전송된 데이터를 받아 처리
 	 *  요청의 파라미터를 받아 처리
+	 * 
 	 */
-	public String addMember() {
+	@PostMapping
+	public String addMember(
+			@RequestParam(value = "name") String name,
+			@RequestParam(value = "email") String email,
+			Model model) {
+		System.out.println("=== 회원 추가 요청 받음 ===");
+		System.out.println("name 파라미터");
+		System.out.println("email 파라미터 : " + email);
+		
+		// 파라미터 검증
+		if(name == null || name.trim().isEmpty()) {
+			System.out.println("이름이 비어있음!");
+			model.addAttribute("error", "이름을 입력해주세요.");
+			return "member-form";
+		}
+		
+		if(email == null || email.trim().isEmpty()) {
+			System.out.println("이메일이 비어있음!");
+			model.addAttribute("error", "이메일을 입력해주세요.");
+			return "member-form";
+		}
+		
+		// 회원 추가
+		Member newMember = memberHandler.addMember(name, email);
+		System.out.println("새 회원 추가 완료 : " + newMember);
+		
+		return "redirect:/members";
 		
 	}
+	
 	
 	/*
 	 * 특정 회원 상세 조회
@@ -114,6 +144,8 @@ public class MemberController {
 		// View 이름만 반환 (데이터 없이 폼만 표시)
 		return "member-form";  // ViewResolver가 /WEB-INF/views/member-form.jsp로 변환
 	}
+	
+	
 	
 }
 

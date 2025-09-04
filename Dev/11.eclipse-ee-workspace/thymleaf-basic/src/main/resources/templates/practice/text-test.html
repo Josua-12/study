@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	body {
+		font-family: Arial, sans-serif;
+		margin: 20px;
+		max-width: 1000px;
+	}
+	
+	.text-box {
+		border: 1px solid #ddd;
+		padding: 15px;
+		margin: 20px 0;
+		border-radius: 5px;
+	}
+	.safe {
+		background-color: #d4edda;
+	}
+	.warning {
+		background-color: #fff3cd;
+	}
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		margin: 10px 0; 
+	}
+	th, td {
+		border: 1px solid #ddd;
+		padding: 8px;
+		text-align: left;
+	}
+	th {
+		background-color: #f0f0f0;
+	}
+	.code {
+		background-color: #f8f9fa;
+		padding: 5px;
+		font-family: monospace;
+		display: inline-block;
+	}
+	.danger {
+		background-color: #f8d7da;
+	}
+</style>
+</head>
+<body>
+	<h1>Thymeleaf 텍스트 처리</h1>
+	
+	<div class="text-box safe">
+
+		<h3>1. 일반 텍스트</h3>
+		<p>원본 : <span class="code">[[${normalText}]]</span></p>
+		<table>
+			<tr>
+				<th>처리 방식</th>
+				<th>결과</th>
+				<th>설명</th>
+			</tr>
+			<tr>
+				<td>th:text</td>
+				<td><span th:text="${normalText}"></span></td>
+				<td>✅안전 - 일반 텍스트는 그대로 표시</td>
+			</tr>
+			<tr>
+				<td>th:utext</td>
+				<td><span th:text="${normalText}"></span></td>
+				<td>✅안전 - 일반 텍스트는 차이가 없음</td>
+			</tr>
+		</table>
+	</div>
+	
+	<!-- 2. HTML 태그 포함 -->
+	<div class="text-box warning">
+		<h3>2. HTML 태그 포함 텍스트</h3>
+		<p>원본 : <span class="code">Spring Boot는 &lt;b&gt;정말&lt;/b&gt; 재밌어요!</span></p>
+		<table>
+			<tr>
+				<th>처리 방식</th>
+				<th>결과</th>
+				<th>설명</th>
+			</tr>
+			<tr>
+				<td>th:text</td>
+				<td><span th:text="${htmlText}"></span></td>
+				<td>✅안전 - 태그를 문자로 표시</td>
+			</tr>
+			<tr>
+				<td>th:utext</td>
+				<td><span th:utext="${htmlText}"></span></td>
+				<td>⚠️주의 - 굵은 글씨로 랜더링</td>
+			</tr>
+		</table>
+	</div>
+	
+	<!-- 3. 스크립트 공격 -->
+	<div class="text-box danger">
+		<h3>3. 악의적인 스크립트</h3>
+		<p>원본 : <span class="code">&lt;script&gt;alert('해킹당했습니다.')&lt;/script&gt;</span></p>
+		<table>
+			<tr>
+				<th>처리 방식</th>
+				<th>결과</th>
+				<th>설명</th>
+			</tr>
+			<tr>
+				<td>th:text</td>
+				<td><span th:text="${scriptText}"></span></td>
+				<td>✅안전 - 스크립트를 문자로 표시</td>
+			</tr>
+			<tr>
+				<td>th:utext</td>
+				<td><span th:utext="${scriptText}"></span></td>
+				<td>❌위험 - 스크립트 실행 가능</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!-- thymeleaf 네임스페이스 선언 -->
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+<meta charset="UTF-8">
+<title>텍스트 출력 기본</title>
+</head>
+<body>
+	<h1>컨텐츠에 데이터 출력하기</h1>
+	<ul>
+		<!-- 
+			th:text 방식(권장)
+				- HTML 태그를 자동으로 이스케이프 처리
+				- <b> 태그가 &lt;b&gt;로 변환되어 화면에 그대로 표시됨
+				- 실무 : 사용자 입력값, 댓글, 닉네임 등 99% 상황에서 사용
+		 -->
+		<li>th:text 사용 <span th:text="${data}"></span></li>
+		<!-- 
+			인라인 표현식 [[...]]
+				- th:text와 동일하게 이스케이프 처리
+				- 짧은 텍스트를 빠르게 출력할 때 편리
+				- 실무 : 간단한 변수 출력시 자주 사용
+		 -->
+		<li>컨텐츠 안에서 직접 출력하기 = [[${data}]]</li>
+	</ul>
+</body>
+</html>
