@@ -1,0 +1,83 @@
+1. Spring Framework 역사
+    1) 2002년도 로드 존슨 책 저술
+    2) 2004년도 스프링 1.0 릴리즈 - DI, IoC 컨테이너, AOP 기능 갖춘 경량 프레임워크
+    3) 2006년도 스프링 2.0
+    4) 2008년도 스프링 2.5
+    5) 2009년도 스프링 3.0
+    6) 2013년도 스프링 4.0
+    7) 2014년도 스프링 부트 1.0 릴리즈 
+        - 임베디드 서버를 사용하여 독립형 Spring 애플리케이션 개발
+    8) 2017년도 스프링 5.0, 스프링 부트 2.0 릴리즈
+        - Spring WebFlux를 사용한 반응형 프로그래밍 소개, 함수형 프로그래밍 
+    9) 2022년도 스프링 부티 3.0 릴리즈
+
+2. 프레임워크
+    1) 프레임워크 도입은 개발 기간이 단축됨
+    2) 회사 - 생산 단가를 낮출 수 있음
+    3) 개발은 상대적으로 쉬워짐, 생산성이 좋아짐
+
+3. 스프링 프레임워크
+    1) Java 기반에서 폭넓게 사용하는 오픈소스 프레임워크
+    2) 개발자가 필요로 하는 대부분의 기능을 지원
+    3) 개발자가 처리해야 하는 설정이 많아짐
+       라이브러리(API) 의존성이 복잡함 (XML 설정)
+       이해도 : 많은 시간과 노력이 요구됨
+    4) 스프링 부트
+        - 스프링의 서브 프로젝트
+
+4. 구성에 대한 규칙
+    1) Spring Boot의 고유한 접근 방식
+        - 포함된 라이브러리를 기반으로 애플리케이션을 자동으로 설정하고 구성함
+            - 'spring-boot-starter-web' 및 'spring-boot-starter-data-jpa'
+              와 같은 종속성은 웹 서버 및 JAP를 자동으로 구성함
+    2) 수동 구성의 양을 줄임
+        - H2 데이터베이스 및 기본 서버 포트와 같은 기본 구성이 사용됨
+    3) 유연하고 외부화된 구성 관리를 허용함
+        - properties이나 YAML 파일은 구성을 관리하는 데 사용됨 
+
+5. Spring 초기화를 사용하여 Spring Boot 애플리케이션 생성
+    1) "프로젝트 이름" + "Application" 형태의 자바 애플리케이션 만들어짐 
+    2) Spring boot 애플리케이션 동작 원리
+
+
+                    application.properties
+                    application.yml                             객체(빈bin)가 생성되고 관리되는 메모리 공간
+        SpringApplication ------> Enviornment     ApplicationContext (Spring Container)         
+                                                 WebApplicationContext
+
+                                  트리거
+                                  @SpringBootApplication
+                                  ---------------------------------------
+                                  아래 세 가지 다른 주석을 결합한 메타 주석 
+                                  @SpringBootConfiguration == @Configuration 
+                                                              --------------
+                                                              Bean 정의 
+
+                                  @EnableAutoConfiguration
+                                    - WebMvcAutoConfiguration
+                                        - Spring MVC를 자동으로 구성함
+                                        - DispatcherServlet, RequestMappingHandlerMapping 및
+                                          기타 MVC 관련 Bean(ViewResolver)을 등록함
+                                    - HttpMessageContvertersAutoConfiguration
+                                        - JSON, XML 및 기타 형식을 처리하는 기본 HttpMessageConverter Bean을
+                                          등록함
+                                    - WebClientAutoConfiguration
+                                        - HTTP 요청을 만들기 위해 "WebClient"을 구성함
+                                    - EmbedderWebServerFactoryCustomizerAutoConfiguration
+                                        - Tomcat과 같은 임베디드 서블릿 컨테이너를 구성함
+
+                                  @ComponentScan
+                                    - Bean으로 등록할 구성요소를 ClassPathBeanDefinitionScanner에 의해
+                                      @Component, @Controller, @Service, @Repository 주석을 감지하고 이러한
+                                      클래스를 ApplicationContext에 빈으로 등록함
+
+6. 외부 프로퍼티 이용하기
+    1) application.properties  
+        - 스프링 부트는 애플리케이션에서 사용하는 설정 정보를 외부 프로퍼티로 분리시킴으로써 자바 소스 수정을 
+          최소화홤
+        - 애플리케이션의 환경을 관리하는 설정 파일 (key=value)
+    2) application.yml
+        - '야믈'이라고 불림
+        - XML이나 JSON과 마찬가지로 데이터의 의미와 구조를 쉽게 전달하기 위한 파일
+        - 기존 XML과 JSON보다 쉽게 작성할 수 있고 가독성이 뛰어남
+        

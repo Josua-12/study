@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            font-family: sans-serif, Tahoma, Geneva, Verdana, 'Segoe UI';
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .welcome-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+
+<!-- Main Content Section -->
+<div class="container">
+    <!-- Header Section -->
+    <!-- th:replace : 다른 HTML 파일의 일부분을 가져와서 교체 -->
+    <div th:replace="fragments/header:: header"></div>
+    <main>
+        <div class="welcome-box">
+            <!-- th:text 컨트롤러에서 전달한 message 데이터를 표시 -->
+            <h2 class="welcome-message" th:text="${message}">
+                기본 메시지
+            </h2>
+
+            <div th:if="${timestamp != null}" class="timestamp">
+                현재 시간 :
+                <strong th:text="${#dates.format(timestamp, 'yyyy년 MM월 dd일 HH시 mm분 ss초')}">
+                    2025년 09월 07일 00시 00분 01초
+                </strong>
+            </div>
+        </div>
+    </main>
+    <!-- Footer Section -->
+    <div th:replace="~{fragments/footer:: footer}">
+
+
+    </div>
+</div>
+</body>
+</html>

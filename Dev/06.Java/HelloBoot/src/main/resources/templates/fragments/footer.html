@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- 재사용 가능한 푸터 프래그먼트 -->
+    <div th:fragment="footer">
+        <footer style="background-color: #f8f9fa;
+                   padding: 20px;
+                   margin-top: 40px;
+                   border-top: 1px solid #dee2db;
+                   text-align: center;">
+            <p>&copy; <span th:text="${#dates.year(#dates.createNow())}">2026</span> AI 회사</p>
+        </footer>
+    </div>
+</body>
+</html>

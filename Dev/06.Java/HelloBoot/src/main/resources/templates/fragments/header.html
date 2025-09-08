@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<!-- th:fragment : 다른 템플릿에서 재사용할 수 있는 조각 정의 -->
+<!-- 이 부분이 다른 HTML 파일에서 th:replace로 삽입됨 -->
+<div th:fragment="commonHeader">
+    <header style="background-color: #007bff; color:white; padding:20px;
+                    border-radius: 8px 8px 0 0;">
+        <h1>스프링 부트 놀이터</h1>
+        <!-- 네비게이션 메뉴 추가 -->
+        <nav style="margin-top: 10px;">
+            <a href="/" style="color: white; margin-right: 15px">홈</a>
+            <a href="/hello" style="color: white; margin-right: 15px">안녕</a>
+            <a href="/about" style="color: white; margin-right: 15px">소개</a>
+            <a href="/contact" style="color: white;">연락처</a>
+        </nav>
+    </header>
+
+</div>
+</body>
+</html>
