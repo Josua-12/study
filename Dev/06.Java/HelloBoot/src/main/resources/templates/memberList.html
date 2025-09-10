@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <style>
+        * {
+            magin: 0;
+            padding: 0;
+            box-sizing: border-box;     /* 패딩과 보더를 요소 크기에 포함 */
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;    /* 수평 중앙 정렬 */
+            align-items: center;    /* 수직 중앙 정렬 */
+            padding: 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 29px 60px rgba(0,0,0,0.1); /* 그림자 효과 */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .empty-status {
+            text-align: center;
+            padding: 80px 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Controller에서 전달한 memberList의 데이터를 확인 -->
+        <div th:if="${not #lists.isEmpty(memberList)}">
+            <table>
+                <thead>
+                    <tr>ID</tr>     <!-- 회원 고유 번호 열 -->
+                    <tr>아이디</tr>     <!-- 로그인 아이디 열 -->
+                    <tr>이름</tr>
+                    <tr>역할</tr>
+                    <tr>작업</tr>     <!-- 수정/삭제 버튼 열 -->
+                </thead>
+                <tbody>
+                    <!-- th:each는 java의 for-each와 동일한 역할 : memberList에서 하나씩 꺼내서 member로 -->
+                    <tr th:each="member : ${memberList}">
+                        <td th:text="${member.id}">1</td>
+                        <td class="user-info">
+                            <!-- 사용자명의 첫 글자를 대문자로 표시 -->
+                            <div class="avatar">
+                                <!-- substring(0,1) : 첫 글자 추출 -->
+                                <!-- toUpperCase() : 대문자 변환 -->
+                                <span th:text="${#strings.substring(member.username, 0, 1).toUpperCase()}">U</span>
+                                <!-- 사용자 명과 상태 표시 영역 -->
+                            </div>
+                            <div class="username-wrapper">
+                                <span class="username" th:text="${member.username}">username</span>
+                                <!-- 온라인 상태 표시 -->
+                                <div class="status">
+                                    <div class="status-dot"></div>
+                                    <span class="status-text">온라인</span>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td th:text="${member.name}">홍길동</td>
+                        <td>
+                            <span class="role-badge" th:text="${member.role}">USER</span>
+                        </td>
+                        <td>
+                            <div class="actions">
+                                <button class="btn-action btn-edit" title="수정">✏️</button>
+                                <button class="btn-action btn-delete" title="삭제">🗑️️️</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div th:if="${#lists.isEmpty(memberList)}" class="empty-status">
+            <h3>등록된 회원이 없습니다.</h3>
+            <p>새로운 회원을 추가하려면 아래 + 버튼을 클릭하세요.</p>
+        </div>
+    </div>
+</body>
+</html>

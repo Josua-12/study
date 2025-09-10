@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: springstarter  # 스프링 애플리케이션 이름
+
+  # 데이터베이스 연결 설정
+  datasource:
+    username: admin       # DB 사용자 이름
+    password: password    # DB 비밀번호
+    diverClassName: org.h2.Driver   # H2 파일 기반 DB 경로
+    url: jdbc:h2:file:./db/bookdb     # H2 데이터베이스 드라이버
+
+  # H2 콘솔 접근 경로 (http://localhost:8081/db-console)
+  h2:
+    console:
+      enabled: 'true'   # H2 웹 콘솔 활성화 여부
+      path: /db-console
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create  # 실행 후 update로 바꾸기

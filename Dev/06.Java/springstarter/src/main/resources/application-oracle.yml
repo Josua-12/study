@@ -1,0 +1,15 @@
+spring:
+  # 데이터베이스 연결 설정
+  datasource:
+    username: book_user       # DB 사용자 이름
+    password: book_password    # DB 비밀번호
+    url: jdbc:oracle:thin:@localhost:1521:xe  # Oracle 서버 정보
+    diverClassName: oracle.jdbc.OracleDriver   # oracle 데이터베이스 드라이버
+
+  jpa:
+    database-platform: org.hibernate.dialect.OracleDialect
+    hibernate:
+      ddl-auto: create
+
+server:
+  port: 8082

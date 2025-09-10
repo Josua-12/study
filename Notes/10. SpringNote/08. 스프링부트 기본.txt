@@ -1,0 +1,81 @@
+1.  Spring Boot 특징
+    1) 스프링의 복잡도 증가 : 라이브러리 관리와 XML 환경 설정 (메타데이터 설정)
+    2) 스프링 부트 등장
+        - 톰캣(Tomcat) 같은 내장 서버 지원
+        - 애플리케이션 관련 설정을 쉽게 처리 
+        - 라이브러리 관리 자동화
+            - Maven, Gradle을 기반으로 하는 스타터(Starter)를 통해 애플리케이션에 
+              필요한 라이브러리 의존성 문제를 해결함
+            - 스타터(Starter) : 애플리케이션 개발에 필요한 수많은 라이브러리를 패키지
+                               형태로 제공해줌
+        - 환경 설정의 자동화
+        - 독립적으로 실행 가능한 jar 패키징
+
+2. 스프링 부트 스타터(starter)
+    1) 라이브러리 의존성 관리
+    2) Maven, Gradle 의존성 관리
+        - Maven Central Repository
+            - https://mvnrepository.com/
+    3) 스프링 부트 프로젝트는 메이븐 기반으로 프로젝트에서 필요한 의존성을 관리함
+    4) 스프링 부트의 스타터는 필요한 라이브러리를 묶어서 패키지 형태로 제공함
+    5) 일반적으로 스타터는 관련된 라이브러리 의존성이 설정되지만 또 다른 스타터를 
+       포함하기도 함
+    6) "spring-boot-starter-모듈명" 형태의 이름을 가짐
+    7) Lombok이나 DevTools 같은 스타터가 아닌 단순 라이브러리도 있음
+
+3. Spring Web MVC 스타터 프로젝트  
+    1) 브라우저에서 애플리케이션에 요청
+        - http://localhost:8081/web/hello
+
+4. application.properties / application.yml 구성
+    1) 각종 설정을 이 파일을 통해 하게 됨
+    2) Spring Initializr를 통해 Spring Boot 프로젝트를 생성하면 application.properties가 생성됨
+    3) 내부 구조 차이남
+        - application.properties
+            - 각 줄마다 key=value 형태로 이루어짐
+        - application.yml   
+            - 들여쓰기로 구분되는 계층 구조
+            - key:value의 형태로 이루어짐
+
+5. 프로파일 설정 파일 생성하기 (인텔리제이 IDE)
+    1) 기존 application.yml 백업 및 수정
+    2) H2 프로파일 설정 파일 생성
+    3) Oracle 프로파일 설정 파일 생성
+
+6. View 만들기
+
+7. Bootstrap CSS 
+    1) Container (컨테이너) 클래스
+        - 전체 브라우저 화면
+    2) 중단점
+        - 화면 크기별 Container 너비
+            - xs (<576px)               100%
+            - sm (>=576px)              540px
+            - md (>=768px)              720px
+            - lg (>=992px)              960px
+    3) Margin 클래스
+        - https://getbootstrap.kr/docs/5.0/utilities/spacing/
+        - my-5
+            - margin Y축 (상하) 5단계
+        - my-4
+            - margin Y축 (상하) 4단계
+        - mb-4
+            - margin bottom (하단) 4단계
+        - mb-2
+            - margin bottom (하단) 2단계 
+        - m = margin, p = padding, t = top, b = bottom, x = 좌우, y = 상하
+
+    4) Grid System (row, col-md-4)
+    
+    5) Card 관련 클래스
+        - card : 기본 카드 컨테이너
+        - card-body : 카드 내부 패딩 영역
+        - card-title
+        - card-subtitle
+        - card-text
+
+    6) Button & Text 클래스
+        - btn 
+        - btn-primary
+        - btn-sm
+        - text-center

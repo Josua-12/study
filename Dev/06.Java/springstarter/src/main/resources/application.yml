@@ -1,0 +1,17 @@
+# 공통 설정만 남기기
+spring:
+  application:
+    name: springstarter  # 스프링 애플리케이션 이름
+
+  # 기본 프로파일을 h2로 설정
+  profiles:
+    active: h2    # 기본값은 h2
+
+  jpa:
+    properties:
+      hibernate:
+        format_sql: 'true'
+    show-sql: 'true'
+
+server:
+  port: '8081'
