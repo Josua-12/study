@@ -1,0 +1,37 @@
+spring:
+  servlet:    # Spring Boot 내장 서블릿 컨테이너 설정
+    multipart:    # 파일 업로드 (multipart/form-data) 처리 설정
+      max-file-size: 10MB   # 업로드 가능한 개별 파일의 최대 크기 제한
+      max-request-size: 10MB  # HTTP 요청 전체의 최대 크기 제한 (여러 파일 업로드시 총합 10MB까지 허용)
+
+  # 데이터베이스 연결 설정
+  datasource:
+    username: root	 		# DB 사용자명
+    password: 12345 		# DB 비밀번호
+    url: jdbc:mysql://@localhost:3306/sboot	# db 연결 url
+    driverClassName: com.mysql.cj.jdbc.Driver # Mysql 데이터베이스 드라이버
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    properties:
+      format_sql: 'true'    # SQL 쿼리를 읽기 쉽게 포멧팅(정렬)해서 출력하는 설정
+    hibernate:
+      ddl-auto: update      # 앱 시작시 테이블 생성
+      naming:               # 엔터티와 필드 이름을 있는 그대로 테이블과 컬럼명으로 사용
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: 'true'        # sql 쿼리 출력
+
+
+server:
+  port: 8081
+
+upload:
+  path: src/main/resources/static/uploads/   # 파일 업로드 경로
+
+# 로깅 설정 추가
+logging:
+  level:
+    root: INFO
+    com.example.restful: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql: TRACE

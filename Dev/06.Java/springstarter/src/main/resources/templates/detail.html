@@ -15,6 +15,7 @@
                     <h2>상세보기</h2>
                 </div>
                 <div class="card-body"> <!-- 카드 본문 영역 -->
+
                     <div class="row">
                         <div class="col-8"> <!-- 12칸 중 8칸 차지 -->
                             <h3 th:text="${book.subject}"></h3> <!-- 책 제목 출력 -->
@@ -33,7 +34,73 @@
                     </div>
                 </div>
             </div>
+        </div>  <!-- 도서 상세 보기 END -->
+                <!-- 리뷰 목록 카드 -->
+        <div class="card">
+            <div class="card-header">
+                <h2>리뷰 목록</h2>
+                <span class="badge badge-secondary">    <!-- Bootstrap 배지 컴포넌트 -->
+                    <span th:text="${#lists.size(book.reviews)}"></span> 개,
+                    평점 : <span th:text="${averageRating}">?</span> /5 <!-- 평균 평점 출력 -->
+                </span>
+            </div>
+            <div class="card-body">
+                <!-- 리뷰가 있는 경우 - 조건문 사용 -->
+                <div th:if="${book.reviews != null and #lists.size(book.reviews) > 0}">
+                    <!-- th:each로 각 리뷰 반복 출력-->
+                    <div class="list-group" th:each="review : ${book.reviews}">
+                        <div class="list-group-item">
+                            <p th:text="${review.content}">리뷰내용</p>
+                            <small th:text="${review}">작성일자</small>
+                            <p><small>평점: <span th:text="${review.rating}"></span>/ 5 </small></p>
 
+                            <!-- 삭제 버튼 폼 -->
+                            <form th:action="@{/deleteReview}" method="post">
+                                <!-- hidden 리뷰 ID 전송 -->
+                                <input type="hidden" name="review_id" th:value="${review.id}">
+                                <input type="hidden" name="book_id" th:value="${review.book.id}">
+                                <button type="submit" class="btn btn-danger btn-sm">삭제</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- 리뷰가 없는 경우 -->
+                <div th:if="${book.reviews == null or #lists.size(book.reviews) == 0}">
+                    <p>작성된 리뷰가 없습니다</p>
+                </div>
+            </div>
+
+        </div> <!-- 리뷰 목록 END -->
+
+        <!-- 리뷰 및 평점 쓰기 카드 -->
+        <div class="card">
+            <h2>리뷰 및 평점 쓰기</h2>
+        </div>
+        <div class="card-body">
+            <!-- 리뷰 등록 폼 - POST 방식으로 /register로 전송 -->
+            <form th:action="@{/register}" method="post">
+                <!-- hidden 타입으로 책 ID 전송 -->
+                <input type="hidden" name="book_id" th:value="${book.id}">
+                <div class="form-group">
+                    <label for="content">리뷰 내용</label>
+                    <textarea class="form-control" id="content" name="content" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="rating">평점</label>
+                    <!-- select 드롭다운 - 1 ~ 5점 선택-->
+                    <select class="form-control" id="rating" name="rating" required>
+                        <option value="1">1 - Poor</option>
+                        <option value="2">2 - Fair</option>
+                        <option value="3">3 - Good</option>
+                        <option value="4">4 - Very Goon</option>
+                        <option value="5">5 - Excellent</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-secondary btn-sm">리뷰 등록</button>
+            </form>
+        </div>
+        <div class="text-right mt-5">   <!-- 우측 정렬, 상단 마진 5 -->
+            <a href="/" class="btn btn-primary btn-sm">도서 리스트</a>
         </div>
 
         <div th:replace="fragments/footer :: footer"></div>

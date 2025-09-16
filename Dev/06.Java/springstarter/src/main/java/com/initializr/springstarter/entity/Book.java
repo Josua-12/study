@@ -6,37 +6,42 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
-@Entity // JPA 엔티티 클래스 명시 - 데이터베이스 테이블과 매핑
-@Table(name= "BOOK")  // 테이블명 명시 (Oracle은 대문자 선호)
+@Entity  // JPA 엔터티 클래스 명시 - 데이터베이스 테이블과 매핑됨
+@Table(name = "BOOK")   //테이블명 명시 (Oracle은 대문자 선호)
 @Getter
 @Setter
 @NoArgsConstructor
 public class Book {
-    @Id // 해당 필드가 Primary Key임을 명시
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // 기본키 생성 전략 : 자동 증가
+    @Id       // 해당 필드가 Primary Key임을 명시
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //기본키 생성 전략 : 자동 증가
     @Column(name = "ID")
-    private Long id;        // 책의 고유 식별자
+    private Long id;            // 책의 고유 식별자
 
     @Column(name = "SUBJECT")
-    private String subject;
+    private String subject;     // 책 제목
 
     @Column(name = "PRICE")
-    private int price;
+    private int price;          // 책 가격
 
     @Column(name = "AUTHOR")
-    private String author;
+    private String author;      // 저자명
 
     @Column(name = "PAGE_COUNT")
-    private int page;
+    private int page;           // 페이지 수
 
     @Column(name = "CREATED_AT")
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt;    // 출 정보 생성 시간
+    @OneToMany(
+        mappedBy = "book",   //  Review 엔터티의 book 필드가 관계의 주인 (연관관계 주인: 외래키를 가진쪽)
+        cascade = CascadeType.ALL       // 모든 영속성 적용
+    )
+    private List<Review> reviews;       // 리뷰 목록 (ArrayList<Review>로 구현됨)
 }
 
-
 /*
-create table book (
+    create table book (
         page_count number(10,0),
         price number(10,0),
         created_at timestamp(6),

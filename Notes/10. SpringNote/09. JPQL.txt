@@ -1,0 +1,9 @@
+1. JPQL (Java Persistence Query Language)
+    1) 자바 객체를 대상으로 하는 쿼리 (DB 독립적)
+        - JPA가 SQL로 변환
+        - DB가 바뀌어도 코드 수정 불필요
+    2) Entity 기준
+    3) @Query 사용
+    4) 엔터티와 속성 이름 이용
+    5) 대소문자 구분
+    6) 사용자 정의 쿼리
