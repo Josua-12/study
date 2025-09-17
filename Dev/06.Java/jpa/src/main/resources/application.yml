@@ -4,19 +4,28 @@ spring:
 
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver # Mysql 데이터베이스 드라이버
-    username: root            # DB 사용자명
-    password: 12345        # DB 비밀번호
-    url: jdbc:mysql://@localhost:3306/    # db 연결 url
+    username: root
+    password: 12345
+    url: jdbc:mysql://@localhost:3306/bookjpa	# db 연결 url
 
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     properties:
       format_sql: 'true'    # SQL 쿼리를 읽기 쉽게 포멧팅(정렬)해서 출력하는 설정
     hibernate:
-      ddl-auto: create      # 앱 시작시 테이블 생성
+      ddl-auto: update      # 앱 시작시 테이블 생성
       naming:               # 엔터티와 필드 이름을 있는 그대로 테이블과 컬럼명으로 사용
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: 'true'        # sql 쿼리 출력
 
+  messages:
+    basename: messages/message  # 메시지 파일 위치
+    encoding: UTF-8
+    cache-duration: PT1H  # 캐시 시간(1시간)
+    fallback-to-system-locale: false  # 시스템 locale 사용 여부
+    always-use-message-format: false  # MessageFormat 항상 사용 여부
+
 server:
   port: 8081
+
+

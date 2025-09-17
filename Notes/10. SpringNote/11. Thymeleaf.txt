@@ -17,6 +17,10 @@
             - 간단한 표현
                 - 변수 표현식 : ${...}
                 - URL 표현식 : @{...}
+                    - 예) th:action = "@{/customer/register}"
+            - 바인딩
+                - th:object="${custom}"     -- 객체 바인딩
+                - th:field="*{username}"    -- 필드 바인딩
 
     2) 텍스트 처리
         - 타임리프의 가장 기본 기능은 텍스트 출력 기능임

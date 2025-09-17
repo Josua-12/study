@@ -1,97 +1,132 @@
 1. RESTful 서비스 (서버)
-    1) 서버는 클라이언트가 자원을 접근할 수 있도록 일관성 있게 URL을 만듦
-        - 만든 URL을 REST API라고 함
-        - 요청을 구분하기 위해 HTTP Method(요청 방식)을 사용함
-        - REST API : 요청방식 + URL 
+    1) 서버는 클라이언트가 자원을 접근할 수 있도록 
+       일괄성 있게 URL을 만듦
+       - 만든 URL을 REST API라고 함 
+       - 요청을 구분하기 HTTP Method(요청방식)을 사용함 
+       - REST API : 요청방식 + URL 
             - 고유한 주소 (자원의 엔드포인트)
 
-            GET         /products
-                        /products/{id}
+
+            GET     /products
+                    /products/{id}
 
 
-            POST        /products
+            POST    /products    
 
-                                        JSON 
-            PUT         /products/{id}
+                                      JSON              
+            PUT     /products/{id} 
 
 
-            DELETE      /products/{id}
+            DELETE  /products/{id} 
 
 2. RESTful API 백엔드 (컨트롤러 서비스 모델)
-    1) 컨트롤러, 서비스 레이어, 데이터 레이어로 구성된 컨트롤러 서비스 모델 패턴
+    1) 컨트롤러, 서비스 레이어, 데이터 레이어로 구성된 컨트롤러 서비스 모델 패턴 
 
-3. RESTful API 기반 프런트엔드 접근 방식
+3. RESTful API 기반 프런트 엔드 접근 방식 
     1) 모듈화, 확장성을 강조하는 최신 웹 개발 원칙 
-    
-    클라이언트 측 랜더링
-        Frontend/UI                 Backend
 
-        (React, Vue.js,             RESTful APIs
-         JSP, Thymeleaf)            Controller Layer        Service Layer
-                                                            Data Layer          DB
-                                                            (데이터 영역)
+    2) 클라이언트 측 랜더링                          
+        Frontend/UI                            BackEnd 
+                              Ajax  
+        (React, Vue.js,   <==========>  RESTful APIs       
+          JSP, Thymeleaf)     JSON,XML   Controller Lyaer <====> Service Layer 
+                                                                    /|\
+                                                                    |
+                                                                    \|/
+                                                                  Data Layer <===> DB 
+                                                                  (데이터 영역)
 
-4. @RestController
-    1) Spring MVC는 @RestController 주석을 사용하여 RESTful 서비스 구축을 지원함
-    2) 일반적으로 다양한 HTTP 메서드 (GET, POST, PUT, DELETE)에 해당하고 
-       특정 URI(Uniform Resource Identifiers)에 매핑되는 엔드포인트 생성이 포함됨
-    3) 이러한 엔트포인트는 요청을 처리하고 JSON 또는 XML과 같은 형식으로 응답을 생성함
-    4) 예
-       Method       URI                                     설명
-       --------------------------------------------------------------------------
-       GET          http://localhost:8081/api/books         전체 데이터 가져오기
-       GET          http://localhost:8081/api/books/{id}    특정 데이터 가져오기
-       POST         http://localhost:8081/api/books         데이터 저장하기
-       PUT          http://localhost:8081/api/books/{id}    특정 데이터 수정하기
-       DELETE       http://localhost:8081/api/books/{id}    데이터 삭제하기 
+4. @RestController 
+  1) Spring MVC는 @RestController 주석을 사용하여 RESTful 서비스 구축을 지원함 
+  2) 일반적으로 다양한 HTTP 메서드 (GET, POST, PUT, DELETE)에 해당하고 
+     특정 URI (Uniform Resource Identifiers)에 매핑되는 엔드포인트 생성이 포함됨 
+  3) 이러한 엔트포인트는 요청을 처리하고 JSON 또는 XML과 같은 형식으로 응답을 생성함 
+  4) 예
+    Method      URI                                   설명                                                                       
+    ---------------------------------------------------------------
+    GET      http://localhost:8081/api/books       전체 데이터 가져오기
+    GET      http://localhost:8081/api/books/{id}  특정 데이터 가져오기 
+    POST     http://localhost:8081/api/books       데이터 저장하기 
+    PUT      http://localhost:8081/api/books/{id}  특정 데이터 수정하기 
+    DELETE   http://localhost:8081/api/books/{id}  데이터 삭제하기 
 
 5. @GetMapping, @PostMapping 사용하여 HTTP 요청 처리 
-    1) 개발의 순서
-        - Repository, Entity => Service => Controller 
-    2) 
-                 request     @RestController           @Service              @Repository
-        CLIENT  <------->    Controller    <------->   Service   <------->   Repository    <------->    DB
-                 response                      
-                             @Autowired               @Autowired
+  1) 개발의 순서 
+    - Repository, Entity => Service => Controller
+  2) MVCS
+              request   @RestController        @Service               @Repository
+    CLIENT   <-------->    Controller  <--------> Service   <-------> Repository   <------> DB 
+              response              
+                           @Autowired           @Autowired 
 
-6. 책 등록 Flow (POST / /api/books) - 데이터 저장하기
-    1) Client (JSON 데이터 전송)
-        - Content-Type : application/json 
-          {
-            "subject" : "Java 고수",
-            "price" : 25000,
-            "author" : "이순신",
-            "page" : 350
-          }
-    2) Controller
-        - POST /api/books
-        - Spring 어노테이션 처리 
-            - @PostMapping
-                - cunsumes : JSON만 허용
-                - produces : JSON으로 응답 설정 
-            - @RequestBody 변환
-                - JSON -> BookPayLoadDTO 자동 변환
-            - @Valid 검증
-              @NotBlank 필드 검증 수행
-    3) Validation (@Valid 검증)
-    4) DTP - Entity (PlayLoadDTO -> Book)
-    5) Service (bookService.save())
-    6) Repository (JPA save())
-    7) Database (INSERT SQL)
-    8) Entity -> DTO (Book -> ViewDTO)
-    9) Response (200 OK + JSON)
-    10) Client (응답 수신)
+6. 책 등록 Flow (POST /api/books) - 데이터 저장하기 
+  1) Client (JSON 데이터 전송)
+    - Content-Type: application/json
+      {
+        "subject" : "Java 고수",
+        "price" : 25000,
+        "author" : "이순신",
+        "page" : 350
+      }
+  2) Controller 
+    - POST /api/books
+    - Spring 어노테이션 처리
+      - @PostMapping
+        - consumes : JSON만 허용
+        - produces : JSON으로 응답 설정 
+      - @RequestBody 변환
+        - JSON -> BookPayloadDTO 자동 변환 
+      - @Valid 검증 
+        @NotBlank 필드 검증 수행                 
+  3) Validation (@Valid 검증)
+  4) DTO -> Entity (PlayLoadDTO -> Book)
+  5) Service (bookService.save())
+  6) Repository (JPA save())
+  7) Database (INSERT SQL)
+  8) Entity -> DTO (Book -> ViewDTO)
+  9) Response (200 OK + JSON)
+  10) Client (응답 수신)
 
-7. 전체 데이터 가져오기
-    1) @GetMapping
-        - http://localhost:8081/api/books
+7. 전체 데이터 가져오기 
+  1) @GetMapping
+    - http://localhost:8081/api/books
 
-8. 특정 데이터 가져오기
-    1) GetMapping
-        - http://localhost:8081/api/books/2
-    
-9. 데이터 수정하기
-    1) PutMapping 
+8. 특정 데이터 가져오기 
+  1) GetMapping
+    - http://localhost:8081/api/books/2 
+
+9. 데이터 수정하기 
+  1) PutMapping 
+    - http://localhost:8081/api/books/4 
 
 10. 데이터 삭제하기 
-    1) DeleteMapping
+  1) DeleteMapping   
+    - http://localhost:8081/api/books/1   
+
+11. (책) 이미지 업로드 (다중 이미지)
+  1) BookImage      
+  2) upload 디렉토리 만들기 
+  3) upload 디렉토리 경로 설정하기 (application.yml)
+
+12. (책) 이미지 뷰어 
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <!-- 메시지 직접 사용 -->
+        <title th:text="#{app.title}">타이틀</title>
+    </head>
+    <body>
+        <h1 th:text="${str}">환영</h1>      <!-- Controller에서 전달한 값-->
+        <p th:text="#{welcome}">환영합니다!</p>    <!-- Thymeleaf에서 직접 메시지 가져오기-->
+
+        <nav>
+            <ul>
+                <li>
+                    <a th:href="@{/customer/register}">회원등록 (폼)</a>
+                </li>
+                <li>
+                    <a th:href="@{/customer/detail/5}">회원 상세(ID : 2)</a>
+                </li>
+            </ul>
+        </nav>
+    </body>
+</html>

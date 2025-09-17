@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <style>
+            .form-container {
+                width: 400px;
+                margin: 50px auto;
+                padding: 20px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+            }
+            .form-group {
+                margin-bottom: 15px;
+            }
+            label {
+                display: inline-block;
+                width: 100px;
+                font-weight: bold;
+            }
+            input, select {
+                width: 200px;
+                padding: 5px;
+            }
+            button {
+                margin-right: 10px;
+                padding: 5px 15px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>회원 등록</h1>
+        <div class="form-container">
+            <!-- th:object로 Customer 객체와 바인딩 -->
+            <form th:action="@{/customer/register}" th:object="${customer}" method="post">
+                <div class="form-group">
+                    <label for="username">아이디 : </label>
+                    <input type="text" id="username" th:field="*{username}" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="password">비밀번호 : </label>
+                    <input type="password" id="password" th:field="*{password}" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="customerName">이름 : </label>
+                    <input type="text" id="customerName" th:field="*{customerName}" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="age">나이 : </label>
+                    <input type="text" id="age" th:field="*{age}" min="1" max="100" />
+                </div>
+
+                <div class="form-group">
+                    <label for="rating">등급 : </label>
+                    <select id="rating" th:field="*{rating}">
+                        <option value="BRONZE">브론즈</option>
+                        <option value="SILVER">실버</option>
+                        <option value="GOLD">골드</option>
+                        <option value="PLATINUM">플래티넘</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="occupation">직업 : </label>
+                    <input type="text" id="occupation" th:field="*{occupation}"/>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit">등록</button>
+                    <button type="button" onclick="location.href='/'">취소</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
