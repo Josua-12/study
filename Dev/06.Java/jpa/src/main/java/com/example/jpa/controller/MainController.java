@@ -14,20 +14,18 @@ import java.util.Locale;
 @AllArgsConstructor
 public class MainController {
 
-    private final MessageSource messageSource;        // 으존성 주입
+    private final MessageSource messageSource;      // 의존성 주입
 
     // URL : GET http://localhost:8081/
     @GetMapping
-    public String index(Model model, Locale locale){
-        // 현재 언어에 맞는 메시지 가져오기
+    public String index(Model model, Locale locale) {
+        //현재 언어에 맞는 메시지 가져오기
         String welcomeMsg = messageSource.getMessage("welcome", null, locale);
         String appTitle = messageSource.getMessage("app.title", null, locale);
 
         model.addAttribute("str", welcomeMsg);
         model.addAttribute("title", appTitle);
 
-
         return "index";
     }
 }
-

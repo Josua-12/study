@@ -68,6 +68,13 @@
     4) fragment 선언
         - th:fragment="이름" 속성을 사용하여 선언함
 
-
-
-
+6. jpa 프로젝트 registerForm.html
+    1) Thymeleaf 문법
+        - th:if 조건부 랜더링
+        - th:text : 텍스트 출력 (XSS 방지)
+        - th:field : 폼 빌드 바인딩
+        - th:action : 폼 제출 URL 
+        - @{ } : URL 표현식
+        - ${ } : 변수 표현식
+        - *{ } : 선택 변수 표현식 (th:Object 기준)
+        

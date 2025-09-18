@@ -19,11 +19,11 @@ spring:
     show-sql: 'true'        # sql 쿼리 출력
 
   messages:
-    basename: messages/message  # 메시지 파일 위치
+    basename: messages/message    # 메시지 파일 위치
     encoding: UTF-8
-    cache-duration: PT1H  # 캐시 시간(1시간)
+    cache-duration: PT1H    # 캐시 시간 (1시간)
     fallback-to-system-locale: false  # 시스템 locale 사용 여부
-    always-use-message-format: false  # MessageFormat 항상 사용 여부
+    always-use-message-format: false    # MessageFormat 항상 사용 여부
 
 server:
   port: 8081

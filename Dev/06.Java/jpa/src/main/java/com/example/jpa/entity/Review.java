@@ -5,13 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.cglib.core.Local;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -24,11 +22,11 @@ public class Review {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt = new Date();
 
-    @ManyToOne  // 리뷰(N) : 고객(1)
-    @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)    // FK
+    @ManyToOne   // 리뷰(N) : 고객(1)
+    @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false) // FK
     private Customer customer;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_review", referencedColumnName = "id", nullable = false)    // FK
+    @ManyToOne  //  리뷰(N) : 책(1)
+    @JoinColumn(name = "book_id", referencedColumnName = "id", nullable = false)  // FK
     private Book book;
 }

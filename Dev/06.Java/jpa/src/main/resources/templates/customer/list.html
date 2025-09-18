@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원 목록</title>
+    <style>
+        /* 전체 페이지 스타일 */
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        /* 컨테이너 스타일 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        /* 헤더 영역 */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        h1 {
+            color: #333;
+            margin: 0;
+        }
+
+        /* 통계 정보 */
+        .stats {
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: #666;
+        }
+
+        /* 버튼 스타일 */
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            transition: all 0.3s;
+            margin: 5px;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5a67d8;
+        }
+
+        .btn-warning {
+            background: #fbbf24;
+            color: #333;
+        }
+
+        .btn-warning:hover {
+            background: #f59e0b;
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        /* 테이블 스타일 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th {
+            background: #f8f9fa;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #333;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        /* 액션 버튼 그룹 */
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+        }
+
+        .action-buttons .btn {
+            padding: 5px 10px;
+            font-size: 12px;
+            margin: 0;
+        }
+
+        /* 등급 뱃지 */
+        .badge {
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-gold {
+            background: #fbbf24;
+            color: #333;
+        }
+
+        .badge-silver {
+            background: #e5e7eb;
+            color: #333;
+        }
+
+        .badge-bronze {
+            background: #a78bfa;
+            color: white;
+        }
+
+        .badge-platinum {
+            background: #60a5fa;
+            color: white;
+        }
+
+        /* 빈 상태 메시지 */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+
+        .empty-state h3 {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        /* 반응형 */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <!-- 헤더 영역 -->
+    <div class="header">
+        <div>
+            <h1>📋 회원 목록</h1>
+        </div>
+        <div class="stats">
+            전체 회원: <span th:text="${totalCounts}">0</span>명
+        </div>
+    </div>
+
+    <!-- 상단 버튼들 -->
+    <div style="margin-bottom: 20px;">
+        <a href="/customer/register" class="btn btn-primary">+ 신규 회원 등록</a>
+        <a href="/" class="btn btn-warning">🏠 메인으로</a>
+    </div>
+
+    <!-- 회원 목록 -->
+    <div th:if="${!#lists.isEmpty(customers)}">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>아이디</th>
+                <th>이름</th>
+                <th>나이</th>
+                <th>직업</th>
+                <th>등급</th>
+                <th>적립금</th>
+                <th>관리</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="customer : ${customers}">
+                <td th:text="${customer.id}">1</td>
+                <td th:text="${customer.username}">username</td>
+                <td th:text="${customer.customerName}">이름</td>
+                <td th:text="${customer.age}">0</td>
+                <td th:text="${customer.occupation}">직업</td>
+                <td>
+                    <!-- 등급별 스타일 적용 -->
+                    <span class="badge"
+                          th:classappend="${customer.rating == 'GOLD'} ? 'badge-gold' :
+                                                  (${customer.rating == 'SILVER'} ? 'badge-silver' :
+                                                  (${customer.rating == 'BRONZE'} ? 'badge-bronze' : 'badge-platinum'))"
+                          th:text="${customer.rating}">등급
+                            </span>
+                </td>
+                <td th:text="${customer.reserves} + '원'">0원</td>
+                <td>
+                    <!-- 관리 버튼들 -->
+                    <div class="action-buttons">
+                        <a th:href="@{/customer/detail/{id}(id=${customer.id})}"
+                           class="btn btn-primary">상세</a>
+                        <a th:href="@{/customer/edit/{id}(id=${customer.id})}"
+                           class="btn btn-warning">수정</a>
+                        <a th:href="@{/customer/delete/{id}(id=${customer.id})}"
+                           class="btn btn-danger"
+                           onclick="return confirm('정말 삭제하시겠습니까?');">삭제</a>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 회원이 없을 때 표시 -->
+    <div th:if="${#lists.isEmpty(customers)}" class="empty-state">
+        <h3>📭 등록된 회원이 없습니다</h3>
+        <p>새로운 회원을 등록해 주세요.</p>
+        <a href="/customer/register" class="btn btn-primary">+ 첫 번째 회원 등록하기</a>
+    </div>
+</div>
+</body>
+</html>

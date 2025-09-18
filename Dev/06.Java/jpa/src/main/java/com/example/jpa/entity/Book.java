@@ -18,11 +18,9 @@ public class Book {
     // 책(1) : 리뷰(N)
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     private List<Review> reviews;
-
     // 책(1) : 이미지(N)
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     private List<BookImage> bookImages;
-
     // 책(1) : 장바구니(N)
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     private List<Cart> carts;

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <style>
+           /* 전체 페이지 스타일 */
+           body {
+               font-family: 'Malgun Gothic', sans-serif;
+               background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+               margin: 0;
+               padding: 20px;
+               min-height: 100vh;
+           }
+
+           /* 컨테이너 스타일 */
+           .container {
+               max-width: 1200px;
+               margin: 0 auto;
+               background: white;
+               border-radius: 10px;
+               padding: 30px;
+               box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+           }
+
+           /* 헤더 영역 */
+           .header {
+               display: flex;
+               justify-content: space-between;
+               align-items: center;
+               margin-bottom: 30px;
+               padding-bottom: 20px;
+               border-bottom: 2px solid #f0f0f0;
+           }
+
+           h1 {
+               color: #333;
+               margin: 0;
+           }
+
+           /* 통계 정보 */
+           .stats {
+               background: #f8f9fa;
+               padding: 10px 20px;
+               border-radius: 5px;
+               color: #666;
+           }
+
+           /* 버튼 스타일 */
+           .btn {
+               padding: 10px 20px;
+               border: none;
+               border-radius: 5px;
+               cursor: pointer;
+               text-decoration: none;
+               display: inline-block;
+               font-size: 14px;
+               transition: all 0.3s;
+           }
+
+           .btn-primary {
+               background: #667eea;
+               color: white;
+           }
+
+           .btn-primary:hover {
+               background: #5a67d8;
+           }
+
+           .btn-warning {
+               background: #fbbf24;
+               color: #333;
+           }
+
+           .btn-warning:hover {
+               background: #f59e0b;
+           }
+
+           .btn-danger {
+               background: #ef4444;
+               color: white;
+           }
+
+           .btn-danger:hover {
+               background: #dc2626;
+           }
+
+           /* 테이블 스타일 */
+           table {
+               width: 100%;
+               border-collapse: collapse;
+               margin-top: 20px;
+           }
+
+           th {
+               background: #f8f9fa;
+               padding: 12px;
+               text-align: left;
+               font-weight: 600;
+               color: #333;
+               border-bottom: 2px solid #dee2e6;
+           }
+
+           td {
+               padding: 12px;
+               border-bottom: 1px solid #dee2e6;
+           }
+
+           tr:hover {
+               background: #f8f9fa;
+           }
+
+           /* 액션 버튼 그룹 */
+           .action-buttons {
+               display: flex;
+               gap: 5px;
+           }
+
+           .action-buttons .btn {
+               padding: 5px 10px;
+               font-size: 12px;
+           }
+
+           /* 등급 뱃지 */
+           .badge {
+               padding: 3px 8px;
+               border-radius: 3px;
+               font-size: 12px;
+               font-weight: 600;
+           }
+
+           .badge-gold {
+               background: #fbbf24;
+               color: #333;
+           }
+
+           .badge-silver {
+               background: #e5e7eb;
+               color: #333;
+           }
+
+           .badge-bronze {
+               background: #a78bfa;
+               color: white;
+           }
+
+           .badge-platinum {
+               background: #60a5fa;
+               color: white;
+           }
+
+           /* 빈 상태 메시지 */
+           .empty-state {
+               text-align: center;
+               padding: 60px 20px;
+               color: #999;
+           }
+
+           .empty-state h3 {
+               color: #666;
+               margin-bottom: 10px;
+           }
+        </style>
+
+    </head>
+    <body>
+        <div class="container fade-in">
+            <!--헤더 영역-->
+            <div class="header">
+                <h1>회원 상세 정보</h1>
+                <div class="subtitle">
+                    회원 ID: #<span th:text="${customer.id}">0</span>
+                </div>
+            </div>
+
+            <!--켄텐츠 영역-->
+            <div class="content">
+                <!--기본 정보 섹션-->
+                <div class="info-section">
+                    <h2 class="section-title">
+                        <span class="section-icon">👤</span>
+                        기본정보
+                    </h2>
+                    <div class="info-grid">
+                        <!--아이디-->
+                        <div class="info-item">
+                            <div class="info-label">아이디</div>
+                            <div class="info-value" th:text="${customer.username}"></div>
+                        </div>
+
+                        <!--이름-->
+                        <div class="info-item">
+                            <div class="info-label">이름</div>
+                            <div class="info-value" th:text="${customer.customerName}"></div>
+                        </div>
+
+                        <!--나이-->
+                        <div class="info-item">
+                            <div class="info-label">나이</div>
+                            <div class="info-value">
+                                <span th:text="${customer.age}">0</span>세
+                            </div>
+                        </div>
+
+                        <!--직업-->
+                        <div class="info-item">
+                            <div class="info-label">직업</div>
+                            <div class="info-value" th:text="${customer.occupation ?: '미입력'}">직업</div>
+                        </div>
+
+                        <!--회원 등급 정보 섹션-->
+                        <div class="info-section">
+                            <h2 class="section-title">
+                                <span class="section-icon">⭐</span>
+                                회원 등급 정보
+                            </h2>
+                            <div class="info-item highlight">
+                                <div class="info-label">회원 등급</div>
+                                <div class="info-value">
+                                <span class="badge"
+                                      th:classappend="${customer.rating == 'GOLD'} ? 'badge-gold' :
+                                                        (${customer.rating == 'SILVER'} ? 'badge-silver' :
+                                                        (${customer.rating == 'BRONZE'} ? 'badge-bronze' : 'badge-platium'))"
+                                      th:text="${customer.rating}">등급
+
+                                </span>
+                                </div>
+                            </div>
+
+                            <!--적립금-->
+                            <div class="info-item highlight">
+                                <div class="info-label">적립금</div>
+                                <div class="info-value">
+                                    <span th:text="${customer.reserves}">0</span>원
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <!-- 버튼 추가 -->
+                <div class="action-section">
+                    <a href="/customer/lists" class="btn btn-secondary">
+                        <span>📋</span>목록으로
+                    </a>
+                    <a href="/" class="btn btn-secondary">
+                        <span>🏠</span>메인으로
+                    </a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

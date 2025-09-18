@@ -83,118 +83,151 @@
         - o{ : 다수 (여러개)   
 
 5. Review
-    1) 데이터베이스 모델링 / 요구사항 분석
+    1) 데이터베이스 모델링 / 요구사항분석
         - 개념적 모델링 (ERD)
         - 논리적 모델링 
-        - 물리적 모델링
-    2) JPA 엔터티 및 저장소 생성
+        - 물리적 모델링 
+    2) JPA 엔터티 및 저장소 생성 
 
+Hibernate: drop table if exists Customer
+Hibernate: create table Customer (age integer not null, reserves int default 0, id bigint not null auto_increment, customerName varchar(255), password varchar(255), rating varchar(255), username varchar(255) not null, primary key (id)) engine=InnoDB
+Hibernate: alter table Customer add constraint UKmufchskagt7e1w4ksmt9lum5l unique (username)
 
-    Hibernate: drop table if exists Customer
-    Hibernate: create table Customer (age integer not null, reserves int default 0, id bigint not null auto_increment, customerName varchar(255), occupation varchar(255), password varchar(255), rating varchar(255), username varchar(255) not null, primary key (id)) engine=InnoDB
-    Hibernate: alter table Customer add constraint UKmufchskagt7e1w4ksmt9lum5l unique (username)
+Hibernate: drop table if exists Customer
+Hibernate: create table Customer (age integer not null, reserves int default 0, id bigint not null auto_increment, customerName varchar(255), occupation varchar(255), password varchar(255), rating varchar(255), username varchar(255) not null, primary key (id)) engine=InnoDB
+Hibernate: alter table Customer add constraint UKmufchskagt7e1w4ksmt9lum5l unique (username)
 
-    Hibernate: drop table if exists Customer
-    Hibernate: drop table if exists Review
-    Hibernate: create table Customer (age integer not null, reserves int default 0, id bigint not null auto_increment, customerName varchar(255), occupation varchar(255), password varchar(255), rating varchar(255), username varchar(255) not null, primary key (id)) engine=InnoDB
-    Hibernate: create table Review (cost integer not null, createdAt datetime(6), id bigint not null auto_increment, content varchar(255), primary key (id)) engine=InnoDB
-    Hibernate: alter table Customer add constraint UKmufchskagt7e1w4ksmt9lum5l unique (username)
+Hibernate: drop table if exists Customer
+Hibernate: drop table if exists Review
+Hibernate: create table Customer (age integer not null, reserves int default 0, id bigint not null auto_increment, customerName varchar(255), occupation varchar(255), password varchar(255), rating varchar(255), username varchar(255) not null, primary key (id)) engine=InnoDB
+Hibernate: create table Review (cost integer not null, createdAt datetime(6), id bigint not null auto_increment, content varchar(255), primary key (id)) engine=InnoDB
+Hibernate: alter table Customer add constraint UKmufchskagt7e1w4ksmt9lum5l unique (username)
 
-6. JPA 관계 매핑하기
+6. JPA 관계 매핑하기 
     1) 핵심 개념 : 누가 FK(외래키)를 가질까?
         - 핵심 규칙 : FK는 항상 "많은 쪽(N)"이 가진다!
-            - 예) 고객(1명), 리뷰(여러 개)
-                => 리뷰 테이블에 customer_id(FK)가 생김
+            - 예) 고객(1명) , 리뷰(여러 개)
+                => 리뷰 테이블에 customer_id(FK)가 생김.
 
-        - FK를 가진 쪽 = 연관 관계의 주인 - @ManyToOne을 쓰는 쪽
-        - FK를 안 가진 쪽 = @OneToMany + mappedBy를 쓰는 쪽
-    2) 실제 테이블 모습
-            Customer 테이블                     Review 테이블
+        - FK를 가진 쪽 = 연관관계의 주인 = @ManyToOne을 쓰는 쪽 
+        - FK를 안 가진 쪽 = @OneToMany +  mappedBy를 쓰는 쪽        
+    2) 실제 테이블 모습 
+
+            Customer 테이블                    Review 테이블 
             id(PK)                              id(PK)
             username                            content
             customerName                        customer_id (FK)
+            X FK 없음!    
 
-            X FK 없음!
+
 
 7. JPA 관계 설정하기 (Customer-Review)
-    1) FK는 항상 "많은 쪽(N, 다)"에 생김
-    2) @ManyToOne = FK가 있는 쪽 = 연관관계 주인
-    3) @OneToMany = FK 없는 쪽 = mappedBy 사용
+    1) FK는 항상 "많은 쪽(N)"에 생김
+    2) @ManyToOne = FK 있는 쪽 = 연관관계 주인 
+    3) @OneToMany = FK 없는 쪽 = mappedBy 사용 
 
-    Hibernate: alter table Review drop foreign key FKl3n8g20ecmr15g83y0g3evv2q
-    Hibernate: drop table if exists Customer
-    Hibernate: drop table if exists Review
-    Hibernate: create table Customer (age integer not null, reserves int default 0, id bigint not null auto_increment, customerName varchar(255), occupation varchar(255), password varchar(255), rating varchar(255), username varchar(255) not null, primary key (id)) engine=InnoDB
-    Hibernate: create table Review (cost integer not null, createdAt datetime(6), customer_id bigint not null, id bigint not null auto_increment, content varchar(255), primary key (id)) engine=InnoDB
-    Hibernate: alter table Customer add constraint UKmufchskagt7e1w4ksmt9lum5l unique (username)
-    Hibernate: alter table Review add constraint FKl3n8g20ecmr15g83y0g3evv2q foreign key (customer_id) references Customer (id)
+Hibernate: alter table Review drop foreign key FKl3n8g20ecmr15g83y0g3evv2q
+Hibernate: drop table if exists Customer
+Hibernate: drop table if exists Review
+Hibernate: create table Customer (age integer not null, reserves int default 0, id bigint not null auto_increment, customerName varchar(255), occupation varchar(255), password varchar(255), rating varchar(255), username varchar(255) not null, primary key (id)) engine=InnoDB
+Hibernate: create table Review (cost integer not null, createdAt datetime(6), customer_id bigint not null, id bigint not null auto_increment, content varchar(255), primary key (id)) engine=InnoDB
+Hibernate: alter table Customer add constraint UKmufchskagt7e1w4ksmt9lum5l unique (username)
+Hibernate: alter table Review add constraint FKl3n8g20ecmr15g83y0g3evv2q foreign key (customer_id) references Customer (id)
 
-    Hibernate: alter table Review drop foreign key FKl3n8g20ecmr15g83y0g3evv2q
-    Hibernate: drop table if exists Book
-    Hibernate: drop table if exists Customer
-    Hibernate: drop table if exists Review
-    Hibernate: create table Book (page integer not null, price integer not null, id bigint not null auto_increment, title varchar(45) not null, author varchar(255), primary key (id)) engine=InnoDB
-    Hibernate: create table Customer (age integer not null, reserves int default 0, id bigint not null auto_increment, customerName varchar(255), occupation varchar(255), password varchar(255), rating varchar(255), username varchar(255) not null, primary key (id)) engine=InnoDB
-    Hibernate: create table Review (cost integer not null, createdAt datetime(6), customer_id bigint not null, id bigint not null auto_increment, content varchar(255), primary key (id)) engine=InnoDB
-    Hibernate: alter table Book add constraint UKodppys65lq7q1xbx8o6p6fgxj unique (title)
-    Hibernate: alter table Customer add constraint UKmufchskagt7e1w4ksmt9lum5l unique (username)
-    Hibernate: alter table Review add constraint FKl3n8g20ecmr15g83y0g3evv2q foreign key (customer_id) references Customer (id)
+Hibernate: alter table Review drop foreign key FKl3n8g20ecmr15g83y0g3evv2q
+Hibernate: drop table if exists Book
+Hibernate: drop table if exists Customer
+Hibernate: drop table if exists Review
+Hibernate: create table Book (page integer not null, price integer not null, id bigint not null auto_increment, title varchar(45) not null, author varchar(255), primary key (id)) engine=InnoDB
+Hibernate: create table Customer (age integer not null, reserves int default 0, id bigint not null auto_increment, customerName varchar(255), occupation varchar(255), password varchar(255), rating varchar(255), username varchar(255) not null, primary key (id)) engine=InnoDB
+Hibernate: create table Review (cost integer not null, createdAt datetime(6), customer_id bigint not null, id bigint not null auto_increment, content varchar(255), primary key (id)) engine=InnoDB
+Hibernate: alter table Book add constraint UKodppys65lq7q1xbx8o6p6fgxj unique (title)
+Hibernate: alter table Customer add constraint UKmufchskagt7e1w4ksmt9lum5l unique (username)
+Hibernate: alter table Review add constraint FKl3n8g20ecmr15g83y0g3evv2q foreign key (customer_id) references Customer (id)
+   
+Hibernate: alter table Review drop foreign key FK8d76td2o7d2d8foei85l93b9w
+Hibernate: alter table Review drop foreign key FKl3n8g20ecmr15g83y0g3evv2q
+Hibernate: drop table if exists Book
+Hibernate: drop table if exists Customer
+Hibernate: drop table if exists Review
+Hibernate: create table Book (page integer not null, price integer not null, id bigint not null auto_increment, title varchar(45) not null, author varchar(255), primary key (id)) engine=InnoDB
+Hibernate: create table Customer (age integer not null, reserves int default 0, id bigint not null auto_increment, customerName varchar(255), occupation varchar(255), password varchar(255), rating varchar(255), username varchar(255) not null, primary key (id)) engine=InnoDB
+Hibernate: create table Review (cost integer not null, book_id bigint not null, createdAt datetime(6), customer_id bigint not null, id bigint not null auto_increment, content varchar(255), primary key (id)) engine=InnoDB
+Hibernate: alter table Book add constraint UKodppys65lq7q1xbx8o6p6fgxj unique (title)
+Hibernate: alter table Customer add constraint UKmufchskagt7e1w4ksmt9lum5l unique (username)
+Hibernate: alter table Review add constraint FK8d76td2o7d2d8foei85l93b9w foreign key (book_id) references Book (id)
+Hibernate: alter table Review add constraint FKl3n8g20ecmr15g83y0g3evv2q foreign key (customer_id) references Customer (id)
 
-    Hibernate: alter table Review drop foreign key FK8d76td2o7d2d8foei85l93b9w
-    Hibernate: alter table Review drop foreign key FKl3n8g20ecmr15g83y0g3evv2q
-    Hibernate: drop table if exists Book
-    Hibernate: drop table if exists Customer
-    Hibernate: drop table if exists Review
-    Hibernate: create table Book (page integer not null, price integer not null, id bigint not null auto_increment, title varchar(45) not null, author varchar(255), primary key (id)) engine=InnoDB
-    Hibernate: create table Customer (age integer not null, reserves int default 0, id bigint not null auto_increment, customerName varchar(255), occupation varchar(255), password varchar(255), rating varchar(255), username varchar(255) not null, primary key (id)) engine=InnoDB
-    Hibernate: create table Review (cost integer not null, book_id bigint not null, createdAt datetime(6), customer_id bigint not null, id bigint not null auto_increment, content varchar(255), primary key (id)) engine=InnoDB
-    Hibernate: alter table Book add constraint UKodppys65lq7q1xbx8o6p6fgxj unique (title)
-    Hibernate: alter table Customer add constraint UKmufchskagt7e1w4ksmt9lum5l unique (username)
-    Hibernate: alter table Review add constraint FK8d76td2o7d2d8foei85l93b9w foreign key (book_id) references Book (id)
-    Hibernate: alter table Review add constraint FKl3n8g20ecmr15g83y0g3evv2q foreign key (customer_id) references Customer (id)
 
-    Hibernate: alter table BookImage drop foreign key FKj7yq0ebj03hom9mm9qom3p0kl
-    Hibernate: alter table Review drop foreign key FK8d76td2o7d2d8foei85l93b9w
-    Hibernate: alter table Review drop foreign key FKl3n8g20ecmr15g83y0g3evv2q
-    Hibernate: drop table if exists Book
-    Hibernate: drop table if exists BookImage
-    Hibernate: drop table if exists Customer
-    Hibernate: drop table if exists Review
-    Hibernate: create table Book (page integer not null, price integer not null, id bigint not null auto_increment, title varchar(45) not null, author varchar(255), primary key (id)) engine=InnoDB
-    Hibernate: create table BookImage (type integer not null, book_id bigint not null, id bigint not null auto_increment, path varchar(255), primary key (id)) engine=InnoDB
-    Hibernate: create table Customer (age integer not null, reserves int default 0, id bigint not null auto_increment, customerName varchar(255), occupation varchar(255), password varchar(255), rating varchar(255), username varchar(255) not null, primary key (id)) engine=InnoDB
-    Hibernate: create table Review (cost integer not null, book_id bigint not null, createdAt datetime(6), customer_id bigint not null, id bigint not null auto_increment, content varchar(255), primary key (id)) engine=InnoDB
-    Hibernate: alter table Book add constraint UKodppys65lq7q1xbx8o6p6fgxj unique (title)
-    Hibernate: alter table Customer add constraint UKmufchskagt7e1w4ksmt9lum5l unique (username)
-    Hibernate: alter table BookImage add constraint FKj7yq0ebj03hom9mm9qom3p0kl foreign key (book_id) references Book (id)
-    Hibernate: alter table Review add constraint FK8d76td2o7d2d8foei85l93b9w foreign key (book_id) references Book (id)
-    Hibernate: alter table Review add constraint FKl3n8g20ecmr15g83y0g3evv2q foreign key (customer_id) references Customer (id)
+Hibernate: alter table BookImage drop foreign key FKj7yq0ebj03hom9mm9qom3p0kl
+Hibernate: alter table Review drop foreign key FK8d76td2o7d2d8foei85l93b9w
+Hibernate: alter table Review drop foreign key FKl3n8g20ecmr15g83y0g3evv2q
+Hibernate: drop table if exists Book
+Hibernate: drop table if exists BookImage
+Hibernate: drop table if exists Customer
+Hibernate: drop table if exists Review
+Hibernate: create table Book (page integer not null, price integer not null, id bigint not null auto_increment, title varchar(45) not null, author varchar(255), primary key (id)) engine=InnoDB
+Hibernate: create table BookImage (type integer not null, book_id bigint not null, id bigint not null auto_increment, path varchar(255), primary key (id)) engine=InnoDB
+Hibernate: create table Customer (age integer not null, reserves int default 0, id bigint not null auto_increment, customerName varchar(255), occupation varchar(255), password varchar(255), rating varchar(255), username varchar(255) not null, primary key (id)) engine=InnoDB
+Hibernate: create table Review (cost integer not null, book_id bigint not null, createdAt datetime(6), customer_id bigint not null, id bigint not null auto_increment, content varchar(255), primary key (id)) engine=InnoDB
+Hibernate: alter table Book add constraint UKodppys65lq7q1xbx8o6p6fgxj unique (title)
+Hibernate: alter table Customer add constraint UKmufchskagt7e1w4ksmt9lum5l unique (username)
+Hibernate: alter table BookImage add constraint FKj7yq0ebj03hom9mm9qom3p0kl foreign key (book_id) references Book (id)
+Hibernate: alter table Review add constraint FK8d76td2o7d2d8foei85l93b9w foreign key (book_id) references Book (id)
+Hibernate: alter table Review add constraint FKl3n8g20ecmr15g83y0g3evv2q foreign key (customer_id) references Customer (id)
 
-    Hibernate: alter table BookImage drop foreign key FKj7yq0ebj03hom9mm9qom3p0kl
-    Hibernate: alter table Cart drop foreign key FKm5ku5ea0qccwca07ju2idkl8e
-    Hibernate: alter table Cart drop foreign key FKjh6lsweiw8ipasfagjwmmgi9u
-    Hibernate: alter table Review drop foreign key FK9xyvsl39okwol3esxbhi66gxd
-    Hibernate: alter table Review drop foreign key FKl3n8g20ecmr15g83y0g3evv2q
-    Hibernate: drop table if exists Book
-    Hibernate: drop table if exists BookImage
-    Hibernate: drop table if exists Cart
-    Hibernate: drop table if exists Customer
-    Hibernate: drop table if exists Review
-    Hibernate: create table Book (page integer not null, price integer not null, id bigint not null auto_increment, title varchar(45) not null, author varchar(255), primary key (id)) engine=InnoDB
-    Hibernate: create table BookImage (type integer not null, book_id bigint not null, id bigint not null auto_increment, path varchar(255), primary key (id)) engine=InnoDB
-    Hibernate: create table Cart (quantity integer not null, book_id bigint not null, cartDate datetime(6), customer_id bigint not null, id bigint not null auto_increment, primary key (id)) engine=InnoDB
-    Hibernate: create table Customer (age integer not null, reserves int default 0, id bigint not null auto_increment, customerName varchar(255), occupation varchar(255), password varchar(255), rating varchar(255), username varchar(255) not null, primary key (id)) engine=InnoDB
-    Hibernate: create table Review (cost integer not null, createdAt datetime(6), customer_id bigint not null, customer_review bigint not null, id bigint not null auto_increment, content varchar(255), primary key (id)) engine=InnoDB
-    Hibernate: alter table Book add constraint UKodppys65lq7q1xbx8o6p6fgxj unique (title)
-    Hibernate: alter table Customer add constraint UKmufchskagt7e1w4ksmt9lum5l unique (username)
-    Hibernate: alter table BookImage add constraint FKj7yq0ebj03hom9mm9qom3p0kl foreign key (book_id) references Book (id)
-    Hibernate: alter table Cart add constraint FKm5ku5ea0qccwca07ju2idkl8e foreign key (book_id) references Book (id)
-    Hibernate: alter table Cart add constraint FKjh6lsweiw8ipasfagjwmmgi9u foreign key (customer_id) references Customer (id)
-    Hibernate: alter table Review add constraint FK9xyvsl39okwol3esxbhi66gxd foreign key (customer_review) references Book (id)
-    Hibernate: alter table Review add constraint FKl3n8g20ecmr15g83y0g3evv2q foreign key (customer_id) references Customer (id)
 
-8. CRUD 작업 수행
-    1) JpaRepository에서 제공되는 CRUD 메서드를 사용하는 방법
-        - JpaRepository에서 제공되는 CRUD 메서드    
-            - 명시적인 구현 없이도 엔티티에 대한 일반적인 CRUD 작업을 위한 기본 메서드를 제공함
-            - save(), findById(), findAll(), deleteById() 메서드를 
+Hibernate: alter table BookImage drop foreign key FKj7yq0ebj03hom9mm9qom3p0kl
+Hibernate: alter table Cart drop foreign key FKm5ku5ea0qccwca07ju2idkl8e
+Hibernate: alter table Review drop foreign key FK8d76td2o7d2d8foei85l93b9w
+Hibernate: alter table Review drop foreign key FKl3n8g20ecmr15g83y0g3evv2q
+Hibernate: drop table if exists Book
+Hibernate: drop table if exists BookImage
+Hibernate: drop table if exists Cart
+Hibernate: drop table if exists Customer
+Hibernate: drop table if exists Review
+Hibernate: create table Book (page integer not null, price integer not null, id bigint not null auto_increment, title varchar(45) not null, author varchar(255), primary key (id)) engine=InnoDB
+Hibernate: create table BookImage (type integer not null, book_id bigint not null, id bigint not null auto_increment, path varchar(255), primary key (id)) engine=InnoDB
+Hibernate: create table Cart (quantity integer not null, book_id bigint not null, cartDate datetime(6), id bigint not null auto_increment, primary key (id)) engine=InnoDB
+Hibernate: create table Customer (age integer not null, reserves int default 0, id bigint not null auto_increment, customerName varchar(255), occupation varchar(255), password varchar(255), rating varchar(255), username varchar(255) not null, primary key (id)) engine=InnoDB
+Hibernate: create table Review (cost integer not null, book_id bigint not null, createdAt datetime(6), customer_id bigint not null, id bigint not null auto_increment, content varchar(255), primary key (id)) engine=InnoDB
+Hibernate: alter table Book add constraint UKodppys65lq7q1xbx8o6p6fgxj unique (title)
+Hibernate: alter table Customer add constraint UKmufchskagt7e1w4ksmt9lum5l unique (username)
+Hibernate: alter table BookImage add constraint FKj7yq0ebj03hom9mm9qom3p0kl foreign key (book_id) references Book (id)
+Hibernate: alter table Cart add constraint FKm5ku5ea0qccwca07ju2idkl8e foreign key (book_id) references Book (id)
+Hibernate: alter table Review add constraint FK8d76td2o7d2d8foei85l93b9w foreign key (book_id) references Book (id)
+Hibernate: alter table Review add constraint FKl3n8g20ecmr15g83y0g3evv2q foreign key (customer_id) references Customer (id)
+
+
+Hibernate: alter table BookImage drop foreign key FKj7yq0ebj03hom9mm9qom3p0kl
+Hibernate: alter table Cart drop foreign key FKm5ku5ea0qccwca07ju2idkl8e
+Hibernate: alter table Cart drop foreign key FKjh6lsweiw8ipasfagjwmmgi9u
+Hibernate: alter table Review drop foreign key FK8d76td2o7d2d8foei85l93b9w
+Hibernate: alter table Review drop foreign key FKl3n8g20ecmr15g83y0g3evv2q
+Hibernate: drop table if exists Book
+Hibernate: drop table if exists BookImage
+Hibernate: drop table if exists Cart
+Hibernate: drop table if exists Customer
+Hibernate: drop table if exists Review
+Hibernate: create table Book (page integer not null, price integer not null, id bigint not null auto_increment, title varchar(45) not null, author varchar(255), primary key (id)) engine=InnoDB
+Hibernate: create table BookImage (type integer not null, book_id bigint not null, id bigint not null auto_increment, path varchar(255), primary key (id)) engine=InnoDB
+Hibernate: create table Cart (quantity integer not null, book_id bigint not null, cartDate datetime(6), customer_id bigint not null, id bigint not null auto_increment, primary key (id)) engine=InnoDB
+Hibernate: create table Customer (age integer not null, reserves int default 0, id bigint not null auto_increment, customerName varchar(255), occupation varchar(255), password varchar(255), rating varchar(255), username varchar(255) not null, primary key (id)) engine=InnoDB
+Hibernate: create table Review (cost integer not null, book_id bigint not null, createdAt datetime(6), customer_id bigint not null, id bigint not null auto_increment, content varchar(255), primary key (id)) engine=InnoDB
+Hibernate: alter table Book add constraint UKodppys65lq7q1xbx8o6p6fgxj unique (title)
+Hibernate: alter table Customer add constraint UKmufchskagt7e1w4ksmt9lum5l unique (username)
+Hibernate: alter table BookImage add constraint FKj7yq0ebj03hom9mm9qom3p0kl foreign key (book_id) references Book (id)
+Hibernate: alter table Cart add constraint FKm5ku5ea0qccwca07ju2idkl8e foreign key (book_id) references Book (id)
+Hibernate: alter table Cart add constraint FKjh6lsweiw8ipasfagjwmmgi9u foreign key (customer_id) references Customer (id)
+Hibernate: alter table Review add constraint FK8d76td2o7d2d8foei85l93b9w foreign key (book_id) references Book (id)
+Hibernate: alter table Review add constraint FKl3n8g20ecmr15g83y0g3evv2q foreign key (customer_id) references Customer (id)
+
+8. CRUD 작업 수행 
+    1) JpaRepository에서 제공되는 CRUD 메서드를 사용하는 방법 
+        - JpaRepository에서 제공되는 CRUD 메서드
+            - 명시적인 구현 없이도 엔터티에 대한 일반적인 CRUD 작업을 위한
+              기본 메서드를 제공함 
+            - save(), findById(), findAll(), deleteById() 메서드를 엑세스 할수 있음  
+
+Hibernate: insert into Customer (age,customerName,occupation,password,rating,reserves,username) values (?,?,?,?,?,?,?)
+ibernate: insert into Customer (age,customerName,occupation,password,rating,reserves,username) values (?,?,?,?,?,?,?)
