@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">Title</title>
+    <style>
+        .status {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 th:text="${title}">타이틀</h1>
+    </div>
+    <div class="message" th:text="message">
+        메시지 표시됨
+    </div>
+
+    <button class="btn" onclick="testConnection()">
+        서버 연결 테스트
+    </button>
+
+    <div id="result" class="status"></div>
+
+<script>
+    function testConnection() {
+        const resultDiv = document.getElementById('result');
+        resultDiv.innerHTML = '🖇️연결 중...';
+
+        // 비동기 처리의 간단한 예
+        setTimeout(() => {
+            resultDiv.innerHTML = '✅ 서버 연결 성공!';
+            resultDiv.className = 'status';
+        }, 1000);
+    }
+</script>
+</body>
+</html>

@@ -6,12 +6,12 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver # Mysql 데이터베이스 드라이버
     username: root
     password: 12345
-    url: jdbc:mysql://@localhost:3306/bookjpa	# db 연결 url
+    url: jdbc:mysql://@localhost:3306/thymeleaf	# db 연결 url
 
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
-      ddl-auto: update      # 앱 시작시 테이블 생성
+      ddl-auto: create      # 앱 시작시 테이블 생성
       naming: # 엔터티와 필드 이름을 있는 그대로 테이블과 컬럼명으로 사용
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: 'true'        # sql 쿼리 출력
