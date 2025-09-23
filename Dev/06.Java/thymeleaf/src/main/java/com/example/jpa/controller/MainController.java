@@ -21,7 +21,11 @@ public class MainController {
     public String index(Model model, Locale locale) {
         model.addAttribute("title", "비동기 전송 처리");
         model.addAttribute("message", "Spring Boot와 JavaScript 비동기 통신하기");
-        return "index.html";
+        return "index";
     }
 
+    @GetMapping("/asynchronous")
+    public String asynchronous() {
+        return "asynchronous_test";
+    }
 }

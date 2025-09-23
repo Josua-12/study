@@ -15,7 +15,7 @@
     <div class="container">
         <h1 th:text="${title}">타이틀</h1>
     </div>
-    <div class="message" th:text="message">
+    <div class="message" th:text="${message}">
         메시지 표시됨
     </div>
 
@@ -24,6 +24,10 @@
     </button>
 
     <div id="result" class="status"></div>
+
+    <a th:href="@{/asynchronous}">
+        <button class="asynchronous">Fetch API Test(Promise)</button>
+    </a>
 
 <script>
     function testConnection() {

@@ -33,3 +33,46 @@
         - 두 가지 방식
             - fetch를 사용한 비동기 통신
             - async/await를 사용한 비동기 통신
+
+2. Promise 
+    1) 비동기 작업의 미래의 값을 나타내는 약속 객체
+        - 지금은 없지만 나중에 줄게
+        - 예) 커피 주문 --> 진동벨 받음 (Promise 객체 생성)
+                        --> 대기 상태 (Pending)
+              다른 일을 하며 기다림 (비동기 처리)
+                        --> UI는 멈추지 않음 (코드는 계속 실행됨)
+              진동벨 울림 --> 커피 받음 (성공)
+                        --> resolve(커피) (Fullfilled 상태)
+              "재료 소진" 안내 --> (실패)
+                        --> reject("재료 없음") (Rejected 상태)
+    2) JavaScript의 내장 객체
+    3) 비동기 작업의 최종 완료 또는 실패를 나타내는 객체임
+        - 비동기 작업이 끝나면 성공 값 또는 실패 이유를 담아서 전달
+    4) ES6(2015)에서 도입
+    
+    5) Promise 체이닝
+        - 데이터가 자동으로 전달되는 원리
+        - 각 then()은 새로운 Promise 객체를 반환함
+        - then() 안에서 return한 값이 다음 then()의 매개변수가 됨
+        - 이 과정이 자동으로 일어남 (JavaScript 엔진이 처리)
+
+    6) then(), catch(), finally()로 결과 처리
+
+    7) 3가지 상태
+        - Pending -> Fullfilled or Rejected
+
+    8) Fetch API
+        - 브라우저에 내장된 JavaScript API
+        - HTTP 요청을 보내고 응답을 받는 현대적인 방법
+        - Promise 기반으로 비동기 처리
+        - XMLHttpRequest보다 간결하고 강력한 기능
+
+        - Promise 반환 -> .then() 체이닝 가능
+        - 간결한 문법 (코드 가독성 향상)
+        - 스트림 처리 (대용량 데이터 효율적 처리)
+        - 모든 최신 브라우저 지원
+
+    9) Asyn/await 
+        - Promise를 쉽게 사용할 수 있도록 등장
+        - ES6 (ES2017)에서 도입된 JavaScript 비동기 처리 문법
+        - Promise 기반이지만 훨씬 읽기 쉽고 직관적인 코드 작성 가능
