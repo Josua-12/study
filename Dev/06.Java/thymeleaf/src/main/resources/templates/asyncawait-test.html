@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fetch API Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .lab-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .section-title {
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .result-box {
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 15px 0;
+            min-height: 100px;
+        }
+
+        .result-title {
+            font-weight: bold;
+            color: #4a5568;
+            margin-bottom: 10px;
+        }
+
+        .time-badge {
+            background: #667eea;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Asyn/Await Test</h1>
+            <p>REST API와 통신</p>
+        </div>
+
+        <!--JSON 데이터 받기-->
+        <div class="lab-section">
+            <h2 class="section-title">
+                기본 Asyn/Await 사용하기
+            </h2>
+
+            <div class="alert alert-info">
+                async 함수 안에서 await를 사용하면 비동기 코드를 동기 코드처럼 작성할 수 있습니다.
+            </div>
+
+            <div class="btn-group">
+                <button class="btn btn-async" onclick="fetchHelloAsync()">
+                    Asyn/Await로 실행
+                </button>
+                <button class="btn btn-promise" onclick="fetchHelloPromise()">
+                    Promise로 실행
+                </button>
+            </div>
+
+
+            <div class="result-box">
+                <div class="result-title">실행 결과:</div>
+                <div id="basic-result">버튼을 클릭하면 결과가 표시됩니다.</div>
+                <div class="performance-meter" id="basic-performance" style="display:none;">
+                    <span>실행 시간: </span>
+                    <span class="time-badge" id="basic-time">0ms</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 순차 처리 vs 병렬 처리 -->
+        <div class="lab-section">
+            <h2 class="section-title">
+                순차 처리 vs 병렬 처리
+            </h2>
+
+            <div class="alert alert-info">
+                여러 API를 호출할 때 순차적으로 처리할지, 병렬로 처리할지 선택할 수 있습니다.
+            </div>
+
+            <div class="btn-group">
+                <button class="btn btn-async" onclick="fetchSequential()">
+                    순차 처리 (느림)
+                </button>
+                <button class="btn btn-promise" onclick="fetchParallel()">
+                    병렬 처리 (빠름)
+                </button>
+            </div>
+
+            <div class="result-box">
+                <div class="result-title">실행 결과:</div>
+                <div id="parallel-result">버튼을 클릭하면 결과가 표시됩니다.</div>
+                <div class="performance-meter" id="parallel-performance" style="display:none;">
+                    <span>실행 시간: </span>
+                    <span class="time-badge" id="parallel-time">0ms</span>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+<script>
+    /*
+        실행시간 측정 클래스
+            - 비동기 작업의 성능을 측정하기 위한 도구
+    */
+    class PerformanceTimer {
+        constructor() {
+            this.startTime = 0;     //시작 시간 저장용 인스턴스 변수
+        }
+
+        start() {
+            this.startTime = performance.now();    // Date.now()보다 정밀한 시간 측정
+        }
+
+        end() {
+            // 경과 시간
+            return Math.round(performance.now() - this.startTime);
+        }
+    }
+
+    /*
+        지연 함수 (밀리초)
+            - 지정된 시간 후 resolve되는 Promise
+    */
+    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+
+    // 기본 Async/Await
+    // async 키워드 : 함수가 항상 Promise를 반환하도록 만듦
+    async function fetchHelloAsync() {
+        // DOM 요소 선택
+        const resultDiv = document.getElementById('basic-result');
+        const perfDiv = document.getElementById('basic-performance');
+        const timeSpan = document.getElementById('basic-time');
+
+        // 타이머 인스턴스 생성
+        const timer = new PerformanceTimer();
+
+        try {
+            resultDiv.innerHTML = `<div class=""></div> Async/Await 요청 중...`;
+            timer.start();          // 시간 측정 시작
+
+            /*
+                비동기 요청 - await는 Promise가 완료될 때까지 대기
+                    await 없으면  -> response는 Promise 객체
+                    await 있으면  -> response는 Response 객체
+            */
+            const response = await fetch('/api/hello');
+            const data = await response.text();
+
+            await delay(500);       //0.5초 대기
+
+            // 성공 결과 표시
+            resultDiv.innerHTML = `
+                <div class="success-message">
+                    ✅<strong>Async/Await 성공!</strong><br>
+                    응답: "${data}"
+                </div>
+            `;
+
+            // 실행 시간 표시
+            const duration = timer.end();    // 경과 시간 계산
+            timeSpan.textContent = `${duration}ms`;     // textContent: 텍스트만 설정
+            perfDiv.style.display = 'flex';
+
+        } catch(error) {
+            resultDiv.innerHTML = `
+                ❌ 에러: ${error.message}
+            `;
+        }
+
+    }
+
+    function fetchHelloPromise() {
+        // DOM 요소 선택
+        const resultDiv = document.getElementById('basic-result');
+        const perfDiv = document.getElementById('basic-performance');
+        const timeSpan = document.getElementById('basic-time');
+
+        // 타이머 인스턴스 생성
+        const timer = new PerformanceTimer();
+
+        resultDiv.innerHTML = `<div class=""></div> Promise 요청 중...`;
+        timer.start();          // 시간 측정 시작
+
+        // Promise 체이닝 시작
+        fetch('/api/hello')
+            .then(response => response.text())
+        // Promise를 반환하면 다음 then에서 그 결과를 받음
+            .then(data => delay(500).then(() => data))
+            .then(data => {
+            resultDiv.innerHTML =`
+                    <div class="success-message">
+                        ✅<strong>Promse 성공!</strong><br>
+                        응답: "${data}"
+                    </div>`;
+            const duration = timer.end();
+            timeSpan.textContent = `${duration}ms`;     // textContent: 텍스트만 설정
+            perfDiv.style.display = 'flex';
+        })
+            .catch(error => {
+            resultDiv.innerHTML = `
+                    <div class="error-message">
+                        ❌ 에러: ${error.message}
+                    </div>
+                `;
+        });
+
+
+    }
+
+    // 순차처리 - 하나씩 기다림 (각 await는 이전 작업이 완료될 때까지 대기)
+    async function fetchSequential() {
+        // DOM 요소 선택
+        const resultDiv = document.getElementById('parallel-result');
+        const perfDiv = document.getElementById('parallel-performance');
+        const timeSpan = document.getElementById('parallel-time');
+
+        // 타이머 인스턴스 생성
+        const timer = new PerformanceTimer();
+
+        try {
+            resultDiv.innerHTML = `<div class=""></div> 순차 처리 중...`;
+            timer.start();          // 시간 측정 시작
+
+            //순차 실행 : 각 await가 완료되어야 다음 번 실행
+            //총 시간 = 1초 + 1초 + 1초 = 3초
+
+            //API 호출1 (1초 소요)
+            const response1 = await fetch('/api/info');     // 네트워크 요청
+            const data1 = await response1.json();           // JSON 파싱
+            await delay(1000);                              // 1초 대기
+
+            //API 호출2 (1초 소요) - 호출이 1이 끝나야 시작
+            const response2 = await fetch('/api/status');     // 네트워크 요청
+            const data2 = await response2.json();           // JSON 파싱
+            await delay(1000);                              // 1초 대기
+
+            //API 호출3 (1초 소요) - 호출이 2이 끝나야 시작
+            const response3 = await fetch('/api/messages');     // 네트워크 요청
+            const data3 = await response3.json();           // JSON 파싱
+            await delay(1000);                              // 1초 대기
+
+            const duration = timer.end();
+
+            resultDiv.innerHTML = `
+                <div class="success-message">
+                    <strong>순차 처리 완료!</strong>
+                    총 3개 API 호출
+                    각 API 1초씩 순차 실행
+                    데이터 수신 완료
+                </div>
+            `;
+
+            timeSpan.textContent = `${duration}ms (약 3초)`;     // textContent: 텍스트만 설정
+            perfDiv.style.display = 'flex';
+        } catch(error) {
+            resultDiv.innerHTML = `
+                    <div class="error-message">
+                        ❌ 에러: ${error.message}
+                    </div>
+            `;
+        }
+
+    }
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

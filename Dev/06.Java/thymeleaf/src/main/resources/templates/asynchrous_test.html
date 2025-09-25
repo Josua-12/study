@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fetch API Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .lab-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .section-title {
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .result-box {
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 15px 0;
+            min-height: 100px;
+        }
+
+        .result-title {
+            font-weight: bold;
+            color: #4a5568;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Fetch API Test</h1>
+            <p>REST API와 통신</p>
+        </div>
+
+        <!--JSON 데이터 받기-->
+        <div class="lab-section">
+            <h2 class="section-title">
+               JSON 데이터 받기
+            </h2>
+
+            <div class="alert alert-info">
+                서버에서 JSON 형식의 데이터를 받아와 화면에 표시합니다.
+            </div>
+
+            <button class="btn btn-success" onclick="fetchInfo()">
+                GET /api/info 실행
+            </button>
+
+            <div class="result-box">
+                <div class="result-title">JSON 응답:</div>
+                <div id="info-result">
+                    버튼을 클릭하면 JSON 데이터가 표시됩니다.
+                </div>
+            </div>
+        </div>
+
+        <!--메시지 목록 조회 (배열 데이터)-->
+        <div class="lab-section">
+            <h2 class="section-title">
+                메시지 목록 조회 (배열 데이터)
+            </h2>
+
+            <div class="alert alert-info">
+                서버에서 배열 형태의 데이터를 받아와 화면에 리스트로 표시합니다.
+            </div>
+
+            <!--여러 버튼 그룹으로 묶기-->
+            <div class="btn-group">
+                <!--모든 메시지 조회-->
+                <button class="btn btn-info" onclick="fetchServerStatus()">
+                    서버 상태 확인
+                </button>
+
+                <!--모든 메시지 조회-->
+                <button class="btn btn-info" onclick="fetchMessages()">
+                    모든 메시지 조회
+                </button>
+
+                <!--특정 ID의 메시지 조회 (파라미터 전달)-->
+                <button class="btn btn-info" onclick="fetchMessageById(1)">
+                    ID=1 메시지 조회
+                </button>
+
+                <!--특정 ID의 메시지 조회 (파라미터 전달)-->
+                <button class="btn btn-info" onclick="fetchMessageById(2)">
+                    ID=2 메시지 조회
+                </button>
+
+                <!--특정 ID의 메시지 조회 (파라미터 전달)-->
+                <button class="btn btn-info" onclick="fetchMessageById(3)">
+                    ID=3 메시지 조회
+                </button>
+
+                <!--특정 ID의 메시지 조회 (파라미터 전달)-->
+                <button class="btn btn-info" onclick="fetchMessageById(999)">
+                    ID=999 메시지 조회
+                </button>
+            </div>
+
+            <div class="result-box">
+                <div class="result-title">메시지 목록:</div>
+                <div id="messages-result">
+                    버튼을 클릭하면 메시지 목록이 표시됩니다.
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+<script>
+    // JSON 데이터 받기
+        function fetchInfo() {
+            const resultDiv = document.getElementById('info-result');
+            resultDiv.innerHTML = "Loading...";
+
+            fetch('/api/info')
+                .then(response => response.json())
+                .then(data => {
+                    console.log('JSON 데이터: ', data);
+                    resultDiv.innerHTML = JSON.stringify(data, null, 2);
+                })
+                .catch(error => {
+                    resultDiv.innerHTML = `Error:${error.message} `;
+                })
+        }
+
+        function fetchServerStatus() {
+            const resultDiv = document.getElementById('messages-result');
+
+            fetch("/api/status")
+                .then(response => response.json())
+
+                .then(status => {
+                    const date = new Date(status.timestamp);
+
+                    resultDiv.innerHTML = `
+                        <div style="padding: 20px; background: #e6fffa; border-radius: 10px;">
+                            <h3>서버 상태</h3>
+                            <p>상태 ${status.server}</p>
+                            <p>메시지 개수: ${status.messageCount}</p>
+                            <p>확인 시간: ${date.toLocaleString()}</p>
+                        </div>
+                    `;
+                })
+        }
+
+        function fetchMessages() {
+            const resultDiv = document.getElementById('messages-result');
+
+            resultDiv.innerHTML = '<div class=""></div>메시지 로딩 중...'
+
+            fetch('/api/messages')
+                .then(response => response.json())  //배열도 json()으로 파싱
+                .then(messages => { // [{...}, {...}, {...}]
+                    console.log('메시지 목록: ', messages);
+
+                    if(messages.length == 0) {
+                        resultDiv.innerHTML = '메시지가 없습니다.';
+                        return;     //함수 종료
+                    }
+
+                    let html = '<div style="display: grid; gap: 10px;">';
+                    // forEach : 배열의 각 요소에 대해 함수 실행
+                    messages.forEach(msg => {
+                        html += `
+                            <div style="padding: 15px; background: #fff;
+                                border-left: 3px solid #667eea;
+                                border-radius: 5px;">
+                                <strong>${msg.title}</strong><br>
+                                <small style="color: #666;">
+                                    작성자: ${msg.author} | ID: ${msg.id}
+                                </small><br>
+                                <p style="margin-top: 10px;">${msg.content}</p>
+                            </div>
+                        `;
+                    })
+                    html += '</div>';
+
+                    // 생성된 HTML을 DOM에 삽입
+                    resultDiv.innerHTML = html;
+                })
+                .catch(error => {
+                    resultDiv.innerHTML = `❌ 에러: ${error.message}`;
+                })
+        }
+
+        // 특정 메시지 조회 (PathVariable)
+        function fetchMessageById(id) {
+            const resultDiv = document.getElementById('messages-result');
+
+            //id가 1이면 => '/api/messages/1'
+            fetch(`/api/messages/${id}`)
+                .then(response => {
+                    // HTTP 상태 코드 체크
+                    // response.ok: 상태코드가 200-299면 true
+                    if(!response.ok) {
+                        // 404 에러 처리
+                        if (response.status == 404) {
+                            throw new Error('메시지를 찾을 수 없습니다.');
+                        }
+                        // 기타 HTTP 에러
+                        throw new Error('HTTP error! status: ${response.status}')
+                    }
+                    return response.json();     // 정상 응답이면 JSON 파싱
+                 })
+                .then(message => {
+                    // 단일 메시지 표시
+                    resultDiv.innerHTML = `
+                        <div style="padding: 20px; background: #f0f4f8;
+                                    border-radius: 10px;">
+                            <h3>${message.title}</h3>
+                            <p>${message.content}</p>
+                            <small>작성자: ${message.author}</small>
+                        </div>
+                    `;
+                 })
+
+                .catch(error => {
+                    //에러 메시지 표시
+                    resultDiv.innerHTML = `🚧 ${error.message}`;
+                })
+
+        }
+
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

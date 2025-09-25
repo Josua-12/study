@@ -25,19 +25,23 @@
 
     <div id="result" class="status"></div>
 
-    <a th:href="@{/asynchronous}">
-        <button class="asynchronous">Fetch API Test(Promise)</button>
+    <a href="/asynchrous">
+        <button class="">Fetch API Test(Promise)</button>
+    </a>
+
+    <a href="/asyncawait">
+        <button class="">Async/Await Test</button>
     </a>
 
 <script>
     function testConnection() {
         const resultDiv = document.getElementById('result');
-        resultDiv.innerHTML = '🖇️연결 중...';
+        resultDiv.innerHTML = '🖇️ 연결 중....';
 
         // 비동기 처리의 간단한 예
         setTimeout(() => {
             resultDiv.innerHTML = '✅ 서버 연결 성공!';
-            resultDiv.className = 'status';
+            resultDiv.className = 'status'
         }, 1000);
     }
 </script>

@@ -10,22 +10,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Locale;
 
-@Controller
-@RequestMapping("/")
+@Controller     // HTML View 반환
+@RequestMapping("/")    // 기본 경로 매핑, 애플리케이션 루트 URL
 @RequiredArgsConstructor
 public class MainController {
 
     private final MessageSource messageSource;      // 의존성 주입
 
-    @GetMapping
-    public String index(Model model, Locale locale) {
+    @GetMapping("/")
+    public String index(Model model) {
         model.addAttribute("title", "비동기 전송 처리");
         model.addAttribute("message", "Spring Boot와 JavaScript 비동기 통신하기");
         return "index";
     }
 
-    @GetMapping("/asynchronous")
-    public String asynchronous() {
-        return "asynchronous_test";
+    @GetMapping("/asynchrous")
+    public String asynchrous() {
+        return "asynchrous_test";
+    }
+
+    @GetMapping("/asyncawait")
+    public String asyncawait() {
+        return "asyncawait-test";
     }
 }

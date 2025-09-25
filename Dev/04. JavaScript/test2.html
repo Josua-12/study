@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>커피 주문 시스템</title>
+</head>
+<body>
+    <h1>커피 주문 시스템(Asyn/Await)</h1>
+    <hr>
+    <h2>테스트 버튼들</h2>
+    <button onclick="orderCoffeeAsync()">커피 주문하기</button>
+    <button onclick="orderMultipleCoffeesAsync()">여러 커피 동시 주문하기</button>
+    <button onclick="runCafeSystem()">카페 시스템 주문 테스트</button>
+    <button onclick="orderWithPromise()">Promise 방식</button>
+    <button onclick="orderWithAsync()">Async/Await 방식</button>
+    <div id="result"></div>
+<script>
+    // 1. 커피 제조 함수 -- Promise를 반환하는 함수
+    /*
+        new Promise() : 비동기 작업을 감싸는 Promise 객체 생성
+            - resolve: 성공시 호출할 함수,  reject: 실패 시 호출 할 함수 
+    */
+    function makeCoffee(coffeeType) {
+        return new Promise((resolve, reject) => {
+            console.log(`${coffeeType} 제조 중...`);
+
+            setTimeout(() => {
+
+                const hasIngredient = Math.random() > 0.1  // 0.1보다 크면 true
+
+                if(hasIngredient) {
+                    resolve(`${coffeeType}`);
+                } else {
+                    reject(`${coffeeType} 재료 소진`)
+                }
+
+            }, 2000);   // 2000ms 후 실행
+        })
+    }
+
+    // Asyn/Await를 사용하는 함수
+    // async 키워드 : 이 함수가 Promise를 반환함을 명시
+    async function orderCoffeeAsync() {
+        const resultDiv = document.getElementById('result');
+        resultDiv.innerHTML = '<p>주문 처리 중...</p>'
+
+        try {
+            console.log('주문 시작');
+            // await 키워드 : Promise가 완료될때까지 함수 실행을 일시정지
+            // makeCoffee()가 resolve되면 그 값을 coffee1에 할당
+            const coffee1 = await makeCoffee('아메리카노');
+            console.log('첫번째 주문 성공 : ', coffee1);
+
+            const coffee2 = await makeCoffee('까페라떼');
+            console.log('두번째 주문 성공 : ', coffee2);
+
+            resultDiv.innerHTML = `
+                <h3>주문 완료!</h3>
+                <p>1. ${coffee1}</p>
+                <p>2. ${coffee2}</p>
+                <p>맛있게 드세요.</p>
+            `;
+
+        } catch(error) {
+            // error : reject()로 전달된 값이나 throw된 에러
+            console.error('주문 실패');
+            resultDiv.innerHTML = `
+                <h3>주문 실패!</h3>
+                <p>${error}</p>
+                <p>다시 시도하세요.</p>
+            `;            
+        } finally {
+            console.log('주문 과정이 완료되었습니다.')
+        }
+
+    }
+
+    // Promise.all() 사용한 병렬 처리
+    async function orderMultipleCoffeesAsync() {
+        console.log('여러 커피 동시 주문 시작');
+
+        try {
+            /*
+                Promise.all() : 여러 Promise를 동시에 실행
+                모든 Promise가 성공해야 전체가 성공
+            */
+           const [americano, caffelatte, cappuccino] = await Promise.all([
+                makeCoffee('아메리카노'),       // 즉시 시작
+                makeCoffee('까페라떼'),         // 즉시 시작
+                makeCoffee('카푸치노')          // 즉시 시작
+           ]);  // 총 2초만 소요 
+
+           // 모든 Promise가 성공한 경우만 여기 도달
+           console.log('모든 주문 성공!')
+           console.log('- ', americano);
+           console.log('- ', caffelatte);
+           console.log('- ', cappuccino);
+
+           //HTML 리스트로 결과 표시
+           document.getElementById('result').innerHTML = `
+                <h3>모든 커피 준비 완료!</h3>
+                <ul>
+                    <li>${americano}</li>    
+                    <li>${caffelatte}</li>
+                    <li>${cappuccino}</li>
+                </ul>
+           `;
+
+        }catch(error) {
+            //Promise.all은 하나라도 실패하면 즉시 실패 
+            //첫번째 실패한 에러만 catch됨
+            console.log('일부 주문 실패: ', error);
+            document.getElementById('result').innerHTML = `
+                <h3>주문 중 오류 발생</h3>    
+                <p>${error}</p>
+            `;
+        }
+    }
+
+    // 카페 시스템 (클래스)
+    class CafeSystem {
+        //메뉴판 객체
+        menu = {
+            '아메리카노' : 2000,
+            '카페라떼' : 3000,
+            '카푸치노' : 3500,
+            '에스프레소' : 3000
+        }
+
+        //async 메서드 : 클래스 내부에서도 async 사용 가능
+        async makeCoffee(coffeeName) {
+            console.log(`${coffeeName} 제조 시작...`);
+
+            // delay() 메소드 호출하여 2초 대기
+            await this.delay(2000);
+
+            if(Math.random() < 0.1) {
+               throw new Error(`${coffeeName} 제조 실패`); 
+            }
+
+            //커피 정보 객체 반환
+            return {
+                name: coffeeName,
+                price: this.menu[coffeeName] || 3000,
+                timestamp: new Date().toLocaleTimeString('ko-KR')
+            }
+        }
+
+        // 주문 처리 메서드 
+        async processOrder(orderList) {
+            console.log('주문 접수: ', orderList);
+            const results = [];     // 완성된 커피 저장 배열
+            let totalPrice = 0;     // 총 금액 누적 변수 
+
+            try {
+                // for ... of 배열의 각 요소를 순회 
+                for(const coffeeName of orderList) {
+                    //각 커피를 순차적으로 제조 
+                    const coffee = await this.makeCoffee(coffeeName);
+                    results.push(coffee);       //배열에 추가
+                    totalPrice += coffee.price; //가격 누적 
+                    console.log(`${coffeeName} 완성`);
+                }
+
+                // 성공 시 결과 객체 반환
+                return {
+                    success: true,
+                    items: results,
+                    totalPrice: totalPrice,
+                    message: '모든 주문 처리가 완료되었습니다.'
+                }
+            }catch(error) {
+                //실패시 부분 성공 정보 반환
+                return {
+                    success: false,
+                    items: results,     // 실패 전까지의 커피들 
+                    totalPrice: totalPrice,
+                    message: error.message      // 에러 메시지 추출
+                }
+            }
+
+
+        }
+
+        // 유틸리티 메서드 : Promise 기반 지연함수
+        delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+    }
+
+    // 카페 시스템 실행 함수
+    async function runCafeSystem() {
+        // 클래스의 인스턴스 생성
+        const cafe = new CafeSystem();
+
+        try {
+            console.log('카페 영업 시작!')
+            
+            // 인스턴스 메서드 호출
+            const order = await cafe.processOrder(['아메리카노', '카페라떼', '카푸치노']);
+
+            // order.success로 성공 여부 확인
+            if(order.success) {
+                console.log('주문 성공!');
+                console.log('주문 내역!:', order.items);
+                console.log('총 금액:', order.totalPrice + '원');
+
+                // HTML 테이블 동적 생성
+                // order.items : 커피 객체들이 담긴 배열 
+                // map() : 배열의 각 요소를 변환하여 새 배열 반환
+                // join('') : map()이 반환한 배열을 문자열로 변환                    
+                document.getElementById('result').innerHTML = `
+                    <h3>✅ 주문 완료!</h3>
+                    <table border="1" style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr>
+                                <th>커피</th>
+                                <th>가격</th>
+                                <th>제조시간</th>
+                            </tr>    
+                        </thead>
+                        <tbody> 
+                            ${
+                                order.items.map(item => `
+                                    <tr>
+                                        <td>${item.name}</td>
+                                        <td>${item.price}</td>
+                                        <td>${item.timestamp}</td>
+                                    </tr>
+                                `).join('')
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2"><strong>총 금액</strong></td>
+                                <td><strong>${order.totalPrice}원</strong></td>
+                            </tr>
+                        </tfoot>    
+                    </table>
+                `;
+            } else {
+                // 실패 시 에러 메시지 출력
+                console.error('❌ 주문 실패 :', order.message);
+            }
+
+        } catch(error) {
+            // 시스템 에러 처리
+            console.error('시스템 오류: ', error);
+        }
+    }
+
+    // Promise 체이닝 방식
+    function orderWithPromise() {
+        makeCoffee('아메리카노')
+            .then(coffee1 => {
+                console.log('첫 번째:', coffee1);
+                return makeCoffee('까페라떼');
+            })
+            .then(coffee2 => {
+                console.log('두 번째:', coffee2);
+                return makeCoffee('카푸치노');                
+            })
+            .then(coffee3 => {
+                console.log('세 번째:', coffee3);
+            })
+            .catch(error => {
+                console.error('에러:', error);
+            })
+            .finally(() => {
+                console.log('완료');
+            })
+    }
+
+    // Async / Await 방식
+    async function orderWithAsync() {
+        try {
+            // 동기 코드처럼 읽히지만 비동기로 동작
+           const coffee1 = await makeCoffee('아메리카노')
+            // Promise가 resolve될때까지 대기
+            // resolve된 값을 변수에 할당
+            console.log(coffee1);
+
+           const coffee2 = await makeCoffee('까페라테');
+           console.log(coffee2);
+
+           const coffee3 = await makeCoffee('카푸치노');
+           console.log(coffee3);
+
+        } catch (error) {
+            console.error('에러: ', error);
+        } finally {
+            console.log('완료');
+        }
+    }
+
+</script>
+</body>
+</html>
