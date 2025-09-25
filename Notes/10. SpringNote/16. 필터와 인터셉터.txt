@@ -1,2 +1,56 @@
 1. Builder Pattern
     1) 복잡한 객체 생성 과정과 표현 방법을 분리하여 다양한 구성의 인스턴스를 만드는 생성 패턴임.
+    2) 예
+        - 수제 햄버거
+            - 주문할 때 빵이나 패티 등 속재료들은 주문하는 사람이 마음대로 결정됨
+            - 선택적으로 속재료들을 보다 유연하게 받아 다양한 타입의 인스턴스를 생성
+    3) 생성자 오버로딩 열거를 하지 않아도 됨
+    4) 데이터의 순서에 상관없이 객체를 만들어냄
+
+2. 필터
+    1) 공통적인 여러 작업을 대신 처리하며 개발 시 중복된 코드를 제거할 수 있도록 필터를 포함한 많은 기능들을 구현함
+    2) Java Servlet 스펙의 일부, HTTP 요청과 응답을 가로채서 전/후 처리를 수행하는 컴포넌트임
+    3) DispatcherServlet에 요청이 전달되기 전/후에 url 패턴에 맞는 모든 요청에 대해 부가적인 작업을 처리할 수 있는 기능을 제공함
+    4) DispatcherServlet은 스프링의 가장 앞 단에 존재하는 프런트 컨트롤러
+    5) 스프링 컨테이너가 아닌 톰캣과 같은 웹 컨테이너(서블릿 컨테이너)에 의해 관리가 되는 것임
+        - 스프링 빈으로 등록은 됨
+    6) DispatcherServlet 전/후에 처리하는 것임
+
+3. 필터 (Filter) 메서드
+    1) javax.servlet  Interface Filter  
+        - void  init(FilterConfig filterConfig)
+            - 필터 객체를 초기화
+            - 웹 컨테이너가 1회 init() 메서드를 호출하여 필터 객체를 초기화함
+            - 이후 요청들은 doFilter()를 통해 처리됨
+        - void doFilter(ServletRequest request, ServletResponse, response, FilterChain chain)
+            - url-pattern에 맞는 모든 HTTP 요청이 DispatcherServlet으로 전달되기 전에 웹 컨테이너에 의해 실행되는 메서드임
+            - FilterChain의 doFilter()를 통해 다음 대상으로 요청을 전달하게 됨
+
+        - void  destory()
+            - 필터 객체를 서비스에서 제거하고 사용하는 자원을 반납하기 위한 메서드임
+            - 웹 컨테이너에 의해 1번 호출됨
+
+4. 필터 등록 차이
+                  @Component                          @WebFilter
+                ---------------------------------------------------------------
+    적용 범위   | 모든 URL(/*)                         지정된 URL 패턴만
+    등록 방식   | Spring 자동 스캔                     @ServletComponentScan 필요
+    URL 패턴    | 지정불가                             urlPatterns로 지정
+
+5. 인터셉터 (Interceptor)
+    1) J2EE 스펙인 필터와 달리 Spring이 제공하는 기술임
+    2) DispatcherServlet이 컨트롤러를 호출하기 전과 후에 요청과 응답을 참조하거나 가공할 수 있는 기능을 제공함
+    3) 웹 컨테이너(서블릿 컨테이너)에서 동작하는 필터와 달리 인터센터는 스프링 컨텍스트에서 동작을 하는 것임
+    4) org.springframework.web.servlet Interface HandlerInterface
+
+6. 필터(Filter)와 인터셉터(Interceptor) 정리
+            대상                        필터                                        인터셉터
+    --------------------------------------------------
+    관리되는 컨테이너        서블릿 컨테이너                                       스프링 컨테이너
+    스프링의 예외처리 여부         x                                                    O
+    Request / Response           O                                                    X 
+    객체 조작 가능 여부      
+     용도                   공통된 보안 및 인증/인가 관련 작업            세부적인 보안 및 인증/인가 공통 작업
+                            모든 요청에 대한 로깅 또는 감사                 API 호출에 대한 로깅 또는 감사
+                            이미지/데이터 압축 및 문자열 인코딩         Controller로 넘겨주는 정보(데이터)의 가공
+                            Spring과 분리되어야 하는 기능               

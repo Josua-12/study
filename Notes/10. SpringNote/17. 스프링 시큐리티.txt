@@ -1,0 +1,72 @@
+1. 스프링 시큐리티(Spring Security)
+    1) 스프링 프레임워크에서 애플리케이션의 보안(인증과 인가, 보안조치)을 담당하는 스프링 하위 프레임워크 
+        - 웹 개발 과정 필수적 사용자 관리 기능을 구현
+    2) 회원가입부터 로그인, 로그아웃, 세션 관리, 권한 관리까지 온라인 플랫폼에 맞춰 다양하게 작업하는 기능을 효과적으로
+       지원하기 위해 개발된 것임
+    3) 개발자들이 보안 관련 기능을 효율적이고 신속하게 구현할 수 있도록 도와줌
+    4) 사이트에 대해서 유효한 사용자인지 확인하는 것 => 인증(로그인)
+       인증된 사용자가 사용할 수 있는 기능인지 확인하고 권한이 부여된 리소스에만 접근을 허용하는 과정 => 인가
+                                            인증 성공 후
+                            Authentication ------------> Authorization
+                                (인증)                      (인가)
+
+2. 서블릿 필터로 처리되는 Spring Security
+    1) Filter 기반으로 동작하기 때문에 Spring MVC와 분리되어 관리 및 동작함
+    2) 세션 & 쿠키 방식으로 인증을 처리함
+    3) 스프링의 DispatcherServlet 앞단에 다양한 역하의 Filter들로 구성되어 잇음
+    4) DispatcherServlet으로 넘어가기 전에 시큐리티 관련 Filter가 요청을 가로채서 클라이언트의 리소스 접근 권한을 확인하고  
+       없는 경우에는 인증 요청(Login) 화면으로 자동으로 리다이렉트 함
+    5) 내장된 인증 과정은 폼로그인(/login)임
+    6) /logout으로 요청하고 내장된 로그아웃 기능도 제공함
+
+3. DelegatingFilterProxy
+    1) 서블릿 필터와 스프링 빈의 연결 매개체
+    2) 인프라스트럭쳐 필터들
+        - DisableEncodeUrlFilter - URL 인코딩 비활성화
+        - WebAsyncManagerIntegrationFilter - 비동기 처리 지원
+        - SecurityContextHolderFilter
+        - HeaderWriterFilter - 보안 헤더 추가
+    3) 인증 관련 필터들 
+        - LogoutFilter
+        - OAuth2AuthorizationRequestRedirectFilter - OAuth2 인증 리다이렉트 
+        - ...
+    4) 인가 관련 필터들 
+        - RememberMeAuthenticationFilter - Remember Me 기능
+        - AnonymousAuthenticationFilter - 익명 사용자 처리
+        - SessionManagerFilter - 세션 관리
+        - ....
+    
+4. Spring Security 인증 아키텍쳐
+
+
+                        SecurityContextHolder
+
+    http Request -----> AuthenticationFilter  ---> Filter... ---> Spring Controller
+                                        |
+                                       \|/
+                        AuthenticationManager
+                                        |
+                                       \|/
+                        AuthenticationProvider
+                                        |
+                                       \|/
+                        UserDetailService
+
+    1) 사용자 요청이 서버로 들어롬
+    2) AuthenticationFilter가 요청을 가로채고 AuthenticationManager로 요청을 위임함
+    3) AuthenticationManager는 등록된 AuthenticationProvider를 조회하며 인증 요구함
+    4) AuthenticationProvider가 실제 데이터를 조회하여 UserDetailService 결과를 돌려줌
+    5) 결과는 SecuritycontextHolder에 저장되어 저장된 유저정보를 Spring Controller에서 사용할 수 있게 됨
+
+5. 자동 설정에 의한 보안
+    1) Spring Security 관련 의존성이 추가된 것만으로도 스프링 앱이 기동될 때 시큐리티 관련 설정이 자동으로 수행되어
+       기본 보안이 작동됨
+    2) 서버가 기동되면서 스프링 시큐리티의 초기화 작업 및 보안 설정이 이루어짐
+    3) 별도의 설정이나 코드를 작성하지 않아도 기본적인 웹 보안 기능이 현재 시스템에 연동
+    4) 기본적으로 모든 요청에 대하여 인증 여부를 검증하고 인증이 승인되어야 자원에 접근이 가능함
+    5) 인증 방식은 폼 로그인 방식과 httpBasic 로그인 방식을 제공함
+    6) 인증을 시도할 수 있는 로그인 페이지가 자동적으로 생성되어 랜더링 됨
+    7) 인증 승인이 이루어질 수 있도록 한 개의 계정이 디폴트(SecurityProperties의 User 객체)가 제공됨
+        - 패스워드 : 서버 가동 시 자동 생성(랜덤 문자열)
+
+6. Spring Security 데이터베이스 설정

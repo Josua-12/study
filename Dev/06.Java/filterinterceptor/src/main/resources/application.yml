@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: filterinterceptor
+
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver # Mysql ?????? ????
+    username: root
+    password: 12345
+    url: jdbc:mysql://@localhost:3306/thymeleaf 	# db ?? url
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update      # ? ??? ??? ??
+      naming: # ???? ?? ??? ?? ??? ???? ????? ??
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: 'true'        # sql ?? ??
+    properties:
+      hibernate:
+        format_sql: 'true'    # SQL ??? ?? ?? ???(??)?? ???? ??
+        highlight_sql: true   # SQL ????? (????)
+        use_sql_comments: true  # SQL ?? ?? (????)
+
+  messages:
+    basename: messages/message    # ??? ?? ??
+    encoding: UTF-8
+    cache-duration: PT1H    # ?? ?? (1??)
+    fallback-to-system-locale: false  # ??? locale ?? ??
+    always-use-message-format: false    # MessageFormat ?? ?? ??
+
+server:
+  port: 8080
+
+#logging:
+#  level:
+#    org.hibernate.SQL: DEBUG
+#    org.hibernate.type.descriptor.sql.BasicBinder: TRACE # ???? ? ??
+#    org.hibernate.orm.jdbc.bind: TRACE
+
