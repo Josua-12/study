@@ -1,0 +1,22 @@
+1. SecurityFilterChain
+
+   로그인 ---> SecurityFilterChain ---> Authentication
+
+2. Thymeleaf Spring Security 메커니즘
+    1) 전체 처리 흐름
+        - Step 1 : 인증 확인
+            - SecurityContextHolder에서 Authentication 객체 확인
+                -> CustomerMember (로그인 정보)
+
+        - Step 2 : Thymeleaf 변수화
+            - #authentication
+              #authorization 
+            - 템플릿 변수로 등록
+
+        - Step 3 : 템플릿 처리
+            - HTML 템플릿 파싱
+            - 조건에 따라 랜더링
+
+        - Step 4 : HTML 생성
+            - 최종 HTML 생성 (조건 만족 요소만 포함)
+            - 브라우저로 전송
