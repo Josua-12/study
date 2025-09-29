@@ -1,0 +1,9 @@
+1. Home.html 프래그먼트 구조
+    1) 화면 구조
+        - layout.html (프래그먼트 컨테이너)
+            - header (common/header.html)
+            - main content
+                - css fragement
+                - content fragement
+                - scripts fragement
+            - footer (common/footer.html)

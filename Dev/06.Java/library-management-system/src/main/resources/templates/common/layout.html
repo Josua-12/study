@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+        th:fragment="layout(title, content, css, scripts)">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:replace="${title}">도서관</title>  <!--프래그먼트로 전달받은 title요소를 이 위치에 삽입-->
+
+    <!--Bootstrap CSS-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap-grid.min.css" rel="stylesheet">
+    <!--Font Awesome-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!--Custom CSS-->
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+
+    <!--페이지별 추가 css-->
+    <th:block th:replace="${css}"></th:block>
+</head>
+<body>
+    <!--Header
+        common/header.html 파일에 있는 "header"라는 이름의 fragment를 가져와서
+        이 div를 통째로 교체하라
+    -->
+    <div th:replace="~{common/header :: header}"></div>
+
+    <!--Main Content-->
+    <main class="main-content">
+        <!--페이지 콘텐츠-->
+        <div th:replace="${content}" class="container my-4">
+            <!--각 페이지의 콘텐츠가 여기에 삽입됩니다-->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div th:replace="~{common/footer :: footer}"></div>
+
+    <!--Bootstrap JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js"></script>
+    <!--Custom JS-->
+    <script th:src="@{/js/app.js}"></script>
+
+    <!--페이지별 추가 JS-->
+    <th:block th:replace="${scripts}"></th:block>
+</body>
+</html>
+
+
+
+
+
+
+
+

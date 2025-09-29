@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+        th:replace="~{common/layout :: layout(~{::title}, ~{::content}, ~{::css}, ~{::scripts})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>도서관 시스템 - 홈</title>      <!--이 title 요소가 ~{::title}로  layout에 전달됨-->
+
+    <th:block th:fragment="css">  <!--이 css 블록이 ~{::css}로  layout에 전달됨-->
+        <!--AOS Animation-->
+        <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+        <style>
+            /* Hero Section */
+            .hero-section {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                padding: 120px 0 80px;
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+            }
+
+            .hero-title {
+                font-size: 3.5rem;
+                font-weight: 700;
+                margin-bottom: 1.5rem;
+                line-height: 1.2;
+            }
+
+            .hero-subtitle {
+                font-size: 1.25rem;
+                margin-bottom: 2rem;
+                opacity: 0.9;
+                line-height: 1.6;
+            }
+
+            .hero-buttons .btn {
+                padding: 0.75rem 2rem;
+                font-size: 1.1rem;
+                font-weight: 600;
+                margin-bottom: 1rem;
+            }
+
+            /* Features Section */
+            .features-section {
+                padding: 80px 0;
+                background-color: #f8f9fa;
+            }
+
+            .feature-card {
+                background: white;
+                border-radius: 15px;
+                padding: 2rem;
+                text-align: center;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                height: 100%;
+            }
+
+            .feature-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            }
+
+            .feature-icon {
+                width: 80px;
+                height: 80px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 0 auto 1.5rem;
+                color: white;
+                font-size: 2rem;
+            }
+
+            /* Stats Section */
+            .stats-section {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                padding: 80px 0;
+            }
+
+            .stat-card {
+                text-align: center;
+                padding: 2rem;
+                background: rgba(255,255,255,0.1);
+                border-radius: 15px;
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255,255,255,0.2);
+            }
+
+            .stat-number {
+                font-size: 3rem;
+                font-weight: 700;
+                display: block;
+                margin-bottom: 0.5rem;
+            }
+
+            .stat-label {
+                font-size: 1.1rem;
+                opacity: 0.9;
+            }
+
+            /* Notice Section */
+            .notice-section {
+                padding: 80px 0;
+                background-color: #f8f9fa;
+            }
+
+            .notice-card {
+                background: linear-gradient(135deg, #e91e63 0%, #f06292 100%);
+                color: white;
+                padding: 2.5rem;
+                border-radius: 20px;
+                box-shadow: 0 10px 30px rgba(233, 30, 99, 0.3);
+            }
+
+            .notice-title {
+                font-size: 1.5rem;
+                font-weight: 600;
+                margin-bottom: 1.5rem;
+            }
+
+            .notice-card a {
+                color: white;
+                text-decoration: underline;
+            }
+
+            .notice-card a:hover {
+                color: #f8f9fa;
+            }
+        </style>
+
+    </th:block>
+</head>
+<body>
+<!--페이지 콘텐츠-->
+<div th:fragment="content">   <!--이 content 블록이 ~{::content}로  layout에 전달됨-->
+    <!--Hero Section-->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <!--왼쪽 영역: 텍스트 콘텐츠-->
+                <div class="col-lg-6" data-aos="fade-right"> <!--왼쪽에서 오른쪽으로 애니메이션-->
+                    <h1 class="hero-title">
+                        지식과 문화가<br>
+                        만나는 공간
+                    </h1>
+                    <p class="hero-subtitle">
+                        최신 도서부터 고전까지, 다양한 분야의 도서와 디지털 자료를
+                        언제 어디서나 편리하게 이용하실 수 있습니다.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="/books" class="btn btn-light btn-lg me-3">
+                            <i class="fas fa-search me-2"></i>도서검색
+                        </a>
+                        <a href="/auth/register" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-user-plus me-2"></i>회원가입
+                        </a>
+                    </div>
+                </div>
+                <!--오른쪽 영역-->
+                <div class="col-lg-6" data-aos="fade-left"> <!--오른쪽에서 왼쪽으로 애니메이션-->
+                    <div class="text-center">
+                        <i class="fas fa-book-open" style="font-size: 15rem; opacity: 0.3;"></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+    <!--Stats Section-->
+    <section class="stats-section">
+        <div class="container">
+            <div class="row" data-aos="fade-up">    <!--AOS: 통계 카드들이 아래에서 위로 떠오름-->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="stat-card">
+                        <span class="stat-number" th:text="${totalBooks}">0</span>
+                        <span class="stat-label">보유 도서</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="stat-card">
+                        <span class="stat-number" th:text="${totalMembers}">0</span>
+                        <span class="stat-label">등록 회원</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="stat-card">
+                        <span class="stat-number" th:text="${monthlyRentals}">0</span>
+                        <span class="stat-label">이달의 대출</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="stat-card">
+                        <span class="stat-number" th:text="${avgRating}">0</span>
+                        <span class="stat-label">평균 평점</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--Features Section-->
+    <section class="features-section">
+        <div class="container">
+            <div class="row text-center mb-5" data-aos="fade-up"> <!--AOS: 주요 서비스 제목이 아래에서 위로 나타남-->
+                <div class="col-12">
+                    <h2 class="section-title">도서관 주요 서비스</h2>
+                    <p class="section-subtitle text-muted">
+                        편리하고 효율적인 도서관 서비스를 경험해보세요
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100"> <!--AOS: 첫번째 카드 0.1초 지연후 나타남-->
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h4>스마트 검색</h4>
+                        <p class="text-muted">
+                            제목, 저자, 키워드로 원하는 도서를 빠르게 찾아보세요.
+                            고급 검색 기능으로 더욱 정확한 결과를 얻을 수 있습니다.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200"> <!--AOS: 두번째 카드 0.2초 지연후 나타남-->
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-bookmark"></i>
+                        </div>
+                        <h4>온라인 예약</h4>
+                        <p class="text-muted">
+                            집에서 편리하게 도서를 예약하고, 대출 상태를
+                            실시간으로 확인할 수 있습니다.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300"> <!--AOS: 세번째 카드 0.3초 지연후 나타남-->
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h4>모바일 지원</h4>
+                        <p class="text-muted">
+                            스마트폰, 태블릿에서 완벽하게 작동하는
+                            반응형 웹 서비스를 제공합니다.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!--Notice Section-->
+    <section class="notice-section">
+        <div class="container">
+            <div class="notice-card" data-aos="fade-up">
+                <h4 class="notice-title">
+                    <i class="fas fa-info-circle me-2"></i>도서관 이용 안내
+                </h4>
+                <div class="row">
+                    <div class="col-mb-6">
+                        <p class="mb-2">
+                            <strong>대출 안내:</strong> 회원 1인당 최대 5권까지 대출 가능하며, 대출 기간은 14일입니다.
+                        </p>
+                        <p class="mb-2">
+                            <strong>연장 안내:</strong> 대출 기간은 1회에 한해 7일 연장이 가능합니다.
+                        </p>
+                    </div>
+                    <div class="col-mb-6">
+                        <p class="mb-2">
+                            <strong>운영 시간:</strong> 온라인 서비스는 24시간 이용 가능합니다.
+                        </p>
+                        <p class="mb-0">
+                            <strong>문의:</strong> 도서관 데스크 02-1234-5678 또는
+                            <a href="mailto:library@example.com" class="text-decoration-none">
+                                library@example.com</a>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<th:block th:fragment="scripts">  <!--이 scripts 블록이 ~{::scripts}로  layout에 전달됨-->
+    <!--AOS Animation-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+    <script>
+        // Initialize AOS (Animate On Scroll) - 스크롤 시 요소 애니메이션
+        AOS.init({
+            duration: 800,      // 애니메이션 지속 시간 (0.8초)
+            once: true,         // 한 번만 실행 (성능 최적화)
+            offset: 100         // 화면에서 100px 떨어진 곳에서 시작
+        })
+
+        // 카드들의 순차적 등장 애니메이션 (물결 효과)
+        document.addEventListener('DOMContentLoaded', function(){ //DOM이 완전히 로드된 후 실행
+            const cards =      // .feature-card, .stat-card 클래스를 가진 모든 요소 선택
+            document.querySelectorAll('.feature-card, .stat-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+                // 각 카드마다 0.1초씩 지연시켜서 순차적으로 나타나게 함
+            });
+
+        })
+
+    </script>
+</th:block>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

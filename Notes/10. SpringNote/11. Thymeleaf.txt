@@ -67,6 +67,14 @@
                 - {...} : 프로그먼트
     4) fragment 선언
         - th:fragment="이름" 속성을 사용하여 선언함
+            - 재사용 가능한 HTML 조각을 정의하는 속성
+            - 다른 페이지에서 'th:replace', 'th:insert'로 불러와 사용
+            - 모든 HTML 태그 또는 'th:block'에 붙일 수 있음
+
+        - th:block  
+            - 랜더링 시 사라지는 논리적 컨테이너
+            - 불필요한 HTML 태그를 추가하지 않고 그룹핑
+            - 
 
 6. jpa 프로젝트 registerForm.html
     1) Thymeleaf 문법
