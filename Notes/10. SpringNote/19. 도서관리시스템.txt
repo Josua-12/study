@@ -1,9 +1,101 @@
-1. Home.html 프래그먼트 구조
-    1) 화면 구조
+1. home.html 프래그먼트 구조 
+
+    1) 화면 구조 
         - layout.html (프래그먼트 컨테이너)
             - header (common/header.html)
-            - main content
+            - main content 
                 - css fragement
                 - content fragement
                 - scripts fragement
             - footer (common/footer.html)
+
+
+2. 전체 아키텍처
+    1) 시스템 구조도 
+
+        Presentation                    Business                    Data
+           Layer                          Layer                      Layer
+        ------------------          -------------------------     ------------------ 
+         * AuthController               * MemberService              * MemberRepo
+         * HomeController               * UserDetailsService         * Member Entity   
+         * Thymleaf                     * Security Config            * MySql DB
+         * Templates
+
+    2) 데이터베이스 ERD 
+
+        ```
+        erDiagram
+            MEMBERS {
+                BIGINT id PK
+                VARCHAR username UK
+                VARCHAR password 
+                VARCHAR email UK 
+                VARCHAR name
+                VARCHAR phone
+                ENUM role
+                ENUM member_type
+                ENUM status
+                TIMESTAMP created_at
+                TIMESTAMP updated_at
+            }
+
+        ROLE_ENUM {
+            string USER "일반 사용자"
+            string LIBRARIAN "사서"
+            string ADMIN "관리자"
+        }
+
+        MEMBER_TYPE_ENUM {
+            string REGULAR "일반 사용자"
+            string SILVER "실버 회원"
+            string GOLD "골드 회원"
+            string VIP "관리자"
+        }
+
+        STATUS_ENUM {
+            string ACTIVE "활성"
+            string SUSPENDED "정지"
+            string WITHDRAWN "탈퇴"
+        }
+
+        MEMBERS ||--|| ROLE_ENUM : has 
+        MEMBERS ||--|| MEMBER_TYPE_ENUM : has 
+        MEMBERS ||--|| STATUS_ENUM : has 
+        ```
+    
+    3) 구현 순서
+        - 프로젝트 설정 
+        - DB 설계 및 엔티티 
+        - Repository 계층 
+        - DTO 및 검증  
+        - Service 계층 
+        - Security 설정
+        - Controller 계층 
+        - View 템플릿 
+        - 테스트 및 검증 
+
+
+3. 구현 
+    1) STEP 1 : Entity 레이어 구현 
+        - Role.java
+        - MemberStatus.java 
+        - MemberType.java 
+        - Member.java (핵심!)
+
+    2) STEP 2 : Repository 레이어 구현 
+        - MemberRepository.java     
+
+    3) STEP 3 : DTO 레이어 구현 
+        - MemberDTO.java 
+
+    4) STEP 4 : Service 레이어 구현 
+        - MemberService.java 
+            - 회원 가입 
+                - 이메일
+                - 비밀번호
+                - 비밀번호 확인
+                - 이름
+                - 전화번호
+                - 주소 
+                - 약관동의    
+        - CustomUserDetailsService.java 

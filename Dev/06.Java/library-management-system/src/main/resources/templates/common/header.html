@@ -11,7 +11,71 @@
 
 
 
+        <!--네베게이션 메뉴-->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <!--왼쪽 메인 메뉴-->
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}">
+                        <i class="fas fa-home"></i>
+                    </a>
+                </li>
+            </ul>
 
+            <!--오른쪽 메뉴-->
+            <ul class="navbar-nav">
+                <!--로그인 상태 메뉴
+                    sec:authorize="isAuthenticated()
+                        - 로그인한 사용자에게만 보임.
+                        - Spring Security가 자동으로 인증 상태 확인
+                -->
+                <li class="nav-item dropdown" sec:authorize="isAuthenticated()" >
+                    <a class="nav-link dropdown-toggle"
+                        href="#"
+                        id="userDropdown"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="fas fa-user-circle me-1"></i>
+                        <!--로그인한 사용자의 username(이메일)-->
+                        <span sec:authentication="name"></span>
+                    </a>
+
+                    <!--드롭다운 메뉴 추가-->
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        <li>
+                            <a class="dropdown-item" th:href="@{/member/profile}">
+                                <i class="fas fa-user me-2"></i>내 정보
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-driver"></li>
+                        <li>
+                            <!--로그아웃 버튼 (POST 방식 필수)-->
+                            <form th:action="@{/auth/logout}" method="post" style="display: inline;">
+                                <button type="submit" class="dropdown-item">
+                                    <i class="fas fa-sign-out-alt me-2"></i>로그아웃
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+
+                <!--비로그인 상태 메뉴
+                    sec:authorize="!isAuthenticated()
+                        - 로그인하지 않은 사용자에게만 보임
+                -->
+                <li class="nav-item" sec:authorize="!isAuthenticated()">
+                    <a class="nav-link" th:href="@{/auth/login}">
+                        <i class="fas fa-sign-in-alt"></i>로그인
+                    </a>
+                </li>
+                <li class="nav-item" sec:authorize="!isAuthenticated()">
+                    <a class="nav-link" th:href="@{/auth/register}">
+                        <i class="fas fa-user-plus"></i>회원가입
+                    </a>
+                </li>
+            </ul>
+        </div>
 
     </div>
 </header>

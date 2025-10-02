@@ -1,10 +1,282 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>회원가입</title>
+    <!--Bootstrap CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center mb-4">회원가입</h2>
 
+            <!--에러 메시지-->
+<!--            <div th:if="{error}" class="alert alert-danger">-->
+<!--                <span th:text="${error}"></span>-->
+<!--            </div>-->
+            <!--
+                Thymeleaf 폼 객체 바인딩 설정
+                    - th:object
+                        - Controller에서 전달받은 MemberRegistrationDTO 객체와 폼을 바인딩
+                    - th:field="*{필드명}"
+                        - 각 input 필드와 DTO 필드를 매핑
+                    - 장점: 유효성 검사, 에러 메시지, 값 유지 등이 자동으로 처리됨
+            -->
+            <!--회원가입 폼-->
+            <form th:action="@{/auth/register}"
+                    method="post"
+                  th:object="${memberRegistrationDTO}">
+                <!--이메일 입력 필드 (필수)-->
+                <div class="mb-3">
+                    <label for="email" class="form-label">
+                        이메일 <span class="text-danger">*</span>
+                    </label>
+                    <!--th:field="*{email}" : DTO의 email 필드와 자동 바인딩-->
+                    <input type="email"
+                            class="form-control"
+                            id="email"
+                            th:field="*{email}"
+                            required>
+                </div>
+
+                <!--비밀번호 입력 필드 (필수)-->
+                <div class="mb-3">
+                    <label for="password" class="form-label">
+                        비밀번호 <span class="text-danger">*</span>
+                    </label>
+                    <!--th:field="*{password}" : DTO의 password 필드와 자동 바인딩-->
+                    <input type="password"
+                           class="form-control"
+                           id="password"
+                           th:field="*{password}"
+                           minlength="8"
+                           required>
+                    <small class="text-muted">
+                        8자 이상, 영문과 숫자 포함
+                    </small>
+                </div>
+
+                <!--비밀번호 확인 필드 (필수)-->
+                <div class="mb-3">
+                    <label for="confirmPassword" class="form-label">
+                        비밀번호 확인<span class="text-danger">*</span>
+                    </label>
+                    <!--th:field="*{password}" : DTO의 password 필드와 자동 바인딩-->
+                    <input type="password"
+                           class="form-control"
+                           id="confirmPassword"
+                           th:field="*{confirmPassword}"
+                           minlength="8"
+                           required>
+                </div>
+
+                <!--실명 입력 필드-->
+                <div class="mb-3">
+                    <label for="name" class="form-label">
+                        이름 <span class="text-danger">*</span>
+                    </label>
+                    <input type="text"
+                            class="form-control"
+                            id="name"
+                            th:field="*{name}"
+                            required>
+                </div>
+
+                <!--전화번호 입력 필드 (선택)-->
+                <div class="mb-3">
+                    <label for="phone" class="form-label">
+                        전화번호
+                    </label>
+                    <input type="text"
+                           class="form-control"
+                           id="phone"
+                           th:field="*{phone}"
+                           placeholder="010-1234-5678">
+                </div>
+
+                <!--주소 입력 필드 (선택)-->
+                <div class="mb-3">
+                    <label for="address" class="form-label">
+                        주소
+                    </label>
+                    <input type="text"
+                           class="form-control"
+                           id="address"
+                           th:field="*{address}">
+                </div>
+
+                <!--약관 동의 섹션-->
+                <div class="mb-4">
+                    <h6 class="fw-bold">약관 동의</h6>
+
+                    <!--서비스 이용약관 (필수)-->
+                    <div class="form-check mb-2">
+                        <!--
+                            data-bs-toggle="modal" <== Bootstrap 모달 트리거
+                        -->
+                        <input class="form-check-input"
+                                type="checkbox"
+                                id="termsAgreed"
+                                th:field="*{termsAgreed}"
+                                required>
+                        <label class="form-check-label" for="termsAgreed">
+                            <span class="text-danger">*</span>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">
+                                서비스 이용약관
+                            </a>에 동의합니다.
+                        </label>
+                    </div>
+
+                    <!-- 개인정보 처리방침 동의 (필수)-->
+                    <div class="form-check mb-2">
+                        <!--
+                            data-bs-toggle="modal" <== Bootstrap 모달 트리거
+                        -->
+                        <input class="form-check-input"
+                               type="checkbox"
+                               id="privacyAgreed"
+                               th:field="*{privacyAgreed}"
+                               required>
+                        <label class="form-check-label" for="privacyAgreed">
+                            <span class="text-danger">*</span>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">
+                                개인정보 처리방침
+                            </a>에 동의합니다.
+                        </label>
+                    </div>
+
+                    <small class="text-muted">
+                        <span class="text-danger">*</span> 필수 동의 항목입니다.
+                    </small>
+
+                </div>
+
+                <!--폼 제출 버튼-->
+                <button type="submit" class="btn btn-primary w-100 mb-3">
+                    회원가입
+                </button>
+
+                <!--로그인 페이지 이동 링크-->
+                <div class="text-center">
+                    <a href="/auth/login" class="btn btn-secondary">
+                        로그인하기
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--
+    Bootstrap 모달 컴포넌트 - 서비스 이용약관
+    - modal fade : Bootstrap 모달 클래스 + 페이드 애니메이션
+    - id = "termsModal" : 모달 식별자 (data-bs-target에서 참조)
+-->
+<div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="termsModalLabel">📋 서비스 이용약관</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-muted mb-3">
+                    <small>제정일: 2025년 9월 1일 | 시행일: 2025년 10월 1일</small>
+                </div>
+                <h6>제 1 조</h6>
+                <p>이 규정은 서울특별시교육청마포평생학습관(분관포함) 학습자 부담 평생교육 프로그램 운영에 관한 사항을 규정함을 목적으로 한다.</p>
+
+                <h6>제 2 조</h6>
+                <ul>
+                    <li><strong>서비스:</strong>명칭은 “서울특별시교육청마포평생학습관 평생학습교실(이하 ‘평생학습교실)” 이라 한다.</li>
+                    <li><strong>회원:</strong>명칭은 “서울특별시교육청마포평생학습관 평생학습교실(이하 ‘평생학습교실)” 이라 한다.</li>
+                    <li><strong>계정:</strong>명칭은 “서울특별시교육청마포평생학습관 평생학습교실(이하 ‘평생학습교실)” 이라 한다.</li>
+                </ul>
+
+                <h6>제 3 조(회원가입)</h6>
+                <p>1. 서울특별시교육청마포평생학습관장(이하 ‘관장’이라 한다)</p>
+                <p>2. 서울특별시교육청마포평생학습관장(이하 ‘관장’이라 한다)</p>
+
+                <h6>제 4 조(서비스 이용)</h6>
+                <p>1. 평생학습교실의 강좌별 강좌 기간, 강습 시간, 모집 정원, 수강료 등은 강좌의 내용과시설 규모에 따라 관장이 정한다.</p>
+                <p>2. 서울특별시교육청마포평생학습관장(이하 ‘관장’이라 한다)</p>
+                <p>3. 서울특별시교육청마포평생학습관장(이하 ‘관장’이라 한다)</p>
+
+                <h6>제 5 조(서비스 이용)</h6>
+                <p>1. 평생학습교실의 강좌별 강좌 기간, 강습 시간, 모집 정원, 수강료 등은 강좌의 내용과시설 규모에 따라 관장이 정한다.</p>
+                <p>2. 서울특별시교육청마포평생학습관장(이하 ‘관장’이라 한다)</p>
+                <p>3. 서울특별시교육청마포평생학습관장(이하 ‘관장’이라 한다)</p>
+
+                <div class="text-center mt-4">
+                    <small class="text-muted">도서관 관리 시스템 운영팀</small>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="privacyModalLabel">📋 서비스 이용약관</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-muted mb-3">
+                    <small>제정일: 2025년 9월 1일 | 시행일: 2025년 10월 1일</small>
+                </div>
+                <h6>제 1 조</h6>
+                <p>이 규정은 서울특별시교육청마포평생학습관(분관포함) 학습자 부담 평생교육 프로그램 운영에 관한 사항을 규정함을 목적으로 한다.</p>
+
+                <h6>제 2 조</h6>
+                <ul>
+                    <li><strong>서비스:</strong>명칭은 “서울특별시교육청마포평생학습관 평생학습교실(이하 ‘평생학습교실)” 이라 한다.</li>
+                    <li><strong>회원:</strong>명칭은 “서울특별시교육청마포평생학습관 평생학습교실(이하 ‘평생학습교실)” 이라 한다.</li>
+                    <li><strong>계정:</strong>명칭은 “서울특별시교육청마포평생학습관 평생학습교실(이하 ‘평생학습교실)” 이라 한다.</li>
+                </ul>
+
+                <h6>제 3 조(회원가입)</h6>
+                <p>1. 서울특별시교육청마포평생학습관장(이하 ‘관장’이라 한다)</p>
+                <p>2. 서울특별시교육청마포평생학습관장(이하 ‘관장’이라 한다)</p>
+
+                <h6>제 4 조(서비스 이용)</h6>
+                <p>1. 평생학습교실의 강좌별 강좌 기간, 강습 시간, 모집 정원, 수강료 등은 강좌의 내용과시설 규모에 따라 관장이 정한다.</p>
+                <p>2. 서울특별시교육청마포평생학습관장(이하 ‘관장’이라 한다)</p>
+                <p>3. 서울특별시교육청마포평생학습관장(이하 ‘관장’이라 한다)</p>
+
+                <h6>제 5 조(서비스 이용)</h6>
+                <p>1. 평생학습교실의 강좌별 강좌 기간, 강습 시간, 모집 정원, 수강료 등은 강좌의 내용과시설 규모에 따라 관장이 정한다.</p>
+                <p>2. 서울특별시교육청마포평생학습관장(이하 ‘관장’이라 한다)</p>
+                <p>3. 서울특별시교육청마포평생학습관장(이하 ‘관장’이라 한다)</p>
+
+                <div class="text-center mt-4">
+                    <small class="text-muted">도서관 관리 시스템 운영팀</small>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
