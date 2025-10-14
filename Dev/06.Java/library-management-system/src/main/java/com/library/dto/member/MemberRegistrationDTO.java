@@ -1,4 +1,4 @@
-package com.library.dto;
+package com.library.dto.member;
 
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;

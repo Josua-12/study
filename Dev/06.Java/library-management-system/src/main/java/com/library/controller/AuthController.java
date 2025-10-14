@@ -1,12 +1,11 @@
 package com.library.controller;
 
-import com.library.dto.MemberRegistrationDTO;
-import com.library.dto.MemberResponseDTO;
+import com.library.dto.member.MemberRegistrationDTO;
+import com.library.dto.member.MemberResponseDTO;
 import com.library.service.MemberService;
 import com.library.util.MaskingUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,12 +55,18 @@ public class AuthController {
         // 2) 현재 인증 상태 확인
 
         // 3) URL 매개변수 기반 상태 메시지 처리
+        // 로그인 실패 시 에러 메시지
+        if (error != null) {
+            log.warn("로그인 실패 - 에러 파라미터 감지");
+            model.addAttribute("error", "이메일 또는 비밀번호가 잘못되었습니다.");
+            model.addAttribute("messageType", "login_error");
+        }
+
         // 회원 가입 완료 후 리다이렉트된 경우
         if (registered != null) {
             log.info("회원 가입 완료 후 로그인 페이지 접근");
             model.addAttribute("message", "회원가입이 완료되었습니다. 로그인해 주세요.");
             model.addAttribute("messageType", "register_success");
-            model.addAttribute("error", "이메일 또는 비밀번호가 잘못되었습니다.");
         }
 
         // 4) 세션 정보 확인

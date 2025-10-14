@@ -1,16 +1,13 @@
 package com.library.service;
 
-import com.library.dto.MemberRegistrationDTO;
-import com.library.dto.MemberResponseDTO;
-import com.library.entity.Member;
-import com.library.entity.MemberStatus;
-import com.library.entity.MemberType;
-import com.library.entity.Role;
+import com.library.dto.member.MemberRegistrationDTO;
+import com.library.dto.member.MemberResponseDTO;
+import com.library.entity.member.Member;
+import com.library.entity.member.MemberStatus;
+import com.library.entity.member.MemberType;
+import com.library.entity.member.Role;
 import com.library.repository.MemberRepository;
 import com.library.util.MaskingUtils;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{common/layout :: layout(~{::title}, ~{::content}, ~{::css}, ~{::scripts})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <th:block th:fragment="css">
+        <style>
+            /* === 헤더 영역 === */
+            .board-header {
+                display: flex;
+                justify-content: space-between; /*자식 요소를 양쪽 끝으로 배치*/
+                align-items: center;
+                margin-bottom: 30px;
+                padding-bottom: 20px;
+                border-bottom: 2px solid #333;
+            }
+
+            .total-count {
+                font-size: 16px;
+                color: #495057;
+            }
+
+            .total-count strong {
+                color: #007bff;
+                font-size: 18px;
+            }
+
+            /*글쓰기 버튼*/
+            .btn-write {
+                padding: 10px 20px;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                text-decoration: none;
+                font-weight: 500;
+                transition: background-color 0.2s;
+            }
+            .btn-write:hover {
+                background-color: #007bff;
+                cursor: pointer;
+            }
+
+            /* === 게시글 테이블 === */
+            .board-table {
+                width: 100%;                /* 전체 너비 사용 */
+                border-collapse: collapse;  /* 테두리 겹침 제거 */
+                margin-bottom: 20px;
+            }
+
+            .board-table thead {
+
+            }
+
+            .board-table th {
+                text-align: center;         /* 헤더 텍스트 중앙 정렬 */
+                vertical-align: middle;     /* 수직 중앙 정렬 */
+                font-weight: bold;
+                padding: 12px 10px;
+                background-color: #f8f9fa;
+                border-bottom: 2px solid #dee2eb;
+            }
+
+            .board-table td {
+                padding: 15px 10px;         /* 행 사이 구분선 */
+                vertical-align: middle;
+            }
+
+            .board-table tbody tr {
+                border-bottom: 1px solid #e9ecef;
+                transition: background-color 0.2s;      /* 호버 효과 애니메이션 */
+            }
+
+            .board-table tbody tr:hover {
+                background-color: #f8f9fa;
+                cursor: pointer;
+            }
+
+            .board-table td.center {
+                text-align: center;
+                vertical-align: middle;
+            }
+
+            .board-table td.title {
+                text-align: left;
+                padding-left: 20px;
+            }
+
+            .board-table td.title a {
+                color: #333;
+                text-decoration: none;
+                transition: color 0.2s;
+            }
+
+            .board-table td.title a:hover {
+                color: #007bff;
+                text-decoration: underline;
+            }
+
+            /*댓글 수*/
+            .comment-count {
+
+            }
+
+            /* === 카테고리 배지 === */
+            /* 모든 카테고리 배지의 공통 스타일 */
+            .category-badge {
+                display: inline-block;
+                padding: 4px 12px;
+                border-radius: 12px;
+                font-size: 12px;
+                font-weight: bold;
+                text-align: center;
+                white-space: nowrap;        /* 텍스트 줄바꿈 방지 */
+            }
+
+            /* 공지사항 카테고리 - 빨간색 */
+            .category-badge.NOTICE {
+                background-color: #ff6b6b;
+                color: white;
+            }
+
+            /* 자유 게시판 카테고리 - 청록색 */
+            .category-badge.FREE {
+                background-color: #4ecdc4;
+                color: white;
+            }
+
+            /* QnA 게시판 카테고리 - 노란색 */
+            .category-badge.QNA {
+                background-color: #ffd93d;
+                color: #333;
+            }
+
+            /* 리뷰 게시판 카테고리 - 연두색 */
+            .category-badge.REVIEW {
+                background-color: #a8e6cf;
+                color: #2d5f3f;
+            }
+
+            /* === 페이징 영역 === */
+            .pagination {
+                display: flex;                  /* Flexbox 레이아웃 사용 */
+                justify-content: center;        /* 수평 중앙 정렬 */
+                align-items: center;            /* 수직 중앙 정렬 */
+                gap: 5px;                       /* 버튼 간 간격 5px */
+                margin-top: 40px;               /* 테이블과의 상단 여백 */
+                padding: 20px 0;
+            }
+
+            /* 페이지 버튼 공통 스타일 */
+            .page-btn {
+                min-width: 35px;                /* 최소 너비 (정사각형에 가깝게) */
+                height: 35px;                   /* 고정 높이 */
+                padding: 8px 12px;
+                border: 1px solid #ddd;
+                background-color: white;
+                color: #333;
+                text-decoration: none;
+                border-radius: 4px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.2s;           /* 모든 속성 변화에 0.2초 애니메이션*/
+            }
+
+            /* 패이지 버튼 호버 효과 */
+            .page-btn:hover {
+                background-color: #f8f9fa;
+                border-color: #007bff;
+                color: #007bff;
+            }
+
+            /* 현재 페이지 강조 스타일 */
+            .page-btn.active {
+                background-color: #007bff;
+                color: white;
+                border-color: #007bff;
+                font-weight: bold;
+            }
+
+            .page-btn.active:hover {
+                background-color: #0056b3;
+                border-color: #0056b3;
+                color: white;
+            }
+
+            /* 이전/다음 그룹 버튼 (<< 이전, 다음 >>) */
+            .page-btn.nav {
+                font-weight: bold;
+            }
+
+            /* 비활성 버튼 (클릭 불가 상태) */
+            .page-btn.disabled {
+                background-color: #f8f9fa;
+                color: #ccc;
+                border-color:#e9ecef;
+                cursor: not-allowed;            /* 금지 커서 표시 */
+                pointer-events: none;           /* 클릭 이벤트 차단*/
+            }
+        </style>
+    </th:block>
+</head>
+<body>
+    <!--메인 컨텐츠 영역 (layout.html의 <main>에 삽입됨-->
+    <div th:fragment="content">
+        <div class="container my-4">
+            <h1 class="mb-4">📋 게시판</h1>
+            <!-- === 헤더 : 전체 게시글 수 & 글쓰기 버튼 === -->
+            <div class="board-header">
+                <!--전체 게시글 수 표시-->
+                <div class="total-count">
+                    전체 <strong th:text="${totalElements}">0</strong>개
+                </div>
+                <!--글쓰기 버튼 (로그인한 사용자만 표시)-->
+                <a th:href="@{/boards/new}" class="btn-write" sec:authorize="isAuthenticated()">
+                    ✏️ 글쓰기
+                </a>
+            </div>
+
+            <!-- === 게시글 목록 테이블 (게시글이 있을 때만 표시) === -->
+            <table class="board-table" th:if="${boards.hasContent()}">
+                <thead>
+                    <tr>
+                        <th style="width: 80px;">번호</th>
+                        <th style="width: 120px;">카테고리</th>
+                        <th>제목</th>
+                        <th style="width: 120px;">작성자</th>
+                        <th style="width: 80px;">조회</th>
+                        <th style="width: 80px;">좋아요</th>
+                        <th style="width: 150px;">작성일</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- boards.content를 반복하며 각 게시글 출력-->
+                    <!-- th:each: Thymeleaf 반복문 -->
+                    <tr th:each="board : ${boards.content}">
+                        <!--게시글 ID-->
+                        <td class="center" th:text="${board.id}">1</td>
+                        <!--카테고리-->
+                        <td class="center">
+                            <!--th:classappend : 기존 class에 동적으로 class 추가-->
+                            <!--board.category.name() : Enum의 name() -->
+                            <!--board.category.displayName : Enum의 displayName-->
+                            <span class="category-badge"
+                                    th:classappend="${board.category.name()}"
+                                    th:text="${board.category.displayName}">
+                                카테고리
+                            </span>
+                        </td>
+                        <!--제목 (클릭 시 상세 페이지로 이동)-->
+                        <td class="title">
+                            <a th:href="@{/boards/{id}(id=${board.id}, page=${currentPage})}"
+                               th:text="${board.title}">
+                                게시글 제목
+                            </a>
+                            <!-- 댓글 수 표시 (댓글이 있을 때만) -->
+                            <!-- th:if: 조건이 참일 때만 랜더링 -->
+                            <span class="comment-count">
+                                <span></span>
+                            </span>
+                        </td>
+
+                        <!-- 작성자 이름 -->
+                        <td class="center" th:text="${board.authorName}">작성자</td>
+
+                        <!-- 조회수 -->
+                        <td class="center" th:text="${board.viewCount}">0</td>
+
+                        <!--좋아요 수-->
+                        <td class="center" th:text="${board.likeCount}">0</td>
+
+                        <!--작성일시-->
+                        <!--#temporals: Thymeleaf의 날짜/시간 유틸리티-->
+                        <td class="center" th:text="${#temporals.format(board.createdAt, 'yyyy-MM-dd HH:mm')}">2025-10-13</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- === 게시글이 없을 때 표시 === -->
+            <div class="empty-list" th:unless="${boards.hasContent()}">
+                <p>게시글이 없습니다. 첫 게시글을 작성해 보세요!</p>
+            </div>
+
+            <!-- === 페이징 영역 (게시글이 있고, 전체 페이지가 1개 이상일 때만 표시) === -->
+            <div class="pagination" th:if="${boards.hasContent() and totalPages > 0}">
+                <a th:href="${hasPrevGroup} ? @{/boards(page=${prevGroupPage}, size=10)} : '#'"
+                   th:classappend="${!hasPrevGroup} ? 'disabled' : ''"
+                   class="page-btn nav">
+                    <<
+                </a>
+                <!-- 페이지 번호 버튼들 -->
+                <a th:each="pageNum : ${#numbers.sequence(startPage, endPage)}"
+                   th:href="@{/boards(page=${pageNum}, size=10)}"
+                   th:text="${pageNum}"
+                   th:classappend="${pageNum == currentPage} ? 'active' : ''"
+                   class="page-btn">
+                </a>
+                <a th:href="${hasNextGroup} ? @{/boards(page=${nextGroupPage}, size=10)} : '#'"
+                   th:classappend="${!hasNextGroup} ? 'disabled' : ''"
+                   class="page-btn nav">
+                     >>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 게시판 전용 JavaScript (layout.html의 </body> 직전에 삽입됨) -->
+    <th:block th:fragment="scripts">
+
+    </th:block>
+</body>
+</html>

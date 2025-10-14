@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{common/layout :: layout(~{::title}, ~{::content}, ~{::css}, ~{::scripts})}">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 상세</title>
+    <!-- 게시글 상세 페이지 전용 스타일 (layout.html의 <head>에 삽입됨) -->
+    <th:block th:fragment="css">
+        <style>
+            .board-detail {
+
+            }
+
+            .board-header {
+
+            }
+
+            .board-title {
+
+            }
+
+            .board-meta {
+
+            }
+
+            .meta-right {
+
+            }
+
+            .meta-left {
+
+            }
+
+            .category-badge {
+
+            }
+
+            .board-content {
+
+            }
+
+            .board-footer {
+
+            }
+
+
+        </style>
+    </th:block>
+</head>
+<body>
+<!-- 메인 컨텐츠 영역 (layout.html의 <main>에 삽입됨 -->
+<div>
+    <th:block th:fragment="content">
+        <div class="board-detail">
+            <!-- 게시글 헤더 영역 -->
+            <div class="border-header">
+                <h1>게시글 제목</h1>
+            </div>
+        </div>
+    </th:block>
+</div>
+</body>
+</html>

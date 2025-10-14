@@ -1,4 +1,4 @@
-package com.library.entity;
+package com.library.entity.member;
 
 public enum MemberType {
     REGULAR("일반회원", 3, 14, 1, 1),

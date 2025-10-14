@@ -88,6 +88,8 @@ public class SecurityConfig {
                             .requestMatchers("/", "/home").permitAll()
                             .requestMatchers("/css/**", "/images/**").permitAll()
                             .requestMatchers("/auth/**", "/register", "/login").permitAll()
+                            // 게시판 URL (목록/상세 조회는 모두 허용)
+                            .requestMatchers("/boards/**").permitAll()
 
                             // 그 외 모든 요청은 인증 필요
                             .anyRequest().authenticated();

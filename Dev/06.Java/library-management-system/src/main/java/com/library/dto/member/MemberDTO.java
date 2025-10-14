@@ -1,4 +1,4 @@
-package com.library.dto;
+package com.library.dto.member;
 /*
     Data Transfer Object
         - 클라이언트와 서버 간 데이터 전송용
@@ -6,8 +6,8 @@ package com.library.dto;
         - 유효성 검증 어노테이션 포함
  */
 
-import com.library.entity.MemberStatus;
-import com.library.entity.MemberType;
+import com.library.entity.member.MemberStatus;
+import com.library.entity.member.MemberType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -49,7 +49,7 @@ public class MemberDTO {
 
     // 시스템 정보 (읽기 전용)
     private LocalDateTime joinDate;     // 가입일
-    private MemberType memberType;      // 회원 등급
+    private MemberType memberType;      // 회원 등급..
     private MemberStatus status;        // 회원 상태
     private String role;                // 권한
 

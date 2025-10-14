@@ -17,7 +17,14 @@
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/}">
-                        <i class="fas fa-home"></i>
+                        <i class="fas fa-home"></i> 홈
+                    </a>
+                </li>
+
+                <!--게시판 메뉴-->
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/boards}">
+                        <i class="fas fa-clipboard-list"></i> 게시판
                     </a>
                 </li>
             </ul>
@@ -37,8 +44,14 @@
                         data-bs-toggle="dropdown"
                         aria-expanded="false">
                         <i class="fas fa-user-circle me-1"></i>
-                        <!--로그인한 사용자의 username(이메일)-->
-                        <span sec:authentication="name"></span>
+                        <!--
+                            로그인 한 사용자의 실제 이름 표시
+                            sec:authentication="name" => "test1@library.com" (이메일)
+                            sec:authentication="principal.name" => "테스트1" (실제 이름)
+
+                            principal = Member 객체 => .name 필드 접근
+                            -->
+                        <span sec:authentication="principal.name"></span>
                     </a>
 
                     <!--드롭다운 메뉴 추가-->

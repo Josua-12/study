@@ -1,4 +1,4 @@
-package com.library.entity;
+package com.library.entity.member;
 
 /*
     사용자 권한을 정의하는 열거형

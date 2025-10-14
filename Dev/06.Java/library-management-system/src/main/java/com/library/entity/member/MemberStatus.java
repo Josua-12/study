@@ -1,4 +1,4 @@
-package com.library.entity;
+package com.library.entity.member;
 
 public enum MemberStatus {
     ACTIVE("활성"),

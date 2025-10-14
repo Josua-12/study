@@ -1,0 +1,15 @@
+* Step 0 : 프로젝트 초기 설정 
+    - 게시판 기능 개발 전 필요한 초기 설정 작업 
+        - 파일 업로드 설정
+        - JPA Auditing 활성화
+
+1. application.yml 파일 업로드 설정 추가
+
+2. JPA Auditing 활성화
+    - @CreatedDate, @LastModifiedDate 자동 동작
+    - BaseEntity에서 createdAt, updatedAt 자동 관리 
+
+3. uploads 디렉토리 생성 및 Git 설정 
+
+4. AuthController 버그 수정
+    - 회원 가입 후 로그인 페이지로 리다이렉트 시, 두 메시지가 동시에 표시되는 버그 
