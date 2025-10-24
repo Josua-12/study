@@ -15,6 +15,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <!--왼쪽 메인 메뉴-->
             <ul class="navbar-nav me-auto">
+                <!--홈 메뉴-->
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/}">
                         <i class="fas fa-home"></i> 홈
@@ -45,12 +46,12 @@
                         aria-expanded="false">
                         <i class="fas fa-user-circle me-1"></i>
                         <!--
-                            로그인 한 사용자의 실제 이름 표시
+                            로그인한 사용자의 실제 이름 표시
                             sec:authentication="name" => "test1@library.com" (이메일)
-                            sec:authentication="principal.name" => "테스트1" (실제 이름)
+                            sec:authentication="principal.name" => "테스트1" (실제이름)
 
                             principal = Member 객체 => .name 필드 접근
-                            -->
+                       -->
                         <span sec:authentication="principal.name"></span>
                     </a>
 

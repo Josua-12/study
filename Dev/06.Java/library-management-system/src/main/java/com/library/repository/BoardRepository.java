@@ -68,16 +68,14 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     /*
         게시글 단건 조회 (ID + 상태, 작성자 정보 포함)
             - N + 1 문제를 방지하기 위해서 Fetch Join을 사용함
-            - Active 상태의 게시글만 조회 (삭제된 글은 조회 불가)
+            - Active 상태의 게시글만 조회 (삭제된 글은 조회가 불가)
 
-       @Param id : 조회할 게시글
-       @Param status : 조회할 게시글 상태 (일반적으로 ACTIVE)
-    */
-    @Query(
-            "SELECT b from Board B " +
+       @param id : 조회할 게시글 ID
+       @param status : 조회할 게시글 상태 (일반적으로 ACTIVE)
+     */
+    @Query("SELECT b from Board b " +
             "JOIN FETCH b.author " +
-            "WHERE b.id = : id AND b.status = : status"
-    )
+            "WHERE b.id = :id  AND b.status = :status")
     Optional<Board> findByIdAndStatusWithAuthor(Long id, BoardStatus status);
 }
 

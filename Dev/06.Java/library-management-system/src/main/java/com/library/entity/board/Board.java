@@ -5,6 +5,9 @@ import com.library.entity.member.Member;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /*
     게시글 Entity
         - 게시판의 게시글 정보를 관리함
@@ -93,6 +96,17 @@ public class Board extends BaseEntity {
     private BoardCategory category = BoardCategory.FREE;
 
     /*
+        첨부파일 목록 (BoardFile과 1:N 관계)
+            - 하나의 게시글에 여러 파일을 첨부할수 있음
+            - cascade = CascadeType.ALL: 게시글 저장/삭제 시 파일도 함께 처리
+            - orphanRemoval = true: 게시글에서 파일을 제거하면 DB에서도 삭제
+            - mappedBy = "board": BoardFile의 board필드가 연관관계의 주인
+     */
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<BoardFile> files = new ArrayList<>();
+
+    /*
         비즈니스 메서드
             - 조회수 증가
                 - 게시글 상세보기 시 호출됨
@@ -123,5 +137,15 @@ public class Board extends BaseEntity {
      */
     public void delete() {
         this.status = BoardStatus.DELETED;
+    }
+
+    /*
+        연관관계 편의 메서드 - 파일 추가
+            - 양방향 관계를 안전하게 설정
+            - Board의 files 컬렉션에 추가하면서 BoardFile의 board도 설정
+     */
+    public void addFile(BoardFile file) {
+        this.files.add(file);
+        file.setBoard(this);
     }
 }

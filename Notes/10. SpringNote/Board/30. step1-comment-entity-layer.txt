@@ -1,0 +1,13 @@
+1. BaseEntity 
+    1) 모든 Entity가 공통으로 가지는 필드(생성일시, 수정일시)를 
+       관리하는 추상 클래스임.
+
+2. CommentStatus Enum 생성 
+
+3. Comment Entity 생성 
+
+4. 검증 및 테스트 
+    1) 데이터베이스 테이블 생성 확인
+        - desc comment;
+    2) Entity 생성 테스트     
+

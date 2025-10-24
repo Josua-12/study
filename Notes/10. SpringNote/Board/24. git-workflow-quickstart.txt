@@ -1,0 +1,27 @@
+1. 전체 워크플로우 (9단계)
+    1) 작업 시작 전 동기화 (git pull)
+
+    2) 작업 브랜치 생성 (git checkout -b)
+
+    3) 코드 작업 및 수정 
+
+    4) 변경사항 스테이징 (git add)
+
+    5) 커밋 (git commit)
+
+    6) main 브랜치로 전환 및 동기화 (git checkout main, git pull)
+
+    7) 브랜치 머지 (git merge)
+
+    8) 원격 저장소에 푸시 (git push)
+
+    9) 작업 브랜치 삭제 (git branch -d)
+
+2. Type 
+    1) feat: 새로운 기능 추가
+    2) fix: 버그 수정
+    3) docs: 문서 수정 
+    4) refactor: 코드 리팩토링 
+    5) test: 테스트 코드 
+    6) style: 코드 포맷팅 (기능 변경 없음)
+    7) chore: 빌드, 설정 파일 수정     

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<!-- 공통 레이아웃 템플릿 적용 (title, content, css, scripts 부분을 레이아웃을 삽입)-->
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{common/layout :: layout(~{::title}, ~{::content}, ~{::css}, ~{::scripts})}">
+
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${isEditMode != null and isEditMode} ? '게시글 수정' : '게시글 작성'">게시글 작성</title>
+    <!--레이아웃에 삽입될 CSS 블록 정의-->
+    <th:block th:fragment="css">
+        <style>
+            .form-container {
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 30px;
+                background-color: #fff;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);  /* 그림자: 수평, 수직, 흐름, 투명도 10% */
+            }
+
+            .form-header {
+                margin-bottom: 30px;
+            }
+
+            .form-header h2 {
+                font-size: 28px;
+                font-weight: bold;
+                color: #333;
+                margin: 0;
+                padding-bottom: 15px;
+                border-bottom: 2px solid #007bff;
+            }
+
+            .form-group {
+                margin-bottom: 20px;
+            }
+
+            .form-group label {
+                display: block;
+                font-weight: 600;
+                margin-bottom: 8px;
+                color: #333;
+            }
+
+            .form-group label .required {
+                color: #dc3545;
+                margin-left: 4px;
+                font-weight: bold;
+            }
+
+            /* ===입력 필드 공통 스타일 === */
+            .form-group input[type="text"],
+            .form-group select,
+            .form-group textarea,
+            .form-group input[type="file"] {
+                width: 100%;
+                padding: 12px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                font-size: 14px;
+                font-family: 'Arial', sans-serif;
+                background-color: #fff;
+                transition: border-color 0.3s ease;
+                box-sizing: border-box;
+            }
+            /* === 포커스 상태 (입력 필드 클릭 시) === */
+            .form-group input[type="text"]:focus,
+            .form-group select,
+            .form-group textarea,
+            .form-group input[type="file"] {
+                outline: none;
+                border-color: #007bff;
+                box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+                background-color: #f8f9fa;
+            }
+
+            .form-group textarea {
+                resize: vertical;           /* 수직 크기 조정만 허용 */
+                min-height: 150px;
+                line-height: 1.6;
+            }
+
+            .error-message {
+                display: block;
+                color: #dc3545;
+                font-size: 13px;
+                margin-top: 5px;
+                font-weight: 500;
+            }
+
+            .form-group.error input,
+            .form-group.error select,
+            .form-group.error textarea {
+                border-color: #dc3545;
+                background-color: #fff5f5;
+            }
+
+            .form-actions {
+
+            }
+
+            .btn {
+
+            }
+
+            .btn-primary {
+
+            }
+
+            .btn-primary:hover {
+
+            }
+
+            .btn-secondary {
+
+            }
+
+            .btn-secondary:hover {
+
+            }
+
+            .help-text {
+
+            }
+        </style>
+    </th:block>
+</head>
+<body>
+<!--레이아웃에 삽입될 컨텐츠 블록 정의-->
+<th:block th:fragment="content">
+    <!--
+        게시글 작성 폼
+            - th:action="@{/boards}"  : 폼 제출 시 /boards URL로 전송
+            - th:object="${board}" :  board 객체와 폼 필드 바인딩
+
+        Thymeleaf 유틸리티 객체 - #fields
+            - #fields: Spring의 유효성 결과(BindingResult)를 다루는 Thymeleaf 내장 객체
+            - #fields.hasErrors('필드명'): 해당 필드의 유효성 검증 에러가 있는지 확인 (true/false)
+            - #fields.errors('필드명') : 해당 필드의 에러 메시지 리스트 반환
+    -->
+    <div class="form-container">
+        <!--시스템 에러 메시지 (예외 발생), error 변수가 있을 경우에만 표시-->
+        <div th:if="${error}" class="alert alert-danger alert-dismissible fade show mb-3" role="alert">
+            <strong>⚠️ 오류 발생</strong>
+            <span th:text="${error}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+
+        <!--서버에서 전달된 에러 메시지가 있을경우에만 표시-->
+        <div th:if="${message}" class="alert alert-danger alert-dismissible fade show mb-3" role="alert">
+            <span th:text="${message}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+
+        <!--페이지 헤더-->
+        <div class="form-header">
+            <h2 th:text="${isEditMode != null and isEditMode} ? '게시글 수정' : '게시글 작성' ">게시글 작성</h2>
+        </div>
+
+        <!--
+            enctype="multipart/form-data" : 파일 업로드를 위한 인코딩 타입
+            ${#fields.hasErrors('category')}: #fields 유틸리티 객체로 category 필드의 에러 여부 확인
+                ? 'error' : 에러가 있으면 'error' 클래스 추가
+
+            HTML form은 GET/POST만 지원하므로:
+                method="post" + _method=PUT 조합사용
+                Spring의 HiddenHttpMethodFilter가 PUT으로 변환
+        -->
+                                    <!-- 수정모드면 /boards/{id}, 작성 모드면 /boards -->
+        <form th:action="@{${(isEditMode != null and isEditMode) ? '/boards/' + boardId : '/boards' }}"
+              th:object="${board}"
+              method="post"
+              enctype="multipart/form-data"
+              id="boardForm">
+            <!-- 수정 모드일 때만 PUT 메서드 사용 -->
+            <input type="hidden" name="_method" th:if="${isEditMode != null and isEditMode}" value="PUT">
+
+            <div class="form-group" th:classappend="${#fields.hasErrors('category')} ? 'error'">
+                <label>
+                    카테고리
+                    <span class="required">*</span>
+                </label>
+                <!--th:field="*{category} : board.category와 양방향 바인딩-->
+                <select id="category" th:field="*{category}">
+                    <option value="">카테고리를 선택하세요</option>
+                    <option th:each="cat : ${categories}"
+                            th:value="${cat}"
+                            th:text="${cat.displayName}">카테고리
+                    </option>
+                </select>
+                <span class="error-message" th:if="${#fields.hasErrors('category')}"
+                        th:errors="*{category}">카테고리 에러</span>
+            </div>
+
+            <!--제목 입력 필드 (필수)-->
+            <div class="form-group" th:classappend="${#fields.hasErrors('title')} ? 'error'">
+                <label for="title">
+                    제목
+                    <span class="required">*</span>
+                </label>
+                <input type="text"
+                        id="title"
+                        th:field="*{title}"
+                        placeholder="제목을 입력하세요(최대 200자)">
+                <span class="error-message" th:if="${#fields.hasErrors('title')}"
+                      th:errors="*{title}">제목 에러</span>
+            </div>
+
+            <!--내용 입력 필드(필수)-->
+            <div class="form-group" th:classappend="${#fields.hasErrors('content')} ? 'error'">
+                <label for="content">
+                    내용
+                    <span class="required">*</span>
+                </label>
+                <textarea id="content"
+                            th:field="*{content}"
+                            placeholder="내용을 입력하세요"></textarea>
+                <span class="error-message" th:if="${#fields.hasErrors('content')}"
+                      th:errors="*{content}">내용 에러</span>
+                <span class="help-text">게시글 내용을 작성해주세요.</span>
+            </div>
+
+            <!--파일 첨부 필드 (선택) - 유효성 검증이 없음 -->
+            <div class="form-group">
+                <label for="files">첨부파일</label>
+                <input type="file"
+                        id="files"
+                        name="files"
+                        multiple
+                        accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.zip">
+                <span class="help-text">이미지, 문서 파일 등을 첨부할 수 있습니다. (최대 10MB, 여러 파일 선택 가능)</span>
+
+                <!--수정 모드일 때만 기존 첨부파일 목록 표시: isEditMode=true AND existingFiles가 null이 아님 AND 비어있지 않음-->
+                <div class="existing-files" th:if="${isEditMode !=null and isEditMode and existingFiles != null and not #lists.isEmpty(existingFiles)}">
+                    <!--기존 첨부파일 헤더: 파일 개수 표시-->
+                    <div class="existing-files-header">
+                        <i class="fas fa-paperclip"></i> 기본 첨부파일 (<span th:text="${#lists.size(existingFiles)}">0</span>개)
+                    </div>
+                    <!--existingFiles 리스트를 순회하며 각 파일을 file-item으로 표시-->
+                    <div th:each="file : ${existingFiles}" class="file-item">
+                        <!--삭제할 파일 선택용 체크박스 -->
+                        <input type="checkbox"
+                                name="deleteFileIds"
+                                th:value="${file.id}"
+                                th:id="'file-' + ${file.id}">
+                        <!-- 체크박스와 연결된 label (클릭시 체크박스 토글)-->
+                        <label th:for="'file-' + ${file.id} ">
+                            <!--파일 타입별 아이콘-->
+                            <i class="fas" th:classappend="${file.getFileIconClass()}"></i>
+                            <!--원본 파일명 표시-->
+                            <span class="file-name" th:text="${file.originalFilename}">파일명.jpg</span>
+                            <!--포맷된 파일 크기 표시 -->
+                            <span class="file-size" th:text="${file.getFormattedFileSize()}"></span>
+                        </label>
+                    </div>
+                    <!--안내 문구-->
+                    <span class="help-text" style="margin-top: 10px; display: block;">
+                        <i class="fas fa-info-circle"></i> 삭제할 파일을 체크하세요.
+                    </span>
+                </div>
+            </div>
+
+            <!--버튼 영역   -->
+            <div class="form-actions">
+                <!--취소 버튼: 수정 모드면 상세 페이지로(/boards/{id}), 작성 모드면 목록으로(/boards) 이동-->
+                <a th:href="@{${(isEditMode != null and isEditMode) ? '/boards/' + boardId : '/boards' }}"
+                   class="btn btn-secondary">취소</a>
+                <button type="submit" class="btn btn-primary"
+                        id="submitBtn"
+                        th:text="${isEditMode != null and isEditMode} ? '수정완료' : '작성완료'">작성완료</button>
+            </div>
+        </form>
+
+        <!--파일 업로드 및 폼 제출 검증 JavaScript-->
+        <script>
+            console.log("게시글 작성 폼 스크립트 로드");
+            // 페이지 로드 완료 후 실행 (모든 HTML 요소 로드 완료 시점)
+            window.addEventListener('load', function() {
+                console.log('페이지 로드 완료');
+                // DOM 요소 선택
+                const form = document.getElementById('boardForm');  //게시글 작성 폼
+                const fileInput = document.getElementById('files');  //파일 입력 필드
+
+                // 필수 요소 존재 확인 (요소가 없으면 스크립트 종료)
+                if (!form || !fileInput) {
+                    console.error('필수 요소를 찾을 수 없습니다.');
+                    return;  // 요소가 없으면 더 이상 실행하지 않음
+                }
+
+                // 파일 검증 상수 정의
+                const MAX_FILE_SIZE = 1024 * 1024 * 10;
+                const ALLOWED_EXTENSIONS = ['jpg', 'jpeg', 'png', 'gif',
+                                            'pdf',
+                                            'doc', 'docx',
+                                            'xls', 'xlsx',
+                                            'ppt', 'pptx',
+                                            'txt', 'zip', 'hwp'];
+
+                // 파일 선택시 실시간 검증 이벤트 리스너
+                fileInput.addEventListener('change', function(e){
+                    const files = e.target.files;       // 사용자가 선택한 파일들의 FileList 객체
+                    let errorMessages = [];     // 에러 메시지를 담을 배열 초기화
+
+                    // 선택한 각 파일에 대해 반복 검증
+                    for (let i = 0; i < files.length; i++) {
+                        const file = files[i];      // 현재 검증 중인 파일
+                        // 1) 파일 크기 검증 (10MB 초과 여부)
+                        if (file.size > MAX_FILE_SIZE) {
+                            errorMessages.push(file.name + ': 파일 크기가 10MB를 초과합니다. (' +
+                                (file.size / 1024 / 1024).toFixed(2) + 'MB) ');
+                        }
+
+                        // 2) 파일 확장자 검증
+                        const fileName = file.name.toLowerCase();
+                        const extension = fileName.substring(fileName.lastIndexOf('.')+1);
+
+                        if (!ALLOWED_EXTENSIONS.includes(extension)) {
+                            errorMessages.push(file.name + ': 허용되지 않은 파일 형식입니다. (' +extension+ ')' );
+                        }
+                    }
+
+                    // 3) 에러 발생 시 처리
+                    if (errorMessages.length > 0) {
+                        alert('파일 업로드 오류:\n\n' +errorMessages.join('\n')); //모든 에러 메시지를 줄바꿈으로 연결하여 표시
+                        e.target.value = '';    // 잘못된 파일 선택 취소 (파일 입력 필드를 초기화)
+                    }
+
+                });
+
+                // 폼 제출 이벤트 리스너
+                form.addEventListener('submit', function(e){
+
+                   console.log('폼 제출 시도');
+
+                    // === 필수 필드 검증 추가 ===
+                    // 1. 입력값 가져오기
+                    const category = document.getElementById('category').value; // 선택된 카테고리
+                    const title = document.getElementById('title').value.trim(); // 제목 (공백제거)
+                    const content = document.getElementById('content').value.trim(); // 내용 (공백제거)
+
+                    // 2. 에러 메시지 배열 초기화
+                    let validationErrors = [];
+
+                    // 3. 카테고리 검증
+                    if (!category) {        //빈 값이면
+                        validationErrors.push('카테고리를 선택해주세요.')
+                    }
+
+                    // 4. 제목 검증
+                    if (!title) {           //빈 값이면
+                        validationErrors.push('제목을 입력해주세요.')
+                    } else if (title.length > 200) {
+                        validationErrors.push('제목은 200자를 초과할 수 업습니다.');
+                    }
+
+                    // 5. 내용 검증
+                    if (!content) {         //빈 값이면
+                        validationErrors.push('내용을 입력해주세요.');
+                    }
+
+                    // 6. 에러가 있으면 폼 제출 차단
+                    if (validationErrors.length > 0) {
+                        e.preventDefault();     // 폼 제출을 중단
+                        alert('입력 오류:\n\n' +validationErrors.join('\n'));  //에러 메시지 표시
+                        return false;       // 함수 종료
+                    }
+                    // === 필수 필드 검증 끝 ===
+
+                    // 수정/작성 확인 메시지 동적 생성
+                    const isEditMode = /*[[${isEditMode}]]*/  false;
+                    const confirmMessage = isEditMode
+                            ? '게시글을 수정하시겠습니까?'
+                            : '게시글을 작성하시겠습니까?';
+
+                    if (!confirm(confirmMessage)) {       // 사용자가 '취소' 클릭시
+                        console.log('사용자 취소');
+                        e.preventDefault();     // 폼 제출을 중단 (서버로 전송하지 않음)
+                        return false;
+                    }
+
+                    // 파일이 첨부된 경우 최종 점검
+                    if (fileInput.files.length > 0) {  // 첨부 파일이 있는 경우에만 검증
+                        const files = fileInput.files
+
+                        // 각 파일에 대한 최종 검증 수행
+                        for (let i = 0; i < files.length; i++) {
+                            const file = files[i];
+
+                            // 파일 크기 최종 검증
+                            if (file.size > MAX_FILE_SIZE) {
+                                e.preventDefault();     // 폼 제출 중단
+                                alert('파일 크기가 너무 큽니다. \n\n' + file.name + ':' +
+                                        (file.size / 1024 / 1024).toFixed(2) + 'MB\n최대 허용 크기: 10MB');
+                                return false;       //함수 종료 (더 이상 검증 안함)
+                            }
+
+                            // 파일 확장자 최종 검증
+                            const fileName = file.name.toLowerCase();
+                            const extension = fileName.substring(fileName.lastIndexOf('.')+1);
+
+                            if (!ALLOWED_EXTENSIONS.includes(extension)) {
+                                e.preventDefault();     // 폼 제출 중단
+                                alert('허용하지 않은 파일 형식입니다. \n\n' + file.name + ' (.' + extension +
+                                        ')\n\n허용된 형식: ' +ALLOWED_EXTENSIONS.join(', '));
+                                return false;       //함수 종료
+                            }
+                        }
+                    }
+
+                    // 모든 검증 통화
+                    console.log('모든 검증 통과, 폼 제출');
+                    return true;
+                });
+
+                console.log('이벤트 리스너 등록 완료');
+            });
+        </script>
+
+    </div>
+</th:block>
+
+<!--레이아웃에 삽입될 JavaScript 블록 정의-->
+<th:block th:fragment="scripts">
+
+</th:block>
+</body>
+</html>

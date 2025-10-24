@@ -1,0 +1,6 @@
+* Service 계층
+    - 트랜잭션 관리
+        - 데이터베이스 변경 작업 (INSERT, UPDATE, DELETE)
+        - 여러 작업을 하나의 단위로 묶음 (All or Nothing)
+        - 에러 발생 시
+    - Entity <-> DTO 

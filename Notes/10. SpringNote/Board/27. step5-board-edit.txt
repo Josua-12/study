@@ -1,0 +1,74 @@
+* 게시판 수정 기능 - Entity & DTO 
+
+1. Entity 계층 
+    1) 더티체킹 (Dirty Checking)
+        - JPA가 엔티티의 상태 변경을 자동으로 감지하여 UPDATE 쿼리를 생성
+        - @Transactional 내에서 엔티티 필드 변경 시 트랜잭션 커밋 직전 자동 반영
+        - 별도의 save() 호출 불필요 
+
+    2) cascade = CascadeType.ALL
+        - 게시글 저장/삭제 시 첨부파일도 함께 처리 
+       orphanRemoval = true 
+        - 컬렉션에서 제거된 파일은 DB에서도 자동 삭제          
+
+* 게시판 수정 기능 - Repository
+    1) BoardRepository         
+        - 역할 
+            - Board 엔티티의 데이터베이스 접근 담당 
+            - Spring Data JPA를 활용한 CRUD 및 커스텀 쿼리 제공 
+            - N + 1 문제 해결을 위한 Fetch Join 쿼리 작성 
+    2) 게시글 단건 조회 
+        - 실행되는 SQL 
+            SELECT b.id, b.title....., b.updataed_at,
+            m.member_id, m.name, m.email, m.role
+            FROM board b
+            INNER JOIN members m ON b.author_id = m.member_id 
+            WHERE b.id = ? AND b.status = 'ACTIVE'     
+        - 특징 
+            - 단일 쿼리로 Board와 Member를 함께 조회   
+            - N + 1 문제 발생하지 않음 
+            - Optional 반화으로 null 안정성 확보 
+    3) 파라미터 바인딩 
+        - 이름 기반 바인딩 (권장)
+            - :파라미터명 형식 사용 
+            - 메서드 파라미터명과 자동 매칭 
+            - 가독성 좋고 순서 변경에 안전                              
+
+* 게시판 수정 기능 - Service
+    1) BoardService
+        - 게시글 관련 비즈니스 로직 처리 
+        - 트랜잭션 관리 (더티체킹 활용)
+        - Entity와 DTO 간 변환  
+        - 권한 검증과 예외 처리 
+
+    2) 게시글 수정 전체 흐름 
+        - 수정 폼 조회     
+
+    3) @Transactional 옵션 
+
+        옵션               기본값       용도
+       ---------------------------------------------------
+       readOnly = true                조회 전용, 성능 최적화  
+       readOnly = false    (기본값)    수정/삭제/추가 작업
+
+
+* 게시판 수정 기능 - Controller
+    1. BoardController
+        1) HTTP 요청을 받아 적절한 서비스 메서드 호출 
+        2) 뷰에 전달할 데이터 준비 (Model)
+        3) 유효성 검증 결과 처리 (BindingResult)
+        4) 리다이렉트 및 메시지 전달 (RedirectAttributes)
+
+    2. 게시글 수정 폼 요청 
+
+* 게시판 수정 기능 - View (Thymleaf)
+    1. 역할 
+        - 게시글 작성과 수정을 하나의 폼으로 처리
+        - isEditMode 변수로 작성/수정 모드 구분 
+        - Thymleaf 표현식으로 동적 UI 구성 
+    2. 공통 레이아웃 사용 
+        - 레이아웃 파라미터
+            - ~{::title} : 페이지 제목 블록
+            - ~{::content} : 메인 켄턴츠 블록
+            - ~{::css} : 페이지별 CSS 블록
+            - ~{::scripts} : 페이지별 JavaScript 블록                     

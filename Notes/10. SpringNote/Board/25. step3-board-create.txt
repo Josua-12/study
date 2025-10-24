@@ -1,0 +1,71 @@
+1. 전체 구조 다이어그램 
+
+
+    클라이언트 (브라우저)               서버 (Spring Boot)                  파일 시스템 
+
+
+    1) 파일 선택                         3) BoardController / FileController   
+                            POST    
+    2) 클라이언트 검증 (JS) ========>     4) BoardService / FileStorageService
+                                                                Yes
+                                        5) FileStorageService ======> 6)파일 저장
+                                                    ||
+                                                    ||NO
+                                                    \/
+                                        7) GlobalExceptionHandler    
+    8) 에러 메시지 표시
+    9) 게시글 상세 페이지 
+
+2. 데이터 흐름 
+    1) 게시글 작성, 사용자 파일 선택
+    2) JavaScript 검증 (클라이언트)
+    3) POST /boards (multipart/form-data)
+    4) BoardController.create()
+    5) BoardService.createBoard()
+    6) FileStorageService.validateFile() <=== 검증
+    7) FileStorageService.storeFile() <=== 저장 
+    8) BoardFile 엔티티 생성 
+    9) Board에 파일 추가 (cascade)
+    10) DB 저장 (게시글 + 파일 정보)
+    11) redirect: /boards/{id}
+
+3. 단계별 구현 
+    1) Phase 1: 데이터베이스 설계 
+        - Entity 
+            - BoardFile.java 생성     
+        - Board Entity 수정(추가)
+
+        - Repository 생성
+            - BoardFileRepository.java 생성 
+
+    2) Phase 2: 설정 파일 작성 
+        - application.yml    
+
+    3) Phase 3: 예외 처리 
+        - 커스텀 예외 생성 
+        - 전역 예외 처리               
+
+    4) Phase 4: 파일 저장 서비스 구현 
+        - FileStorageService.java 생성 
+
+    5) Phase 5: DTO 
+        - BoardCreateDTO 추가       
+
+4. 게시글 진행 정리
+    1) 사용자가 form.html에서 게시글 작성
+
+    2) JavaScript로 클라이언트 검증 (파일 크기, 확장자)
+
+    3) POST /boards ==> BoardController.create()
+
+    4) @Valid로 서버 검증 (제목, 내용, 카테고리)
+
+    5) BoardService.createBoard()
+        - 게시글 생성
+        - 파일이 있으면 FileStorageService로 저장
+        - BoardFile 엔티티 생성 및 연결
+    
+    6) DB 저장 (cascade로 게시글 + 파일 함께 저장)
+
+    7) 성공 시 : detail 페이지로 리다이렉트 + 성공 메시지
+       실패 시 : form으로 돌아가 + 에러 메시지 

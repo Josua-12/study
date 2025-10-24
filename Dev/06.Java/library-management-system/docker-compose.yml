@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # 컨테이너 이름 (docker ps에서 표시되는 이름)
+    container_name: library-app
+    # 환경 변수 설정
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3306/librarydb?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 12345
+
+    # 포트 매핑
+    # "호스트포트:컨테이너포트"
+    # 호스트의 8081 포트로 접속하면
+    ports:
+      - "8081:8081"
+
+    # 파일 업로드 디렉토리
+    # 호스트의 ./uploads가 컨테이너의 /app/uploads에 마운트됨
+    # 컨테이너 재시작 시에도 업로드된 파일 유지, 호스트에서 직접 파일 접근 가능
+    volumes:
+      - ./uploads:/app/uploads
+      - ./logs:/app/logs
+
+    # bridge 네트워크를 사용하는 컨테이너 격리
+    networks:
+      - library-network
+
+    restart: unless-stopped
+
+# bridge: 기본 Docker 네트워크 드라이버
+# 컨테이너 간 통신 가능, 외부와는 포트 매핑을 통해 통신
+networks:
+  library-network:
+    driver: bridge

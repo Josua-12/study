@@ -1,0 +1,15 @@
+* JAR 직접 배포 
+
+1. 빌드하기 
+    1) 빌드 명령어 
+        - .\gradlew.bat clean build -x test
+            - -x test : 테스트를 건너뜀. 
+    2) 빌드 성공 확인 
+        - \build\libs\library-management-system-0.0.1-SHAPSHOT.jar
+            - 모든 의존성이 포함된 실행 가능한 JAR임         
+
+2. 로컬에서 실행 
+    1) 기본 실행
+        - java -jar build/libs/library-management-system-0.0.1-SHAPSHOT.jar
+    2) 실행 확인
+        - http://localhost:8081                     

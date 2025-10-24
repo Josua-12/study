@@ -49,7 +49,7 @@ public class MemberDTO {
 
     // 시스템 정보 (읽기 전용)
     private LocalDateTime joinDate;     // 가입일
-    private MemberType memberType;      // 회원 등급..
+    private MemberType memberType;      // 회원 등급
     private MemberStatus status;        // 회원 상태
     private String role;                // 권한
 

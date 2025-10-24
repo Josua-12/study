@@ -1,0 +1,10 @@
+* 댓글 기능 - Controller 계층
+
+1. Controller 역할
+    1) HTTP 요청을 받아서 처리
+    2) Service 계층 호출
+    3) HTTP 응답 반환 (JSON 형식)
+    4) 입력 검증 및 에러 처리
+
+2. RESTful API 설계
+    1) HTTP

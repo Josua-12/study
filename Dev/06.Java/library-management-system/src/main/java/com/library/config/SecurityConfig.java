@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -77,9 +78,15 @@ public class SecurityConfig {
                 // AuthenticationProvider 등록 (필수)
                 .authenticationProvider(authenticationProvider())
 
+                /*
+                    CSRF 보호 설정 (게시글 삭제 기능을 우해 필수)
+                        - CSRF 보호 활성화 (기본값)
+                            - 모든 POST/PUT/DELETE요청에 CSRF 토큰 검증
+                            - 토큰이 없거나 잘못된 요청은 403 Forbidden 응답
+                 */
                 .csrf(csrf -> {
-                    csrf.disable();     //개발 단계에서는 비활성화
-                    log.info("1. CSRF 보호 비활성화 (운영에서는 활성화 필요!)");
+                    //csrf.disable();     //개발 단계에서는 비활성화
+                    log.info("1. CSRF 보호 활성화 (운영에서는 활성화 필요!)");
                 })
 
                 .authorizeHttpRequests(authz -> {
@@ -90,6 +97,12 @@ public class SecurityConfig {
                             .requestMatchers("/auth/**", "/register", "/login").permitAll()
                             // 게시판 URL (목록/상세 조회는 모두 허용)
                             .requestMatchers("/boards/**").permitAll()
+
+                            // 댓글 API 권한설정
+                            // - GET(조회): 누구나 접근 가능 (로그인 불필요)
+                            // - POST/PUT/DELETE (작성/수정/삭제): 인증된 사용자만 가능
+                            .requestMatchers(HttpMethod.GET, "/api/comments/**").permitAll()
+                            .requestMatchers("/api/comments/**").authenticated()
 
                             // 그 외 모든 요청은 인증 필요
                             .anyRequest().authenticated();

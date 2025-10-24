@@ -1,21 +1,25 @@
 package com.library.dto.board;
 
 import com.library.entity.board.Board;
+import com.library.entity.board.BoardCategory;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /*
     게시글 상세 조회용 DTO
         - 게시글의 전체 내용을 포함함
         - 포함 정보
             - 게시글 상세 정보 : ID, 제목, 본문, 카테고리, 작성일시, 수정일시
-            - 통계 정보 : 조회수, 좋아요, 댓글 수
-            - 작성자 정보 : 이름, 이메일
-*/
+            - 통계 정보: 조회수, 좋아요, 댓글 수
+            - 작성자 정보: 이름, 이메일
+ */
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,13 +33,16 @@ public class BoardDetailDTO {
     private Long viewCount;
     private Long likeCount;
     private Integer commentCount;
+    private BoardCategory category;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    private List<BoardFileDTO> files = new ArrayList<>();
 
     /*
         Board Entity를 BoardDetailDTO로 변환하는 정적 메서드
             - Board Entity와 연관된 Member Entity의 정보를 함께 추출함
-    */
+     */
     public static BoardDetailDTO from(Board board) {
         return BoardDetailDTO.builder()
                 .id(board.getId())
@@ -46,9 +53,12 @@ public class BoardDetailDTO {
                 .viewCount(board.getViewCount())
                 .likeCount(board.getLikeCount())
                 .commentCount(0)
+                .category(board.getCategory())
                 .createdAt(board.getCreatedAt())
                 .updatedAt(board.getUpdatedAt())
+                .files(board.getFiles().stream()
+                        .map(BoardFileDTO::from)
+                        .collect(Collectors.toList()))
                 .build();
     }
-
 }
