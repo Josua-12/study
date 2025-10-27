@@ -1,0 +1,48 @@
+* AWS IAM 사용자 생성이 최우선인 이유
+    1. 핵심 원칙
+        - 모든 AWS 리소스 접근에는 IAM 자격 증명이 필수임
+        - IAM 없이는 어떤 AWS 서비스도 사용할 수 없음
+        - IAM은 AWS의 "출입증"임
+
+        1) Layer 0 : IAM (Identity and Access Management)
+            - 인증 및 권한 관리 기반 계층
+            - IAM 사용자
+                - github-actions-deployer
+                - Access Key
+                    - Github Actions에서 AWS API 호출 시 사용
+        
+        2) Layer 1 : AWS 서비스 접근 권한
+            - IAM 정책으로 제어되는 접근 권한
+                - AmazonEC2ContainerRegistryPowerUser
+                    - ECR 이미지 Push/Pull 권한
+                    - Amazon ECR 리소스 생성 / 관리
+                - AmazonEC2FullAccess
+                    - ECS 테스크 배포 및 서비스 관리 권한
+                    - Amazon ECS 리소스 생성 / 관리
+
+* AWS IAM 사용자 생성
+    1. AWS Console 로그인
+        - 리전이 서울(ap-northeast-2)인지 확인 (우측 상단)
+
+    2. IAM 서비스로 이동
+        - 상단 검색창에 "IAM" 입력
+        - IAM 클릭하여 서비스 이동
+        - 왼쪽 메뉴에서 "사용자" 클릭
+
+    3. 새 사용자 생성
+        
+    4. 권한 설정
+        1) 권한 추가
+        2) 필요한 정책 및 체크
+            - AmazonEC2ContainerRegistryPowerUser   
+                - Docker 이미지를 ECR 
+
+    5. 태그 추가
+
+    6. 검토 및 생성
+     
+    7. Access Key 저장 (중요!)
+
+* Github Secrets 설정
+    1. 저장한 AWS 자격 증명을 등록해야 함
+    
