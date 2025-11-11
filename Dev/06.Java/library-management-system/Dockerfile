@@ -1,7 +1,7 @@
 # Stage 1 : Build (빌드 단계)
-# - 결과물 : JAR 파일 (build\libs\*.jar)
+# - 결과물: JAR 파일 (build\libs\*.jar)
 
-# gradle 8.5와 JDK 17이 포함된 공식 이미지를 빌드 스테이지의 베이스로 이용
+#gradle 8.5와 JDK 17이 포함된 공식 이미지를 빌드 스테이지의 베이스로 사용
 FROM gradle:8.5-jdk17 AS builder
 # 컨테이너 내 작업 디렉토리를 /app으로 설정 (모든 후속 명령이 이 디렉토리에서 실행됨)
 WORKDIR /app
@@ -11,7 +11,7 @@ COPY build.gradle settings.gradle ./
 # Gradle wrapper 관련 파일들을 컨테이너로 복사
 COPY gradle ./gradle
 
-# 프로젝트 의존성을 미리 다운로드
+# 프로젝트 의존성을 미리 다운로드 (--no-daemon: Gradle 데몬 사용 안 함)
 RUN gradle dependencies --no-daemon
 
 # 소스 코드 복사
@@ -20,8 +20,8 @@ COPY src ./src
 # 애플리케이션 빌드
 # clean : 이전 빌드 산출물 제거
 RUN gradle clean build -x test --no-daemon
-# --------------------------------------------------------------------
-# Stage 2 : Runtime (실행 단계)
+#---------------------------------------------------------------------
+# Stage 2: Runtime  (실행 단계)
 # - 목적 : 빌드된 JAR 파일만 포함한 경량 실행 이미지 생성
 # - Base Image : 경량 Alpine Linux 기반 JRE
 # - 최종 이미지 크기 : 400MB 내외
@@ -49,7 +49,7 @@ RUN chown spring:spring /app/app.jar
 # 사용자 전환
 USER spring:spring
 
-#포트 노출
+# 포트 노출
 EXPOSE 8081
 
 HEALTHCHECK --interval=30s --timeout=3s --start-period=60s --retries=3 \

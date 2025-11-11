@@ -1,0 +1,95 @@
+* 요구사항 
+    1) 구현할 기능 
+        - 회원가입 API
+        - Request 
+            {
+                "email": "test@gmail.com",
+                "name" : "이순신",
+                "password" : "abc"
+            }
+        - Response
+            - (204 No Content로 응답하기)
+
+    2) 게시글 작성 API 
+        - Request
+            {
+                "title" : "제목",
+                "content" : "내용",
+                "userId" : 1
+            }            
+        - Response
+            - (204 No Content로 응답하기)    
+
+    3) DB 서버를 간편하게 실행하기 위해서 Docker를 사용할 것임 
+
+    4) DB 설계
+        - 모놀리식 아키텍처 
+            - user_id를 참조한 채로 DB를 설계함 
+
+            사용자 (users)                  게시글 (boards)
+           ----------------               ----------------
+             user_id (PK)  ---------        board_id (PK)
+             email                  |       title
+             name                   |       content
+             password               |-----▶ user_id (FK)   
+
+        - 마이크로서비스 아키텍처 
+            - DB가 독립적으로 분리되어 있기 때문에 user_id를 참조할수 없음
+            - 하지만 특정 게시글이 어떤 사용자의 게시글인지 파악하기 위해 
+              user_id에 대한 정보는 있어야 함.
+
+            사용자 (users)                  게시글 (boards)
+           ----------------               ----------------
+             user_id (PK)  ---------        board_id (PK)
+             email                  |       title
+             name                   X       content
+             password               |-----▶ user_id    
+
+* 각 MicroService에 해당하는 DB 서버 실행하기 
+    1. Docker로 MySQL 서버 2대 실행
+        - docker run -e MYSQL_ROOT_PASSWORD=password -p 3307:3306 -d mysql                        
+        - docker run -e MYSQL_ROOT_PASSWORD=password -p 3308:3306 -d mysql
+
+* User MicroService 만들기 
+
+* Board MicroService 만들기 
+    1. Docker MySQL 데이터 영속성
+        - 이 프로젝트는 Docker 컨테이너로 실행되는 MySQL을 사용함
+        - Docker Volume 메커니즘 
+            - MySQL 공식 이미지는 /var/lib/mysql을 VOLUME으로 선언함
+            - Volume을 명시하지 않아도 익명 볼륨이 자동 생성
+            - 컨테이너를 삭제해도 볼륨은 남아있음
+            - 컨테이너 재시작 시 같은 볼륨을 사용하면 데이터 유지
+    2. 컨테이너 생명주기와 데이터
+        - 명령어                    컨테이너 상태       데이터 보존 여부
+        -------------------------------------------------------------------
+        docker start <컨테이너ID>   다시 실행 (Up)         그대로 사용
+        docker stop <컨테이너>      중지됨 (Exited)          유지됨
+        docker rm <컨테이너>           삭제됨              볼륨은 유지
+        docker rm -v <컨테이너>   삭제 + Volume 삭제        완전 삭제
+
+* JPA가 기본생성자를 사용하는 시점들
+    1. DB 조회 시 
+        - userRepository.findById(1L).orElseThrow();
+            - 이때 JPA/Hibernate는:
+                - DB에서 데이터 SELECT
+                - 기본 생성자로 빈 User 객체 생성   <--- 여기서 User() 필요
+                - Reflection으로 필드에 값 주입
+    2. 영속성 컨텍스트 관리
+        1) JPA는 엔티티를 관리하면서 내부적으로 리플렉션을 사용해 객체를 복제하거나 재구성 할 수 있음
+            - signUp()에서 하는 것
+                - new User(...) => 매개변수 생성자 사용
+                    |
+                   \|/
+                  userRepository.save(user)   =>  DB에 저장
+
+                  [나중에 JPA가 조회할 때]
+                  SELECT * FROM users WHERE id = 1
+                    |
+                   \|/
+                  User user = new User();   <----  기본 생성자 호출!
+                    |
+                   \|/
+                  user.id = 1;  (리플랙션으로 필드 주입)
+                  user.username = "이순신"
+                  user.password = "1234"

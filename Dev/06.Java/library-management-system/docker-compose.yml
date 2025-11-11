@@ -1,22 +1,57 @@
+# MySQL과 Spring Boot 애플리케이션을 함께 실행하는 로컬 환경 구성
+
 version: "3.8"
 
 services:
+  # MySQL Database Service
+  mysql:
+    image: mysql:8.0
+    container_name: library-mysql
+
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345    # 운영 환경에서는 반드시 변경
+      MYSQL_DATABASE: librarydb
+      MYSQL_CHARACTER_SET_SERVER: utf8mb4
+      MYSQL_COLLATION_SERVER: utf8mb4_unicode_ci
+      TZ: Asia/Seoul
+
+    ports:
+      - "3307:3306"  # 호스트 3307 포트로 접속
+
+    volumes:
+      # MySQL 데이터 디렉토리 (mysql-data=하단에서 정의한 Named Volume 사용, /var/lib/mysql=컨테이너 내부 MySQL 데이터 저장소)
+      - mysql-data:/var/lib/mysql
+
+    networks:
+      - library-network  # 하단에서 정의된 library-network 사용
+
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p12345"]  #MySQL 서버가 응답하는지 확인
+      interval: 10s   # 10초마다 health check 실행
+      timeout: 5s     # 5초 안에 응답 없으면 실패로 간주
+      retries: 10     # 최대 10번까 실패 허용
+      start_period: 40s   # 컨테이너 시작 후 40초 동안은 검사 제외 (MySQL 초기화 시간 확보)
+
+    restart: unless-stopped   # 컨테이너가 비정상 종료되면 자동 재시작, 단 수동 중지는 예외
+
+  # Application Service
   app:
     build:
       context: .
       dockerfile: Dockerfile
-    # 컨테이너 이름 (docker ps에서 표시되는 이름)
+    #컨테이너 이름 (docker ps에서 표시되는 이름)
     container_name: library-app
-    # 환경 변수 설정
+    #환경 변수 설정
     environment:
       SPRING_PROFILES_ACTIVE: prod
-      SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3306/librarydb?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: 12345
+      # mysql: Docker Compose 네트워크 내에서 MySQL 서비스 이름으로 접근
+      DB_URL: jdbc:mysql://mysql:3306/librarydb?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+      DB_USERNAME: root
+      DB_PASSWORD: 12345
 
     # 포트 매핑
     # "호스트포트:컨테이너포트"
-    # 호스트의 8081 포트로 접속하면
+    # 호스트의 8081 포트로 접속하면 컨테이너의 8081 포트로 전달됨
     ports:
       - "8081:8081"
 
@@ -27,14 +62,23 @@ services:
       - ./uploads:/app/uploads
       - ./logs:/app/logs
 
-    # bridge 네트워크를 사용하는 컨테이너 격리
+    # bridge 네트웤를 사용하는 컨테이너 격리
     networks:
       - library-network
 
+    depends_on:
+      mysql:
+        condition: service_healthy
+
     restart: unless-stopped
+
 
 # bridge: 기본 Docker 네트워크 드라이버
 # 컨테이너 간 통신 가능, 외부와는 포트 매핑을 통해 통신
 networks:
   library-network:
     driver: bridge
+
+volumes:
+  mysql-data:   # Named Volume 선언
+    driver: local

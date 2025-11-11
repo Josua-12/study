@@ -1,0 +1,104 @@
+* 사용자 조회 API 만들기 
+    1. Response DTO 만들기 
+        1) UserResponseDto
+    2. service 로직 작성 
+    3. Controller 로직 작성         
+
+* 특정 게시글 조회 API 만들기 
+    1. BoardResponseDto 만들기 
+        - UserDto 만들기 
+            - userId, name
+
+    2. user-service의 API와 통신할 코드 만들기 
+        - RestClient라는 라이브러리 사용 
+        - WebClient
+        - RestTemplate        
+
+* 시퀀스 다이어그램 
+    [Client]
+        |
+        | GET /boards/10
+        |
+        ▼    
+    [BoardController]
+        |
+        | BoardService.getBoard(10)
+        | 
+        ▼        
+    [BoardService.getBoard(10)]
+        |
+        |--> [1] boardRepository.findById(10)
+        |           |
+        |           ▼
+        |       [board-service DB (MySQL 3308)]
+        |           |
+        |           ▼
+        |        SELECT * FROM boards WHERE board_id = 10
+        |           |
+        |           ▼
+        |        Board {
+        |           boardId: 1,
+        |           title: "MSA 구축",
+        |           content: "Client....",
+        |           userId: 10                                     
+        |        }    
+        |--> [2] userClient.fetchUser(10)
+        |           |
+        |           ▼
+        |        [HTTP 통신]
+        |           |
+        |           ▼
+        |        GET http://localhost:8080/users/10
+        |           |
+        |           ▼
+        |        [user-service API]
+        |           |
+        |           ▼
+        |        [UserController]    
+        |           |
+        |           ▼
+        |        [UserService]       
+        |           |
+        |           ▼
+        |        [user-service DB (MySQL 3307)]   
+        |           |
+        |           ▼
+        |        SELECT * FROM users WHERE user_id = 10
+        |           |
+        |           ▼
+        |        User {
+        |           userId: 10,
+        |           name: "이순신",
+        |           email: "Lee@gmail.com"
+        |        }   
+        |           |
+        |           ▼
+        |        UserResponseDto {
+        |           userId: 10,
+        |           name: "이순신",
+        |           email: "Lee@gmail.com"
+        |       }
+        |           |
+        |           ▼
+        |       [HTTP 응답]
+        |           |
+        |           ▼
+        |        UserResponseDto 반환 
+        |
+        |--> [3] UserDto 생성 (필드 선택)
+        |       UserDto {
+        |          userId: 10,
+        |          name: "이순신"      
+        |       }
+        |
+        |--> [4] BoardResponseDto 생성 (데이터 통합)
+        |       BoardResponseDto {
+        |           boardId: 10,
+        |           title: "MSA 구축",
+        |           content: "Client....",   
+        |           user : {
+        |               userId: 10,
+        |               name: "이순신"         |               
+        |           }          
+        |       }
+        |--> [5] return BoardResponseDto

@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: user-service
+
+  datasource:
+    url: jdbc:mysql://localhost:3307/user-db    # MySQL 컨테이너 연결 (포트: 3307)
+    username: root    # 관리자 계정
+    password: password   # 관리자 비밀번호
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update  # 테이블 자동 생성/업데이트 (기존 데이터 보존)
+    show-sql: true      # SQL 쿼리 콘솔 출력

@@ -1,0 +1,66 @@
+* Amazon Elastic Container Registry
+    1. ECR 생성
+        - AWS의 Docker 이미지 저장소 (Docker Hub와 유사)
+        - ECS에서 컨테이너 실행 시 이미지를 가져올 곳 
+        - (중요: 모든 AWS 리소스는 같은 리전에 생성해야 함)
+
+    2. 생성된 ECR Repository 정보를 Github에 등록해야 함       
+
+* Amazon Elastic Container Service 
+    1. ECS
+        - Docker 컨테이너를 실행하고 관리하는 AWS 서비스임     
+        - Kubernetes의 간소화 버전 
+    2. ECS 클러스터 생성
+
+    3. 생성된 ECS 클러스터 Github에 등록해야 함      
+
+* ECS Task Definition 생성 준비 
+    1. 필요한 작업
+        - Dockerfile
+        - .dockerignore
+        - application.yml
+        - docker-compose.yml    
+
+    2. (참고 사항) Dockerfile             vs              docker-compose.yml 
+       ---------------------------------------------------------------------------------
+         역할   단일 이미지 빌드 명령어                여러 컨테이너 실행 및 연결 오케스트레이션 
+         목적   어떻게 만들까?                        어떻게 실행하고 연결할까?
+         대상   1개 컨테이너 이미지                    여러 컨테이너 (App + DB + Redis)
+         비유   요리 레시피 (재료 + 조리법)             코스 요리 메뉴 구성 (전체 + 메인 + 디저트)  
+
+    3. (참고 사항) Docker compose
+        - 선언적(declarative) 설정 파일   
+        - 순차적 실행 코드가 아님 
+        - 실행 과정 
+            - 전체 파일을 먼저 읽음 
+                - services 섹션 확인
+                - volumes 섹션 확인 
+                - networks 섹션 확인 
+            - 모든 정의를 검증 
+            - 필요한 리소스 생성 
+                - networks 생성
+                - volumes 생성
+                - services(컨테이너) 생성    
+        - 관례
+            - services(주요 내용)를 상단에,  networks/volumes(인프라)를 하단에 배치 
+        - 패턴 
+            - 하단 정의 => 상단 사용                         
+
+* 프로젝트 디렉토리로 이동 Docker 이미지 빌드 
+     docker build -t library-management-system:latest .
+
+* docker-compose build app
+  docker-compose up -declarative
+
+
+  ;
+  &allowPublicKeyRetrieval=true
+
+
+
+  docker-compose down
+  docker-compose build --no-cache
+  docker-compose up -d
+  docker-compose logs -f app
+
+  type docker-compose.yml | findstr "DB_URL"

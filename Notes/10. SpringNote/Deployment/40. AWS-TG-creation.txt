@@ -1,0 +1,11 @@
+* AWS 배포 단계 
+    1) Phase 1 : 준비 단계
+        - IAM 사용자 생성, Access Key, Git 브랜치 생성
+    2) Phase 2 : 로컬 검증
+        - Dockerfile, .dockerignore, docker-compose.yml, application.yml
+        - 로컬 빌드 및 테스트
+    3) Phase 3 : AWS 인프라
+        - ERC Registry, ECS Cluster, Security Groups, Target Groups
+        - Application Load Balancer, Parameter Store, CloudWatcj logs
+        - Github Secrets
+    4) Phase 4 : 배포 자동화

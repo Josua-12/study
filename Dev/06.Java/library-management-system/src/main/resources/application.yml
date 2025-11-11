@@ -13,7 +13,7 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver #Mysql db 드라이버
     username: root
     password: 12345
-    url: jdbc:mysql://localhost:3306/librarydb?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3308/librarydb?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
 
   # 파일 업로드 설정
   servlet:
@@ -31,20 +31,20 @@ file:
   max-size: 10485760  # 파일 크기 제한 (10MB = 10 * 1024 * 1024)
   allowed-extensions: jpg,jpeg,png,pdf,gif,doc,docx,xls,xlsx,ppt,pptx,txt,zip,hwp #허용된 파일 확장자
 
+
 # Actuator 설정 (Health check용)
 management:
-  endpoints: # 앤드포인트 전역 설정
-    web:     # 웹을 통한 엔드포인트 노출 설정
+  endpoints:  # 엔드포인트 전역 설정
+    web:      # 웹을 통한 엔드포인트 노출 설정
       exposure:
-        include: health,info,metics   # 노출할 엔드포인트 목록
-      base-path: /actuator # actuator 엔드포인트의 기본 경로
-  endpoint: # 개별 엔드포인트 설정
-    health: # health 엔드포인트 상세 설정
-      show-details: when-authorized # 상세 health 정보는 인증된 사용자에게만 표시
-  health:   # health indicator 전역 설정
+        include: health,info,metics  # 노출할 엔드포인트 목록
+      base-path: /actuator   # actuator 엔트포인트의 기본 경로
+  endpoint:   # 개별 엔드포인트 설정
+    health:   # health 엔드포인트 상세 설정
+      show-details: when-authorized  # 상세 health 정보는 인증된 사용자에게만 표시
+  health:     # health indicator 전역 설정
     defaults:
-      enabled: true # 기본 health indicator 활성화
-
+      enabled: true   # 기본 health indicator 활성화
 
 
 
@@ -84,7 +84,36 @@ spring:
     activate:
       on-profile: prod
 
+  datasource:
+    # AWS ECS Task Definition에서 환경변수로 주입
+    # 문법: ${환경변수명:기본값} - 환경변수가 있으면 사용, 없으면 기본값 사용
+    url: ${DB_URL:jdbc:mysql://localhost:3306/librarydb?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:12345}
+    # 연결 풀 설정 (HikariCP)
+    hikari:
+      maximum-pool-size: 10
+      connection-timeout: 30000
+      # MySQL 연결 재시도 설정
+      connection-init-sql: SELECT 1
+
   jpa:
     hibernate:
-      ddl-auto: validate    # 운영환경에서는 검증만
+      ddl-auto: update    # 운영환경에서는 검증만 => 테이블 자동 생성/업데이트
     show-sql: false         # 운영환경에서는 SQL 출력 안함
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    # 데이터베이스 초기화 모드
+    open-in-view: false
+
+# 파일 업로드 경로 (운영 환경)
+file:
+  upload-dir: ${FILE_UPLOAD_DIR:./uploads}
+
+# 로깅 설정 (운영 환경)
+logging:
+  level:
+    com.library: INFO
+    org.springframework.web: INFO
+    org.hibernate: WARN

@@ -1,0 +1,28 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: board-service
+
+  datasource:
+    url: jdbc:mysql://localhost:3308/board-db    # MySQL 컨테이너 연결 (포트: 3308)
+    username: root    # 관리자 계정
+    password: password   # 관리자 비밀번호
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update  # 테이블 자동 생성/업데이트 (기존 데이터 보존)
+    show-sql: true      # SQL 쿼리 콘솔 출력
+
+# 마이크로서비스 간 통신 설정
+# board-service가 다른 서비스와 HTTP 통신 할 때 사용하는 URL 설정
+client:
+  user-service:
+    url: http://localhost:8080 # user-service 서버 주소 (포트: 8080)
+
+
+
+
+
+
